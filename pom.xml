@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>gov.snsw.framework</groupId>
+  <artifactId>dlp-automation</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>dlp-automation</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <repositories>
+ 	<repository>
+         <id>Beton</id>
+         <name>Beton</name>
+         <url>https://github.com/PerfectoMobileSA/Beton/raw/master/mvn-repo/snapshot</url>
+         <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+         </snapshots>
+      </repository>
+  </repositories>
+  <dependencies>
+   <dependency>
+         <groupId>com.perfectomobile</groupId>
+         <artifactId>PerfectoCI</artifactId>
+         <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
+  </dependencies>
+</project>
