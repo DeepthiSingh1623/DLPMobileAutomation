@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
-import com.perfectomobile.webCommunityPOM.WebCommunityBaseView;
 
 public class NewTest extends BasicTest {
 
