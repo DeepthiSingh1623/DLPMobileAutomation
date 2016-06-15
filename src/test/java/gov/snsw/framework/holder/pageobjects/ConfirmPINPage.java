@@ -1,9 +1,9 @@
-package gov.snsw.framework.pageobjects;
+package gov.snsw.framework.holder.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.pageobjects.DriverPage;
+import gov.snsw.framework.holder.pageobjects.DriverPage;
 
 public class ConfirmPINPage extends DriverPage{
 
