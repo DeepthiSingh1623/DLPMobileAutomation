@@ -18,18 +18,18 @@ public class SignInNSWAcctPage extends DriverPage {
 	By signInPg = By.xpath("[text()='Sign in with your  MyService NSW account']");
 	
 	//Email Address in sign in page
-	By emailAddress = By.xpath("//*[text()='Sign In']/../../view[1]");
+	By emailAddress = By.xpath("//*[@resourceid='"+resourceid+":id/etxtUsername']");
 	
-	//Password on Signin page
-	By password = By.xpath("//*[text()='Sign In']/../../view[2]");	
+	//Password on Signin page	
+	By password = By.xpath("//*[@resourceid='"+resourceid+":id/etxtPassword']");
 	
-	//SignIn button
-	By signInBtn = By.xpath("//*[text()='Sign In']");
-	
+		
+	//SignIn button	
+	By signInBtn = By.xpath("//*[@resourceid='"+resourceid+":id/btnLogin']");
 	
 	public EnterPINPage signInNswAcct(String email, String pwd )
 	{
-		explicitFluentWait(emailAddress);
+		fluentWait(emailAddress);
 		driver.findElement(emailAddress).click();
 		driver.findElement(emailAddress).sendKeys(email);
 		driver.findElement(password).click();

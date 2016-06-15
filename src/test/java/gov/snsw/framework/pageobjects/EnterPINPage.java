@@ -14,8 +14,8 @@ public class EnterPINPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	
-	//Enter PIN
-	By enterPin = By.xpath("//*[contains(text(),'App settings.')]/../group");
+	//Enter PIN	
+	By enterPin = By.xpath("//*[@resourceid='"+resourceid+":id/pin_entry']");
 	
 		
 	public ConfirmPINPage enter4DigitPin(String pin)

@@ -11,8 +11,8 @@ public class ConfirmPINPage extends DriverPage{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	//Enter Confirm PIN
-	By confirmPin = By.xpath("//*[contains(text(),'confirm')]/../group");
+	//Enter Confirm PIN	
+	By confirmPin = By.xpath("//*[@resourceid='"+resourceid+":id/pin_entry']");
 	
 	public MyLicencePage enter4DigitConfirmNumber(String pin)
 	{

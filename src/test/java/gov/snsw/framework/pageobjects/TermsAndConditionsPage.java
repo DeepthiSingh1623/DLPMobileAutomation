@@ -1,6 +1,6 @@
 package gov.snsw.framework.pageobjects;
 
-import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,12 +21,11 @@ public class TermsAndConditionsPage extends DriverPage
 		//Terms and Conditions Page
 		By termsAndconditionMsg = By.xpath("//*[text()='Terms & Conditions']");	
 		
-		//Terms and Conditions Page Accept Button
-		By tAndcAcceptBtn = By.xpath("//*[text()='Accept']");
+		//Terms and Conditions Page Accept Button		
+		By tAndcAcceptBtn = By.xpath("//*[@resourceid=\"au.gov.nsw.onegov.app.holder.uat:id/btnAccept\"]");
 		
 		//Terms and Conditions Page Decline Button
-		By tAndcDeclineBtn = By.xpath("//*[text()='Decline']");
-		
+		By tAndcDeclineBtn = By.xpath("//*[text()='Decline']");	
 	
 		
 		public SignInNSWAcctPage termsAndConditionAcceptBtn()
