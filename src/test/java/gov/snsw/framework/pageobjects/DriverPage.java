@@ -1,6 +1,7 @@
 package gov.snsw.framework.pageobjects;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -17,9 +18,19 @@ public class DriverPage {
 	{
 		this.driver=driver;   
 		//System.out.println("Driver title from super class:"+driver.getCurrentUrl());
+		this.driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		SwitchtoContext(driver,"NATIVE_APP");
+		}	
 		
-	} 
 
+		private void SwitchtoContext(WebDriver driver, String string) {
+			// TODO Auto-generated method stub
+			
+		}		
+		
+
+		String resourceid = "au.gov.nsw.onegov.app.holder.uat";
 	
 		public WebElement explicitFluentWait(By element){
 		WebDriverWait wait = new WebDriverWait(driver, 60);
