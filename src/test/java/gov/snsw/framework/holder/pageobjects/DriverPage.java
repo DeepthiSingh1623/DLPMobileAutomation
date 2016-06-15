@@ -35,7 +35,8 @@ public class DriverPage {
 		}		
 		
 
-		String resourceid = "au.gov.nsw.onegov.app.holder.uat";
+		String holder_resourceid = "au.gov.nsw.onegov.app.holder.uat";
+		protected String checker_resourceid = "au.gov.nsw.onegov.app.checker.uat";
 	
 		public WebElement explicitWait(By element){
 		WebDriverWait wait = new WebDriverWait(driver, 60);
