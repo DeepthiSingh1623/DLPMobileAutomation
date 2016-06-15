@@ -1,11 +1,11 @@
-package gov.snsw.framework.pageobjects;
+package gov.snsw.framework.holder.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import gov.snsw.framework.pageobjects.DriverPage;
+import gov.snsw.framework.holder.pageobjects.DriverPage;
 
 public class SignInNSWAcctPage extends DriverPage {
 
@@ -29,7 +29,7 @@ public class SignInNSWAcctPage extends DriverPage {
 	
 	public EnterPINPage signInNswAcct(String email, String pwd )
 	{
-		explicitFluentWait(emailAddress);
+		fluentWait(emailAddress);
 		driver.findElement(emailAddress).click();
 		driver.findElement(emailAddress).sendKeys(email);
 		driver.findElement(password).click();

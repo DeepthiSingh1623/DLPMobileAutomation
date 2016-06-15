@@ -1,4 +1,4 @@
-package gov.snsw.framework.pageobjects;
+package gov.snsw.framework.checker.pageobjects;
 
 
 import java.util.List;

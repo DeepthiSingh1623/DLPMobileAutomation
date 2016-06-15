@@ -1,4 +1,4 @@
-package gov.snsw.framework.pageobjects;
+package gov.snsw.framework.checker.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class MyLicencePage extends DriverPage{
 	
 	public DetailLicencePage clickLicStatus()
 	{	
-		explicitFluentWait(fishingFee);
+		fluentWait(fishingFee);
 		driver.findElement(fishingFee).click();
 		return new DetailLicencePage(driver);
 	}

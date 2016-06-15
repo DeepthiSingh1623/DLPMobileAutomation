@@ -11,13 +11,13 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
-import gov.snsw.framework.pageobjects.AddIntroPage;
-import gov.snsw.framework.pageobjects.ConfirmPINPage;
-import gov.snsw.framework.pageobjects.DetailLicencePage;
-import gov.snsw.framework.pageobjects.EnterPINPage;
-import gov.snsw.framework.pageobjects.MyLicencePage;
-import gov.snsw.framework.pageobjects.SignInNSWAcctPage;
-import gov.snsw.framework.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.holder.pageobjects.AddIntroPage;
+import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
+import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
+import gov.snsw.framework.holder.pageobjects.EnterPINPage;
+import gov.snsw.framework.holder.pageobjects.MyLicencePage;
+import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
 
 public class ViewLicenceDetailsTest extends BasicTest {
 

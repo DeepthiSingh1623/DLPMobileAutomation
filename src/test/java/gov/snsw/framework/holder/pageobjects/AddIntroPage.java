@@ -1,4 +1,4 @@
-package gov.snsw.framework.pageobjects;
+package gov.snsw.framework.holder.pageobjects;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import gov.snsw.framework.pageobjects.DriverPage;
+import gov.snsw.framework.holder.pageobjects.DriverPage;
 
 public class AddIntroPage extends DriverPage {
 	
