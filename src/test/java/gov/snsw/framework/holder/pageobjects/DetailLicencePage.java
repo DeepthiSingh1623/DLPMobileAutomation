@@ -1,10 +1,9 @@
 package gov.snsw.framework.holder.pageobjects;
 
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
 
 public class DetailLicencePage extends DriverPage{
 
@@ -17,13 +16,13 @@ public class DetailLicencePage extends DriverPage{
 	
 	
 	//Capture License Status
-	By licStatus = By.xpath("//*[@resourceid='"+resourceid+":id/licenceCurrent']");		
+	By licStatus = By.xpath("//*[@resourceid='"+holder_resourceid+":id/licenceCurrent']");		
 	
 	//License Details
-	By licDetails = By.xpath("//*[resourceid ='"+resourceid+":id/detail']");
+	By licDetails = By.xpath("//*[resourceid ='"+holder_resourceid+":id/detail']");
 	
 	//Click Back Icon	
-	By backIcon = By.xpath("//*[@resourceid='"+resourceid+":id/imgLeft']");
+	By backIcon = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
 	
 	//Capture License Number
 	By licNum = By.xpath("//*[text()='Licence Number']/../text[2]");
@@ -32,7 +31,7 @@ public class DetailLicencePage extends DriverPage{
 	
 	By licExpiryDate = By.xpath("//*[text()='Expiry Date']/../text[2]");
 	
-	By licClasses = By.xpath("//*text()='Classes/Conditions']/../text[2]");
+	By licClasses = By.xpath("//*[text()='Classes/Conditions']/../text[2]");
 	
 	/*public String getLicDetails()
 	{			

@@ -12,10 +12,11 @@ public class ConfirmPINPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	//Enter Confirm PIN	
-	By confirmPin = By.xpath("//*[@resourceid='"+resourceid+":id/pin_entry']");
+	By confirmPin = By.xpath("//*[@resourceid='"+holder_resourceid+":id/pin_entry']");
 	
 	public MyLicencePage enter4DigitConfirmNumber(String pin)
 	{
+		fluentWait(confirmPin);
 		driver.findElement(confirmPin).sendKeys(pin);
 		return new MyLicencePage(driver);
 	}

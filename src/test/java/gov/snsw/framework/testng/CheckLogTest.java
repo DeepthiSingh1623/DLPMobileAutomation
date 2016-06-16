@@ -17,17 +17,18 @@ import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
-import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
+
 import gov.snsw.framework.holder.pageobjects.EnterPINPage;
+import gov.snsw.framework.holder.pageobjects.LogDetailPage;
+import gov.snsw.framework.holder.pageobjects.LogPage;
 import gov.snsw.framework.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
 
-public class ViewLicenceDetailsTest extends BasicTest {
-
+public class CheckLogTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Name,String LogEvent_Type,String licence_Number) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -54,44 +55,44 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 		//Enter 4 digit PIN confirmation
 		 		MyLicencePage LicPg = confirmPg.enter4DigitConfirmNumber(pin);
 		 		
-		 		//Click the Fishing Fee License 
-		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
-		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
+		 		//Verify My Licences Page is displayed
+		 		String licenseName = LicPg.viewLicName(licence_Name);
+		 		assertTrue(licenseName.contains(licence_Name));
 		 		
-		 		//Capturing the Lic Num
-		 		String licenceNumber = detailLicPg.getLicNum();	
+		 		//Click on the Settings and then My Activity
+		 		LogPage logPg = LicPg.clickMyActivity();
 		 		
-		 		assertTrue(licenceNumber.equalsIgnoreCase(licence_Number));
+		 		//Verify Log page is displayed
+		 		String logPgTitle = logPg.verifylogsTitle();
+		 		System.out.println("The title of the page is "+logPgTitle);
+		 		assertTrue(logPgTitle.contains("Logs"));
 		 		
-		 		//Capturing the Lic Start Date		 		
-		 		String licenceStartDate = detailLicPg.getLicStartDate();
-		 		assertTrue(licenceStartDate.equalsIgnoreCase(licence_StartDate));
+		 		//Click the first / latest log with required Lic Number
+		 		LogDetailPage logPgDetail = logPg.clickOnLicNum(licence_Number);
 		 		
+		 		//Verify Logs Detailed Page is displayed
+		 		String logsTitle = logPgDetail.verifylogsDetailsPageTitle();
+		 		assertTrue(logsTitle.contains("Logs"));
 		 		
-		 		//capturing the Lic Expire Date
-		 		String licenceExpireDate = detailLicPg.getLicExpireDate();
-		 		//assert licenceExpireDate
-		 		assertTrue(licenceExpireDate.equalsIgnoreCase(licence_ExpireDate));		 
+		 		//Verify the Event Type
+		 		String liceventType = logPg.checklogDetails();
+		 		assertTrue(liceventType.contains(LogEvent_Type));
 		 		
-		 		//Capture Class Type
-		 		String classType = detailLicPg.getLicClass();		 		
-		 		//assert Class Type
-		 		assertTrue(classType.equalsIgnoreCase(class_Type));
+		 		//click the Back Button on the Log Detail Page
+		 		logPgDetail.clickBackBtnLogPgDetail();
 		 		
-		 		//click Back button to go to my license page
-		 		LicPg = detailLicPg.pressBackBtn();
+		 		//Click log Page Back Button
+		 		logPg.clickBackBtnLogPg();
 		 		
-		 		//Click on the Settings and then sign out
-		 		LicPg.settings();	
+		 		// Click on the Settings and Sign out
+		 		LicPg.settings();
 		 		
 		 		//clean app
 		 		Map  params = new HashMap();
 	 			params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
-	 			
-	 			
-		 		//close App
+	 			//close App
 		 		driver.close();
 		 		
 		}
@@ -113,7 +114,7 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(7);
+		  s = ed.getData(4);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -125,7 +126,8 @@ public class ViewLicenceDetailsTest extends BasicTest {
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public ViewLicenceDetailsTest(DesiredCapabilities caps) {
+	public CheckLogTest(DesiredCapabilities caps) {
 		super(caps);
-	}
+	}	
+
 }

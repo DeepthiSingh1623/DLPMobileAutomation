@@ -15,13 +15,22 @@ public class EnterPINPage extends DriverPage{
 	}
 	
 	//Enter PIN	
-	By enterPin = By.xpath("//*[@resourceid='"+resourceid+":id/pin_entry']");
+	By enterPin = By.xpath("//*[@resourceid='"+holder_resourceid+":id/pin_entry']");
 	
 		
 	public ConfirmPINPage enter4DigitPin(String pin)
 	{
+		fluentWait(enterPin);
 		driver.findElement(enterPin).sendKeys(pin);
 		return new ConfirmPINPage(driver);
+	}
+	
+	public String enterPINPgExist()
+	{
+		By enterPinExist = By.xpath("//*[@resourceid='"+holder_resourceid+":id/pin_title']");
+		String pinPgExist = driver.findElement(enterPinExist).getText();
+		return pinPgExist;
+		 
 	}
 	
 	

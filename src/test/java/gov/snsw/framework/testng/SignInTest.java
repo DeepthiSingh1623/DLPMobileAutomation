@@ -17,17 +17,20 @@ import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
-import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
+
+
 import gov.snsw.framework.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
 
-public class ViewLicenceDetailsTest extends BasicTest {
 
+public class SignInTest extends BasicTest{
 
+	
+	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Name) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -54,42 +57,40 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 		//Enter 4 digit PIN confirmation
 		 		MyLicencePage LicPg = confirmPg.enter4DigitConfirmNumber(pin);
 		 		
-		 		//Click the Fishing Fee License 
-		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
-		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
+		 		//Verify My Licences Page is displayed
+		 		String licenseName = LicPg.viewLicName(licence_Name);
+		 		assertTrue(licenseName.contains(licenseName));
 		 		
-		 		//Capturing the Lic Num
-		 		String licenceNumber = detailLicPg.getLicNum();	
+		 		//Close App
+		 		Map<String, Object> params = new HashMap();
+		 		params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		Object result1 = driver.executeScript("mobile:application:close", params);
+		 		params.clear();
 		 		
-		 		assertTrue(licenceNumber.equalsIgnoreCase(licence_Number));
+		 		//Open App		 				 		
+		 		Map<String, Object> params1 = new HashMap();
+		 		params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		Object result2 = driver.executeScript("mobile:application:open", params);
+		 		params.clear();			 	
 		 		
-		 		//Capturing the Lic Start Date		 		
-		 		String licenceStartDate = detailLicPg.getLicStartDate();
-		 		assertTrue(licenceStartDate.equalsIgnoreCase(licence_StartDate));
+		 		//Verify the Re-Enter PIN Page is displayed
+		 		String pinPg = enterPIN.enterPINPgExist();
+		 		assertTrue(pinPg.contains(pinPg));
 		 		
-		 		
-		 		//capturing the Lic Expire Date
-		 		String licenceExpireDate = detailLicPg.getLicExpireDate();
-		 		//assert licenceExpireDate
-		 		assertTrue(licenceExpireDate.equalsIgnoreCase(licence_ExpireDate));		 
-		 		
-		 		//Capture Class Type
-		 		String classType = detailLicPg.getLicClass();		 		
-		 		//assert Class Type
-		 		assertTrue(classType.equalsIgnoreCase(class_Type));
-		 		
-		 		//click Back button to go to my license page
-		 		LicPg = detailLicPg.pressBackBtn();
+		 		//Re-enter 4 digit PIN Number
+		 		enterPIN.enter4DigitPin(pin);
+		 				 		
+		 		//Verify PinPage is displayed
+		 		assertTrue(licenseName.contains(licenseName));		 			 		
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
 		 		
 		 		//clean app
-		 		Map  params = new HashMap();
+		 		Map  params2 = new HashMap();
 	 			params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
-	 			
 	 			
 		 		//close App
 		 		driver.close();
@@ -113,7 +114,7 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(7);
+		  s = ed.getData(4);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -125,7 +126,10 @@ public class ViewLicenceDetailsTest extends BasicTest {
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public ViewLicenceDetailsTest(DesiredCapabilities caps) {
+	public SignInTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }
+	
+
+

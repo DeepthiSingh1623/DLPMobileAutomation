@@ -1,7 +1,7 @@
 package gov.snsw.framework.holder.pageobjects;
 
 
-import java.util.List;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +29,7 @@ public class DriverPage {
 		}	
 		
 
-		private void SwitchtoContext(WebDriver driver, String string) {
+		protected void SwitchtoContext(WebDriver driver, String string) {
 			// TODO Auto-generated method stub
 			
 		}		
