@@ -112,6 +112,7 @@ public class LicenceShareTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
+	
 	public LicenceShareTest(DesiredCapabilities caps) {
 		super(caps);
 	}
