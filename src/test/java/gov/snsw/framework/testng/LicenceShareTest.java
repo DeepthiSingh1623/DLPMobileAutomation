@@ -18,6 +18,7 @@ import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
+import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
@@ -29,7 +30,7 @@ public class LicenceShareTest extends BasicTest{
 	
 
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String appName)  throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -56,18 +57,26 @@ public class LicenceShareTest extends BasicTest{
 		 		//Enter 4 digit PIN confirmation
 		 		MyLicencePage LicPg = confirmPg.enter4DigitConfirmNumber(pin);
 		 		
-		 		//verify the Fishing Fee Licence
-		 		//LicPg.fluentWait(LicPg.licName);		 	
-		 	
-		 		// verify/assert the Share button exist and is clickable
-		 		LicPg.clickShareLic();
+		 		//Click the Fishing Fee License 
+		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
+		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
+		 		
+		 		//click on Share License Button
+		 		detailLicPg.clickShareLicenceBtn();
+		 		
+		 		//verify the Licence Details Page is displayed
+		 		String detailLicTitle = detailLicPg.verifylicDetailsPageTitle();
+		 		assertTrue(detailLicTitle.contains("Licence Details"));
+		 		
+		 		//click the back button on the License Detailed Page
+		 		LicPg = detailLicPg.pressBackBtn();
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
 		 		
 		 		//clean app
 		 		Map  params = new HashMap();
-	 			params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			params.put("identifier", appName);
 	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
 		 		//close App
@@ -91,7 +100,7 @@ public class LicenceShareTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(3);
+		  s = ed.getData(11);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

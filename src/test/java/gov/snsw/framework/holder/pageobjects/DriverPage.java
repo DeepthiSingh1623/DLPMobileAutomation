@@ -35,7 +35,7 @@ public class DriverPage {
 		}		
 		
 
-		String holder_resourceid = "au.gov.nsw.onegov.app.holder.uat";
+		protected String holder_resourceid = "au.gov.nsw.onegov.app.holder.uat";
 		protected String checker_resourceid = "au.gov.nsw.onegov.app.checker.uat";
 	
 		public WebElement explicitWait(By element){
