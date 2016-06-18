@@ -40,7 +40,9 @@ public class CheckerLicSearchTest extends BasicTest{
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 	 	try{
-	 			//reportPass("success", "param");
+	 			
+	 			 	
+	 			 
 	 			 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -68,29 +70,39 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		//Thread.sleep(100000);
 		 		assertEquals("Enter licence details", licSch.getPageTitle());
 		 		
-
-		 		Map<String, Object> params = new HashMap();
-		 		params.put("mode", "off");
-		 		driver.executeScript("mobile:keyboard:display", params);
-		 		
 		 		licSch.enterLicenceNumber(licenceNo);
 		 		
-				
+		 		Map<String, Object> params = new HashMap();
+ 			 	params.put("keySequence", "BACK");
+ 			 	Object result = driver.executeScript("mobile:presskey", params);
+ 			 	
 		 		CheckerLicenceDetails licDtls= licSch.clickCheckBtn();
 		 		
 		 		assertEquals("Licence Details", licDtls.getPageTitle());
 		 		
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licenceNo));
-		 		
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licstDate));
-		 		assertNotNull(licDtls.isTextPresentOnScreen(licExpD));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licName));
-		 		assertNotNull(licDtls.isTextPresentOnScreen(address));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(holdName));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(status));
+	 		
+		 		params.clear();
+		 		params.put("start", "887,2173");
+		 		params.put("end", "894,463");
+		 		Object result1 = driver.executeScript("mobile:touch:swipe", params);
+		 		
+		 		assertNotNull(licDtls.isTextPresentOnScreen(licExpD));
+		 		assertNotNull(licDtls.isTextPresentOnScreen(address));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(dob));
 		 		
-		 		//chkPg.signOut();
+		 		params.clear();
+ 			 	params.put("keySequence", "BACK");
+ 			 	driver.executeScript("mobile:presskey", params);
+ 			 	
+ 			 	driver.executeScript("mobile:presskey", params);
+		 		
+		 		chkPg.signOut();
+		 		
 		 		
 		}
 	 	catch(Exception e){
