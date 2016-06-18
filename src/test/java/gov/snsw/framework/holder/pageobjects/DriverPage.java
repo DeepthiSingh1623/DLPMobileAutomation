@@ -60,8 +60,14 @@ public class DriverPage {
 			return element1;
 		}
 
+		By titlePg = By.xpath("//*[@resourceid='"+checker_resourceid+":id/toolbarTitle']");
 
-
-
+		public String getPageTitle(){
+			
+			fluentWait(titlePg);
+			return driver.findElement(titlePg).getText();
+			
+		}
 	
 }
+
