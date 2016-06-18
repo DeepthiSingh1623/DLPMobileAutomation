@@ -45,4 +45,10 @@ public class RenewLicencePage extends DriverPage{
 		nextBtn();
 		
 	}
+	
+	public void verifyHeading()
+	{
+		driver.findElement(headingReqDetails).isDisplayed();
+				
+	}
 }

@@ -14,7 +14,7 @@ public class ManageYourLicPage extends DriverPage{
 	//*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/txtManageLicenceHistory"]
 	
 	//Update your Details
-	//*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/txtManageUpdateDetails"]
+	By updateDetails = By.xpath("//*[@resourceid='"+holder_resourceid+":id/txtManageUpdateDetails']");
 	
 	//Renew your Licence
 	By renewLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/txtManageRenewLicence']");
@@ -61,5 +61,25 @@ public class ManageYourLicPage extends DriverPage{
 		return new DetailLicencePage(driver);
 	}
 	
+	public void updateDetails()
+	{
+		
+		driver.findElement(updateDetails).click();
+	}
+	
+	public UpdateLicenceDetailsPage clickUpdateDetails()
+	{
+		fluentWait(updateDetails);
+		updateDetails();
+		return new UpdateLicenceDetailsPage(driver);
+		
+	}
+	
+	public String verifyError()
+	{
+		By errorMsg = By.xpath("//*[@resourceid='"+holder_resourceid+"id/snackbar_text']");
+		String snackBarMsg = driver.findElement(errorMsg).getText();
+		return snackBarMsg;
+	}
 	
 }

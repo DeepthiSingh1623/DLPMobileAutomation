@@ -98,11 +98,11 @@ public class DetailLicencePage extends DriverPage{
 		driver.findElement(shareLic).click();
 	}
 	
-	public ManageYourLicPage clickShareLicenceBtn()
+	public QRCodePage clickShareLicenceBtn()
 	{
 		fluentWait(shareLic);
-		manageLicenceBtn();
-		return new ManageYourLicPage(driver);
+		shareLicenceBtn();
+		return new QRCodePage(driver);
 	}
 	
 	public String verifylicDetailsPageTitle()

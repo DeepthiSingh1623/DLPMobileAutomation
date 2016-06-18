@@ -16,23 +16,22 @@ import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.holder.pageobjects.AddIntroPage;
-import gov.snsw.framework.holder.pageobjects.AppSettingPage;
-import gov.snsw.framework.holder.pageobjects.ChangeNewPINPage;
-import gov.snsw.framework.holder.pageobjects.ChangePINPage;
-import gov.snsw.framework.holder.pageobjects.ConfirmNewPINPage;
 import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
 import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.holder.pageobjects.ManageYourLicPage;
 import gov.snsw.framework.holder.pageobjects.MyLicencePage;
-import gov.snsw.framework.holder.pageobjects.RenewLicencePage;
+
 import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.holder.pageobjects.SuccessfulLicDetailsUpdatePage;
 import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.holder.pageobjects.UpdateLicenceDetailsPage;
+import gov.snsw.framework.holder.pageobjects.UpdatePostalAddressPage;
+import gov.snsw.framework.holder.pageobjects.UpdateResidentialAddressPage;
 
-public class RenewLicenceTest extends BasicTest{
-
+public class UpdateLicenceDetailsTest extends BasicTest {
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin,String appName) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin,String appName, String postal_Address) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -65,31 +64,42 @@ public class RenewLicenceTest extends BasicTest{
 	 		//Click on the Manage License Button
 	 		ManageYourLicPage mngLic = detailLicPg.clickManageLicenceBtn();
 	 		
-	 		//click on renew lic
-	 		RenewLicencePage renewLicPg = mngLic.clickRenewLic();
-		 	
-	 		//Verify the Renew Lic Screen is displayed
-	 		renewLicPg.verifyHeading();
+	 		//click on update your details
+	 		UpdateLicenceDetailsPage updateLicPg = mngLic.clickUpdateDetails();
 	 		
-	 		//Need to write code to Renew Licence 		
+	 		//click on Residential Address Change Edit Button
+	 		UpdatePostalAddressPage updateResAdd = updateLicPg.clickEditPostalAddressBtn();
 	 		
+	 		//Enter The New Res Address
+	 		updateLicPg =  updateResAdd.enterNewPostalAddress(postal_Address);
 	 		
-	 		//click back button on the Manage your lic page
-	 		mngLic.clickbackBtn();
+		 	//Click Save Changes Button
+	 		SuccessfulLicDetailsUpdatePage LicUpdateSaveBtn = updateLicPg.clickUpdateLicDetailsSaveBtn();
 	 		
-	 		//click the back button on the detailed Licence screen
-	 		detailLicPg.pressBackBtn();
+	 		//Verify Success Message
+	 		String resAddChngMsg = LicUpdateSaveBtn.verifyUpdateLicSucessPage();
+	 		System.out.println("The Res Address Changed is "+resAddChngMsg);
+	 		//assertTrue(resAddChngMsg.contains("SUCCESSFUL"));
+	 		
+	 		//Click Back button on the success Page
+	 		mngLic=LicUpdateSaveBtn.clickBackBtnSucessLicDetail();
+	 	
+	 		//Click Back button on the Manage your Licence Page
+	 		detailLicPg = mngLic.clickbackBtn();
+	 		
+	 		//Click Back Button on the Detailed Licence Page'
+	 		LicPg = detailLicPg.pressBackBtn();
 	 		
 		   // Click on the Settings and Sign out
 		   LicPg.settings();
 		 		
-		   //clean app
-		   Map  params2 = new HashMap();
-		   params2.put("identifier", appName);
-	 	   Object result = driver.executeScript("mobile:application:clean", params2);
+		  //clean app
+		  Map  params2 = new HashMap();
+		  params2.put("identifier", appName);
+	 	  Object result = driver.executeScript("mobile:application:clean", params2);
 		 		
-	 	   //close App
-		   driver.close();
+	 	  //close App
+		  driver.close();
 		 		
 		}
 	 	catch(Exception e){
@@ -110,7 +120,7 @@ public class RenewLicenceTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(11);
+		  s = ed.getData(12);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -122,8 +132,9 @@ public class RenewLicenceTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public RenewLicenceTest(DesiredCapabilities caps) {
+	public UpdateLicenceDetailsTest(DesiredCapabilities caps) {
 		super(caps);
 	}	
+
 
 }

@@ -21,6 +21,7 @@ import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
 import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.holder.pageobjects.MyLicencePage;
+import gov.snsw.framework.holder.pageobjects.QRCodePage;
 import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
 
@@ -62,11 +63,11 @@ public class LicenceShareTest extends BasicTest{
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//click on Share License Button
-		 		detailLicPg.clickShareLicenceBtn();
+		 		QRCodePage qrCodePg = detailLicPg.clickShareLicenceBtn();
 		 		
 		 		//verify the Licence Details Page is displayed
-		 		String detailLicTitle = detailLicPg.verifylicDetailsPageTitle();
-		 		assertTrue(detailLicTitle.contains("Licence Details"));
+		 		String qrCodeTitle = qrCodePg.verifyQRCodePageTitle();
+		 		assertTrue(qrCodeTitle.contains("Licence Details"));
 		 		
 		 		//click the back button on the License Detailed Page
 		 		LicPg = detailLicPg.pressBackBtn();
