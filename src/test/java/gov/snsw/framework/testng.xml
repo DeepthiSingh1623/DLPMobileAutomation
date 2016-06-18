@@ -3,7 +3,10 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-      <class name="gov.snsw.framework.testng.NewTest"/>
+      <class name="gov.snsw.framework.testng.CheckerSignInTest"/>
+      <class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
+      <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
     </classes>
+    
   </test> <!-- Test -->
 </suite> <!-- Suite -->
