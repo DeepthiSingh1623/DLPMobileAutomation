@@ -28,10 +28,11 @@ public class LogPage extends DriverPage {
 		return new MyLicencePage(driver);
 	}
 	
-	public void onLicNumber(String licence_Number)
+	public LogDetailPage clickOnLicNumber(String licence_Number)
 	{
 		By licNo = By.xpath("//*[text()='"+licence_Number+"']");
 		driver.findElement(licNo).click();
+		return new LogDetailPage(driver);
 		
 	}
 	
@@ -43,11 +44,6 @@ public class LogPage extends DriverPage {
 		
 	}
 	
-	public LogDetailPage clickOnLicNum(String licence_Number)
-	{
-		onLicNumber(licence_Number);
-		return new LogDetailPage(driver);
-	}
-	
+
 	
 }

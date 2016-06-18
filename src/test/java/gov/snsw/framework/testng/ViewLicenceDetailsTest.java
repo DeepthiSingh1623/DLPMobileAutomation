@@ -27,7 +27,7 @@ public class ViewLicenceDetailsTest extends BasicTest {
 
 
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type,String licence_Name, String LogEvent_Type, String new_Pin, String appName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -59,8 +59,7 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//Capturing the Lic Num
-		 		String licenceNumber = detailLicPg.getLicNum();	
-		 		
+		 		String licenceNumber = detailLicPg.getLicNum();			 		
 		 		assertTrue(licenceNumber.equalsIgnoreCase(licence_Number));
 		 		
 		 		//Capturing the Lic Start Date		 		
@@ -86,7 +85,7 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 		
 		 		//clean app
 		 		Map  params = new HashMap();
-	 			params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			params.put("identifier", appName);
 	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
 	 			
@@ -113,7 +112,7 @@ public class ViewLicenceDetailsTest extends BasicTest {
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(7);
+		  s = ed.getData(11);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

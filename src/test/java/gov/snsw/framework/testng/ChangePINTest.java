@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -17,20 +16,21 @@ import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.holder.pageobjects.AddIntroPage;
+import gov.snsw.framework.holder.pageobjects.AppSettingPage;
+import gov.snsw.framework.holder.pageobjects.ChangeNewPINPage;
+import gov.snsw.framework.holder.pageobjects.ChangePINPage;
+import gov.snsw.framework.holder.pageobjects.ConfirmNewPINPage;
 import gov.snsw.framework.holder.pageobjects.ConfirmPINPage;
-import gov.snsw.framework.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.holder.pageobjects.EnterPINPage;
+
 import gov.snsw.framework.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
 
-
-public class LicenceShareTest extends BasicTest{
-
-	
+public class ChangePINTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String appName)  throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin,String appName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -57,29 +57,65 @@ public class LicenceShareTest extends BasicTest{
 		 		//Enter 4 digit PIN confirmation
 		 		MyLicencePage LicPg = confirmPg.enter4DigitConfirmNumber(pin);
 		 		
-		 		//Click the Fishing Fee License 
-		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
-		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
+		 		//Verify My Licences Page is displayed
+		 		String licenseName = LicPg.viewLicName();
+		 		assertTrue(licenseName.contains(licence_Name));
 		 		
-		 		//click on Share License Button
-		 		detailLicPg.clickShareLicenceBtn();
+		 		//Click on the AppSettings
+		 		AppSettingPage appSettingPg = LicPg.clickSettings();
 		 		
-		 		//verify the Licence Details Page is displayed
-		 		String detailLicTitle = detailLicPg.verifylicDetailsPageTitle();
-		 		assertTrue(detailLicTitle.contains("Licence Details"));
+		 		//Click on the Change PIN Button
+		 		ChangePINPage chgPIN = appSettingPg.clickChangePinBtn();
 		 		
-		 		//click the back button on the License Detailed Page
-		 		LicPg = detailLicPg.pressBackBtn();
+		 		//click Ok Button
+		 		chgPIN.okBtn();
 		 		
-		 		//Click on the Settings and then sign out
-		 		LicPg.settings();	
+		 		//enter 4 digit current Pin
+		 		ChangeNewPINPage chgNewPin = chgPIN.enter4DigitCurrentPin(pin);
+		 		
+		 		//enter 4 digit New PIN
+		 		ConfirmNewPINPage cofrmNewPin = chgNewPin.enter4DigitNewPin(new_Pin);
+		 		
+		 		//enter 4 digit confirm new PIN
+		 		appSettingPg = cofrmNewPin.enter4DigitConfirmNewPin(new_Pin);
+		 		
+		 		//Verify the AppSettings Page is displayed
+		 		String appsetPg = appSettingPg.verifyAppSettingTitleBar();
+		 		System.out.println("The Page displayed is  "+appsetPg);
+		 		assertTrue(appsetPg.contains("App Settings"));
+		 		
+		 		//Close App
+		 		Map<String, Object> params = new HashMap();
+		 		params.put("identifier", appName);
+		 		Object result1 = driver.executeScript("mobile:application:close", params);
+		 		params.clear();
+		 		
+		 		//Open App		 				 		
+		 		Map<String, Object> params1 = new HashMap();
+		 		params.put("identifier", appName);
+		 		Object result2 = driver.executeScript("mobile:application:open", params);
+		 		params.clear();	
+		 		
+		 		// enter Newly created PIN
+		 		chgNewPin.enter4DigitNewPin(new_Pin);		 		 		
+		 		
+		 	
+		 		//Verify My Licences Page is displayed
+		 		String ActuallicenseName = LicPg.viewLicName();
+		 		System.out.println("The Actual Lic Name is "+ActuallicenseName);
+		 		String ExpectedlicenseName = licence_Name;
+		 		System.out.println("The Expected Lic Name is "+ExpectedlicenseName);
+		 		assertTrue(ExpectedlicenseName.contains(ExpectedlicenseName));
+		 		
+		 		// Click on the Settings and Sign out
+		 		LicPg.settings();
 		 		
 		 		//clean app
-		 		Map  params = new HashMap();
+		 		Map  params2 = new HashMap();
 	 			params.put("identifier", appName);
 	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
-		 		//close App
+	 			//close App
 		 		driver.close();
 		 		
 		}
@@ -94,6 +130,7 @@ public class LicenceShareTest extends BasicTest{
         	Assert.fail();
         }
 	}
+
 
 	@DataProvider (name = "logInData", parallel = false)
 	public Object[][] searchItemsData(){
@@ -112,8 +149,8 @@ public class LicenceShareTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	
-	public LicenceShareTest(DesiredCapabilities caps) {
+	public ChangePINTest(DesiredCapabilities caps) {
 		super(caps);
-	}
+	}	
+
 }

@@ -21,6 +21,8 @@ public class DetailLicencePage extends DriverPage{
 	//License Details
 	By licDetails = By.xpath("//*[resourceid ='"+holder_resourceid+":id/detail']");
 	
+	
+	
 	//Click Back Icon	
 	By backIcon = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
 	
@@ -32,6 +34,11 @@ public class DetailLicencePage extends DriverPage{
 	By licExpiryDate = By.xpath("//*[text()='Expiry Date']/../text[2]");
 	
 	By licClasses = By.xpath("//*[text()='Classes/Conditions']/../text[2]");
+	
+	By manageLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/menu_licence_manage']");
+	
+	//Share Button
+	By shareLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/btnFloatingActionButton']");
 	
 	/*public String getLicDetails()
 	{			
@@ -72,6 +79,37 @@ public class DetailLicencePage extends DriverPage{
 	{
 		driver.findElement(backIcon).click();
 		return new MyLicencePage(driver);
+	}
+	
+	public void manageLicenceBtn()
+	{
+		driver.findElement(manageLic).click();
+	}
+	
+	public ManageYourLicPage clickManageLicenceBtn()
+	{
+		fluentWait(manageLic);
+		manageLicenceBtn();
+		return new ManageYourLicPage(driver);
+	}
+	
+	public void shareLicenceBtn()
+	{
+		driver.findElement(shareLic).click();
+	}
+	
+	public ManageYourLicPage clickShareLicenceBtn()
+	{
+		fluentWait(shareLic);
+		manageLicenceBtn();
+		return new ManageYourLicPage(driver);
+	}
+	
+	public String verifylicDetailsPageTitle()
+	{
+		By licDetailsTitle = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
+		String detailedLicTitleBar = driver.findElement(licDetailsTitle).getText();
+		return detailedLicTitleBar;
 	}
 	
 

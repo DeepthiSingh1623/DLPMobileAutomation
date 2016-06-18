@@ -28,6 +28,9 @@ public class MyLicencePage extends DriverPage{
 	
 	//Click My Activity
 	By log = By.xpath("//*[text()='My Activity']");
+	
+	//Click Settings to ChangePIN
+	By settingOption = By.xpath("//*[text()='Settings']");
 		
 	//Click on the Sign out OK Confirm Button  
 	By ok = By.xpath("//*[text()='OK']");
@@ -49,6 +52,7 @@ public class MyLicencePage extends DriverPage{
 	{
 		fluentWait(setting3Bars);
 		driver.findElement(setting3Bars).click();
+		fluentWait(signOut);
 		driver.findElement(signOut).click();
 		driver.findElement(ok).click();
 	}
@@ -57,6 +61,12 @@ public class MyLicencePage extends DriverPage{
 	{
 		driver.findElement(setting3Bars).click();
 		driver.findElement(log).click();
+	}
+	
+	public void settingsOpt()
+	{
+		driver.findElement(setting3Bars).click();
+		driver.findElement(settingOption).click();
 	}
 	
 	public void clickShareLic()
@@ -72,12 +82,12 @@ public class MyLicencePage extends DriverPage{
 		return new DetailLicencePage(driver);
 	}
 	
-	public String viewLicName(String licence_Name)
+	public String viewLicName()
 	{
-		By LicName = By.xpath("//*[text()='"+licence_Name+"']");
+		By LicName = By.xpath("//*[text()='Recreational Fishing Fee']");
 		fluentWait(LicName);
-		String licName = driver.findElement(LicName).getText();
-		return licName;
+		String licenseName = driver.findElement(LicName).getText();
+		return licenseName;
 	}
 	
 	//Add License
@@ -95,7 +105,13 @@ public class MyLicencePage extends DriverPage{
 		return new LogPage(driver);
 	}
 	
-	
+	//Setting Menu to change PIN
+	public AppSettingPage clickSettings()
+	{
+		fluentWait(setting3Bars);
+		settingsOpt();
+		return new AppSettingPage(driver);
+	}
 	
 	
 	

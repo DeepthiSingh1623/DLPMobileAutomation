@@ -30,7 +30,7 @@ public class SignInTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Name) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String appName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -58,37 +58,41 @@ public class SignInTest extends BasicTest{
 		 		MyLicencePage LicPg = confirmPg.enter4DigitConfirmNumber(pin);
 		 		
 		 		//Verify My Licences Page is displayed
-		 		String licenseName = LicPg.viewLicName(licence_Name);
-		 		assertTrue(licenseName.contains(licenseName));
+		 		String ActuallicenseName = LicPg.viewLicName();
+		 		System.out.println("The Actual Lic Name is "+ActuallicenseName);
+		 		String ExpectedlicenseName = licence_Name;
+		 		System.out.println("The Expected Lic Name is "+ExpectedlicenseName);
+		 		assertTrue(ExpectedlicenseName.contains(ActuallicenseName));
 		 		
 		 		//Close App
 		 		Map<String, Object> params = new HashMap();
-		 		params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		params.put("identifier", appName);
 		 		Object result1 = driver.executeScript("mobile:application:close", params);
 		 		params.clear();
 		 		
 		 		//Open App		 				 		
 		 		Map<String, Object> params1 = new HashMap();
-		 		params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		params.put("identifier", appName);
 		 		Object result2 = driver.executeScript("mobile:application:open", params);
 		 		params.clear();			 	
 		 		
 		 		//Verify the Re-Enter PIN Page is displayed
 		 		String pinPg = enterPIN.enterPINPgExist();
-		 		assertTrue(pinPg.contains(pinPg));
+		 		System.out.println("The re-enter PIN text is "+pinPg);
+		 		assertTrue(pinPg.contains("Enter PIN"));
 		 		
 		 		//Re-enter 4 digit PIN Number
 		 		enterPIN.enter4DigitPin(pin);
 		 				 		
 		 		//Verify PinPage is displayed
-		 		assertTrue(licenseName.contains(licenseName));		 			 		
+		 		assertTrue(ExpectedlicenseName.contains(ActuallicenseName));	
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
 		 		
 		 		//clean app
 		 		Map  params2 = new HashMap();
-	 			params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			params.put("identifier", appName);
 	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
 	 			
@@ -114,7 +118,7 @@ public class SignInTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(4);
+		  s = ed.getData(11);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

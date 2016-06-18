@@ -28,7 +28,7 @@ import gov.snsw.framework.holder.pageobjects.TermsAndConditionsPage;
 public class CheckLogTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Name,String LogEvent_Type,String licence_Number) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -56,7 +56,7 @@ public class CheckLogTest extends BasicTest{
 		 		MyLicencePage LicPg = confirmPg.enter4DigitConfirmNumber(pin);
 		 		
 		 		//Verify My Licences Page is displayed
-		 		String licenseName = LicPg.viewLicName(licence_Name);
+		 		String licenseName = LicPg.viewLicName();
 		 		assertTrue(licenseName.contains(licence_Name));
 		 		
 		 		//Click on the Settings and then My Activity
@@ -68,10 +68,11 @@ public class CheckLogTest extends BasicTest{
 		 		assertTrue(logPgTitle.contains("Logs"));
 		 		
 		 		//Click the first / latest log with required Lic Number
-		 		LogDetailPage logPgDetail = logPg.clickOnLicNum(licence_Number);
+		 		LogDetailPage logPgDetail = logPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//Verify Logs Detailed Page is displayed
 		 		String logsTitle = logPgDetail.verifylogsDetailsPageTitle();
+		 		System.out.println("The title of the Detailed Log page is "+logsTitle);
 		 		assertTrue(logsTitle.contains("Logs"));
 		 		
 		 		//Verify the Event Type
@@ -79,7 +80,7 @@ public class CheckLogTest extends BasicTest{
 		 		assertTrue(liceventType.contains(LogEvent_Type));
 		 		
 		 		//click the Back Button on the Log Detail Page
-		 		logPgDetail.clickBackBtnLogPgDetail();
+		 		logPg = logPgDetail.clickBackBtnLogPgDetail();
 		 		
 		 		//Click log Page Back Button
 		 		logPg.clickBackBtnLogPg();
@@ -114,7 +115,7 @@ public class CheckLogTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(4);
+		  s = ed.getData(9);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
