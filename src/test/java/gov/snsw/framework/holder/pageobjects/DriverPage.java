@@ -3,6 +3,7 @@ package gov.snsw.framework.holder.pageobjects;
 
 
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -68,6 +69,14 @@ public class DriverPage {
 			return driver.findElement(titlePg).getText();
 			
 		}
+		
+		public WebElement isTextPresentOnScreen(String text) {
+			
+			return driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
+		}
+
+		
+		
 	
 }
 
