@@ -12,11 +12,11 @@
   <test name="Holder App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.SignInTest"/>
-      <class name="gov.snsw.framework.testng.ViewLicenceDetailsTest"/>
+      <!-- class name="gov.snsw.framework.testng.ViewLicenceDetailsTest"/>
       <class name="gov.snsw.framework.testng.ChangePINTest"/>
       <class name="gov.snsw.framework.testng.UpdateLicenceDetailsTest"/>
       <class name="gov.snsw.framework.testng.LicenceShareTest"/>
-      <class name="gov.snsw.framework.testng.RenewLicenceTest"/>
+      <class name="gov.snsw.framework.testng.RenewLicenceTest"/-->
     </classes>
     
   </test> <!-- Holder App Tests -->
