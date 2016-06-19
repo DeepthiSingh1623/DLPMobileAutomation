@@ -10,7 +10,7 @@ public class UpdatePostalAddressPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	
-	By PostalAdd = By.xpath("//*[@resourceid='applicantPostalAddress_AddressSearchIntuitive']");
+	By postalAdd = By.xpath("//*[@resourceid='applicantPostalAddress_AddressSearchIntuitive']");
 	
 	By addressList = By.xpath("//*[@resourceid='ui-id-1']");
 	
@@ -21,11 +21,11 @@ public class UpdatePostalAddressPage extends DriverPage{
 		driver.findElement(addressList).click();
 	}
 	
-	public void PostalAdd(String postal_Address)
+	public void postalAdd(String postal_Address)
 	{
-		driver.findElement(PostalAdd).clear();
-		fluentWait(PostalAdd);
-		driver.findElement(PostalAdd).sendKeys(postal_Address);
+		driver.findElement(postalAdd).clear();
+		fluentWait(postalAdd);
+		driver.findElement(postalAdd).sendKeys(postal_Address);
 		addresslist();
 	}
 	
@@ -38,10 +38,10 @@ public class UpdatePostalAddressPage extends DriverPage{
 	
 	public UpdateLicenceDetailsPage enterNewPostalAddress(String postal_Address)
 	{
-		fluentWait(PostalAdd);
-		PostalAdd(postal_Address);
-		addresslist();
-		fluentWait(doneBtn);
+		fluentWait(postalAdd);
+		//postalAdd(postal_Address);
+		//addresslist();
+		//fluentWait(doneBtn);
 		doneBtn();		
 		return new UpdateLicenceDetailsPage(driver);
 	}
