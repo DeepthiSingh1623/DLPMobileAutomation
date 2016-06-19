@@ -34,7 +34,7 @@ public class CheckerLicSearchTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin, String appName, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
+	public void checkerLicenceSearch(String username, String password,String pin, String appName, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");

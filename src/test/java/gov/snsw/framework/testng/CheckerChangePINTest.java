@@ -27,7 +27,7 @@ import gov.snsw.framework.checker.pageobjects.TermsAndConditionsPage;
 public class CheckerChangePINTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin, String appName) throws Exception{
+	public void checkerChangePInSettings(String username, String password,String pin, String appName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
