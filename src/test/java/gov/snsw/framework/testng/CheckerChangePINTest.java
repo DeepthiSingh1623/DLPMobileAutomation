@@ -39,22 +39,33 @@ public class CheckerChangePINTest extends BasicTest{
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 		EnterPINPage enterPIN = null;
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 		if(AddInPg.isStartBtnExists()){
+		 			
+		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			
+		 			//Click Accept Button on the Terms and Condition Page
+		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.signInNswAcct(username,password);
+			 		 
+				 		//Enter 4 digit PIN
+				 		 enterPIN.enterPin(pin);
+				 		 enterPIN.enterPin(pin);
+
+		 		}
+		 		else{
+		 			
+		 			enterPIN = new EnterPINPage(driver);
+		
+		 			//Enter 4 digit PIN confirmation
+			 		 enterPIN.enterPin(pin);
+		 		}
+		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		//Enter the login details in the Sign In Page
-		 		EnterPINPage enterPIN = signIn.signInNswAcct(username,password);
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN = enterPIN.enterNewPin(pin);
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		SNSWCheckerPage chkPg = enterPIN.confirmNewPIN(pin);
-		 		
-		 		assertEquals("OneGovNSW Checker", chkPg.getPageTitle());		 		
+		 		assertEquals("UAT-Checker", chkPg.getPageTitle());		 		
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = chkPg.clickSettings();
@@ -70,12 +81,13 @@ public class CheckerChangePINTest extends BasicTest{
 		 		assertEquals("Enter your current PIN",enterPIN.getPINPageTitle());
 		 		
 		 		//enter 4 digit current Pin
-		 		enterPIN = enterPIN.enterCurrrentPINOnChangePIN(pin);
+		 		enterPIN.enterPin(pin);
 		 		
 		 		//assertEquals("You are required to setup a new PIN",enterPIN.getPINPageTitle());
-		 		enterPIN = enterPIN.enterNewPINOnChangePIN("2222");
-		 		appSettingPg = enterPIN.confirmNewPINOnChangePIN("2222");
+		 		enterPIN.enterPin("2222");
+		 		 enterPIN.enterPin("2222");
 
+		 		
 		 		//Close App
 		 		Map<String, Object> params = new HashMap();
 		 		params.put("identifier", appName);
@@ -89,10 +101,10 @@ public class CheckerChangePINTest extends BasicTest{
 		 		params.clear();	
 		 		
 		 		// enter Newly created PIN
-		 		chkPg = enterPIN.enterCurrrentPINOnLogin("2222");		 		 		
+		 		enterPIN.enterPin("2222");		 		 		
 		 	
 		 		
-		 		assertEquals("OneGovNSW Checker",chkPg.getPageTitle());
+		 		assertEquals("UAT-Checker",chkPg.getPageTitle());
 		 		
 		 		// Click on the Settings and Sign out
 		 		chkPg.signOut();
@@ -115,8 +127,7 @@ public class CheckerChangePINTest extends BasicTest{
 	  		params.put("identifier", appName);
 	 		result1 = driver.executeScript("mobile:application:close", params);
 	 		params.clear();
-	 		
-	 		driver.close();
+
 	 	}
         if(testFail){
         	Assert.fail();

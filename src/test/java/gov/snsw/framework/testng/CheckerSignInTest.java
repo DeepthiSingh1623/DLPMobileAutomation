@@ -40,23 +40,35 @@ public class CheckerSignInTest extends BasicTest{
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 		EnterPINPage enterPIN = null;
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 		if(AddInPg.isStartBtnExists()){
+		 			
+		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			
+		 			//Click Accept Button on the Terms and Condition Page
+		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.signInNswAcct(username,password);
+			 		 
+				 		//Enter 4 digit PIN
+				 		 enterPIN.enterPin(pin);
+				 		 enterPIN.enterPin(pin);
+
+		 		}
+		 		else{
+		 			
+		 			enterPIN = new EnterPINPage(driver);
+		
+		 			//Enter 4 digit PIN confirmation
+			 		 enterPIN.enterPin(pin);
+		 		}
+		 
+		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		//Enter the login details in the Sign In Page
-		 		EnterPINPage enterPIN = signIn.signInNswAcct(username,password);
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN = enterPIN.enterNewPin(pin);
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		SNSWCheckerPage chkPg = enterPIN.confirmNewPIN(pin);
-		 		
-		 		assertEquals(chkPg.getPageTitle(),"OneGovNSW Checker");	
-		 		
+		 		assertEquals("UAT-Checker", chkPg.getPageTitle());	
+		 		System.out.println("App package name:"+appName);
 		 		Map<String, Object> params = new HashMap();
 		 		params.put("identifier", appName);
 		 		Object result1 = driver.executeScript("mobile:application:close", params);
@@ -71,8 +83,8 @@ public class CheckerSignInTest extends BasicTest{
 		 		assertEquals("Enter PIN",enterPIN.getPINPageTitle());
 		 		
 		 		//Re-enter 4 digit PIN Number
-		 		enterPIN.enterCurrrentPINOnLogin(pin);
-		 		assertEquals(chkPg.getPageTitle(),"OneGovNSW Checker");		 		
+		 		enterPIN.enterPin(pin);
+		 		assertEquals("UAT-Checker", chkPg.getPageTitle());		 		
 		 		chkPg.signOut();
 		 		
 		}
