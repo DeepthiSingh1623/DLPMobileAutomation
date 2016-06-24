@@ -17,15 +17,13 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
-import gov.snsw.framework.checker.pageobjects.AddIntroPage;
-import gov.snsw.framework.checker.pageobjects.CheckerLicenceDetails;
-
-
-import gov.snsw.framework.checker.pageobjects.EnterPINPage;
-import gov.snsw.framework.checker.pageobjects.LicenceSearch;
-import gov.snsw.framework.checker.pageobjects.SNSWCheckerPage;
-import gov.snsw.framework.checker.pageobjects.SignInNSWAcctPage;
-import gov.snsw.framework.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
+import gov.snsw.framework.android.checker.pageobjects.CheckerLicenceDetails;
+import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
+import gov.snsw.framework.android.checker.pageobjects.LicenceSearch;
+import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
+import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
 
 
 

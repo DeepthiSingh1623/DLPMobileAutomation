@@ -2,6 +2,7 @@ package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,19 +16,19 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
-import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
-import gov.snsw.framework.android.checker.pageobjects.AppSettingPage;
-import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
-import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
-import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
-import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
+import gov.snsw.framework.android.holder.pageobjects.AppSettingPage;
 
 
+import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
+import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
+import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 
-public class CheckerChangePINTest extends BasicTest{
+public class HolderChangePINTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void checkerChangePInSettings(String username, String password,String pin, String appName) throws Exception{
+	public void changePINTestCase(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin,String appName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -39,6 +40,12 @@ public class CheckerChangePINTest extends BasicTest{
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
+		 		//Enter PIN
+		 		EnterPINPage enterPIN = null;
+		 		
+		 		if(AddInPg.isStartBtnExist())
+		 		{		 			
+		 		
 		 		//Click on the Start button on introduction page
 		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 		
@@ -46,36 +53,53 @@ public class CheckerChangePINTest extends BasicTest{
 		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
 		 		
 		 		//Enter the login details in the Sign In Page
-		 		EnterPINPage enterPIN = signIn.signInNswAcct(username,password);
+		 		enterPIN = signIn.signInNswAcct(username,password);
 		 		 		
 		 		//Enter 4 digit PIN
-		 		enterPIN = enterPIN.enterNewPin(pin);
+		 		enterPIN.enter4DigitPin(pin);
 		 		
 		 		//Enter 4 digit PIN confirmation
-		 		SNSWCheckerPage chkPg = enterPIN.confirmNewPIN(pin);
+		 		enterPIN.enter4DigitPin(pin);
+		 		}
 		 		
-		 		assertEquals("OneGovNSW Checker", chkPg.getPageTitle());		 		
+		 		else
+		 		{
+		 			enterPIN = new EnterPINPage(driver);
+		 			
+		 			//Enter 4 digit PIN
+		 			enterPIN.enter4DigitPin(pin);
+		 			
+		 		}
+		 		
+		 		MyLicencePage LicPg = new MyLicencePage(driver);
+		 		
+		 		//Verify My License Page is displayed
+		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
+		 		
 		 		
 		 		//Click on the AppSettings
-		 		AppSettingPage appSettingPg = chkPg.clickSettings();
+		 		AppSettingPage appSettingPg = LicPg.clickSettings();
 		 		
-		 		assertEquals("App Settings",appSettingPg.getPageTitle());
+		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
 		 		
 		 		//Click on the Change PIN Button
 		 		 appSettingPg.clickChangePinBtn();
 		 		
 		 		//click Ok Button
-		 		enterPIN = appSettingPg.okBtn();
+		 		enterPIN = appSettingPg.changePINOkBtn();
 		 		
-		 		assertEquals("Enter your current PIN",enterPIN.getPINPageTitle());
+		 		assertEquals("Enter your current PIN",enterPIN.enterPINPgExist());
 		 		
 		 		//enter 4 digit current Pin
 		 		enterPIN = enterPIN.enterCurrrentPINOnChangePIN(pin);
 		 		
 		 		//assertEquals("You are required to setup a new PIN",enterPIN.getPINPageTitle());
-		 		enterPIN = enterPIN.enterNewPINOnChangePIN("2222");
-		 		appSettingPg = enterPIN.confirmNewPINOnChangePIN("2222");
-
+		 		enterPIN = enterPIN.enterNewPINOnChangePIN(new_Pin);
+		 		appSettingPg = enterPIN.confirmNewPINOnChangePIN(new_Pin);
+		 		
+		 		//Verify the AppSettings Page is displayed
+		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
+		 		
 		 		//Close App
 		 		Map<String, Object> params = new HashMap();
 		 		params.put("identifier", appName);
@@ -89,14 +113,15 @@ public class CheckerChangePINTest extends BasicTest{
 		 		params.clear();	
 		 		
 		 		// enter Newly created PIN
-		 		chkPg = enterPIN.enterCurrrentPINOnLogin("2222");		 		 		
+		 		LicPg = enterPIN.enterCurrrentPINOnLogin(new_Pin);		 		 		
 		 	
+		 		//verify My Licence Page is Displayed
+		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());	 	
 		 		
-		 		assertEquals("OneGovNSW Checker",chkPg.getPageTitle());
 		 		
 		 		// Click on the Settings and Sign out
-		 		chkPg.signOut();
-		 
+		 		LicPg.settings();
+		 		
 		 		
 		}
 	 	catch(Exception e){
@@ -105,19 +130,27 @@ public class CheckerChangePINTest extends BasicTest{
 	 		reportFail("expected", "actual","params");	
 
 	 	}
+	 	
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
+	 		//clean app
+	 		Map  params = new HashMap();
+ 			params.put("identifier", appName);
+ 			Object result = driver.executeScript("mobile:application:clean", params);
 	 		params.clear();
 	 		
-	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
+	 		
+	 		//clean app
+	 		Map  params1 = new HashMap();
+ 			params1.put("identifier", appName);
+ 			result = driver.executeScript("mobile:application:clean", params1);
 	 		params.clear();
 	 		
+ 			//close App
 	 		driver.close();
+	 		
 	 	}
+		
         if(testFail){
         	Assert.fail();
         }
@@ -128,8 +161,8 @@ public class CheckerChangePINTest extends BasicTest{
 	public Object[][] searchItemsData(){
 		 Object[][] s = null;
 		try {
-		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("checkerSingInSheet"), false);
-		  s = ed.getData(4);
+		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
+		  s = ed.getData(11);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -141,7 +174,7 @@ public class CheckerChangePINTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public CheckerChangePINTest(DesiredCapabilities caps) {
+	public HolderChangePINTest(DesiredCapabilities caps) {
 		super(caps);
 	}	
 
