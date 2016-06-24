@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -39,29 +40,40 @@ public class CheckerLicSearchTest extends BasicTest{
 		}
 	 	try{
 	 			
-	 			 	
-	 			 
-	 			 			
+			 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
+		 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
 		 		//Click on the Start button on introduction page
-		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 		EnterPINPage enterPIN = null;
 		 		
-		 		//Enter the login details in the Sign In Page
-		 		EnterPINPage enterPIN = signIn.signInNswAcct(username,password);
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN = enterPIN.enterNewPin(pin);
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		SNSWCheckerPage chkPg = enterPIN.confirmNewPIN(pin);
-		 		
-		 		assertEquals("OneGovNSW Checker", chkPg.getPageTitle());	
+		 		if(AddInPg.isStartBtnExists()){
+		 			
+		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			
+		 			//Click Accept Button on the Terms and Condition Page
+		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.signInNswAcct(username,password);
+			 		 
+				 		//Enter 4 digit PIN
+				 		 enterPIN.enterPin(pin);
+
+		 		}
+		 		else{
+		 			
+		 			enterPIN = new EnterPINPage(driver);
+		 			
+		 			//Enter 4 digit PIN confirmation
+			 		 enterPIN.enterPin(pin);
+		 		}
+		 
+		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
+		 		assertEquals("UAT-Checker", chkPg.getPageTitle());	
 		 		
 		 		LicenceSearch licSch= chkPg.clickManualSearch();	
 		 		

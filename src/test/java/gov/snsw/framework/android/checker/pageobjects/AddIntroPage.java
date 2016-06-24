@@ -3,6 +3,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.android.holder.pageobjects.DriverPage;
@@ -32,11 +33,25 @@ public class AddIntroPage extends DriverPage {
 	
 		
 		public TermsAndConditionsPage addStartBtn()
-		{	
+		{
 			driver.findElement(addIntroStartBtn).click();
+
 			return new TermsAndConditionsPage(driver);
 		}
-	
+		
+		public boolean isStartBtnExists(){
+			
+			boolean startBtnExis = false;
+			try{
+				startBtnExis = driver.findElement(addIntroStartBtn).isDisplayed();
+			}
+			
+			catch(NoSuchElementException e)
+			{
+				startBtnExis = false;
+			}
+			return startBtnExis;
+		}
 	
 
 }

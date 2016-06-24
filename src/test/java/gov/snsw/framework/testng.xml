@@ -1,18 +1,20 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="DLP Holder and Checker Automation Suite" parallel="false">
+<suite name="DLP Holder and Checker Smoke Test Suite" parallel="false">
   <test name="Checker App Tests">
-    <!--classes>
+    <classes>
       <class name="gov.snsw.framework.testng.CheckerSignInTest"/>
-      <class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
-      <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
-    </classes-->
+      <!-- class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
+      <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/-->
+    </classes>
     
-  </test> <!-- Chekcer App Tests -->
+  </test>
+ 
+   <!-- Chekcer App Tests -->
   <test name="Holder App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.SignInTest"/>
-      <!-- class name="gov.snsw.framework.testng.ViewLicenceDetailsTest"/>
+      <!--class name="gov.snsw.framework.testng.ViewLicenceDetailsTest"/>
       <class name="gov.snsw.framework.testng.ChangePINTest"/>
       <class name="gov.snsw.framework.testng.UpdateLicenceDetailsTest"/>
       <class name="gov.snsw.framework.testng.LicenceShareTest"/>

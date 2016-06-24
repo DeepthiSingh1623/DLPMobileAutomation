@@ -39,9 +39,9 @@ public class UpdatePostalAddressPage extends DriverPage{
 	public UpdateLicenceDetailsPage enterNewPostalAddress(String postal_Address)
 	{
 		fluentWait(postalAdd);
-		//postalAdd(postal_Address);
-		//addresslist();
-		//fluentWait(doneBtn);
+		postalAdd(postal_Address);
+		addresslist();
+		fluentWait(doneBtn);
 		doneBtn();		
 		return new UpdateLicenceDetailsPage(driver);
 	}
