@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class EnterPINPage extends DriverPage{
 
@@ -16,7 +16,7 @@ public class EnterPINPage extends DriverPage{
 	}
 	
 	//Enter PIN	
-	By enterPin = By.xpath("//*[@resourceid='"+holder_resourceid+":id/pin_entry']");
+	By enterPin = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']");
 	
 		
 	public void enter4DigitPin(String pin)
@@ -28,7 +28,7 @@ public class EnterPINPage extends DriverPage{
 	//Change PIN 
 	public String enterPINPgExist()
 	{
-		By enterPinExist = By.xpath("//*[@resourceid='"+holder_resourceid+":id/pin_title']");
+		By enterPinExist = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_title']");
 		String pinPgExist = driver.findElement(enterPinExist).getText();
 		return pinPgExist;
 	}	

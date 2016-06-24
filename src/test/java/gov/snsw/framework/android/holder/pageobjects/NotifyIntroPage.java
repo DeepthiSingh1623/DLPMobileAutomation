@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class NotifyIntroPage extends DriverPage{
 

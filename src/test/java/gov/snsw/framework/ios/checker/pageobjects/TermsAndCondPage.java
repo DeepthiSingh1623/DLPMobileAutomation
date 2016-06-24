@@ -1,4 +1,4 @@
-package gov.snsw.framework.ios.holder.pageobjects;
+package gov.snsw.framework.ios.checker.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

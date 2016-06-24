@@ -2,7 +2,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class CheckerLicenceDetails extends DriverPage{
 

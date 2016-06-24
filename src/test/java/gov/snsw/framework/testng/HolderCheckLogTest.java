@@ -33,6 +33,7 @@ public class HolderCheckLogTest extends BasicTest{
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
+		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
 	 			 			

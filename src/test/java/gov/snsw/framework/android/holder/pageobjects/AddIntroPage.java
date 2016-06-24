@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class AddIntroPage extends DriverPage {
 	
@@ -19,7 +19,7 @@ public class AddIntroPage extends DriverPage {
 		By addIntroMsg = By.xpath("//*[text()='Add']");	
 		
 		///Start Button		
-		By addIntroStartBtn = By.xpath("//*[@resourceid='"+holder_resourceid+":id/btnStart']");
+		By addIntroStartBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnStart']");
 
 		public TermsAndConditionsPage addStartBtn()
 		{	

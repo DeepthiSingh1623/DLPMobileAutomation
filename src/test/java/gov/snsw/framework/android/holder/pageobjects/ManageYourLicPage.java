@@ -3,6 +3,8 @@ package gov.snsw.framework.android.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 public class ManageYourLicPage extends DriverPage{
 
 	public ManageYourLicPage(WebDriver driver) {
@@ -14,10 +16,10 @@ public class ManageYourLicPage extends DriverPage{
 	//*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/txtManageLicenceHistory"]
 	
 	//Update your Details
-	By updateDetails = By.xpath("//*[@resourceid='"+holder_resourceid+":id/txtManageUpdateDetails']");
+	By updateDetails = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtManageUpdateDetails']");
 	
 	//Renew your Licence
-	By renewLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/txtManageRenewLicence']");
+	By renewLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtManageRenewLicence']");
 	
 	//Share Details
 	//*[text()="Share Details"]
@@ -35,7 +37,7 @@ public class ManageYourLicPage extends DriverPage{
 	//*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/chkboxShareAddress"]
 	
 	//Manage your Licence Back Button
-	By mngLicBackBtn = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
+	By mngLicBackBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
 	public void renewLic()
 	{
@@ -77,7 +79,7 @@ public class ManageYourLicPage extends DriverPage{
 	
 	public String verifyError()
 	{
-		By errorMsg = By.xpath("//*[@resourceid='"+holder_resourceid+"id/snackbar_text']");
+		By errorMsg = By.xpath("//*[@resourceid='"+holder_android_resourceid+"id/snackbar_text']");
 		String snackBarMsg = driver.findElement(errorMsg).getText();
 		return snackBarMsg;
 	}

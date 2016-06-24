@@ -6,6 +6,8 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 public class SharingLicencePage extends DriverPage{
 
 	public SharingLicencePage(WebDriver driver) {
@@ -15,25 +17,25 @@ public class SharingLicencePage extends DriverPage{
 	
 	By shareScanCode = By.xpath("//*[@class='android.widget.ImageView']");
 	
-	By shareBackBtn = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
+	By shareBackBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
 	public String verifySharePageTitle()
 	{
-		By shareTitle = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
+		By shareTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
 		String shareTitleExist = driver.findElement(shareTitle).getText();
 		return shareTitleExist;
 	}
 	
 	public String verifyShareLicName()
 	{
-		By shareLicName = By.xpath("//*[@resourceid='"+holder_resourceid+":id/textLicence']");
+		By shareLicName = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/textLicence']");
 		String shareLicenceName = driver.findElement(shareLicName).getText();
 		return shareLicenceName;
 	}
 	
 	public String verifyShareLicNum()
 	{
-		By shareLicNum = By.xpath("//*[@resourceid='"+holder_resourceid+":id/textLicenceNo']");
+		By shareLicNum = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/textLicenceNo']");
 		String shareLicenceNum = driver.findElement(shareLicNum).getText();
 		return shareLicenceNum;
 	}

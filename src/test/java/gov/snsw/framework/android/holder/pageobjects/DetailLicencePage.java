@@ -4,6 +4,8 @@ package gov.snsw.framework.android.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 
 public class DetailLicencePage extends DriverPage{
 
@@ -16,15 +18,15 @@ public class DetailLicencePage extends DriverPage{
 	
 	
 	//Capture License Status
-	By licStatus = By.xpath("//*[@resourceid='"+holder_resourceid+":id/licenceCurrent']");		
+	By licStatus = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/licenceCurrent']");		
 	
 	//License Details
-	By licDetails = By.xpath("//*[resourceid ='"+holder_resourceid+":id/detail']");
+	By licDetails = By.xpath("//*[resourceid ='"+holder_android_resourceid+":id/detail']");
 	
 	
 	
 	//Click Back Icon	
-	By backIcon = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
+	By backIcon = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
 	//Capture License Number
 	By licNum = By.xpath("//*[text()='Licence Number']/../text[2]");
@@ -35,10 +37,10 @@ public class DetailLicencePage extends DriverPage{
 	
 	By licClasses = By.xpath("//*[text()='Classes/Conditions']/../text[2]");
 	
-	By manageLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/menu_licence_manage']");
+	By manageLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/menu_licence_manage']");
 	
 	//Share Button
-	By shareLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/btnFloatingActionButton']");
+	By shareLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnFloatingActionButton']");
 	
 	/*public String getLicDetails()
 	{			
@@ -107,7 +109,7 @@ public class DetailLicencePage extends DriverPage{
 	
 	public String verifylicDetailsPageTitle()
 	{
-		By licDetailsTitle = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
+		By licDetailsTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
 		String detailedLicTitleBar = driver.findElement(licDetailsTitle).getText();
 		return detailedLicTitleBar;
 	}

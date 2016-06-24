@@ -3,7 +3,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class EnterPINPage extends DriverPage{
 
@@ -13,8 +13,8 @@ public class EnterPINPage extends DriverPage{
 	}
 	
 	//Enter PIN	
-		By enterPin = By.xpath("//*[@resourceid='"+checker_resourceid+":id/pin_entry']");
-		By enterPinExist = By.xpath("//*[@resourceid='"+checker_resourceid+":id/pin_title']");
+		By enterPin = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/pin_entry']");
+		By enterPinExist = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/pin_title']");
 		
 	public void enterPin(String pin)
 	{

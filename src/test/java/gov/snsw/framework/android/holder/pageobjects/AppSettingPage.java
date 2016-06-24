@@ -3,6 +3,8 @@ package gov.snsw.framework.android.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 
 
 public class AppSettingPage extends DriverPage{
@@ -14,13 +16,13 @@ public class AppSettingPage extends DriverPage{
 	
 	
 	//ChangePIN
-	By changePIN = By.xpath("//*[@resourceid='"+holder_resourceid+":id/txtSettingPin']");
+	By changePIN = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtSettingPin']");
 	
 	//Auto Lock
-	By autoLock = By.xpath("//*[@resourceid='"+holder_resourceid+":id/txtSettingAutoLock']");
+	By autoLock = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtSettingAutoLock']");
 	
 	//Back Button
-	By appSettingsBackBtn = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
+	By appSettingsBackBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
 	//Chane PIN Button
 	public void changePINBtn()
@@ -49,7 +51,7 @@ public class AppSettingPage extends DriverPage{
 	
 	public String verifyAppSettingTitleBar()
 	{
-		By appSettingsPg = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
+		By appSettingsPg = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
 		String appTitleBar = driver.findElement(appSettingsPg).getText();
 		return appTitleBar;
 	}

@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class AddIntroPage extends DriverPage {
 	
@@ -43,6 +43,7 @@ public class AddIntroPage extends DriverPage {
 			
 			boolean startBtnExis = false;
 			try{
+				//fluentWait(addIntroStartBtn);
 				startBtnExis = driver.findElement(addIntroStartBtn).isDisplayed();
 			}
 			

@@ -3,6 +3,8 @@ package gov.snsw.framework.ios.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 public class ManageLicencePage extends DriverPage{
 
 	public ManageLicencePage(WebDriver driver) {

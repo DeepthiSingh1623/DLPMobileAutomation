@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.ios.holder.pageobjects.DetailLicencePage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class MyLicencesPage extends DriverPage{
 

@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.android.checker.pageobjects.AppSettingPage;
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class SNSWCheckerPage extends DriverPage{
 	
 	
-	By manualScan = By.xpath("//*[@resourceid='"+checker_resourceid+":id/btnManualCheck']");
+	By manualScan = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnManualCheck']");
 	
-	By scanOption = By.xpath("//*[@resourceid='"+checker_resourceid+":id/btnFloatingActionButton']");
+	By scanOption = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnFloatingActionButton']");
 	
 	//Click Settings to ChangePIN
 		By settingOption = By.xpath("//*[text()='Settings']");
@@ -25,7 +25,7 @@ public class SNSWCheckerPage extends DriverPage{
 	By ok = By.xpath("//*[text()='OK']");
 	
 	//Click 3bars Setting	
-	By setting3Bars = By.xpath("//*[@resourceid='"+checker_resourceid+":id/imgLeft']");
+	By setting3Bars = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
 	public SNSWCheckerPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub

@@ -33,13 +33,13 @@ import gov.snsw.framework.ios.holder.pageobjects.UpdatePostalAddressPage;
 public class IOS_HolderUpdateLicenceTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String appName,String postal_Address,String lic_OwnerName) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		
-		String bundleID = (String) caps.getCapability("bundleId");	
+		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
 	 			//reportPass("success", "param");
 	 			
@@ -169,14 +169,14 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 	 		
 	 		//clean app
 	 		Map  params = new HashMap();
-	 		params.put("identifier", bundleID);
+	 		params.put("identifier", appName);
  			Object result = driver.executeScript("mobile:application:clean", params);
  			params.clear();
  		
 	 		
  			//close app
 	 		Map  params2 = new HashMap();
-	 		params2.put("identifier", bundleID);
+	 		params2.put("identifier", appName);
  			result = driver.executeScript("mobile:application:close", params2);
 	 		
  			try {
@@ -205,7 +205,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(13);
+		  s = ed.getData(12);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

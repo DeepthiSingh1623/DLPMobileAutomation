@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import gov.snsw.framework.utils.DriverPage;
+
 public class MyLicencePage extends DriverPage{
 
 	public MyLicencePage(WebDriver driver) {
@@ -21,7 +23,7 @@ public class MyLicencePage extends DriverPage{
 	
 		
 	//Fishing Fee Share
-	public By shareLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/recycler']/group[1]/group[1]/group[1]/text[2]");
+	public By shareLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/recycler']/group[1]/group[1]/group[1]/text[2]");
 	
 	//Click on Sign out  
 	By signOut = By.xpath("//*[text()='Sign Out']");
@@ -36,10 +38,10 @@ public class MyLicencePage extends DriverPage{
 	By ok = By.xpath("//*[text()='OK']");
 	
 	//Click 3bars Setting	
-	By setting3Bars = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
+	By setting3Bars = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 								
 	//Add License button
-	By addLic = By.xpath("//*[@resourceid='"+holder_resourceid+":id/btnFloatingActionButton']");
+	By addLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnFloatingActionButton']");
 	
 	public DetailLicencePage clickLicStatus()
 	{	
@@ -114,7 +116,7 @@ public class MyLicencePage extends DriverPage{
 	
 	public String verifyMyLicTitle()
 	{
-		By licTitile = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
+		By licTitile = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
 		String licPgTitile = driver.findElement(licTitile).getText();
 		return licPgTitile;
 	}
