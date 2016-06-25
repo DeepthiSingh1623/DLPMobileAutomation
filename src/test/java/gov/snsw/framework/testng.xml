@@ -13,7 +13,7 @@
    <!-- Chekcer App Tests -->
   <test name="Holder App Tests">
     <classes>
-      <class name="gov.snsw.framework.testng.SignInTest"/>
+      <class name="gov.snsw.framework.testng.HolderSignInTest"/>
       <!--class name="gov.snsw.framework.testng.ViewLicenceDetailsTest"/>
       <class name="gov.snsw.framework.testng.ChangePINTest"/>
       <class name="gov.snsw.framework.testng.UpdateLicenceDetailsTest"/>
