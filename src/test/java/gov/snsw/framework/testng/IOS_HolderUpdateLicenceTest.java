@@ -111,7 +111,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		
 		 		//Address list select using TAP
 		 					 		
-		 		Map<String, Object> params2 = new HashMap<>();
+		 		Map<String, Object> params2 = new HashMap<String, Object>();
 		 		params2.put("location", "536,502");
 		 		Object result2 = driver.executeScript("mobile:touch:tap", params2);
 		 		
@@ -147,7 +147,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		//Click Back Button on the Detailed Lic Page
 		 		//LicPg = detailLicPg.clickBackBtn();			
 		 		
-		 		Map<String, Object> params10 = new HashMap<>();
+		 		Map<String, Object> params10 = new HashMap<String, Object>();
 		 		params10.put("location", "37,92");
 		 		Object result10 = driver.executeScript("mobile:touch:tap", params10);
 		 				

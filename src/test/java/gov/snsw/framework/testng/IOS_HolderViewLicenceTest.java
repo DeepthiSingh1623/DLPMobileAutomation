@@ -96,7 +96,7 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		 		//LicPg = detailLicPg.clickBackBtn();
 		 		
 		 		//Back Button on detailed Lic page used TAP
-		 		Map<String, Object> params1 = new HashMap<>();
+		 		Map<String, Object> params1 = new HashMap<String, Object>();
 		 		params1.put("location", "29,79");
 		 		Object result1 = driver.executeScript("mobile:touch:tap", params1); 		
 		 		
