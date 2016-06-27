@@ -9,7 +9,7 @@
       <protocol>http</protocol>
       <host>10.100.21.15</host>
       <port>3128</port>
-      <nonProxyHosts>*.testservicensw.net</nonProxyHosts>
+      <nonProxyHosts>*.testservicensw.net | *.perfectomobile.com</nonProxyHosts>
     </proxy>
          <proxy>
       <id>snsw_https_proxy</id>
@@ -17,7 +17,7 @@
       <protocol>https</protocol>
       <host>10.100.21.15</host>
       <port>3128</port>
-      <nonProxyHosts>*.testservicensw.net</nonProxyHosts>
+      <nonProxyHosts>*.testservicensw.net | *.perfectomobile.com</nonProxyHosts>
     </proxy>
   </proxies>
 </settings>

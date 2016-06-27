@@ -1,4 +1,4 @@
-package gov.snsw.framework.android.holder.pageobjects;
+package gov.snsw.framework.utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +36,13 @@ public class DriverPage {
 		}		
 		
 
-		protected String holder_resourceid = "au.gov.nsw.onegov.app.holder.uat";
+		protected String holder_android_resourceid = "au.gov.nsw.onegov.app.holder.uat";
 		
-		protected String checker_resourceid = "au.gov.nsw.onegov.app.checker.uat";
+		protected String checker_android_resourceid = "au.gov.nsw.onegov.app.checker.uat";
+		
+		protected String holder_ios_resourceid = "au.gov.nsw.onegov.MyLicences.uat";
+		
+		protected String checker_ios_resourceid = "au.gov.nsw.onegov.LicenceChecker.uat";
 	
 		public WebElement explicitWait(By element){
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -62,16 +66,22 @@ public class DriverPage {
 			return element1;
 		}
 
-		By titlePg = By.xpath("//*[@resourceid='"+checker_resourceid+":id/toolbarTitle']");
+		By titlePg = By.xpath("//*[@resourceid='"+checker_ios_resourceid+":id/toolbarTitle']");
 
-		public String getPageTitle(){
+		public String getiOSCheckerPageTitle(){
 			
 			fluentWait(titlePg);
 			return driver.findElement(titlePg).getText();
 			
 		}
 		
+		By checkTle = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/toolbarTitle']");
+		public String getAndroidCheckerPageTitle(){
 			
+			fluentWait(checkTle);
+			return driver.findElement(checkTle).getText();
+			
+		}
 		
 		
 		public WebElement isTextPresentOnScreen(String text) {
@@ -79,7 +89,6 @@ public class DriverPage {
 			return driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
 		}
 
-		
 		
 	
 }

@@ -1,4 +1,4 @@
-package gov.snsw.framework.ios.holder.pageobjects;
+package gov.snsw.framework.ios.checker.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -66,11 +66,11 @@ public class EnterPinPage extends DriverPage{
 		driver.findElement(unlockPin4).sendKeys("4");
 	}
 	
-	public MyLicencesPage enterPINUnlock()
+	public SNSWCheckerPage enterPINUnlock()
 	{
 		fluentWait(unlockPin1);
 		enterPinUnlock();
-		return new MyLicencesPage(driver);
+		return new SNSWCheckerPage(driver);
 		
 	}
 	

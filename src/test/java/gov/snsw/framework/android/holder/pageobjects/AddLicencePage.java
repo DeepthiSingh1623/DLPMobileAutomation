@@ -3,6 +3,8 @@ package gov.snsw.framework.android.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 public class AddLicencePage extends DriverPage{
 
 	public AddLicencePage(WebDriver driver) {
@@ -14,7 +16,7 @@ public class AddLicencePage extends DriverPage{
 	
 	 //*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/toolbarTitle"]
 			
-			
+	By addLicPg = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");	
 	
 	public AddLicencePage clickAddLicense()
 	{	
@@ -24,10 +26,10 @@ public class AddLicencePage extends DriverPage{
 	
 	}	
 	
-	public void addLicPgExistVerify()
+	public  String addLicPgExistVerify()
 	{
-		By addLicPg = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
-		String addLicPgExist = driver.findElement(addLicPg).getText();
+		
+		return driver.findElement(addLicPg).getText();
 		
 	}
 }

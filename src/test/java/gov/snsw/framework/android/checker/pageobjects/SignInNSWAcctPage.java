@@ -3,7 +3,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class SignInNSWAcctPage extends DriverPage {
 
@@ -14,11 +14,11 @@ public class SignInNSWAcctPage extends DriverPage {
 	
 	
 	//Email Address in sign in page
-	By emailAdd = By.xpath("//*[@resourceid='"+checker_resourceid+":id/etxtUsername']");
+	By emailAdd = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/etxtUsername']");
 	//Password on Signin page
-	By password = By.xpath("//*[@resourceid='"+checker_resourceid+":id/etxtPassword']");	
+	By password = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/etxtPassword']");	
 	//SignIn button
-	By signInBtn = By.xpath("//*[@resourceid='"+checker_resourceid+":id/btnLogin']");
+	By signInBtn = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnLogin']");
 	
 	
 	public EnterPINPage signInNswAcct(String email, String pwd )

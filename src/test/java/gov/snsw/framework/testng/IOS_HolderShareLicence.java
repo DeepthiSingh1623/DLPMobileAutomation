@@ -27,12 +27,12 @@ import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
 public class IOS_HolderShareLicence extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String appName,String postal_Address,String lic_OwnerName) throws Exception{
+	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
-		//String bundleID = (String) caps.getCapability("bundleID");	
+		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
 	 			//reportPass("success", "param");
 	 			
@@ -149,7 +149,7 @@ public class IOS_HolderShareLicence extends BasicTest
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(13);
+		  s = ed.getData(12);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

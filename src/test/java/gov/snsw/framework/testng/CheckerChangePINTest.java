@@ -27,11 +27,12 @@ import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
 public class CheckerChangePINTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void checkerChangePInSettings(String username, String password,String pin, String appName) throws Exception{
+	public void checkerChangePInSettings(String username, String password,String pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
+		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
 	 			 			
@@ -65,12 +66,12 @@ public class CheckerChangePINTest extends BasicTest{
 		 		}
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		assertEquals("UAT-Checker", chkPg.getPageTitle());		 		
+		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());	 		
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = chkPg.clickSettings();
 		 		
-		 		assertEquals("App Settings",appSettingPg.getPageTitle());
+		 		assertEquals("App Settings",appSettingPg.getAndroidCheckerPageTitle());
 		 		
 		 		//Click on the Change PIN Button
 		 		 appSettingPg.clickChangePinBtn();
@@ -104,7 +105,7 @@ public class CheckerChangePINTest extends BasicTest{
 		 		enterPIN.enterPin("2222");		 		 		
 		 	
 		 		
-		 		assertEquals("UAT-Checker",chkPg.getPageTitle());
+		 		assertEquals("UAT-Checker",chkPg.getAndroidCheckerPageTitle());
 		 		
 		 		// Click on the Settings and Sign out
 		 		chkPg.signOut();
@@ -140,7 +141,7 @@ public class CheckerChangePINTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("checkerSingInSheet"), false);
-		  s = ed.getData(4);
+		  s = ed.getData(3);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

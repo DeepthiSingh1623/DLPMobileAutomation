@@ -3,7 +3,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class LicenceSearch extends DriverPage{
 
@@ -13,8 +13,8 @@ public class LicenceSearch extends DriverPage{
 	}
 	
 	
-	By licNo= By.xpath("//*[@resourceid='"+checker_resourceid+":id/etxtLicenceNumber']");
-	By chkBtn= By.xpath("//*[@resourceid='"+checker_resourceid+":id/btnCheck']");
+	By licNo= By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/etxtLicenceNumber']");
+	By chkBtn= By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnCheck']");
 	
 	public void enterLicenceNumber(String licNum){
 		

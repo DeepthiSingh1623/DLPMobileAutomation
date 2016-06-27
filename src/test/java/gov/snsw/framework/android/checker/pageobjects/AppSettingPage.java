@@ -3,7 +3,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import gov.snsw.framework.android.holder.pageobjects.DriverPage;
+import gov.snsw.framework.utils.DriverPage;
 
 public class AppSettingPage extends DriverPage{
 
@@ -14,13 +14,13 @@ public class AppSettingPage extends DriverPage{
 	
 	
 	//ChangePIN
-	By changePIN = By.xpath("//*[@resourceid='"+checker_resourceid+":id/txtSettingPin']");
+	By changePIN = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/txtSettingPin']");
 	
 	//Auto Lock
-	By autoLock = By.xpath("//*[@resourceid='"+checker_resourceid+":id/txtSettingAutoLock']");
+	By autoLock = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/txtSettingAutoLock']");
 	
 	//Back Button
-	By appSettingsBackBtn = By.xpath("//*[@resourceid='"+checker_resourceid+":id/imgLeft']");
+	By appSettingsBackBtn = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
 	
 	public void changePINBtn()
 	{

@@ -3,6 +3,9 @@ package gov.snsw.framework.ios.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.ios.holder.pageobjects.AddIntroPage;
+import gov.snsw.framework.utils.DriverPage;
+
 public class SettingsPage extends DriverPage{
 
 	public SettingsPage(WebDriver driver) {

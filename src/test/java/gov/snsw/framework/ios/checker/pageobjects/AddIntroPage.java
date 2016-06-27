@@ -1,11 +1,11 @@
-package gov.snsw.framework.ios.holder.pageobjects;
+package gov.snsw.framework.ios.checker.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.utils.DriverPage;
-import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
+import gov.snsw.framework.ios.checker.pageobjects.TermsAndCondPage;
 
 public class AddIntroPage extends DriverPage{
 

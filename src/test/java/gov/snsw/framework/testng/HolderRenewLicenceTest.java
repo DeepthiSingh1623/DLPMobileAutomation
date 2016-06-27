@@ -31,11 +31,12 @@ import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 public class HolderRenewLicenceTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void renewLicence(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin,String appName) throws Exception{
+	public void renewLicence(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
+		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
 	 			 			
@@ -136,7 +137,7 @@ public class HolderRenewLicenceTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(11);
+		  s = ed.getData(10);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

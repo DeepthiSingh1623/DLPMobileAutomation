@@ -3,6 +3,8 @@ package gov.snsw.framework.android.holder.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import gov.snsw.framework.utils.DriverPage;
+
 public class LogDetailPage extends DriverPage{
 
 	public LogDetailPage(WebDriver driver) {
@@ -10,7 +12,7 @@ public class LogDetailPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	//Click BackButton
-	By backBtn = By.xpath("//*[@resourceid='"+holder_resourceid+":id/imgLeft']");
+	By backBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
 	public void BackBtnLogPgDetail()
 	{
@@ -25,7 +27,7 @@ public class LogDetailPage extends DriverPage{
 	
 	public String verifylogsDetailsPageTitle()
 	{
-		By logsTitle = By.xpath("//*[@resourceid='"+holder_resourceid+":id/toolbarTitle']");
+		By logsTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
 		String logsTitleBar = driver.findElement(logsTitle).getText();
 		return logsTitleBar;
 	}

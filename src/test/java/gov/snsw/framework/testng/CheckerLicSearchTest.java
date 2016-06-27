@@ -33,11 +33,12 @@ public class CheckerLicSearchTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void checkerLicenceSearch(String username, String password,String pin, String appName, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
+	public void checkerLicenceSearch(String username, String password,String pin, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
+		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			
 			 			
@@ -73,12 +74,12 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		}
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		assertEquals("UAT-Checker", chkPg.getPageTitle());	
+		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());	
 		 		
 		 		LicenceSearch licSch= chkPg.clickManualSearch();	
 		 		
 		 		//Thread.sleep(100000);
-		 		assertEquals("Enter licence details", licSch.getPageTitle());
+		 		assertEquals("Enter licence details", licSch.getAndroidCheckerPageTitle());
 		 		
 		 		licSch.enterLicenceNumber(licenceNo);
 		 		
@@ -88,7 +89,7 @@ public class CheckerLicSearchTest extends BasicTest{
  			 	
 		 		CheckerLicenceDetails licDtls= licSch.clickCheckBtn();
 		 		
-		 		assertEquals("Licence Details", licDtls.getPageTitle());
+		 		assertEquals("Licence Details", licDtls.getAndroidCheckerPageTitle());
 		 		
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licenceNo));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licstDate));
@@ -147,7 +148,7 @@ public class CheckerLicSearchTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("checkerSingInSheet"), false);
-		  s = ed.getData(13);
+		  s = ed.getData(12);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
