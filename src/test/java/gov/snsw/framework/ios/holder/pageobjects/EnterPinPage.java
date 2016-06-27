@@ -51,10 +51,10 @@ public class EnterPinPage extends DriverPage{
 	}
 	
 	//Enter Unlock Pin
-	By unlockPin1 = By.xpath("//*[@class='UIAScrollView']/secure[1]");
-	By unlockPin2 = By.xpath("//*[@class='UIAScrollView']/secure[2]");
-	By unlockPin3 = By.xpath("//*[@class='UIAScrollView']/secure[3]");
-	By unlockPin4 = By.xpath("//*[@class='UIAScrollView']/secure[4]");
+	By unlockPin1 = By.xpath("//*[@class='UIASecureTextField'][1]");
+	By unlockPin2 = By.xpath("//*[@class='UIASecureTextField'][2]");
+	By unlockPin3 = By.xpath("//*[@class='UIASecureTextField'][3]");
+	By unlockPin4 = By.xpath("//*[@class='UIASecureTextField'][4]");
 	
 							 
 	

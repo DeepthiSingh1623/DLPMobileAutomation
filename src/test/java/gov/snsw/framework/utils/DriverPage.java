@@ -53,7 +53,7 @@ public class DriverPage {
 	
 		public WebElement fluentWait(final By element)
 		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(90, TimeUnit.SECONDS)
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
 																			.pollingEvery(5, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
@@ -84,9 +84,19 @@ public class DriverPage {
 		}
 		
 		
-		public WebElement isTextPresentOnScreen(String text) {
+		public boolean  isTextPresentOnScreen(String text) {
 			
-			return driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
+			boolean txtPres= false;
+			
+			try{
+				txtPres = driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")).isDisplayed();
+			}
+			
+			catch(Exception e){
+				txtPres= false;
+			}
+			
+			return txtPres;
 		}
 
 		

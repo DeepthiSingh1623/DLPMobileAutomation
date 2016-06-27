@@ -1,16 +1,18 @@
 package gov.snsw.framework.ios.checker.pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.utils.DriverPage;
 
-public class TermsAndCondPage extends DriverPage{
+public class TermsAndConditionsPage extends DriverPage{
 
-	public TermsAndCondPage(WebDriver driver) {
+	public TermsAndConditionsPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
+
 	
 	By agreeBtn = By.xpath("//*[@label='AGREE']");
 
@@ -19,11 +21,11 @@ public class TermsAndCondPage extends DriverPage{
 		driver.findElement(agreeBtn).click();
 	}
 
-	public SignInPage pressAgreeBtn()
+	public SignInNSWAcctPage pressAgreeBtn()
 	{
 		fluentWait(agreeBtn);
 		agreeButton();
-		return new SignInPage(driver);
+		return new SignInNSWAcctPage(driver);
 	}
 	
 
@@ -32,5 +34,21 @@ public class TermsAndCondPage extends DriverPage{
 	By tAndCPage = By.xpath("//*[@label='Terms & Conditions']");
 	String tAndCTitle = driver.findElement(tAndCPage).getText();
 	return tAndCTitle;
+	}
+
+	public boolean isAgreeBtnExist() {
+		// TODO Auto-generated method stub
+		boolean agreeBtnExist = false;
+		try{
+			//fluentWait(agreeBtn);
+			agreeBtnExist= driver.findElement(agreeBtn).isDisplayed();
+			
+		}
+		catch(NoSuchElementException e)
+		{
+			agreeBtnExist = false;
+		}
+		return agreeBtnExist;
+	
 	}
 }

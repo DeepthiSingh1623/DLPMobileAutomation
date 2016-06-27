@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.utils.DriverPage;
 
-public class SignInPage extends DriverPage{
+public class SignInNSWAcctPage extends DriverPage{
 
-	public SignInPage(WebDriver driver) {
+	public SignInNSWAcctPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
@@ -38,14 +38,14 @@ public class SignInPage extends DriverPage{
 		driver.findElement(signIn).click();
 	}
 	
-	public EnterPinPage pressSignIn(String Username, String Password)
+	public EnterPINPage pressSignIn(String Username, String Password)
 	{
 		fluentWait(userName);
 		enterEmail(Username);
 		enterPwd(Password);
 		fluentWait(signIn);
 		signInBtn();
-		return new EnterPinPage(driver);
+		return new EnterPINPage(driver);
 		
 	}
 

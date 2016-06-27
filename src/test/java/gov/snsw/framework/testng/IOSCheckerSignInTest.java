@@ -1,6 +1,6 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,15 +12,15 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
-import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
-import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
-import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
-import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
-import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.ios.checker.pageobjects.EnterPINPage;
+import gov.snsw.framework.ios.checker.pageobjects.SNSWCheckerPage;
+import gov.snsw.framework.ios.checker.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.ios.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.ios.checker.pageobjects.SettingsPage;
 import gov.snsw.framework.utils.Utilities;
 
 
-public class CheckerSignInTest extends BasicTest{
+public class IOSCheckerSignInTest extends BasicTest{
 
 	
 	
@@ -30,53 +30,57 @@ public class CheckerSignInTest extends BasicTest{
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
-		String appName = (String) caps.getCapability("appPackage");
+		String appName = (String) caps.getCapability("bundleId");
 	 	try{
 	 			 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 	
-		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
-		 		EnterPINPage enterPIN = null;
+		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
+		 		EnterPINPage enterPIN = new EnterPINPage(driver);
 		 		
-		 		if(AddInPg.isStartBtnExists()){
+		 		if(tcPg.isAgreeBtnExist()){
 		 			
-		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
-		 			
-		 			//Click Accept Button on the Terms and Condition Page
-		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 			SignInNSWAcctPage signIn = tcPg.pressAgreeBtn();
 			 		
 			 		//Enter the login details in the Sign In Page
-			 		enterPIN = signIn.signInNswAcct(username,password);
+		 			enterPIN = signIn.pressSignIn(username,password);
 			 		 
 				 		//Enter 4 digit PIN
-				 		 enterPIN.enterPin(pin);
-				 		 enterPIN.enterPin(pin);
-
+				 		 enterPIN.enterPin();
+				 		 enterPIN.enterPin();
+		 			
 		 		}
+		 		
 		 		else{
 		 			
-		 			enterPIN = new EnterPINPage(driver);
-		
-		 			//Enter 4 digit PIN confirmation
-			 		 enterPIN.enterPin(pin);
+		 			enterPIN.enterPinUnlock();
 		 		}
+		 	
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());	
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
 		 		Utilities.closeApp(driver, appName);
 		 		
 		 		Utilities.openApp(driver, appName);
 		 		
 		 		//Verify the Re-Enter PIN Page is displayed
-		 		assertEquals("Enter PIN",enterPIN.getPINPageTitle());
+		 		assertTrue(enterPIN.isTextPresentOnScreen("Unlock with pin"));
 		 		
 		 		//Re-enter 4 digit PIN Number
-		 		enterPIN.enterPin(pin);
-		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());		 		
-		 		chkPg.signOut();
+		 		enterPIN.enterPinUnlock();
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));
+		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
+		 		
+		 		//Verify Settings Page is displayed
+		 		settingPg.verifySettingsPageTitile();
+		 		
+		 		//Click SignOut
+		 		tcPg = settingPg.pressSigoutButton();
+		 		
+		 		assertTrue(tcPg.isTextPresentOnScreen("Terms & Conditions"));
 		 		
 		}
 	 	catch(Exception e){
@@ -118,7 +122,7 @@ public class CheckerSignInTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public CheckerSignInTest(DesiredCapabilities caps) {
+	public IOSCheckerSignInTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

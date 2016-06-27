@@ -5,7 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.utils.DriverPage;
-import gov.snsw.framework.ios.checker.pageobjects.TermsAndCondPage;
+import gov.snsw.framework.ios.checker.pageobjects.TermsAndConditionsPage;
 
 public class AddIntroPage extends DriverPage{
 
@@ -21,11 +21,11 @@ public class AddIntroPage extends DriverPage{
 		driver.findElement(startBtn).click();
 	}
 			
-	public TermsAndCondPage pressStartBtn()
+	public TermsAndConditionsPage pressStartBtn()
 	{
 		fluentWait(startBtn);
 		IntrostartBtn();
-		return new TermsAndCondPage(driver);
+		return new TermsAndConditionsPage(driver);
 	}
 	
 	public String verifyAddPageTitle()

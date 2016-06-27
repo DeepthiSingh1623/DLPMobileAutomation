@@ -30,7 +30,6 @@ public class AddIntroPage extends DriverPage {
 		
 		///Start Button
 		By addIntroStartBtn = By.xpath("//*[text()='Start']");
-	
 		
 		public TermsAndConditionsPage addStartBtn()
 		{

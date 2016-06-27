@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.utils.DriverPage;
 
-public class EnterPinPage extends DriverPage{
+public class EnterPINPage extends DriverPage{
 
-	public EnterPinPage(WebDriver driver) {
+	public EnterPINPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
@@ -51,10 +51,10 @@ public class EnterPinPage extends DriverPage{
 	}
 	
 	//Enter Unlock Pin
-	By unlockPin1 = By.xpath("//*[@class='UIAScrollView']/secure[1]");
-	By unlockPin2 = By.xpath("//*[@class='UIAScrollView']/secure[2]");
-	By unlockPin3 = By.xpath("//*[@class='UIAScrollView']/secure[3]");
-	By unlockPin4 = By.xpath("//*[@class='UIAScrollView']/secure[4]");
+	By unlockPin1 = By.xpath("//*[@class='UIASecureTextField'][1]");
+	By unlockPin2 = By.xpath("//*[@class='UIASecureTextField'][2]");
+	By unlockPin3 = By.xpath("//*[@class='UIASecureTextField'][3]");
+	By unlockPin4 = By.xpath("//*[@class='UIASecureTextField'][4]");
 	
 							 
 	
@@ -99,6 +99,7 @@ public class EnterPinPage extends DriverPage{
 		driver.findElement(unlockPin3).sendKeys("2");
 		driver.findElement(unlockPin4).sendKeys("2");
 	}
+	
 	
 	
 	
