@@ -28,6 +28,9 @@ public class DriverPage {
 		}	
 		
 
+		//capturing snack Bar messages
+		
+	
 		protected void SwitchtoContext(WebDriver driver, String string) {
 			// TODO Auto-generated method stub
 			

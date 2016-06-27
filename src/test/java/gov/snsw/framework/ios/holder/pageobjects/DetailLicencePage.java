@@ -49,6 +49,7 @@ public class DetailLicencePage extends DriverPage{
 	
 	public void backBtn()
 	{
+		fluentWait(LicBackBtn);
 		driver.findElement(LicBackBtn).click();
 	}
 	

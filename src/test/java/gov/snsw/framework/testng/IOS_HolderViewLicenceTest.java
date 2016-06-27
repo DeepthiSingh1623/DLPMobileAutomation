@@ -78,14 +78,29 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		 		//Click Licence Number
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
+		 		
 		 		assertEquals(lic_OwnerName,detailLicPg.getLicName());
+		 		
+		 		
 		 		assertEquals(licence_Number,detailLicPg.getLicNum());
+		 		
+		 		
 		 		assertEquals(licence_StartDate,detailLicPg.getLicStartDate());
+		 		
+		 		
 		 		assertEquals(licence_ExpireDate,detailLicPg.getLicExpireDate());
 		 		
-		 		//Click Back Button on the Licence Details Page
-		 		LicPg = detailLicPg.clickBackBtn();
 		 		
+		 		//Click Back Button on the Licence Details Page
+		 		//LicPg = detailLicPg.clickBackBtn();
+		 		
+		 		//Back Button on detailed Lic page used TAP
+		 		Map<String, Object> params1 = new HashMap<>();
+		 		params1.put("location", "29,79");
+		 		Object result1 = driver.executeScript("mobile:touch:tap", params1); 		
+		 		
+		 		
+		 			 		
 		 		//Verify My Licence Page is displayed
 		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
 		 				 		

@@ -15,7 +15,7 @@ public class UpdatePostalAddressPage extends DriverPage{
 	//Address 
 	By Address = By.xpath("//*[@class='DOMUIAButton']/../textfield");
 	
-	By addEnterDone = By.xpath("//device/view/window[2]/toolbar[1]/button[3]");
+	By addEnterDone = By.xpath("//*[@class='DOMUIAButton']");
 	
 	
 	public void addressEnterDoneBtn()

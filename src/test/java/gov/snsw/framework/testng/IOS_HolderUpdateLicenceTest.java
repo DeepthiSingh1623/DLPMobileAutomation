@@ -103,10 +103,16 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		UpdatePostalAddressPage updatePostalPg = updateLicPg.clickeditPostalBtn();
 		 		
 		 		//Verify the postal address changes Page Title is displayed		 		
-		 		assertEquals("UPDATE CONTACT DETAILS",updatePostalPg.verifyPostalAddressTitle());
+		 		//assertEquals("UPDATE CONTACT DETAILS",updatePostalPg.verifyPostalAddressTitle());
 		 				 	
 		 		//Change Address
-		 		//updatePostalPg.addressField(postal_Address);
+		 		updatePostalPg.addressField(postal_Address);
+		 		
+		 		//Address list select using TAP
+		 					 		
+		 		Map<String, Object> params2 = new HashMap<>();
+		 		params2.put("location", "536,502");
+		 		Object result2 = driver.executeScript("mobile:touch:tap", params2);
 		 		
 		 		//click address enter Done button
 		 		//updatePostalPg.addressEnterDoneBtn();
@@ -119,7 +125,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		//String ExpectedAddress = postal_Address;
 		 	//	System.out.println("The Actual Address is: "+ActualAddress);
 		 	//	System.out.println("The Expected Address is: "+ExpectedAddress);
-		 	//	assertTrue(ExpectedAddress.equalsIgnoreCase(ActualAddress));
+		 	//	assertTrue(ExpectedAddress.equalsIgnoreCase(ActualAddress));		 		
 		 		
 		 		
 		 		//click Save Changes
@@ -138,7 +144,12 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		detailLicPg = manageLicPg.clickCancelBtn();
 		 		
 		 		//Click Back Button on the Detailed Lic Page
-		 		LicPg = detailLicPg.clickBackBtn();
+		 		//LicPg = detailLicPg.clickBackBtn();			
+		 		
+		 		Map<String, Object> params10 = new HashMap<>();
+		 		params10.put("location", "37,92");
+		 		Object result10 = driver.executeScript("mobile:touch:tap", params10);
+		 				
 		 		
 		 		//Verify My Licence Page is displayed
 		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
