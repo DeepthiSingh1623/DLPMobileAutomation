@@ -30,5 +30,11 @@ public class Utilities {
  		driver.executeScript("mobile:application:clean", params);
  		params.clear();
 	}
-
+	
+	public static void BackBtn(RemoteWebDriver driver)
+	{
+	params.put("keySequence", "BACK");
+	driver.executeScript("mobile:presskey", params);
+	}
+	
 }

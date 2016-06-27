@@ -29,7 +29,7 @@ import gov.snsw.framework.android.holder.pageobjects.UpdateLicenceDetailsPage;
 import gov.snsw.framework.android.holder.pageobjects.UpdatePostalAddressPage;
 import gov.snsw.framework.android.holder.pageobjects.UpdateResidentialAddressPage;
 
-public class HolderUpdateLicenceDetailsTest extends BasicTest {
+public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	@Test (dataProvider="logInData")
 	public void updateLicence(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address) throws Exception{
 		boolean testFail = false;
@@ -158,7 +158,7 @@ public class HolderUpdateLicenceDetailsTest extends BasicTest {
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public HolderUpdateLicenceDetailsTest(DesiredCapabilities caps) {
+	public Android_HolderUpdateLicenceDetailsTest(DesiredCapabilities caps) {
 		super(caps);
 	}	
 

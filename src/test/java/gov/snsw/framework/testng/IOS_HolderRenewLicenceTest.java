@@ -28,6 +28,7 @@ import gov.snsw.framework.ios.holder.pageobjects.SuccessfullLicDetailsUpdatePage
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
 import gov.snsw.framework.ios.holder.pageobjects.UpdateLicDetailsPage;
 import gov.snsw.framework.ios.holder.pageobjects.UpdatePostalAddressPage;
+import gov.snsw.framework.utils.Utilities;
 
 public class IOS_HolderRenewLicenceTest extends BasicTest
 {
@@ -129,16 +130,10 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		Map  params = new HashMap();
-	 		params.put("identifier", appName);
- 			Object result = driver.executeScript("mobile:application:clean", params);
- 			params.clear();
- 		
-	 		
+	 		Utilities.cleanApp(driver, appName);
+	 			 		
  			//close app
-	 		Map  params2 = new HashMap();
-	 		params2.put("identifier", appName);
- 			result = driver.executeScript("mobile:application:close", params2);
+	 		Utilities.closeApp(driver, appName);
 	 		
  			try {
 	                

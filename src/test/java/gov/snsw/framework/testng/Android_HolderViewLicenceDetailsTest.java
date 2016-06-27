@@ -1,7 +1,7 @@
 package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertEquals;
-
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,18 +17,18 @@ import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
-import gov.snsw.framework.android.holder.pageobjects.AppSettingPage;
 
-
+import gov.snsw.framework.android.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 
-public class HolderChangePINTest extends BasicTest{
+public class Android_HolderViewLicenceDetailsTest extends BasicTest {
+
 
 	@Test (dataProvider="logInData")
-	public void changePINTestCase(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void viewLicenceDetails(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type,String licence_Name, String LogEvent_Type, String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -69,60 +69,44 @@ public class HolderChangePINTest extends BasicTest{
 		 			
 		 			//Enter 4 digit PIN
 		 			enterPIN.enter4DigitPin(pin);
-		 			
 		 		}
+		 		
 		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
-		 		//Verify My License Page is displayed
+		 		//Verify My Licence Page is displayed
 		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
 		 		
+		 		//Click the Fishing Fee License 
+		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
+		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
-		 		//Click on the AppSettings
-		 		AppSettingPage appSettingPg = LicPg.clickSettings();
+		 		//Capturing the Lic Num
+		 		String licenceNumber = detailLicPg.getLicNum();			 		
+		 		assertTrue(licenceNumber.equalsIgnoreCase(licence_Number));
 		 		
-		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
+		 		//Capturing the Lic Start Date		 		
+		 		String licenceStartDate = detailLicPg.getLicStartDate();
+		 		assertTrue(licenceStartDate.equalsIgnoreCase(licence_StartDate));
 		 		
-		 		//Click on the Change PIN Button
-		 		 appSettingPg.clickChangePinBtn();
 		 		
-		 		//click Ok Button
-		 		enterPIN = appSettingPg.changePINOkBtn();
+		 		//capturing the Lic Expire Date
+		 		String licenceExpireDate = detailLicPg.getLicExpireDate();
+		 		//assert licenceExpireDate
+		 		assertTrue(licenceExpireDate.equalsIgnoreCase(licence_ExpireDate));		 
 		 		
-		 		assertEquals("Enter your current PIN",enterPIN.enterPINPgExist());
+		 		//Capture Class Type
+		 		String classType = detailLicPg.getLicClass();		 		
+		 		//assert Class Type
+		 		assertTrue(classType.equalsIgnoreCase(class_Type));
 		 		
-		 		//enter 4 digit current Pin
-		 		enterPIN = enterPIN.enterCurrrentPINOnChangePIN(pin);
+		 		//click Back button to go to my license page
+		 		LicPg = detailLicPg.pressBackBtn();
 		 		
-		 		//assertEquals("You are required to setup a new PIN",enterPIN.getPINPageTitle());
-		 		enterPIN = enterPIN.enterNewPINOnChangePIN(new_Pin);
-		 		appSettingPg = enterPIN.confirmNewPINOnChangePIN(new_Pin);
+		 		//Click on the Settings and then sign out
+		 		LicPg.settings();	
 		 		
-		 		//Verify the AppSettings Page is displayed
-		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
-		 		
-		 		//Close App
-		 		Map<String, Object> params = new HashMap();
-		 		params.put("identifier", appName);
-		 		Object result1 = driver.executeScript("mobile:application:close", params);
-		 		params.clear();
-		 		
-		 		//Open App		 				 		
-		 		Map<String, Object> params1 = new HashMap();
-		 		params.put("identifier", appName);
-		 		Object result2 = driver.executeScript("mobile:application:open", params);
-		 		params.clear();	
-		 		
-		 		// enter Newly created PIN
-		 		LicPg = enterPIN.enterCurrrentPINOnLogin(new_Pin);		 		 		
 		 	
-		 		//verify My Licence Page is Displayed
-		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());	 	
-		 		
-		 		
-		 		// Click on the Settings and Sign out
-		 		LicPg.settings();
-		 		
 		 		
 		}
 	 	catch(Exception e){
@@ -131,25 +115,18 @@ public class HolderChangePINTest extends BasicTest{
 	 		reportFail("expected", "actual","params");	
 
 	 	}
-	 	
 	 	finally{
 	 		
-	 		//clean app
-	 		Map  params = new HashMap();
- 			params.put("identifier", appName);
- 			Object result = driver.executeScript("mobile:application:clean", params);
+	 		Map<String, Object> params = new HashMap();
+	 		params.put("identifier", appName);
+	 		Object result1 = driver.executeScript("mobile:application:clean", params);
 	 		params.clear();
 	 		
-	 		
-	 		//clean app
-	 		Map  params1 = new HashMap();
- 			params1.put("identifier", appName);
- 			result = driver.executeScript("mobile:application:clean", params1);
+	  		params.put("identifier", appName);
+	 		result1 = driver.executeScript("mobile:application:close", params);
 	 		params.clear();
 	 		
- 			//close App
 	 		driver.close();
-	 		
 	 	}
 		
         if(testFail){
@@ -175,8 +152,7 @@ public class HolderChangePINTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public HolderChangePINTest(DesiredCapabilities caps) {
+	public Android_HolderViewLicenceDetailsTest(DesiredCapabilities caps) {
 		super(caps);
-	}	
-
+	}
 }

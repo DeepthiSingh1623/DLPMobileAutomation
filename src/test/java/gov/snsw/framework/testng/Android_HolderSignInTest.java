@@ -22,9 +22,10 @@ import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
 
-public class HolderSignInTest extends BasicTest{
+public class Android_HolderSignInTest extends BasicTest{
 
 	
 	
@@ -83,19 +84,14 @@ public class HolderSignInTest extends BasicTest{
 		 		System.out.println("The Actual Lic Name is "+ActuallicenseName);
 		 		String ExpectedlicenseName = licence_Name;
 		 		System.out.println("The Expected Lic Name is "+ExpectedlicenseName);
-		 		assertTrue(ExpectedlicenseName.contains(ActuallicenseName));
+		 		assertTrue(ExpectedlicenseName.contains(ActuallicenseName));		 		 		
 		 		
-		 		//Close App
-		 		Map<String, Object> params = new HashMap();
-		 		params.put("identifier", appName);
-		 		Object result1 = driver.executeScript("mobile:application:close", params);
-		 		params.clear();
+		 		//close app
+		 		Utilities.closeApp(driver, appName);
 		 		
-		 		//Open App		 				 		
-		 		Map<String, Object> params1 = new HashMap();
-		 		params.put("identifier", appName);
-		 		Object result2 = driver.executeScript("mobile:application:open", params);
-		 		params.clear();			 	
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
+		 		
 		 		
 		 		//Verify the Re-Enter PIN Page is displayed
 		 		String pinPg = enterPIN.enterPINPgExist();
@@ -122,20 +118,14 @@ public class HolderSignInTest extends BasicTest{
 	 	
 	 	finally{
 	 		
-	 		//clean app
-	 		Map  params = new HashMap();
-	 		params.put("identifier", appName);
- 			Object result = driver.executeScript("mobile:application:clean", params);
- 			params.clear();
- 		
 	 		
- 			//clean app
-	 		Map  params2 = new HashMap();
-	 		params2.put("identifier", appName);
- 			result = driver.executeScript("mobile:application:close", params2);
- 			
-	 		//close App
-	 		driver.close();
+	 		//Clean App
+	 		Utilities.cleanApp(driver, appName);
+	 		
+	 		
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+	 		
 	 		
 	 	}
 		
@@ -162,7 +152,7 @@ public class HolderSignInTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public HolderSignInTest(DesiredCapabilities caps) {
+	public Android_HolderSignInTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

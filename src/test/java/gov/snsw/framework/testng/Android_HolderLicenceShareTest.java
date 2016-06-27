@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -21,14 +22,19 @@ import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.android.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
+
+import gov.snsw.framework.android.holder.pageobjects.SharingLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
-public class HolderViewLicenceDetailsTest extends BasicTest {
 
+public class Android_HolderLicenceShareTest extends BasicTest{
+
+	
 
 	@Test (dataProvider="logInData")
-	public void viewLicenceDetails(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type,String licence_Name, String LogEvent_Type, String new_Pin) throws Exception{
+	public void licenceShareAsHolder(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin)  throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -74,39 +80,40 @@ public class HolderViewLicenceDetailsTest extends BasicTest {
 		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
-		 		//Verify My Licence Page is displayed
+		 		//Verify My License Page is displayed
 		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
 		 		
-		 		//Click the Fishing Fee License 
-		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
+		 		//Click the License Number		 				 				
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
-		 		//Capturing the Lic Num
-		 		String licenceNumber = detailLicPg.getLicNum();			 		
-		 		assertTrue(licenceNumber.equalsIgnoreCase(licence_Number));
+		 		//click on Share License Button
+		 		SharingLicencePage shareLicPg = detailLicPg.clickShareLicenceBtn();
 		 		
-		 		//Capturing the Lic Start Date		 		
-		 		String licenceStartDate = detailLicPg.getLicStartDate();
-		 		assertTrue(licenceStartDate.equalsIgnoreCase(licence_StartDate));
+		 		//verify the License Share Page - Title is displayed
+		 		String shareTitle = shareLicPg.verifySharePageTitle();
+		 		assertTrue(shareTitle.contains("Sharing Licence"));
 		 		
+		 		//verify the License Share Page - Lic Name is displayed
+		 		String shareLicName = shareLicPg.verifyShareLicName();
+		 		assertTrue(shareLicName.contains("Fishing licence"));
 		 		
-		 		//capturing the Lic Expire Date
-		 		String licenceExpireDate = detailLicPg.getLicExpireDate();
-		 		//assert licenceExpireDate
-		 		assertTrue(licenceExpireDate.equalsIgnoreCase(licence_ExpireDate));		 
+		 		//verify the License Share Page - Lic Num is displayed
+		 		String shareLicNum = shareLicPg.verifyShareLicNum();
+		 		assertTrue(shareLicNum.contains(licence_Number));
 		 		
-		 		//Capture Class Type
-		 		String classType = detailLicPg.getLicClass();		 		
-		 		//assert Class Type
-		 		assertTrue(classType.equalsIgnoreCase(class_Type));
+		 		//verify the License Share Page - Scan Img is displayed
+		 		//assertTrue(shareLicPg.verifyShareQRScan());
 		 		
-		 		//click Back button to go to my license page
+		 		//Click Back Button on the QR Scan Page
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click the back button on the License Detailed Page
 		 		LicPg = detailLicPg.pressBackBtn();
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
 		 		
-		 	
+		 		
 		 		
 		}
 	 	catch(Exception e){
@@ -115,25 +122,23 @@ public class HolderViewLicenceDetailsTest extends BasicTest {
 	 		reportFail("expected", "actual","params");	
 
 	 	}
+	 	
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
+
+	 		//Clean App
+	 		Utilities.cleanApp(driver, appName);
 	 		
-	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
-	 		params.clear();
 	 		
-	 		driver.close();
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+	 		
 	 	}
 		
         if(testFail){
         	Assert.fail();
         }
 	}
-
 
 	@DataProvider (name = "logInData", parallel = false)
 	public Object[][] searchItemsData(){
@@ -152,7 +157,8 @@ public class HolderViewLicenceDetailsTest extends BasicTest {
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public HolderViewLicenceDetailsTest(DesiredCapabilities caps) {
+	
+	public Android_HolderLicenceShareTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

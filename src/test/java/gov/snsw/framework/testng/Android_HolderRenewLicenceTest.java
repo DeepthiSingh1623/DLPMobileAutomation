@@ -27,8 +27,9 @@ import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.RenewLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
-public class HolderRenewLicenceTest extends BasicTest{
+public class Android_HolderRenewLicenceTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
 	public void renewLicence(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
@@ -114,16 +115,13 @@ public class HolderRenewLicenceTest extends BasicTest{
 	 	}
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
+	 		//Clean App
+	 		Utilities.cleanApp(driver, appName);
 	 		
-	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
-	 		params.clear();
 	 		
-	 		driver.close();
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+	 		
 	 	}
 		
         if(testFail){
@@ -149,7 +147,7 @@ public class HolderRenewLicenceTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public HolderRenewLicenceTest(DesiredCapabilities caps) {
+	public Android_HolderRenewLicenceTest(DesiredCapabilities caps) {
 		super(caps);
 	}	
 

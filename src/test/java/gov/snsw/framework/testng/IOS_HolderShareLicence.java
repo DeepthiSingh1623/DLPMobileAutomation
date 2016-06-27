@@ -23,6 +23,7 @@ import gov.snsw.framework.ios.holder.pageobjects.SettingsPage;
 import gov.snsw.framework.ios.holder.pageobjects.ShareLicencePage;
 import gov.snsw.framework.ios.holder.pageobjects.SignInPage;
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
+import gov.snsw.framework.utils.Utilities;
 
 public class IOS_HolderShareLicence extends BasicTest
 {
@@ -122,19 +123,11 @@ public class IOS_HolderShareLicence extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		Map  params = new HashMap();
-	 		params.put("identifier", appName);
- 			Object result = driver.executeScript("mobile:application:clean", params);
- 			params.clear();
- 		
-	 		
- 			//clean app
-	 		Map  params2 = new HashMap();
-	 		params2.put("identifier", appName);
- 			result = driver.executeScript("mobile:application:close", params2);
+	 		Utilities.cleanApp(driver, appName);
+	 			 		
+ 			//close app
+	 		Utilities.closeApp(driver, appName);
  			
-	 		//close App
-	 		driver.close();
 	 		
 	 	}
 		

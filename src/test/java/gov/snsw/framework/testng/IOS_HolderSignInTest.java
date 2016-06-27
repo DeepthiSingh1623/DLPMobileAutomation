@@ -6,6 +6,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+ 
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -22,6 +23,7 @@ import gov.snsw.framework.ios.holder.pageobjects.MyLicencesPage;
 import gov.snsw.framework.ios.holder.pageobjects.SettingsPage;
 import gov.snsw.framework.ios.holder.pageobjects.SignInPage;
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
+import gov.snsw.framework.utils.Utilities;
 
 public class IOS_HolderSignInTest extends BasicTest
 {
@@ -75,16 +77,10 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
 		 		
 		 		//Close App
-		 		Map<String, Object> params = new HashMap();
-		 		params.put("identifier", appName);
-		 		Object result1 = driver.executeScript("mobile:application:close", params);
-		 		params.clear();
+		 		Utilities.closeApp(driver, appName);
 		 		
-		 		//Open App		 				 		
-		 		Map<String, Object> params1 = new HashMap();
-		 		params.put("identifier", appName);
-		 		Object result2 = driver.executeScript("mobile:application:open", params);
-		 		params.clear();			 	
+		 		//Open App		
+		 		Utilities.openApp(driver, appName);		 			 	
 		 		
 		 		//Verify the Re-Enter PIN Page is displayed
 		 		assertEquals("Unlock with pin",enterPIN.verifyUnlockPINTitle());
@@ -119,20 +115,13 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		Map  params = new HashMap();
-	 		params.put("identifier", appName);
- 			Object result = driver.executeScript("mobile:application:clean", params);
- 			params.clear();
- 		
+	 		Utilities.cleanApp(driver, appName);
 	 		
- 			//clean app
-	 		Map  params2 = new HashMap();
-	 		params2.put("identifier", appName);
- 			result = driver.executeScript("mobile:application:close", params2);
+	 		//Close App
+	 		Utilities.closeApp(driver, appName);
+	 		
+	 			 		
  			
-	 		//close App
-	 		driver.close();
-	 		
 	 	}
 		
         if(testFail){
