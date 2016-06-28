@@ -1,12 +1,9 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -17,8 +14,7 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
-import gov.snsw.framework.android.checker.pageobjects.CheckerLicenceDetails;
-import gov.snsw.framework.android.checker.pageobjects.LicenceSearch;
+
 import gov.snsw.framework.ios.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.ios.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.ios.checker.pageobjects.SignInNSWAcctPage;
