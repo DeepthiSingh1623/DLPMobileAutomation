@@ -62,11 +62,15 @@ public class IOSCheckerManualSearchTest extends BasicTest{
 		 	
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-				if(chkPg.isDialogOpen()){
-					 			
-					 			chkPg.clickCancel();
-					 			
-					 		}
+		 		if(chkPg.isPopupOpen()){
+		 			chkPg.clickNo();
+		 		}
+		 		
+		 		if(chkPg.isDialogOpen()){
+		 			
+		 			chkPg.clickCancel();
+		 			
+		 		}
 		 		
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
