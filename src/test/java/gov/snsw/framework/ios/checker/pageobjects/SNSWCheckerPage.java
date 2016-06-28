@@ -17,6 +17,10 @@ public class SNSWCheckerPage extends DriverPage{
 	By settings = By.xpath("//*[@class='UIATabBar']/button[3]");
 	
 	By manualSearchBtn = By.xpath("//*[@class='UIATabBar']/button[2]");
+	
+	By cancelBtn = By.xpath("//*[@label='Cancel']");
+	
+	By noBtn = By.xpath("//*[@label='No']");
 							 
 	public void settingsBtn()
 	{
@@ -37,6 +41,45 @@ public class SNSWCheckerPage extends DriverPage{
 		return new LicenceSearchPage(driver);
 	}
 
+	public boolean isDialogOpen(){
+		
+		boolean dialOpn= false;
+		try{
+			dialOpn = driver.findElement(cancelBtn).isDisplayed();
+		}
+		
+		catch(Exception e){
+			dialOpn = false;
+		}
+		
+		return dialOpn;
+		
+	}
 	
+	public void  clickCancel(){
+		
+		driver.findElement(cancelBtn).click();
+				
+	}
+
+	public boolean isPopupOpen() {
+		// TODO Auto-generated method stub
+		boolean dialOpn= false;
+		try{
+			dialOpn = driver.findElement(noBtn).isDisplayed();
+		}
+		
+		catch(Exception e){
+			dialOpn = false;
+		}
+		
+		return dialOpn;
+	}
+	
+	public void  clickNo(){
+		
+		driver.findElement(noBtn).click();
+				
+	}
 	
 }

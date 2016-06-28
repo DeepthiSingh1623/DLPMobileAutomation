@@ -60,6 +60,15 @@ public class IOSCheckerSignInTest extends BasicTest{
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
+		 		if(chkPg.isDialogOpen()){
+		 			
+		 			chkPg.clickCancel();
+		 			
+		 		}
+		 		
+		 		else if(chkPg.isPopupOpen()){
+		 			chkPg.clickNo();
+		 		}
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
 		 		Utilities.closeApp(driver, appName);
