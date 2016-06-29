@@ -7,16 +7,16 @@
       <id>snsw_http_proxy</id>
       <active>true</active>
       <protocol>http</protocol>
-      <host>10.100.21.15</host>
-      <port>3128</port>
+      <host>proxylb.testservicensw.net</host>
+      <port>9090</port>
       <nonProxyHosts>*.testservicensw.net | *.perfectomobile.com</nonProxyHosts>
     </proxy>
          <proxy>
       <id>snsw_https_proxy</id>
       <active>true</active>
       <protocol>https</protocol>
-      <host>10.100.21.15</host>
-      <port>3128</port>
+      <host>proxylb.testservicensw.net</host>
+      <port>9090</port>
       <nonProxyHosts>*.testservicensw.net | *.perfectomobile.com</nonProxyHosts>
     </proxy>
   </proxies>
