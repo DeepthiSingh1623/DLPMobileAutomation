@@ -145,7 +145,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 
 	 		//Clean App
 	 		//Utilities.cleanApp(driver, appName);
-	 		Map<String, Object> params1 = new HashMap<>();
+	 		Map<String, Object> params1 = new HashMap<String, Object>();
 	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
 	 		
@@ -153,7 +153,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 		
 	 		//close app
 	 		//Utilities.closeApp(driver, appName);
-	 		Map<String, Object> params2 = new HashMap<>();
+	 		Map<String, Object> params2 = new HashMap<String, Object>();
 	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 	 		Object result2 = driver.executeScript("mobile:application:close", params2);
 	 		
