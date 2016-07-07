@@ -89,7 +89,7 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		//Verify My License Page is displayed
 	 		assertEquals("Licences",LicPg.verifyMyLicTitle());
 	 		
-	 		Map<String, Object> params6 = new HashMap<>();
+	 		Map<String, Object> params6 = new HashMap<String, Object>();
 	 		params6.put("start", "571,2126");
 	 		params6.put("end", "504,0");
 	 		params6.put("duration", "2");
@@ -147,7 +147,7 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		payPg.creditCardHolderName(cardName);
 	 		Utilities.BackBtn(driver);
 	 		
-	 		Map<String, Object> params7 = new HashMap<>();
+	 		Map<String, Object> params7 = new HashMap<String, Object>();
 	 		params7.put("start", "816,2287");
 	 		params7.put("end", "787,479");
 	 		Object result7 = driver.executeScript("mobile:touch:swipe", params7);
@@ -162,7 +162,7 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		Utilities.BackBtn(driver);	
 	 		
 	 		//Scroll to settings page
-	 		Map<String, Object> params22 = new HashMap<>();
+	 		Map<String, Object> params22 = new HashMap<String, Object>();
 	 		params22.put("start", "566,700");
 	 		params22.put("end", "552,1721");
 	 		params22.put("duration", "2");
