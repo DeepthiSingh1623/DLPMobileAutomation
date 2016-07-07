@@ -1,10 +1,12 @@
 package gov.snsw.framework.testng;
 
+import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -39,12 +41,13 @@ public class CheckerChangePINTest extends BasicTest{
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
-		 		
+		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
+		 			 		
 		 		EnterPINPage enterPIN = null;
 		 		
-		 		if(AddInPg.isStartBtnExists()){
+		 		if(tcPg.isAgreeBtnExist()){
 		 			
-		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 			
 		 			//Click Accept Button on the Terms and Condition Page
 		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
@@ -66,7 +69,7 @@ public class CheckerChangePINTest extends BasicTest{
 		 		}
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());	 		
+		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	 		
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = chkPg.clickSettings();
@@ -101,15 +104,21 @@ public class CheckerChangePINTest extends BasicTest{
 		 		Object result2 = driver.executeScript("mobile:application:open", params);
 		 		params.clear();	
 		 		
+		 		//Re-enter 4 digit PIN Number
+		 		enterPIN.enterPin(pin);		
+		 		
+		 		//assert Error Message
+		 		assertTrue(enterPIN.isTextPresentOnScreen("PIN error, please try again."));
+		 		
 		 		// enter Newly created PIN
 		 		enterPIN.enterPin("2222");		 		 		
 		 	
 		 		
-		 		assertEquals("UAT-Checker",chkPg.getAndroidCheckerPageTitle());
+		 		assertEquals("Enter licence details",chkPg.getAndroidCheckerPageTitle());
 		 		
 		 		// Click on the Settings and Sign out
 		 		chkPg.signOut();
-		 
+
 		 		
 		}
 	 	catch(Exception e){
@@ -120,13 +129,14 @@ public class CheckerChangePINTest extends BasicTest{
 	 	}
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
+	 		/*Map<String, Object> params = new HashMap();
 	 		params.put("identifier", appName);
 	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
+	 		params.clear();*/
 	 		
+	 		Map<String, Object> params = new HashMap();
 	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
+	  		Object result1 = driver.executeScript("mobile:application:close", params);
 	 		params.clear();
 
 	 	}

@@ -13,16 +13,23 @@ public class LicenceSearchPage extends DriverPage{
 	}
 	
 	
-	By licNo= By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/etxtLicenceNumber']");
-	By chkBtn= By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnCheck']");
+	By licNo= By.xpath("//*[@value='Licence Number']");
+	By searchBtn= By.xpath("//*[@label='SEARCH']");
+	By doneBtn = By.xpath("//*[@label='Done']");
 	
 	public void enterLicenceNumber(String licNum){
 		
 		fluentWait(licNo);
+		driver.findElement(licNo).click();
 		driver.findElement(licNo).sendKeys(licNum);
+		
+		driver.findElement(doneBtn).click();
 		
 	
 	}
 	
+	public void searchLicence(){
+		driver.findElement(searchBtn).click();
+	}
 
 }

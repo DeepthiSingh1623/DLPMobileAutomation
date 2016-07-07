@@ -69,6 +69,12 @@ public class IOSCheckerChangePINTest extends BasicTest{
 		 			chkPg.clickCancel();
 		 			
 		 		}
+		 		
+		 		if(chkPg.okNotifications()){
+		 			
+		 			chkPg.clickOk();
+		 			
+		 		}
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 	
 		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
@@ -109,7 +115,7 @@ public class IOSCheckerChangePINTest extends BasicTest{
 		 		//Click SignOut
 		 		tcPg = settingPg.pressSigoutButton();
 		 		
-		 		assertTrue(tcPg.isTextPresentOnScreen("Terms & Conditions"));
+		 		assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
 		 		
 		}
 	 	catch(Exception e){

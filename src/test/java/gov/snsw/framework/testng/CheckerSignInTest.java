@@ -1,8 +1,12 @@
 package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -36,12 +40,13 @@ public class CheckerSignInTest extends BasicTest{
 		 		switchToContext(driver, "NATIVE_APP");
 		 	
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
-		 		
+		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
+		 		//assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
 		 		EnterPINPage enterPIN = null;
 		 		
-		 		if(AddInPg.isStartBtnExists()){
+		 		if(tcPg.isAgreeBtnExist()){
 		 			
-		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			
 		 			
 		 			//Click Accept Button on the Terms and Condition Page
 		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
@@ -64,7 +69,7 @@ public class CheckerSignInTest extends BasicTest{
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());	
+		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
 		 		
 		 		Utilities.closeApp(driver, appName);
 		 		
@@ -75,8 +80,10 @@ public class CheckerSignInTest extends BasicTest{
 		 		
 		 		//Re-enter 4 digit PIN Number
 		 		enterPIN.enterPin(pin);
-		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());		 		
+		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());		 		
 		 		chkPg.signOut();
+		 		tcPg = new TermsAndConditionsPage(driver);
+		 		tcPg.fluentWait(By.xpath("//*[contains(text(),'Terms and Conditions')]"));
 		 		
 		}
 	 	catch(Exception e){
@@ -88,7 +95,7 @@ public class CheckerSignInTest extends BasicTest{
 		
 	 	finally{
 	 		
-	 		Utilities.cleanApp(driver, appName);
+	 		//Utilities.cleanApp(driver, appName);
 	 		
 	 		Utilities.closeApp(driver, appName);
 	 		

@@ -1,25 +1,25 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="DLP Holder and Checker Smoke Test Suite" parallel="false">
-  <!-- test name="IOS Checker App Tests">
+  <test name="IOS Checker App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.IOSCheckerSignInTest"/>
       <class name="gov.snsw.framework.testng.IOSCheckerChangePINTest"/>
       <class name="gov.snsw.framework.testng.IOSCheckerManualSearchTest"/>
     </classes>
     
-  </test-->
+  </test>
   
-  <test name="Android Checker App Tests">
+  <!-- test name="Android Checker App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.CheckerSignInTest"/>
       <class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
       <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
     </classes>
     
-  </test>
+  </test-->
   
-    <!-- test name="IOS Holder App Tests">
+    <!--test name="IOS Holder App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.IOS_HolderSignInTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderViewLicenceTest"/>

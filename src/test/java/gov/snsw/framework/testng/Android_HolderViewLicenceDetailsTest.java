@@ -23,6 +23,7 @@ import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
 public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 
@@ -117,14 +118,8 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 	 	}
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
-	 		
-	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
-	 		params.clear();
+	 		Utilities.cleanApp(driver, appName);
+	 		Utilities.closeApp(driver, appName);
 	 		
 	 		driver.close();
 	 	}

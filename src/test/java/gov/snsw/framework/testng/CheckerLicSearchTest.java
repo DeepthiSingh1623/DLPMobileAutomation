@@ -7,6 +7,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -46,14 +47,14 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		//Driver initialization	 		
 		 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
-		 		
+		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
 		 		//Click on the Start button on introduction page
-		 		
+		 		//assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
 		 		EnterPINPage enterPIN = null;
 		 		
-		 		if(AddInPg.isStartBtnExists()){
+		 		if(tcPg.isAgreeBtnExist()){
 		 			
-		 			TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 			
 		 			//Click Accept Button on the Terms and Condition Page
 		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
@@ -63,7 +64,7 @@ public class CheckerLicSearchTest extends BasicTest{
 			 		 
 				 		//Enter 4 digit PIN
 				 		 enterPIN.enterPin(pin);
-
+				 		 enterPIN.enterPin(pin);
 		 		}
 		 		else{
 		 			
@@ -74,21 +75,17 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		}
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		assertEquals("UAT-Checker", chkPg.getAndroidCheckerPageTitle());	
-		 		
-		 		LicenceSearch licSch= chkPg.clickManualSearch();	
+		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
+		 		LicenceSearch licSch= new LicenceSearch(driver);
+		 		//LicenceSearch licSch= chkPg.clickManualSearch();	
 		 		
 		 		//Thread.sleep(100000);
-		 		assertEquals("Enter licence details", licSch.getAndroidCheckerPageTitle());
+		 		//assertEquals("Enter licence details", licSch.getAndroidCheckerPageTitle());
 		 		
 		 		licSch.enterLicenceNumber(licenceNo);
-		 		
-		 		Map<String, Object> params = new HashMap();
- 			 	params.put("keySequence", "BACK");
- 			 	Object result = driver.executeScript("mobile:presskey", params);
- 			 	
 		 		CheckerLicenceDetails licDtls= licSch.clickCheckBtn();
 		 		
+	 		
 		 		assertEquals("Licence Details", licDtls.getAndroidCheckerPageTitle());
 		 		
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licenceNo));
@@ -97,7 +94,8 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		assertNotNull(licDtls.isTextPresentOnScreen(holdName));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(status));
 	 		
-		 		params.clear();
+		 		Map<String, Object> params = new HashMap();
+		 		
 		 		params.put("start", "887,2173");
 		 		params.put("end", "894,463");
 		 		Object result1 = driver.executeScript("mobile:touch:swipe", params);
@@ -108,12 +106,11 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		
 		 		params.clear();
  			 	params.put("keySequence", "BACK");
- 			 	driver.executeScript("mobile:presskey", params);
- 			 	
- 			 	driver.executeScript("mobile:presskey", params);
+ 			 	Object result = driver.executeScript("mobile:presskey", params);
+
 		 		
 		 		chkPg.signOut();
-		 		
+
 		 		
 		}
 	 	catch(Exception e){
@@ -126,12 +123,12 @@ public class CheckerLicSearchTest extends BasicTest{
 	 	finally{
 	 		
 	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
+	 		/*params.put("identifier", appName);
 	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
+	 		params.clear();*/
 	 		
 	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
+	  		Object result1 = driver.executeScript("mobile:application:close", params);
 	 		params.clear();
 	 		
 	 		driver.close();

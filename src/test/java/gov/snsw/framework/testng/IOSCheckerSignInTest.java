@@ -71,6 +71,12 @@ public class IOSCheckerSignInTest extends BasicTest{
 		 			
 		 		}
 		 		
+		 		if(chkPg.okNotifications()){
+		 			
+		 			chkPg.clickOk();
+		 			
+		 		}
+		 		
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
 		 		Utilities.closeApp(driver, appName);
@@ -91,7 +97,7 @@ public class IOSCheckerSignInTest extends BasicTest{
 		 		//Click SignOut
 		 		tcPg = settingPg.pressSigoutButton();
 		 		
-		 		assertTrue(tcPg.isTextPresentOnScreen("Terms & Conditions"));
+		 		assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
 		 		
 		}
 	 	catch(Exception e){

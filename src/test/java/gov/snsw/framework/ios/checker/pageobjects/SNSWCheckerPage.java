@@ -14,13 +14,23 @@ public class SNSWCheckerPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	//Settings IconPage
-	By settings = By.xpath("//*[@class='UIATabBar']/button[3]");
+	By settings = By.xpath("//*[@class='UIATabBar']/button[5]");
 	
-	By manualSearchBtn = By.xpath("//*[@class='UIATabBar']/button[2]");
+	By activityBtn = By.xpath("//*[@class='UIATabBar']/button[3]");
+	
+	By manualSearch = By.xpath("//*[@class='UIATabBar']/button[2]");
 	
 	By cancelBtn = By.xpath("//*[@label='Cancel']");
 	
 	By noBtn = By.xpath("//*[@label='No']");
+	
+	By okBtn = By.xpath("//*[@label='Ok']");
+	
+	public LicenceSearchPage clickManualSearch()
+	{
+		driver.findElement(manualSearch).click();
+		return new LicenceSearchPage(driver);
+	}
 							 
 	public void settingsBtn()
 	{
@@ -36,8 +46,8 @@ public class SNSWCheckerPage extends DriverPage{
 	
 	public LicenceSearchPage clickActivity()
 	{
-		fluentWait(manualSearchBtn);
-		driver.findElement(manualSearchBtn).click();
+		fluentWait(activityBtn);
+		driver.findElement(activityBtn).click();
 		return new LicenceSearchPage(driver);
 	}
 
@@ -80,6 +90,27 @@ public class SNSWCheckerPage extends DriverPage{
 		
 		driver.findElement(noBtn).click();
 				
+	}
+	
+	public void  clickOk(){
+		
+	
+		driver.findElement(okBtn).click();
+				
+	}
+
+	public boolean okNotifications() {
+		// TODO Auto-generated method stub
+		boolean dialOpn= false;
+		try{
+			dialOpn = driver.findElement(cancelBtn).isDisplayed();
+		}
+		
+		catch(Exception e){
+			dialOpn = false;
+		}
+		
+		return dialOpn;
 	}
 	
 }

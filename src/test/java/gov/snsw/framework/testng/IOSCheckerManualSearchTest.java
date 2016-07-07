@@ -16,6 +16,7 @@ import com.perfectomobile.test.BasicTest;
 
 
 import gov.snsw.framework.ios.checker.pageobjects.EnterPINPage;
+import gov.snsw.framework.ios.checker.pageobjects.LicenceSearchPage;
 import gov.snsw.framework.ios.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.ios.checker.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.ios.checker.pageobjects.TermsAndConditionsPage;
@@ -28,7 +29,7 @@ public class IOSCheckerManualSearchTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin) throws Exception{
+	public void signIn(String username, String password,String pin, String licenceNo) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -72,20 +73,32 @@ public class IOSCheckerManualSearchTest extends BasicTest{
 		 			
 		 		}
 		 		
+		 		if(chkPg.okNotifications()){
+		 			
+		 			chkPg.clickOk();
+		 			
+		 		}
+		 		
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
 		 		
 		 		
-		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
+		 		LicenceSearchPage licSearch = chkPg.clickManualSearch();
+		 		licSearch.enterLicenceNumber(licenceNo);
+		 		licSearch.searchLicence();
 		 		
+		 		assertTrue(licSearch.isTextPresentOnScreen("Name on Licence"));
+		 		
+		 		
+		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
 		 		//Verify Settings Page is displayed
 		 		settingPg.verifySettingsPageTitile();
 		 		
 		 		//Click SignOut
 		 		tcPg = settingPg.pressSigoutButton();
 		 		
-		 		assertTrue(tcPg.isTextPresentOnScreen("Terms & Conditions"));
-		 		reportFail("Manual search on iOS", "No Manual search on iOS", "No Manual Search on iOS");	
+		 		assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
+		 		//reportFail("Manual search on iOS", "No Manual search on iOS", "No Manual Search on iOS");	
 		 		
 		}
 	 	catch(Exception e){
@@ -115,7 +128,7 @@ public class IOSCheckerManualSearchTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("checkerSingInSheet"), false);
-		  s = ed.getData(3);
+		  s = ed.getData(4);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

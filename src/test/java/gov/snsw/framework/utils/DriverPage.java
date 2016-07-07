@@ -53,8 +53,8 @@ public class DriverPage {
 	
 		public WebElement fluentWait(final By element)
 		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
-																			.pollingEvery(5, TimeUnit.SECONDS)
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(40, TimeUnit.SECONDS)
+																			.pollingEvery(2, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
 				public WebElement  apply(WebDriver driver) {
@@ -98,8 +98,15 @@ public class DriverPage {
 			
 			return txtPres;
 		}
-
 		
-	
+		By hamBurgerMenu = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
+		
+		public void clickHamburgerMenu(){
+			
+			fluentWait(hamBurgerMenu);
+			driver.findElement(hamBurgerMenu).click();
+			
+		}
+		
 }
 

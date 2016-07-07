@@ -2,6 +2,7 @@ package gov.snsw.framework.android.checker.pageobjects;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import gov.snsw.framework.utils.DriverPage;
@@ -28,8 +29,25 @@ public class TermsAndConditionsPage extends DriverPage
 		
 		public SignInNSWAcctPage termsAndConditionAcceptBtn()
 		{
-			driver.findElement(tAndcAcceptBtn).click();
+			driver.findElement(agreeBtn).click();
 			return new SignInNSWAcctPage(driver);
+		}
+
+		By agreeBtn = By.xpath("//*[text()='Agree']");
+
+		public boolean isAgreeBtnExist() {
+			// TODO Auto-generated method stub
+			boolean agreeBtnExist = false;
+			try{
+				fluentWait(agreeBtn);
+				agreeBtnExist= driver.findElement(agreeBtn).isDisplayed();
+				
+			}
+			catch(Exception e)
+			{
+				agreeBtnExist = false;
+			}
+			return agreeBtnExist;
 		}	
 			
 	
