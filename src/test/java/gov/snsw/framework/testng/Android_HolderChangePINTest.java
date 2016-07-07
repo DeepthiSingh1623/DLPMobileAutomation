@@ -112,13 +112,13 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		
 		 		//close app
 		 		//Utilities.closeApp(driver, appName);
-		 		Map<String, Object> params2 = new HashMap<>();
+		 		Map<String, Object> params2 = new HashMap<String, Object>();
 		 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 		 		Object result2 = driver.executeScript("mobile:application:close", params2);
 		 		
 		 		//Open App
 		 		//Utilities.openApp(driver, appName);
-		 		Map<String, Object> params3 = new HashMap<>();
+		 		Map<String, Object> params3 = new HashMap<String, Object>();
 		 		params3.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 		 		Object result3 = driver.executeScript("mobile:application:open", params3);
 		 		
