@@ -60,7 +60,15 @@ public class IOSCheckerChangePINTest extends BasicTest{
 		 	
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
+		 		if(chkPg.isPopupOpen()){
+		 			chkPg.clickNo();
+		 		}
 		 		
+		 		if(chkPg.isDialogOpen()){
+		 			
+		 			chkPg.clickCancel();
+		 			
+		 		}
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 	
 		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
