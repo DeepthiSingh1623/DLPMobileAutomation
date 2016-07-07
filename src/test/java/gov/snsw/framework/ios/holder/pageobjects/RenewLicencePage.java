@@ -13,5 +13,22 @@ public class RenewLicencePage extends DriverPage {
 	}
 	
 	By renewLicNextBtn = By.xpath("//*[@label='Next']");
+	
+	
+	//*[@label="29/06/2016"]
+	public String expiryDate()
+	{
+		By expiryDate = By.xpath("//*[@label='Expiry Date']/../text[12]");
+		String LicRenewalExpireDate = driver.findElement(expiryDate).getText();
+		return LicRenewalExpireDate;
+		
+	}
+	
+	public LicenceDurationAndFeePage nextButton()
+	{
+		fluentWait(renewLicNextBtn);
+		driver.findElement(renewLicNextBtn).click();
+		return new LicenceDurationAndFeePage(driver);
+	}
 
 }

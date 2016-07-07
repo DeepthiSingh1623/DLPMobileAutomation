@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import gov.snsw.framework.utils.DriverPage;
+import gov.snsw.framework.utils.Utilities;
 
 public class SignInNSWAcctPage extends DriverPage {
 
@@ -23,11 +24,13 @@ public class SignInNSWAcctPage extends DriverPage {
 	//Password on Signin page	
 	By password = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/etxtPassword']");
 	
+	//Show PAssword
+	By showPwd = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtShowHidePassword']");
 		
 	//SignIn button	
 	By signInBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnLogin']");
 	
-	public EnterPINPage signInNswAcct(String email, String pwd )
+	public void signInNswAcct(String email, String pwd )
 	{
 		fluentWait(emailAddress);
 		driver.findElement(emailAddress).click();
@@ -35,10 +38,20 @@ public class SignInNSWAcctPage extends DriverPage {
 		driver.findElement(emailAddress).sendKeys(email);
 		driver.findElement(password).click();
 		driver.findElement(password).clear();
-		driver.findElement(password).sendKeys(pwd);
+		driver.findElement(password).sendKeys(pwd);		
+	}
+	
+	public EnterPINPage clickSignInBtn()
+	{
+		fluentWait(signInBtn);
 		driver.findElement(signInBtn).click();
 		return new EnterPINPage(driver);
-		
+	}
+	
+	public boolean verifyShowPwd()
+	{
+		fluentWait(showPwd);
+		return driver.findElement(showPwd).isDisplayed();
 	}
 
 

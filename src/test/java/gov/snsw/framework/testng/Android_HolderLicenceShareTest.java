@@ -60,7 +60,13 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
 		 		
 		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.signInNswAcct(username,password);
+		 		signIn.signInNswAcct(username,password);
+		 		
+		 		//Keyboard Remove
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click Sign In Button
+		 		enterPIN = signIn.clickSignInBtn();
 		 		 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
@@ -81,7 +87,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
 		 		//Verify My License Page is displayed
-		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
+		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
 		 		
 		 		//Click the License Number		 				 				
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
@@ -90,28 +96,39 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		SharingLicencePage shareLicPg = detailLicPg.clickShareLicenceBtn();
 		 		
 		 		//verify the License Share Page - Title is displayed
-		 		String shareTitle = shareLicPg.verifySharePageTitle();
-		 		assertTrue(shareTitle.contains("Sharing Licence"));
+		 		//String shareTitle = shareLicPg.verifySharePageTitle();
+		 		//assertTrue(shareTitle.contains("Sharing Licence"));
+		 		
+		 	assertTrue(shareLicPg.isTextPresentOnScreen("Sharing Licence"));
 		 		
 		 		//verify the License Share Page - Lic Name is displayed
-		 		String shareLicName = shareLicPg.verifyShareLicName();
-		 		assertTrue(shareLicName.contains("Fishing licence"));
+		 		//String shareLicName = shareLicPg.verifyShareLicName();
+		 		//assertTrue(shareLicName.contains("Fishing licence"));
+		 		
+		 		assertTrue(shareLicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
 		 		//verify the License Share Page - Lic Num is displayed
-		 		String shareLicNum = shareLicPg.verifyShareLicNum();
-		 		assertTrue(shareLicNum.contains(licence_Number));
+		 		//String shareLicNum = shareLicPg.verifyShareLicNum();
+		 		
+		 	//	assertTrue(shareLicNum.contains(licence_Number));
+		 		
+		 		assertTrue(shareLicPg.isTextPresentOnScreen(licence_Number));
 		 		
 		 		//verify the License Share Page - Scan Img is displayed
 		 		//assertTrue(shareLicPg.verifyShareQRScan());
 		 		
 		 		//Click Back Button on the QR Scan Page
-		 		Utilities.BackBtn(driver);
+		 		shareLicPg.backBtn();
 		 		
 		 		//click the back button on the License Detailed Page
-		 		LicPg = detailLicPg.pressBackBtn();
+		 		//LicPg = detailLicPg.pressBackBtn();
+		 		Utilities.BackBtn(driver);
+		 		
 		 		
 		 		//Click on the Settings and then sign out
-		 		LicPg.settings();	
+		 		LicPg.settings();
+
+		 		reportFail("expected", "actual","params");	
 		 		
 		 		
 		 		
@@ -127,11 +144,21 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 		
 
 	 		//Clean App
-	 		Utilities.cleanApp(driver, appName);
+	 		//Utilities.cleanApp(driver, appName);
+	 		Map<String, Object> params1 = new HashMap<>();
+	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
+	 		
 	 		
 	 		
 	 		//close app
-	 		Utilities.closeApp(driver, appName);
+	 		//Utilities.closeApp(driver, appName);
+	 		Map<String, Object> params2 = new HashMap<>();
+	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		
+	 		
+	 		
 	 		
 	 	}
 		

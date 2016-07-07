@@ -35,6 +35,7 @@ public class Android_HolderChangePINTest extends BasicTest{
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
+		
 	 	try{
 	 			//reportPass("success", "param");
 	 			 			
@@ -55,8 +56,14 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
 		 		
 		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.signInNswAcct(username,password);
-		 		 		
+		 		signIn.signInNswAcct(username,password);
+		 		
+		 		//Keyboard Remove
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click Sign In Button
+		 		enterPIN = signIn.clickSignInBtn();
+		 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
 		 		
@@ -76,7 +83,7 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
 		 		//Verify My License Page is displayed
-		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
+		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
 		 		
 		 		
 		 		//Click on the AppSettings
@@ -104,16 +111,24 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
 		 		
 		 		//close app
-		 		Utilities.closeApp(driver, appName);
+		 		//Utilities.closeApp(driver, appName);
+		 		Map<String, Object> params2 = new HashMap<>();
+		 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		Object result2 = driver.executeScript("mobile:application:close", params2);
 		 		
 		 		//Open App
-		 		Utilities.openApp(driver, appName);
+		 		//Utilities.openApp(driver, appName);
+		 		Map<String, Object> params3 = new HashMap<>();
+		 		params3.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		Object result3 = driver.executeScript("mobile:application:open", params3);
+		 		
+		 		 		
 		 		
 		 		// enter Newly created PIN
 		 		LicPg = enterPIN.enterCurrrentPINOnLogin(new_Pin);		 		 		
 		 	
 		 		//verify My Licence Page is Displayed
-		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());	 	
+		 		assertEquals("Licences",LicPg.verifyMyLicTitle());	 	
 		 		
 		 		
 		 		// Click on the Settings and Sign out
@@ -131,11 +146,19 @@ public class Android_HolderChangePINTest extends BasicTest{
 	 	finally{
 	 		
 	 		//Clean App
-	 		Utilities.cleanApp(driver, appName);
+	 		//Utilities.cleanApp(driver, appName);
+	 		Map<String, Object> params1 = new HashMap<>();
+	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
+	 		
 	 		
 	 		
 	 		//close app
-	 		Utilities.closeApp(driver, appName);
+	 		//Utilities.closeApp(driver, appName);
+	 		Map<String, Object> params2 = new HashMap<>();
+	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		
 	 		
 	 	}
 		

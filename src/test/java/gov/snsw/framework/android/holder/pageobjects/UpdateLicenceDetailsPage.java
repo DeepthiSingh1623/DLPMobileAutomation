@@ -17,17 +17,12 @@ public class UpdateLicenceDetailsPage extends DriverPage{
 	//Review and Update //*[@contentDesc="REVIEW AND UPDATE"]
 	
 	//Residential Address
-	//*[@resourceid="licenceApplication"]/view[5]
-	By editResAdd = By.xpath("//*[@resourceid='licenceApplication']/view[6]/view[1]");
+	By editResAdd = By.xpath("//*[@resourceid='licenceApplication']/view[6]/view[3]");
 	
 	//Postal Address
-	//*[@resourceid="licenceApplication"]/view[9]
-	//*[@resourceid="licenceApplication"]/view[10]/view[1]
-	By editPostalAdd = By.xpath("//*[@resourceid='licenceApplication']/view[6]/view[1]");
+	By editPostalAdd = By.xpath("//*[@contentDesc='POSTAL ADDRESS']/../view[6]");
 	
 	//Mobile Number
-	////*[@contentDesc="0412962427"]
-	//*[@resourceid="licenceApplication"]/view[14]/view[1]
 	By editMobileNum = By.xpath("//*[@resourceid='licenceApplication']view[14]/view[1]");
 	
 	//email Address

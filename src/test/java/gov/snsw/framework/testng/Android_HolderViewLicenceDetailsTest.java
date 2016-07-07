@@ -55,7 +55,13 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
 		 		
 		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.signInNswAcct(username,password);
+		 		signIn.signInNswAcct(username,password);
+		 		
+		 		//Keyboard Remove
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click Sign In Button
+		 		enterPIN = signIn.clickSignInBtn();
 		 		 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
@@ -76,7 +82,7 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
+		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
 		 		
 		 		//Click the Fishing Fee License 
 		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
@@ -102,7 +108,8 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		assertTrue(classType.equalsIgnoreCase(class_Type));
 		 		
 		 		//click Back button to go to my license page
-		 		LicPg = detailLicPg.pressBackBtn();
+		 		Utilities.BackBtn(driver);
+		 		//LicPg = detailLicPg.pressBackBtn();
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	

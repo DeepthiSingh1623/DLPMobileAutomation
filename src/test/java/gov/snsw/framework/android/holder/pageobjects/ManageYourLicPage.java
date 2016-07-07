@@ -20,7 +20,7 @@ public class ManageYourLicPage extends DriverPage{
 	
 	//Renew your Licence
 	By renewLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtManageRenewLicence']");
-	
+					
 	//Share Details
 	//*[text()="Share Details"]
 	

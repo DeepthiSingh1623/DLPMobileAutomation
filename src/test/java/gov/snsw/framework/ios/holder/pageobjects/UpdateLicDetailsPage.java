@@ -13,8 +13,8 @@ public class UpdateLicDetailsPage extends DriverPage{
 	}
 
 	//Postal Address
-	By editPostalAdd = By.xpath("//*[@class='UIAWebView']/link[3]/link[1]/text[1]");
-							    
+	By editPostalAdd = By.xpath("//*[@label='POSTAL ADDRESS']/../link[3]");
+	                            
 	
 						
 	//Save Changes Button

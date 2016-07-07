@@ -23,9 +23,12 @@ public class EnterPinPage extends DriverPage{
 	public String verifyPinEnterTitle()
 	{
 		By pinTitle = By.xpath("//*[@label='You are required to set up a PIN.  You can change this in your App Settings.']");
+		fluentWait(pinTitle);
 		String pinEnterTitle = driver.findElement(pinTitle).getText();
 		return pinEnterTitle;
 	}
+	
+	
 	public void enterPin()
 	{
 		driver.findElement(pin1).sendKeys("1");

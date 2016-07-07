@@ -27,7 +27,8 @@ import gov.snsw.framework.android.holder.pageobjects.SuccessfulLicDetailsUpdateP
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 import gov.snsw.framework.android.holder.pageobjects.UpdateLicenceDetailsPage;
 import gov.snsw.framework.android.holder.pageobjects.UpdatePostalAddressPage;
-import gov.snsw.framework.android.holder.pageobjects.UpdateResidentialAddressPage;
+import gov.snsw.framework.utils.Utilities;
+
 
 public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	@Test (dataProvider="logInData")
@@ -57,7 +58,13 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
 	 		
 	 		//Enter the login details in the Sign In Page
-	 		enterPIN = signIn.signInNswAcct(username,password);
+	 		signIn.signInNswAcct(username,password);
+	 		
+	 		//Keyboard Remove
+	 		Utilities.BackBtn(driver);
+	 		
+	 		//click Sign In Button
+	 		enterPIN = signIn.clickSignInBtn();
 	 		 		
 	 		//Enter 4 digit PIN
 	 		enterPIN.enter4DigitPin(pin);
@@ -77,7 +84,7 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 		MyLicencePage LicPg = new MyLicencePage(driver);
 	 		
 	 		//Verify My Licence Page is displayed
-	 		assertEquals("My Licences",LicPg.verifyMyLicTitle());
+	 		assertEquals("Licences",LicPg.verifyMyLicTitle());
 	 		
 	 		//Click the License to view the detailed Licence	 						
 	 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);		 	
@@ -92,14 +99,18 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 		UpdatePostalAddressPage updateResAdd = updateLicPg.clickEditPostalAddressBtn();
 	 		
 	 		//Enter The New Res Address
-	 		updateLicPg =  updateResAdd.enterNewPostalAddress(postal_Address);
+	 		updateResAdd.enterNewPostalAddress(postal_Address);
 	 		
-		 	//Click Save Changes Button
+	 		Utilities.BackBtn(driver);
+	 		
+	 		updateResAdd.pressDoneBtn();
+	 		
+	 		//Click Save Changes Button
 	 		SuccessfulLicDetailsUpdatePage LicUpdateSaveBtn = updateLicPg.clickUpdateLicDetailsSaveBtn();
 	 		
 	 		//Verify Success Message
-	 		String resAddChngMsg = LicUpdateSaveBtn.verifyUpdateLicSucessPage();
-	 		System.out.println("The Res Address Changed is "+resAddChngMsg);
+	 		//String resAddChngMsg = LicUpdateSaveBtn.verifyUpdateLicSucessPage();
+	 		//System.out.println("The Res Address Changed is "+resAddChngMsg);
 	 		//assertTrue(resAddChngMsg.contains("SUCCESSFUL"));
 	 		
 	 		//Click Back button on the success Page
@@ -109,7 +120,9 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 		detailLicPg = mngLic.clickbackBtn();
 	 		
 	 		//Click Back Button on the Detailed Licence Page'
-	 		LicPg = detailLicPg.pressBackBtn();
+	 		//LicPg = detailLicPg.pressBackBtn();
+	 		
+	 		Utilities.BackBtn(driver);
 	 		
 		   // Click on the Settings and Sign out
 		   LicPg.settings();
