@@ -19,6 +19,7 @@ public class SharingLicencePage extends DriverPage{
 	
 	By shareBackBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
+	
 	public String verifySharePageTitle()
 	{
 		By shareTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
@@ -43,6 +44,12 @@ public class SharingLicencePage extends DriverPage{
 	public boolean verifyShareQRScan()
 	{
 		return driver.findElement(shareScanCode).isDisplayed();
+		
+	}
+	
+	public void backBtn()
+	{
+		 driver.findElement(shareBackBtn).click();
 		
 	}
 	

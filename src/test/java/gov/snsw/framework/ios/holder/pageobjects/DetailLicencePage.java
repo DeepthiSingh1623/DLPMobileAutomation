@@ -13,13 +13,13 @@ public class DetailLicencePage extends DriverPage{
 	}
 
 	//Verify/Share Licence	
-	By Licshare = By.xpath("//*[@label='VERIFY']");
+	By Licshare = By.xpath("//*[@label='SHOW CODE']");
 	
 	//Manage Button
-	By LicManage = By.xpath("//*[@label='Manage']");
+	By LicManage = By.xpath("//*[@label='Manage' and @class='UIAButton']");
 	
 	//Back Button
-	By LicBackBtn = By.xpath("//*[@label='Back']");
+	By LicBackBtn = By.xpath("//*[@label='Manage' and @class='UIAButton']/../button[1]");
 		
 	public String getLicName()
 	{

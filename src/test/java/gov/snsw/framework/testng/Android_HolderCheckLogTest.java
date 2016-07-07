@@ -4,8 +4,7 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -24,8 +23,9 @@ import gov.snsw.framework.android.holder.pageobjects.LogPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
-public class HolderCheckLogTest extends BasicTest{
+public class Android_HolderCheckLogTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
 	public void checkLogTest(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type) throws Exception{
@@ -54,7 +54,13 @@ public class HolderCheckLogTest extends BasicTest{
 		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
 		 		
 		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.signInNswAcct(username,password);
+		 		signIn.signInNswAcct(username,password);
+		 		
+		 		//Keyboard Remove
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click Sign In Button
+		 		enterPIN = signIn.clickSignInBtn();
 		 		 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
@@ -105,13 +111,7 @@ public class HolderCheckLogTest extends BasicTest{
 		 		// Click on the Settings and Sign out
 		 		LicPg.settings();
 		 		
-		 		//clean app
-		 		Map  params = new HashMap();
-	 			params.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-	 			Object result = driver.executeScript("mobile:application:clean", params);
 		 		
-	 			//close App
-		 		driver.close();
 		 		
 		}
 	 	catch(Exception e){
@@ -120,6 +120,18 @@ public class HolderCheckLogTest extends BasicTest{
 	 		reportFail("expected", "actual","params");	
 
 	 	}
+	 	finally{
+	 		
+
+	 		//Clean App
+	 		Utilities.cleanApp(driver, appName);
+	 		
+	 		
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+	 		
+	 	}
+		
 		
         if(testFail){
         	Assert.fail();
@@ -144,7 +156,7 @@ public class HolderCheckLogTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public HolderCheckLogTest(DesiredCapabilities caps) {
+	public Android_HolderCheckLogTest(DesiredCapabilities caps) {
 		super(caps);
 	}	
 

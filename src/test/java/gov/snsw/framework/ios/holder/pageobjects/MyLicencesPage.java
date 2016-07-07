@@ -16,9 +16,19 @@ public class MyLicencesPage extends DriverPage{
 	//License Page Title
 	public String myLicPgTitle()
 	{
-		By mylicTitle = By.xpath("//*[@label='Recreational Fishing Fee']");
+		By mylicTitle = By.xpath("//*[@label='NSW Recreational Fishing Fee']");
+		fluentWait(mylicTitle);
 		String myLicPgTitle = driver.findElement(mylicTitle).getText();
 		return myLicPgTitle;
+	}
+	
+	//Licence Number Displayed
+	public String verifyMyLicPgLicNum(String licence_Number)
+	{
+		By myLicNum = By.xpath("//*[text()='Licence No. "+licence_Number+"']");
+		fluentWait(myLicNum);
+		String myLicPgNumberDisp = driver.findElement(myLicNum).getText();
+		return myLicPgNumberDisp;
 	}
 	
 	public DetailLicencePage clickOnLicNumber(String licence_Number)

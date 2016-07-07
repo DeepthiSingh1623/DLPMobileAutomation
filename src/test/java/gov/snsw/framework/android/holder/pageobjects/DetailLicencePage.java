@@ -35,12 +35,13 @@ public class DetailLicencePage extends DriverPage{
 	
 	By licExpiryDate = By.xpath("//*[text()='Expiry Date']/../text[2]");
 	
-	By licClasses = By.xpath("//*[text()='Classes/Conditions']/../text[2]");
+	By licClasses = By.xpath("//*[text()='Classes']/../text[2]");
 	
 	By manageLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/menu_licence_manage']");
 	
 	//Share Button
-	By shareLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnFloatingActionButton']");
+	By shareLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnVerify']");
+
 	
 	/*public String getLicDetails()
 	{			

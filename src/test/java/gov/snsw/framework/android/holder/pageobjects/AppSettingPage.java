@@ -27,12 +27,12 @@ public class AppSettingPage extends DriverPage{
 	//Chane PIN Button
 	public void changePINBtn()
 	{
-		fluentWait(changePIN);
 		driver.findElement(changePIN).click();
 	}
 	
 	public AppSettingPage clickChangePinBtn()
 	{
+		fluentWait(changePIN);
 		changePINBtn();
 		return new AppSettingPage(driver);
 	} 	
@@ -52,6 +52,7 @@ public class AppSettingPage extends DriverPage{
 	public String verifyAppSettingTitleBar()
 	{
 		By appSettingsPg = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
+		fluentWait(appSettingsPg);
 		String appTitleBar = driver.findElement(appSettingsPg).getText();
 		return appTitleBar;
 	}

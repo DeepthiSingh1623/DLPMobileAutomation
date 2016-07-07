@@ -13,7 +13,7 @@ public class UpdatePostalAddressPage extends DriverPage{
 	}
 	
 	By postalAdd = By.xpath("//*[@resourceid='applicantPostalAddress_AddressSearchIntuitive']");
-	
+	                       
 	By addressList = By.xpath("//*[@resourceid='ui-id-1']");
 	
 	public void addresslist()
@@ -26,9 +26,8 @@ public class UpdatePostalAddressPage extends DriverPage{
 	public void postalAdd(String postal_Address)
 	{
 		driver.findElement(postalAdd).clear();
-		fluentWait(postalAdd);
 		driver.findElement(postalAdd).sendKeys(postal_Address);
-		addresslist();
+		//addresslist();
 	}
 	
 	By doneBtn = By.xpath("//*[@resourceid='DoneStep']");
@@ -38,14 +37,19 @@ public class UpdatePostalAddressPage extends DriverPage{
 		driver.findElement(doneBtn).click();
 	}
 	
-	public UpdateLicenceDetailsPage enterNewPostalAddress(String postal_Address)
+	public void enterNewPostalAddress(String postal_Address)
 	{
 		fluentWait(postalAdd);
 		postalAdd(postal_Address);
-		addresslist();
+				
+		
+	}
+	
+	public UpdateLicenceDetailsPage pressDoneBtn()
+	{
 		fluentWait(doneBtn);
-		doneBtn();		
+		doneBtn();
 		return new UpdateLicenceDetailsPage(driver);
 	}
-
-}
+	
+	}

@@ -1,6 +1,7 @@
 package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -73,8 +74,14 @@ public class IOS_HolderChangePinTest extends BasicTest
 		 				 		
 		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
 		 		
+		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+		 		{
+		 			LicPg.selectNo();
+		 		} 
+		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click Manage Button
 		 		SettingsPage settingsPage = LicPg.clickSettingsBtn();
@@ -111,7 +118,8 @@ public class IOS_HolderChangePinTest extends BasicTest
 		 		enterPIN.enterNewPINUnlock();	
 		 				 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		//assertEquals(licence_Number,LicPg.verifyMyLicPgLicNum(licence_Number));
+		 		
 		 				 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();

@@ -73,8 +73,13 @@ public class IOS_HolderSignInTest extends BasicTest
 		 				 		
 		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
 		 		
+		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+		 		{
+		 			LicPg.selectNo();
+		 		}
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
 		 		//Close App
 		 		Utilities.closeApp(driver, appName);
@@ -89,8 +94,9 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		LicPg = enterPIN.enterPINUnlock();		 		
 		 				 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 				 		
+		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));		
+		 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
@@ -101,7 +107,8 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		//assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		assertTrue(AddInPg.isTextPresentOnScreen("Add"));
 		 	
 		 		
 		}
@@ -115,10 +122,10 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		Utilities.cleanApp(driver, appName);
+	 		Utilities.cleanApp(driver,appName);
 	 		
 	 		//Close App
-	 		Utilities.closeApp(driver, appName);
+	 		Utilities.closeApp(driver,appName);
 	 		
 	 			 		
  			

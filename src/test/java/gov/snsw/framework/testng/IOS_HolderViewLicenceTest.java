@@ -1,6 +1,7 @@
 package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
-		String appName = (String) caps.getCapability("bundleID");	
+		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
 	 			//reportPass("success", "param");
 	 			
@@ -73,8 +74,14 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		 				 		
 		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
 		 		
+		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+		 		{
+		 			LicPg.selectNo();
+		 		} 
+		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click Licence Number
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
@@ -93,29 +100,31 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		 		
 		 		
 		 		//Click Back Button on the Licence Details Page
-		 		//LicPg = detailLicPg.clickBackBtn();
+		 		LicPg = detailLicPg.clickBackBtn();
 		 		
 		 		//Back Button on detailed Lic page used TAP
-		 		Map<String, Object> params1 = new HashMap<String, Object>();
-		 		params1.put("location", "29,79");
-		 		Object result1 = driver.executeScript("mobile:touch:tap", params1); 		
+		 		//Map<String, Object> params1 = new HashMap<String, Object>();
+		 		//params1.put("location", "29,79");
+		 		//Object result1 = driver.executeScript("mobile:touch:tap", params1); 		
 		 		
 		 		
 		 			 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 				 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
 		 		//Verify Settings Page is displayed
-		 		settingPg.verifySettingsPageTitile();
+		 		assertTrue(settingPg.isTextPresentOnScreen("Settings"));
+		 		//settingPg.verifySettingsPageTitile();
 		 		
 		 		//Click SignOut
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		//assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		assertTrue(AddInPg.isTextPresentOnScreen("Add"));
 		 		
 		 		
 		 		

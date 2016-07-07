@@ -54,7 +54,9 @@ public class MyLicencePage extends DriverPage{
 	{
 		fluentWait(setting3Bars);
 		driver.findElement(setting3Bars).click();
+		fluentWait(signOut);
 		driver.findElement(signOut).click();
+		fluentWait(ok);
 		driver.findElement(ok).click();
 	}
 	
@@ -85,7 +87,7 @@ public class MyLicencePage extends DriverPage{
 	
 	public String viewLicName()
 	{
-		By LicName = By.xpath("//*[text()='Recreational Fishing Fee']");
+		By LicName = By.xpath("//*[text()='NSW Recreational Fishing Fee']");
 		fluentWait(LicName);
 		String licenseName = driver.findElement(LicName).getText();
 		return licenseName;
@@ -121,7 +123,6 @@ public class MyLicencePage extends DriverPage{
 		return licPgTitile;
 	}
 	
-	
-	
+		
 
 }

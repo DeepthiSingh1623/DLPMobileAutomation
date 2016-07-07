@@ -17,7 +17,7 @@ public class UpdatePostalAddressPage extends DriverPage{
 	//Address 
 	By Address = By.xpath("//*[@class='DOMUIAButton']/../textfield");
 	
-	By addEnterDone = By.xpath("//*[@class='DOMUIAButton']");
+	By addEnterDone = By.xpath("//device/view/window[2]/toolbar[3]/button[3]");
 	
 	
 	public void addressEnterDoneBtn()
@@ -46,14 +46,12 @@ public class UpdatePostalAddressPage extends DriverPage{
 	
 	public void addressField(String postal_add)
 	{
+		fluentWait(Address);
 		driver.findElement(Address).clear();
 		driver.findElement(Address).sendKeys(postal_add);
 	}
 	
-	public void getAddressList()
-	{
-		
-	}
+	
 	
 	
 	

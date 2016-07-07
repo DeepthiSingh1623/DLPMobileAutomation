@@ -25,7 +25,7 @@ public class ManageLicencePage extends DriverPage{
 	
 	By cancelBtn = By.xpath("//*[@label='Cancel']");
 	
-	public void updaleLicBtn()
+	public void updateLicBtn()
 	{
 		driver.findElement(updateLic).click();
 	}
@@ -35,7 +35,8 @@ public class ManageLicencePage extends DriverPage{
 	}
 	public UpdateLicDetailsPage clickUpdateLicBtn()
 	{
-		updaleLicBtn();
+		fluentWait(updateLic);
+		updateLicBtn();
 		fluentWait(okBtn);
 		okButton();
 		return new UpdateLicDetailsPage(driver);
@@ -64,12 +65,13 @@ public class ManageLicencePage extends DriverPage{
 		driver.findElement(renewLic).click();
 	}
 	
-	public void clickRenewLic()
+	public RenewLicencePage clickRenewLic()
 	{
 		fluentWait(renewLic);
 		renewLicBtn();
 		fluentWait(okBtn);
 		okButton();
+		return new RenewLicencePage(driver);
 		
 	}
 }

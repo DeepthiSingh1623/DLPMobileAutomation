@@ -10,47 +10,37 @@ public class RenewLicencePage extends DriverPage{
 	public RenewLicencePage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
-	}
+	}	
 	
-	//Provide Details - RENEW LIC
-	By headingReqDetails = By.xpath("//*[@contentDesc='PROVIDE DETAILS']");
-	
-	//Input License NUmber to be Renewed
-	By renewLicNumber = By.xpath("//*[@resourceid='LicenceNumber']");
-	
-	//Input Renewal Number
-	By renewRenewalNumber = By.xpath("//*[@resourceid='RenewalNumber']");
-	
-	
-	//Next Button
-	By renewNextBtn = By.xpath("//*[@resourceid='Next']");
-	
-	public void renewLicNum(String licence_Number)
-	{
-		driver.findElement(renewLicNumber).sendKeys(licence_Number);
-	}
-	
-	public void renewLicRenewalNum(String Renewal_Number)
-	{
-		driver.findElement(renewRenewalNumber).sendKeys(Renewal_Number);
-	}
+	By nextBtn = By.xpath("//*[@resourceid='NextStep']");
 	
 	public void nextBtn()
 	{
-		driver.findElement(renewNextBtn).click();
+		driver.findElement(nextBtn).click();
 	}
 	
-	public void enterLicNumber(String licence_Number)
+	public LicenceDurationAndFeePage clickNextBtn()
 	{
-		fluentWait(renewLicNumber);
-		renewLicNum(licence_Number);
+		fluentWait(nextBtn);
 		nextBtn();
+		return new LicenceDurationAndFeePage(driver);
+	}
+	
+	public String VerifytitlePg()
+	{
+		By titlePg = By.xpath("//*[text()='Renew Licence']");
+		fluentWait(titlePg);
+		String pgTitle = driver.findElement(titlePg).getText();
+		return pgTitle;
+	}
+	
+	public String expiryDate()
+	{
+		By expiryDate = By.xpath("//*[@contentDesc='EXPIRY DATE']/../view[11]");
+		String LicRenewalExpireDate = driver.findElement(expiryDate).getText();
+		return LicRenewalExpireDate;
 		
 	}
 	
-	public void verifyHeading()
-	{
-		driver.findElement(headingReqDetails).isDisplayed();
-				
-	}
+	
 }

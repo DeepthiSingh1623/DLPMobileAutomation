@@ -37,6 +37,7 @@ public class DriverPage {
 		
 
 		protected String holder_android_resourceid = "au.gov.nsw.onegov.app.holder.uat";
+	                                                
 		
 		protected String checker_android_resourceid = "au.gov.nsw.onegov.app.checker.uat";
 		
@@ -53,7 +54,7 @@ public class DriverPage {
 	
 		public WebElement fluentWait(final By element)
 		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(120, TimeUnit.SECONDS)
 																			.pollingEvery(5, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
@@ -83,8 +84,17 @@ public class DriverPage {
 			
 		}
 		
+		By HolderTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
+		public String getAndroidHolderPageTitle(){
+			
+			fluentWait(HolderTitle);
+			return driver.findElement(HolderTitle).getText();
+			
+		}
 		
-		public boolean  isTextPresentOnScreen(String text) {
+		
+		
+		public boolean isTextPresentOnScreen(String text) {
 			
 			boolean txtPres= false;
 			
@@ -98,7 +108,29 @@ public class DriverPage {
 			
 			return txtPres;
 		}
-
+			public boolean  isContentPresentOnScreen(String text) {
+			
+			boolean txtPres= false;
+			
+			try{
+				txtPres = driver.findElement(By.xpath("//*[contains(@contentDesc,'" + text + "')]")).isDisplayed();
+			
+			}
+			
+			catch(Exception e){
+				txtPres= false;
+			}
+			
+			return txtPres;
+		}
+			
+			//Notification
+			By notificationPop = By.xpath("//*[@label='No']");
+			
+			public void selectNo()
+			{
+				driver.findElement(notificationPop).click();
+			}
 		
 	
 }

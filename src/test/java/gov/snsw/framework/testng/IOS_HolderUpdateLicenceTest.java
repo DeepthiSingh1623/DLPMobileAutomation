@@ -1,5 +1,6 @@
 package gov.snsw.framework.testng;
 
+import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -78,17 +79,24 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 			//Enter 4 digit PIN
 		 			enterPIN.enterPINUnlock();
 		 		}
-		 				 		
+		 		
+		 		
 		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
 		 		
+		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+		 		{
+		 			LicPg.selectNo();
+		 		}
+		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click Licence Number
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//verify the Detailed Lic Page 
-		 		assertEquals("Recreational Fishing Fee",licence_Name);
+		 		assertTrue(detailLicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click Manage Button
 		 		ManageLicencePage manageLicPg = detailLicPg.clickManageBtn();
@@ -97,25 +105,19 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		UpdateLicDetailsPage updateLicPg = manageLicPg.clickUpdateLicBtn();
 		 		
 		 		//Verify the UPDATE CONTACT DETAILS page is loaded
-		 		assertEquals("UPDATE CONTACT DETAILS",updateLicPg.verifyUpdateLicTitle());
-		 		
+		 		//assertEquals("UPDATE CONTACT DETAILS",updateLicPg.verifyUpdateLicTitle());
+		 		//assertTrue(updateLicPg.isTextPresentOnScreen("UPDATE CONTACT DETAILS"));
 		 		
 		 		// Click Address change Edit Button
 		 		UpdatePostalAddressPage updatePostalPg = updateLicPg.clickeditPostalBtn();
 		 		
 		 		//Verify the postal address changes Page Title is displayed		 		
-		 		//assertEquals("UPDATE CONTACT DETAILS",updatePostalPg.verifyPostalAddressTitle());
+		 		//assertTrue(updateLicPg.isTextPresentOnScreen("UPDATE CONTACT DETAILS"));
 		 				 	
 		 		//Change Address
 		 		updatePostalPg.addressField(postal_Address);
 		 		
-		 		//Address list select using TAP
-		 					 		
-		 		Map<String, Object> params2 = new HashMap<String, Object>();
-		 		params2.put("location", "536,502");
-		 		Object result2 = driver.executeScript("mobile:touch:tap", params2);
-		 		
-		 		//click address enter Done button
+		 	 	//click address enter Done button
 		 		//updatePostalPg.addressEnterDoneBtn();
 		 		
 		 		//click the Done Button
@@ -145,15 +147,14 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		detailLicPg = manageLicPg.clickCancelBtn();
 		 		
 		 		//Click Back Button on the Detailed Lic Page
-		 		//LicPg = detailLicPg.clickBackBtn();			
+		 		LicPg = detailLicPg.clickBackBtn();		
 		 		
-		 		Map<String, Object> params10 = new HashMap<String, Object>();
-		 		params10.put("location", "37,92");
-		 		Object result10 = driver.executeScript("mobile:touch:tap", params10);
+		 		//Map<String, Object> params10 = new HashMap<String, Object>();
+		 		//params10.put("location", "37,92");
+		 		//Object result10 = driver.executeScript("mobile:touch:tap", params10);
 		 				
-		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		//assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 				 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
