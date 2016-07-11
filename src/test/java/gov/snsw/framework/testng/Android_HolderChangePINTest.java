@@ -1,7 +1,7 @@
 package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertEquals;
-
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,8 +18,7 @@ import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.android.holder.pageobjects.AppSettingPage;
-
-
+import gov.snsw.framework.android.holder.pageobjects.DetailLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
@@ -49,66 +48,87 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			//Click on the Start button on introduction page
+			 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		signIn.signInNswAcct(username,password);
+			 		
+			 		//Verifying Show Password Exist
+			 		assertTrue(signIn.verifyShowPwd());
+			 		
+			 		//Keyboard Remove
+			 		Utilities.BackBtn(driver);
+			 		
+			 		//click Sign In Button
+			 		enterPIN = signIn.clickSignInBtn();
+			 		 		
+			 		//Verify the Enter PIN is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enter4DigitPin(pin);
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enter4DigitPin(pin);
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPINPage(driver);
+			 			
+			 			//Verify Unlock Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+			 			
+			 			//Enter 4 digit PIN
+			 			enterPIN.enter4DigitPin(pin);
+			 		}	 		
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
-		 		
-		 		//Enter the login details in the Sign In Page
-		 		signIn.signInNswAcct(username,password);
-		 		
-		 		//Keyboard Remove
-		 		Utilities.BackBtn(driver);
-		 		
-		 		//click Sign In Button
-		 		enterPIN = signIn.clickSignInBtn();
-		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enter4DigitPin(pin);
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enter4DigitPin(pin);
-		 		}
-		 		
-		 		else
-		 		{
-		 			enterPIN = new EnterPINPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enter4DigitPin(pin);
-		 			
-		 		}
-		 		
-		 		MyLicencePage LicPg = new MyLicencePage(driver);
-		 		
-		 		//Verify My License Page is displayed
-		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
-		 		
+			 		MyLicencePage LicPg = new MyLicencePage(driver);
+			 		
+			 		//Verify My Licence Page is displayed.
+			 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+			 				 		
+			 		//Verify My Licences Page is displayed
+			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = LicPg.clickSettings();
 		 		
-		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
-		 		
+		 		//Verify app Settings Page is displayed 
+		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
+		 				 		
 		 		//Click on the Change PIN Button
 		 		 appSettingPg.clickChangePinBtn();
 		 		
 		 		//click Ok Button
 		 		enterPIN = appSettingPg.changePINOkBtn();
 		 		
-		 		assertEquals("Enter your current PIN",enterPIN.enterPINPgExist());
+		 		//verify Enter Current PIN Pg is displayed
+		 		assertTrue(enterPIN.enterPINPgExist().contains("Enter your current PIN"));
 		 		
 		 		//enter 4 digit current Pin
 		 		enterPIN = enterPIN.enterCurrrentPINOnChangePIN(pin);
 		 		
-		 		//assertEquals("You are required to setup a new PIN",enterPIN.getPINPageTitle());
+		 		//verify Enter New PIN Pg is displayed
+		 		assertTrue(enterPIN.enterPINPgExist().contains("Enter new PIN"));
+		 		
+		 		//Enter New PIN
 		 		enterPIN = enterPIN.enterNewPINOnChangePIN(new_Pin);
+		 		
+		 		//verify Enter Confirm New PIN Pg is displayed
+		 		assertTrue(enterPIN.enterPINPgExist().contains("Confirm PIN"));
 		 		
 		 		appSettingPg = enterPIN.confirmNewPINOnChangePIN(new_Pin);
 		 		
 		 		//Verify the AppSettings Page is displayed
-		 		assertEquals("App Settings",appSettingPg.verifyAppSettingTitleBar());
+		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//close app
 		 		//Utilities.closeApp(driver, appName);
@@ -121,18 +141,27 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		Map<String, Object> params3 = new HashMap<String, Object>();
 		 		params3.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 		 		Object result3 = driver.executeScript("mobile:application:open", params3);
+		 			 		
+		 		//Verify Unlock Enter Pin is displayed
+		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
 		 		
-		 		 		
+		 		//Enter 4 digit PIN
+		 		enterPIN.enter4DigitPin(pin);
+		 		
+		 		//Verify Error Message for incorrect Password
+		 		assertTrue(enterPIN.verifyErrorINTitle().contains("PIN error, please try again."));
 		 		
 		 		// enter Newly created PIN
 		 		LicPg = enterPIN.enterCurrrentPINOnLogin(new_Pin);		 		 		
 		 	
-		 		//verify My Licence Page is Displayed
-		 		assertEquals("Licences",LicPg.verifyMyLicTitle());	 	
-		 		
+		 		//Verify My Licence Page is displayed.
+		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences")); 	
 		 		
 		 		// Click on the Settings and Sign out
 		 		LicPg.settings();
+		 		
+		 		//Verify Add Intro Page is displayed
+		 		assertTrue(AddInPg.verifyAddPg().contains("Add"));
 		 		
 		 		
 		}

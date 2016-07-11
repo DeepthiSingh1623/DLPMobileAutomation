@@ -12,8 +12,8 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	//*[@contentDesc="PAYMENT"]
-	//
+	
+	
 	//CreditNumber
 	By creditCardNum = By.xpath("//*[@resourceid='payment_CreditCardDetails_CreditCardNumber']");
 	
@@ -69,6 +69,13 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 	public void submitBtn()
 	{
 		 driver.findElement(submitBtn).click();
+	}
+	
+	public boolean verifyPaymentPgExist()
+	{
+		By paymentPg = By.xpath("//*[@contentDesc='PAYMENT']");
+		fluentWait(paymentPg);
+		return driver.findElement(paymentPg).isDisplayed();
 	}
 	
 	

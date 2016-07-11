@@ -1,13 +1,13 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -53,84 +53,92 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			//Click on the Start button on introduction page
+			 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		signIn.signInNswAcct(username,password);
+			 		
+			 		//Verifying Show Password Exist
+			 		assertTrue(signIn.verifyShowPwd());
+			 		
+			 		//Keyboard Remove
+			 		Utilities.BackBtn(driver);
+			 		
+			 		//click Sign In Button
+			 		enterPIN = signIn.clickSignInBtn();
+			 		 		
+			 		//Verify the Enter PIN is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enter4DigitPin(pin);
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enter4DigitPin(pin);
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPINPage(driver);
+			 			
+			 			//Verify Unlock Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+			 			
+			 			//Enter 4 digit PIN
+			 			enterPIN.enter4DigitPin(pin);
+			 		}	 		
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
-		 		
-		 		//Enter the login details in the Sign In Page
-		 		signIn.signInNswAcct(username,password);
-		 		
-		 		//Keyboard Remove
-		 		Utilities.BackBtn(driver);
-		 		
-		 		//click Sign In Button
-		 		enterPIN = signIn.clickSignInBtn();
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enter4DigitPin(pin);
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enter4DigitPin(pin);
-		 		}
-		 		
-		 		else
-		 		{
-		 			enterPIN = new EnterPINPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enter4DigitPin(pin);
-		 		}
+			 		MyLicencePage LicPg = new MyLicencePage(driver);
+			 		
+			 		//Verify My Licence Page is displayed.
+			 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+			 				 		
+			 		//Verify My Licences Page is displayed
+			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
 		 		
-		 		MyLicencePage LicPg = new MyLicencePage(driver);
-		 		
-		 		//Verify My License Page is displayed
-		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
-		 		
-		 		//Click the License Number		 				 				
+		 		//Click the Fishing Fee License 
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
+		 		
+		 		//Verify Detailed Licence Page is Displayed
+		 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));
 		 		
 		 		//click on Share License Button
 		 		SharingLicencePage shareLicPg = detailLicPg.clickShareLicenceBtn();
 		 		
-		 		//verify the License Share Page - Title is displayed
-		 		//String shareTitle = shareLicPg.verifySharePageTitle();
-		 		//assertTrue(shareTitle.contains("Sharing Licence"));
+		 		//Verify Share Licence Page is displayed
+		 		assertTrue(shareLicPg.verifySharePageTitle().contains("Sharing Licence"));
 		 		
-		 	assertTrue(shareLicPg.isTextPresentOnScreen("Sharing Licence"));
+		 		assertTrue(shareLicPg.verifyShareLicName().contains("NSW Recreational Fishing Fee"));
 		 		
-		 		//verify the License Share Page - Lic Name is displayed
-		 		//String shareLicName = shareLicPg.verifyShareLicName();
-		 		//assertTrue(shareLicName.contains("Fishing licence"));
-		 		
-		 		assertTrue(shareLicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		
-		 		//verify the License Share Page - Lic Num is displayed
-		 		//String shareLicNum = shareLicPg.verifyShareLicNum();
-		 		
-		 	//	assertTrue(shareLicNum.contains(licence_Number));
-		 		
-		 		assertTrue(shareLicPg.isTextPresentOnScreen(licence_Number));
-		 		
-		 		//verify the License Share Page - Scan Img is displayed
-		 		//assertTrue(shareLicPg.verifyShareQRScan());
+		 		assertTrue(shareLicPg.verifyShareLicNum().contains(licence_Number));
 		 		
 		 		//Click Back Button on the QR Scan Page
 		 		shareLicPg.backBtn();
 		 		
+		 		//Verify Detailed Licence Page is displayed
+		 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));
+		 		
 		 		//click the back button on the License Detailed Page
-		 		//LicPg = detailLicPg.pressBackBtn();
 		 		Utilities.BackBtn(driver);
 		 		
+		 		//Verify My Licence Page is displayed.
+		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();
+		 		
+		 		//Verify Add Intro Page is displayed
+		 		assertTrue(AddInPg.verifyAddPg().contains("Add"));
 
-		 		reportFail("expected", "actual","params");	
-		 		
-		 		
+		 		//reportFail("expected", "actual","params");	
 		 		
 		}
 	 	catch(Exception e){

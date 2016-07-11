@@ -1,11 +1,10 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
  
 
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -56,8 +55,14 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		//Enter the login details in the Sign In Page
 		 		enterPIN = signIn.pressSignIn(username,password);
 		 		 		
+		 		//Verify Enter Pin is displayed
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
+		 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enterPin();
+		 		
+		 		//Verify Confirm PIN is displayed
+		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
 		 		
 		 		//Enter 4 digit PIN confirmation
 		 		enterPIN.enterPin();
@@ -67,20 +72,25 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		{
 		 			enterPIN = new EnterPinPage(driver);
 		 			
+		 			//Verify Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+			 		
 		 			//Enter 4 digit PIN
 		 			enterPIN.enterPINUnlock();
 		 		}
 		 				 		
+		 		
 		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
 		 		
 		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
 		 		{
 		 			LicPg.selectNo();
 		 		}
-		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
 		 		
+		 		
+		 		//Verify My Licence Page is displayed
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 				 		
 		 		//Close App
 		 		Utilities.closeApp(driver, appName);
 		 		
@@ -88,15 +98,14 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		Utilities.openApp(driver, appName);		 			 	
 		 		
 		 		//Verify the Re-Enter PIN Page is displayed
-		 		assertEquals("Unlock with pin",enterPIN.verifyUnlockPINTitle());
+		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
 		 		
 		 		//Re-enter 4 digit PIN Number
 		 		LicPg = enterPIN.enterPINUnlock();		 		
 		 				 		
-		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));		
-		 		
+		 		//Verify My License Page is displayed
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 				
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
@@ -107,11 +116,9 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		//assertEquals("Add",AddInPg.verifyAddPageTitle());
-		 		assertTrue(AddInPg.isTextPresentOnScreen("Add"));
-		 	
+		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
 		 		
-		}
+	 	}
 	 	catch(Exception e){
 	 		
 	 		e.printStackTrace();

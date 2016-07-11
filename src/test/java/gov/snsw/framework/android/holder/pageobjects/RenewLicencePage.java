@@ -39,8 +39,12 @@ public class RenewLicencePage extends DriverPage{
 		By expiryDate = By.xpath("//*[@contentDesc='EXPIRY DATE']/../view[11]");
 		String LicRenewalExpireDate = driver.findElement(expiryDate).getText();
 		return LicRenewalExpireDate;
-		
 	}
 	
-	
+	public boolean verifyLicenceNumberDisp()
+	{
+		By renPgLicNum = By.xpath("//*[@contentDesc='LICENCE NUMBER']");
+		fluentWait(renPgLicNum);
+		return driver.findElement(renPgLicNum).isDisplayed();
+	}
 }

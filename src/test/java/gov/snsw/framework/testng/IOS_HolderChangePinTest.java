@@ -1,11 +1,10 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -37,8 +36,7 @@ public class IOS_HolderChangePinTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 			
-		 		switchToContext(driver, "NATIVE_APP");
+	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
@@ -48,52 +46,74 @@ public class IOS_HolderChangePinTest extends BasicTest
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
-		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInPage signIn = tcPg.pressAgreeBtn();
-		 		
-		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.pressSignIn(username,password);
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enterPin();
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enterPin();
-		 		}
-		 		
-		 		else
-		 		{
-		 			enterPIN = new EnterPinPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enterPINUnlock();
-		 		}
-		 				 		
-		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
-		 		
-		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
-		 		{
-		 			LicPg.selectNo();
-		 		} 
-		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		
-		 		//Click Manage Button
+		 			//Click on the Start button on introduction page
+			 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInPage signIn = tcPg.pressAgreeBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.pressSignIn(username,password);
+			 		 		
+			 		//Verify Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enterPin();
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enterPin();
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPinPage(driver);
+			 			
+			 			//Verify Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+				 		
+			 			//Enter 4 digit PIN
+			 			enterPIN.enterPINUnlock();
+			 		}
+			 				 		
+			 		
+			 		MyLicencesPage LicPg = new MyLicencesPage(driver);
+			 		
+			 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+			 		{
+			 			LicPg.selectNo();
+			 		}
+			 		
+			 		
+			 	//Verify My Licence Page is displayed
+			 	assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+			 	
+			 	//Click Settings Button
 		 		SettingsPage settingsPage = LicPg.clickSettingsBtn();
+		 		
+		 		//Verify Settings Page is displayed
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//select Change PIN Option on settings Page
 		 		settingsPage.clickChangePin();
 		 		
+		 		//verify old pin Page 
+		 		assertTrue(enterPIN.verifyOldPinTitle().contains("Enter old pin"));
+		 		
 		 		//enter Old 4 digit PIN
 		 		enterPIN.enterPin();
 		 		
+		 		//verify New pin Page 
+		 		assertTrue(enterPIN.verifyNewPinTitle().contains("Enter new pin"));
+		 		
 		 		//enter New PIN
 		 		enterPIN.enterNewPIN();
+		 		
+		 		//Verify Confirm PIN
+		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
 		 		
 		 		//Enter Confirm New PIN
 		 		enterPIN.enterNewPIN();
@@ -104,39 +124,35 @@ public class IOS_HolderChangePinTest extends BasicTest
 		 		//Open App	
 		 		Utilities.openApp(driver, appName);
 		 			 				 		
-		 				 		
 		 		//Verify the Re-Enter PIN Page is displayed
-		 		assertEquals("Unlock with pin",enterPIN.verifyUnlockPINTitle());
+		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
 		 		
 		 		//Re-enter 4 digit PIN Number
 		 		enterPIN.enterPINUnlock(); 		
 		 		
 		 		//assert Error Message
-		 		assertEquals("Invalid Pin",enterPIN.invalidPINError());
+		 		assertTrue(enterPIN.invalidPINError().contains("Invalid Pin"));
 		 		
 		 		//Enter New PIN
 		 		enterPIN.enterNewPINUnlock();	
 		 				 		
 		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Number,LicPg.verifyMyLicPgLicNum(licence_Number));
-		 		
-		 				 		
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 				 				 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
 		 		//Verify Settings Page is displayed
-		 		settingPg.verifySettingsPageTitile();
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//Click SignOut
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
 		 		
-		 		
-		 		
-		}
-	 	catch(Exception e){
+	 	}
+	 	    catch(Exception e){
 	 		
 	 		e.printStackTrace();
 	 		reportFail("expected", "actual","params");	

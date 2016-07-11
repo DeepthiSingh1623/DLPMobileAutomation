@@ -43,6 +43,12 @@ public class AddIntroPage extends DriverPage {
 			return startBtnExist;
 		}
 		
+		public String verifyAddPg()
+		{
+			String addTitle = driver.findElement(addIntroMsg).getText();
+			return addTitle;
+		}
+		
 	
 	
 

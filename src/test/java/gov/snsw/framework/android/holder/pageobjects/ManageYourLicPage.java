@@ -17,7 +17,7 @@ public class ManageYourLicPage extends DriverPage{
 	
 	//Update your Details
 	By updateDetails = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtManageUpdateDetails']");
-	
+	                            	
 	//Renew your Licence
 	By renewLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtManageRenewLicence']");
 					
@@ -79,9 +79,19 @@ public class ManageYourLicPage extends DriverPage{
 	
 	public String verifyError()
 	{
-		By errorMsg = By.xpath("//*[@resourceid='"+holder_android_resourceid+"id/snackbar_text']");
+		By errorMsg = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/snackbar_text']");
 		String snackBarMsg = driver.findElement(errorMsg).getText();
 		return snackBarMsg;
 	}
+	
+	public String verifyManageLicPage()
+	{
+		By manageTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
+		fluentWait(manageTitle);
+		String snackBarMsg = driver.findElement(manageTitle).getText();
+		return snackBarMsg;
+	}
+	
+	
 	
 }

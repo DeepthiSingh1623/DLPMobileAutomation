@@ -30,5 +30,49 @@ public class RenewLicencePage extends DriverPage {
 		driver.findElement(renewLicNextBtn).click();
 		return new LicenceDurationAndFeePage(driver);
 	}
-
+	
+	public String verifyRenewalLicTitle()
+	{
+		//Title
+		By pgTitle = By.xpath("//*[@label='LICENCE NUMBER']");
+		fluentWait(pgTitle);
+		String LicPgTitle = driver.findElement(pgTitle).getText();
+		return LicPgTitle;
+	}
+	
+	public String verifyRenewalDurationFeeLicTitle()
+	{
+		//Title
+		By pgTitle = By.xpath("//*[@label='Total Amount Due']");
+		fluentWait(pgTitle);
+		String LicPgTitle = driver.findElement(pgTitle).getText();
+		return LicPgTitle;
+	}
+	
+	public String verifyRenewalReviewDetailsTitle()
+	{
+		//Title
+		By pgTitle = By.xpath("//*[text()='LICENSEE']");
+		fluentWait(pgTitle);
+		String LicPgTitle = driver.findElement(pgTitle).getText();
+		return LicPgTitle;
+	}
+	
+	public String verifyRenewalDeclartionTitle()
+	{
+		//Title
+		By pgTitle = By.xpath("//*[@label='I Agree']");
+		fluentWait(pgTitle);
+		String LicPgTitle = driver.findElement(pgTitle).getText();
+		return LicPgTitle;
+	}
+	
+	public String verifyPaymentTitle()
+	{
+		//Title
+		By pgTitle = By.xpath("//*[@label='Total Due']");
+		fluentWait(pgTitle);
+		String LicPgTitle = driver.findElement(pgTitle).getText();
+		return LicPgTitle;
+	}
 }

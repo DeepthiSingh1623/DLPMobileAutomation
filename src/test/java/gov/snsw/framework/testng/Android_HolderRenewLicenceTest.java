@@ -53,70 +53,87 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		if(AddInPg.isStartBtnExist())
 	 		{		 			
 	 		
-	 		//Click on the Start button on introduction page
-	 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+	 			//Click on the Start button on introduction page
+		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 		
+		 		//Click Accept Button on the Terms and Condition Page
+		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 		
+		 		//Enter the login details in the Sign In Page
+		 		signIn.signInNswAcct(username,password);
+		 		
+		 		//Verifying Show Password Exist
+		 		assertTrue(signIn.verifyShowPwd());
+		 		
+		 		//Keyboard Remove
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click Sign In Button
+		 		enterPIN = signIn.clickSignInBtn();
+		 		 		
+		 		//Verify the Enter PIN is displayed
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+		 		
+		 		//Enter 4 digit PIN
+		 		enterPIN.enter4DigitPin(pin);
+		 		
+		 		//Verify Confirm PIN is displayed
+		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
+		 		
+		 		//Enter 4 digit PIN confirmation
+		 		enterPIN.enter4DigitPin(pin);
+		 		}
+		 		
+		 		else
+		 		{
+		 			enterPIN = new EnterPINPage(driver);
+		 			
+		 			//Verify Unlock Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+		 			
+		 			//Enter 4 digit PIN
+		 			enterPIN.enter4DigitPin(pin);
+		 		}	 		
 	 		
-	 		//Click Accept Button on the Terms and Condition Page
-	 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
-	 		
-	 		//Enter the login details in the Sign In Page
-	 		signIn.signInNswAcct(username,password);
-	 		
-	 		//Keyboard Remove
-	 		Utilities.BackBtn(driver);
-	 		
-	 		//click Sign In Button
-	 		enterPIN = signIn.clickSignInBtn();
-	 		 		
-	 		//Enter 4 digit PIN
-	 		enterPIN.enter4DigitPin(pin);
-	 		
-	 		//Enter 4 digit PIN confirmation
-	 		enterPIN.enter4DigitPin(pin);
-	 		}
-	 		
-	 		else
-	 		{
-	 			enterPIN = new EnterPINPage(driver);
-	 			
-	 			//Enter 4 digit PIN
-	 			enterPIN.enter4DigitPin(pin);
-	 		}
+		 		MyLicencePage LicPg = new MyLicencePage(driver);
+		 		
+		 		//Verify My Licence Page is displayed.
+		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+		 				 		
+		 		//Verify My Licences Page is displayed
+		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 	 		
 	 		
-	 		MyLicencePage LicPg = new MyLicencePage(driver);
+	 		//Click the Fishing Fee License 
+	 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 	 		
-	 		//Verify My License Page is displayed
-	 		assertEquals("Licences",LicPg.verifyMyLicTitle());
+	 		//Verify Detailed Licence Page is Displayed
+	 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));
 	 		
-	 		Map<String, Object> params6 = new HashMap<String, Object>();
-	 		params6.put("start", "571,2126");
-	 		params6.put("end", "504,0");
-	 		params6.put("duration", "2");
-	 		Object result6 = driver.executeScript("mobile:touch:swipe", params6);
-	 		
-	 		//Click the License to view the detailed License	 						
-	 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);		 	
 	 		
 	 		//Click on the Manage License Button
 	 		ManageYourLicPage mngLic = detailLicPg.clickManageLicenceBtn();
 	 		
+	 		//Verify Manage Page is Displayed
+	 		assertTrue(mngLic.verifyManageLicPage().contains("Manage your licence"));
+	 		
 	 		//click on renew License
 	 		RenewLicencePage renewLicPg = mngLic.clickRenewLic();
-		 	
+	 		
+	 		//Verify the page is redirected to SNSW Website
+	 		assertTrue(renewLicPg.verifyLicenceNumberDisp());
+	 		
 	 		//Verify the Renew License Screen is displayed
 	 		assertTrue(renewLicPg.isTextPresentOnScreen("Renew Licence"));
 	 			 		
-	 		
 	 		//verify Licence Details
-	 		//verify lic number
 	 		assertTrue(renewLicPg.isContentPresentOnScreen(licence_Number));
 	 		
 	 		//Verify Lic Name
 	 		assertTrue(renewLicPg.isContentPresentOnScreen(lic_OwnerName));
 	 		
 	 		//verify LicenceType
-	 		assertTrue(renewLicPg.isContentPresentOnScreen(licence_Name));
+	 		assertTrue(renewLicPg.isContentPresentOnScreen("Recreational Fishing Fee"));
 	 		
 	 		//Verify Expiry Date	 	 		
 	 		//assertEquals(Utilities.dateFormatChange(licence_ExpireDate),renewLicPg.expiryDate());
@@ -124,14 +141,26 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		//click Next Button
 	 		LicenceDurationAndFeePage licDurationFee = renewLicPg.clickNextBtn();
 	 		
+	 		//Verify Duration and Fee Page Exist
+	 		assertTrue(licDurationFee.verifyDurationFeePgExist());
+	 		
 	 		//click Next Button on the Fee Page
 	 		ReviewDetailsRenewalLicencePage reviewDetails = licDurationFee.selectDuration();
+	 		
+	 		//Verify Review Details Page Exist
+	 		assertTrue(reviewDetails.verifyReviewDetailsPgExist());
 	 		
 	 		//Review Details Page
 	 		DeclarationRenewalLicencePage dclare = reviewDetails.clickNext();
 	 		
+	 		//Verify Review Declaration Page Exist
+	 		assertTrue(dclare.verifyDeclarationPgExist());
+	 		
 	 		//click agree and Next Button
 	 		PaymentLicenceRenewalPage payPg = dclare.clickNextBtnDeclarationPage();
+	 		
+	 		//Verify Review Declaration Page Exist
+	 		assertTrue(payPg.verifyPaymentPgExist());
 	 		
 	 		//Enter Details in Payment Page 
 	 		payPg.creditCardNum(cardNumber);	 		
@@ -170,11 +199,11 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		 		 		
 	 		// Click on the Settings and Sign out
 		    LicPg.settings();
-		    
-		  //Verify Add Intro Page is displayed
-		  assertTrue(AddInPg.isTextPresentOnScreen("Add"));
+		        
+			 //Verify Add Intro Page is displayed
+			   assertTrue(AddInPg.verifyAddPg().contains("Add"));
 	 		
-	 	  reportFail("expected", "actual","params");	
+	 	  //reportFail("expected", "actual","params");	
 		 		
 		  	 		
 	 	}

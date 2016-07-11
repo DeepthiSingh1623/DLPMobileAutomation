@@ -15,6 +15,8 @@ public class ShareLicencePage extends DriverPage{
 	By doneBtn = By.xpath("//*[@label='Done']");
 	
 	
+	
+	
 	public String getLicName()
 	{
 		By licName = By.xpath("//*[@label='Name on Licence']/../text[2]");
@@ -42,4 +44,14 @@ public class ShareLicencePage extends DriverPage{
 		
 	}
 
+	public String verifyLicName()
+	{
+		By mylicTitle = By.xpath("//*[@label='NSW Recreational Fishing Fee']");
+		fluentWait(mylicTitle);
+		String myLicenceName = driver.findElement(mylicTitle).getText();
+		return myLicenceName;
+	}
+	
+	
+	
 }

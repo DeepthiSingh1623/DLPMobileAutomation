@@ -26,8 +26,8 @@ public class UpdatePostalAddressPage extends DriverPage{
 	public void postalAdd(String postal_Address)
 	{
 		driver.findElement(postalAdd).clear();
+		driver.findElement(postalAdd).clear();
 		driver.findElement(postalAdd).sendKeys(postal_Address);
-		//addresslist();
 	}
 	
 	By doneBtn = By.xpath("//*[@resourceid='DoneStep']");
@@ -50,6 +50,14 @@ public class UpdatePostalAddressPage extends DriverPage{
 		fluentWait(doneBtn);
 		doneBtn();
 		return new UpdateLicenceDetailsPage(driver);
+	}
+	
+	public boolean verifyPostalpdateLicTitle()
+	{
+		By postalAddUpdate = By.xpath("//*[@contentDesc='UPDATE POSTAL ADDRESS']");
+		fluentWait(postalAddUpdate);
+		return driver.findElement(postalAddUpdate).isDisplayed();
+		
 	}
 	
 	}

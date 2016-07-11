@@ -53,7 +53,7 @@ public class DriverPage {
 	
 		public WebElement fluentWait(final By element)
 		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(90, TimeUnit.SECONDS)
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(120, TimeUnit.SECONDS)
 																			.pollingEvery(2, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
@@ -90,8 +90,7 @@ public class DriverPage {
 		
 		try{
 			txtPres = driver.findElement(By.xpath("//*[contains(@contentDesc,'" + text + "')]")).isDisplayed();
-		
-		}
+					}
 		
 		catch(Exception e){
 			txtPres= false;

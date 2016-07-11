@@ -25,4 +25,12 @@ public class ReviewDetailsRenewalLicencePage extends DriverPage{
 		nextBtn();
 		return new DeclarationRenewalLicencePage(driver);
 	}
+	
+	public boolean verifyReviewDetailsPgExist()
+	{
+		By reviewDetailsPg = By.xpath("//*[@contentDesc='REVIEW DETAILS']");
+		fluentWait(reviewDetailsPg);
+		return driver.findElement(reviewDetailsPg).isDisplayed();
+	}
+	
 }

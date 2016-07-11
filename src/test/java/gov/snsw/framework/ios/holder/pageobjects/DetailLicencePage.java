@@ -16,10 +16,10 @@ public class DetailLicencePage extends DriverPage{
 	By Licshare = By.xpath("//*[@label='SHOW CODE']");
 	
 	//Manage Button
-	By LicManage = By.xpath("//*[@label='Manage' and @class='UIAButton']");
+	By LicManage = By.xpath("//*[@label='Manage']");
 	
 	//Back Button
-	By LicBackBtn = By.xpath("//*[@label='Manage' and @class='UIAButton']/../button[1]");
+	By LicBackBtn = By.xpath("//*[@label='Manage']/../button[1]");
 		
 	public String getLicName()
 	{
@@ -45,6 +45,7 @@ public class DetailLicencePage extends DriverPage{
 	public String getLicExpireDate()
 	{
 		By licExpireDate = By.xpath("//*[@label='Expiry Date']/../text[2]");
+		fluentWait(licExpireDate);
 		String LicenceExpireDate = driver.findElement(licExpireDate).getText();
 		return LicenceExpireDate;
 	}	
@@ -86,6 +87,14 @@ public class DetailLicencePage extends DriverPage{
 		manageBtn();
 		return new ManageLicencePage(driver);
 		
+	}
+	
+	public String verifyDetailLicTitle()
+	{
+		By myDetailslicTitle = By.xpath("//*[@label='NSW Recreational Fishing Fee']");
+		fluentWait(myDetailslicTitle);
+		String myLicDetailPgTitle = driver.findElement(myDetailslicTitle).getText();
+		return myLicDetailPgTitle;
 	}
 	
 	

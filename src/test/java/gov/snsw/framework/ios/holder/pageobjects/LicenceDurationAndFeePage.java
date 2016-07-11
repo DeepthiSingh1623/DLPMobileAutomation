@@ -34,6 +34,7 @@ public class LicenceDurationAndFeePage extends DriverPage {
 	{
 		fluentWait(oneYear);
 		oneYear();
+		fluentWait(nextBtn);
 		nextBtn();
 		return new ReviewDetailsRenewalLicencePage(driver);
 	}

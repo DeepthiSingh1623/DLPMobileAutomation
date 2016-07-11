@@ -34,7 +34,7 @@ public class UpdateLicDetailsPage extends DriverPage{
 	public String verifyUpdateLicTitle()
 	{
 		//Title
-		By updateLicTitle = By.xpath("//*[@label='UPDATE CONTACT DETAILS']");
+		By updateLicTitle = By.xpath("//*[@label='POSTAL ADDRESS']");
 		fluentWait(updateLicTitle);
 		String PgTitle = driver.findElement(updateLicTitle).getText();
 		return PgTitle;
@@ -60,6 +60,8 @@ public class UpdateLicDetailsPage extends DriverPage{
 		String changedAddress = driver.findElement(addressField).getText();
 		return changedAddress;
 	}
+	
+	
 
 	
 }

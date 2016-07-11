@@ -2,11 +2,10 @@ package gov.snsw.framework.testng;
 
 import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.assertEquals;
+
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -56,63 +55,74 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+		 			//Click on the Start button on introduction page
+			 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInPage signIn = tcPg.pressAgreeBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.pressSignIn(username,password);
+			 		 		
+			 		//Verify Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enterPin();
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enterPin();
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPinPage(driver);
+			 			
+			 			//Verify Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+				 		
+			 			//Enter 4 digit PIN
+			 			enterPIN.enterPINUnlock();
+			 		}
+			 				 		
+			 		
+			 		MyLicencesPage LicPg = new MyLicencesPage(driver);
+			 		
+			 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+			 		{
+			 			LicPg.selectNo();
+			 		}
+			 		
+			 		
+			 	//Verify My Licence Page is displayed
+			 	assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInPage signIn = tcPg.pressAgreeBtn();
-		 		
-		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.pressSignIn(username,password);
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enterPin();
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enterPin();
-		 		}
-		 		
-		 		else
-		 		{
-		 			enterPIN = new EnterPinPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enterPINUnlock();
-		 		}
-		 		
-		 		
-		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
-		 		
-		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
-		 		{
-		 			LicPg.selectNo();
-		 		}
-		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		
-		 		//Click Licence Number
+			 	//Click Licence Number
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//verify the Detailed Lic Page 
-		 		assertTrue(detailLicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		
+		 		assertTrue(detailLicPg.verifyDetailLicTitle().contains(licence_Name));
+
 		 		//Click Manage Button
 		 		ManageLicencePage manageLicPg = detailLicPg.clickManageBtn();
+		 		
+		 		//Verify Manage Page id displayed
+		 		assertTrue(manageLicPg.verifyManagePgTitle().contains("Manage"));
 		 		
 		 		//click Update your details
 		 		UpdateLicDetailsPage updateLicPg = manageLicPg.clickUpdateLicBtn();
 		 		
-		 		//Verify the UPDATE CONTACT DETAILS page is loaded
-		 		//assertEquals("UPDATE CONTACT DETAILS",updateLicPg.verifyUpdateLicTitle());
-		 		//assertTrue(updateLicPg.isTextPresentOnScreen("UPDATE CONTACT DETAILS"));
+		 		//Verify Page is redirected to SNSW WebSite
+		 		assertTrue(updateLicPg.verifyUpdateLicTitle().contains("POSTAL ADDRESS"));
 		 		
 		 		// Click Address change Edit Button
 		 		UpdatePostalAddressPage updatePostalPg = updateLicPg.clickeditPostalBtn();
 		 		
 		 		//Verify the postal address changes Page Title is displayed		 		
-		 		//assertTrue(updateLicPg.isTextPresentOnScreen("UPDATE CONTACT DETAILS"));
+		 		assertTrue(updatePostalPg.verifyPostalAddressTitle().contains("Australia"));
 		 				 	
 		 		//Change Address
 		 		updatePostalPg.addressField(postal_Address);
@@ -123,52 +133,43 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		//click the Done Button
 		 		updateLicPg = updatePostalPg.clickDoneBtn();
 		 		
-		 		//Verify the changed address is Updated Address is displayed
-		 		//String ActualAddress = updateLicPg.verifyChangedAddress();
-		 		//String ExpectedAddress = postal_Address;
-		 	//	System.out.println("The Actual Address is: "+ActualAddress);
-		 	//	System.out.println("The Expected Address is: "+ExpectedAddress);
-		 	//	assertTrue(ExpectedAddress.equalsIgnoreCase(ActualAddress));		 		
-		 		
+		 		//Verify Page is redirected to SNSW WebSite
+		 		assertTrue(updateLicPg.verifyUpdateLicTitle().contains("POSTAL ADDRESS"));
 		 		
 		 		//click Save Changes
 		 		SuccessfullLicDetailsUpdatePage successPg = updateLicPg.clickSaveBtn();
 		 		
 		 		//Verify Success Message is displayed
-		 		assertEquals("Your contact details have been updated successfully.",successPg.verifySuccessMsg());
-		 		
+		 		assertTrue(successPg.verifySuccessMsg().contains("Your contact details have been updated successfully."));
+		 				 		
 		 		//Click Done Button on the Success Page
 		 		manageLicPg = successPg.clickDoneBtn();
 		 		
-		 		//Verify the Update your Details Page is displayed
-		 		//manageLicPg.verifyUpdateYourDetailsPage();
+		 		//Verify the Manage Page is displayed
+		 		assertTrue(manageLicPg.verifyManagePgTitle().contains("Manage"));
 		 		
 		 		//Click Cancel Button on the Manage Page
 		 		detailLicPg = manageLicPg.clickCancelBtn();
 		 		
+		 		assertTrue(detailLicPg.verifyDetailLicTitle().contains(licence_Name));
+		 		
 		 		//Click Back Button on the Detailed Lic Page
 		 		LicPg = detailLicPg.clickBackBtn();		
 		 		
-		 		//Map<String, Object> params10 = new HashMap<String, Object>();
-		 		//params10.put("location", "37,92");
-		 		//Object result10 = driver.executeScript("mobile:touch:tap", params10);
-		 				
 		 		//Verify My Licence Page is displayed
-		 		//assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 				 		
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
 		 		//Verify Settings Page is displayed
-		 		settingPg.verifySettingsPageTitile();
+		 		assertTrue(settingPg.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//Click SignOut
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertEquals("Add",AddInPg.verifyAddPageTitle());
-		 		
-		 	
+		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
 		 		
 		 	}
 	 	catch(Exception e){

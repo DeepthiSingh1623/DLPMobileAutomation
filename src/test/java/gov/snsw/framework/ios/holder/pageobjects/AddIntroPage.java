@@ -31,6 +31,7 @@ public class AddIntroPage extends DriverPage{
 	public String verifyAddPageTitle()
 	{	
 	By AddPage = By.xpath("//*[@label='Add']");
+	fluentWait(AddPage);
 	String AddTitle = driver.findElement(AddPage).getText();
 	return AddTitle;
 	}

@@ -106,8 +106,23 @@ public class UpdateLicenceDetailsPage extends DriverPage{
 		return new SuccessfulLicDetailsUpdatePage(driver);
 	}
 	
+	public boolean verifyUpdateLicTitle()
+	{
+		By postalAdd = By.xpath("//*[@contentDesc='REVIEW AND UPDATE']");
+		fluentWait(postalAdd);
+		return driver.findElement(postalAdd).isDisplayed();
+		
+	}
+	
+	public String verifyAddressEnterTitle()
+	{
+		By postalAdd = By.xpath("//*[@contentDesc='Australia']");
+		fluentWait(postalAdd);
+		String postalAddTitle = driver.findElement(postalAdd).getText();
+		return postalAddTitle;
+	}
 	
 	
-	
+		
 	
 }

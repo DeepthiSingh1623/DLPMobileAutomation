@@ -2,10 +2,6 @@ package gov.snsw.framework.android.holder.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.utils.DriverPage;
 
 public class EnterPINPage extends DriverPage{
@@ -32,6 +28,7 @@ public class EnterPINPage extends DriverPage{
 		String pinPgExist = driver.findElement(enterPinExist).getText();
 		return pinPgExist;
 	}	
+	
 	
 	//Change PIN - New
 	public EnterPINPage enterNewPINOnChangePIN(String pin)
@@ -64,5 +61,43 @@ public class EnterPINPage extends DriverPage{
 		return new MyLicencePage(driver);
 	}
 	
+	public String verifyPinEnterTitle()
+	{
+		By pinTitle = By.xpath("//*[text()='myLicences']");
+		fluentWait(pinTitle);
+		String pinEnterTitle = driver.findElement(pinTitle).getText();
+		return pinEnterTitle;
+	}
+	
+	//Enter CONFIRM PIN 
+		public String verifyPinConfirmTitle()
+		{
+			By pinConfirmTitle = By.xpath("//*[text()='Confirm PIN']");
+			fluentWait(pinConfirmTitle);
+			String ConfirmpinEnterTitle = driver.findElement(pinConfirmTitle).getText();
+			return ConfirmpinEnterTitle;
+		}
+	
+		//Unlock PIN Title
+		public String verifyUnlockPINTitle()
+		{
+			By unlockTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_title']");
+			fluentWait(unlockTitle);
+			String unlockPINTitle = driver.findElement(unlockTitle).getText();
+			return unlockPINTitle;
+		}
+		
+		//Unlock Error PIN
+				public String verifyErrorINTitle()
+				{
+					By ErrorTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_error']");
+					fluentWait(ErrorTitle);
+					String unlockPINTitle = driver.findElement(ErrorTitle).getText();
+					return unlockPINTitle;
+				}
+		
+		//*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/pin_error"]
+		
+		
 
 }

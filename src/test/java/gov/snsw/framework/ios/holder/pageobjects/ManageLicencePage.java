@@ -25,6 +25,8 @@ public class ManageLicencePage extends DriverPage{
 	
 	By cancelBtn = By.xpath("//*[@label='Cancel']");
 	
+	
+	
 	public void updateLicBtn()
 	{
 		driver.findElement(updateLic).click();
@@ -74,4 +76,15 @@ public class ManageLicencePage extends DriverPage{
 		return new RenewLicencePage(driver);
 		
 	}
+	
+	public String verifyManagePgTitle()
+	{
+		//Manage ButtonPage Title
+		By LicManage = By.xpath("//*[@label ='Manage']");
+		fluentWait(LicManage);
+		String ManageTitle = driver.findElement(LicManage).getText();
+		return ManageTitle;
+		
+	}
+	
 }

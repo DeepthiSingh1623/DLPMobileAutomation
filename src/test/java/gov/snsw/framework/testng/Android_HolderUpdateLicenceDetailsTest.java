@@ -1,5 +1,6 @@
 package gov.snsw.framework.testng;
 
+
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -51,81 +52,120 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 		if(AddInPg.isStartBtnExist())
 	 		{		 			
 	 		
-	 		//Click on the Start button on introduction page
-	 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+	 			//Click on the Start button on introduction page
+		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 		
+		 		//Click Accept Button on the Terms and Condition Page
+		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 		
+		 		//Enter the login details in the Sign In Page
+		 		signIn.signInNswAcct(username,password);
+		 		
+		 		//Verifying Show Password Exist
+		 		assertTrue(signIn.verifyShowPwd());
+		 		
+		 		//Keyboard Remove
+		 		Utilities.BackBtn(driver);
+		 		
+		 		//click Sign In Button
+		 		enterPIN = signIn.clickSignInBtn();
+		 		 		
+		 		//Verify the Enter PIN is displayed
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+		 		
+		 		//Enter 4 digit PIN
+		 		enterPIN.enter4DigitPin(pin);
+		 		
+		 		//Verify Confirm PIN is displayed
+		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
+		 		
+		 		//Enter 4 digit PIN confirmation
+		 		enterPIN.enter4DigitPin(pin);
+		 		}
+		 		
+		 		else
+		 		{
+		 			enterPIN = new EnterPINPage(driver);
+		 			
+		 			//Verify Unlock Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+		 			
+		 			//Enter 4 digit PIN
+		 			enterPIN.enter4DigitPin(pin);
+		 		}	 		
 	 		
-	 		//Click Accept Button on the Terms and Condition Page
-	 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 		MyLicencePage LicPg = new MyLicencePage(driver);
+		 		
+		 		//Verify My Licence Page is displayed.
+		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+		 				 		
+		 		//Verify My Licences Page is displayed
+		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 	 		
-	 		//Enter the login details in the Sign In Page
-	 		signIn.signInNswAcct(username,password);
 	 		
-	 		//Keyboard Remove
-	 		Utilities.BackBtn(driver);
+	 		//Click the Fishing Fee License 
+	 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 	 		
-	 		//click Sign In Button
-	 		enterPIN = signIn.clickSignInBtn();
-	 		 		
-	 		//Enter 4 digit PIN
-	 		enterPIN.enter4DigitPin(pin);
+	 		//Verify Detailed Licence Page is Displayed
+	 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));
 	 		
-	 		//Enter 4 digit PIN confirmation
-	 		enterPIN.enter4DigitPin(pin);
-	 		}
-	 		
-	 		else
-	 		{
-	 			enterPIN = new EnterPINPage(driver);
-	 			
-	 			//Enter 4 digit PIN
-	 			enterPIN.enter4DigitPin(pin);
-	 		}
-	 		
-	 		MyLicencePage LicPg = new MyLicencePage(driver);
-	 		
-	 		//Verify My Licence Page is displayed
-	 		assertEquals("Licences",LicPg.verifyMyLicTitle());
-	 		
-	 		//Click the License to view the detailed Licence	 						
-	 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);		 	
 	 		
 	 		//Click on the Manage License Button
 	 		ManageYourLicPage mngLic = detailLicPg.clickManageLicenceBtn();
 	 		
+	 		//Verify Manage Page is Displayed
+	 		assertTrue(mngLic.verifyManageLicPage().contains("Manage your licence"));
+	 		
 	 		//click on update your details
 	 		UpdateLicenceDetailsPage updateLicPg = mngLic.clickUpdateDetails();
+	 		
+	 		//Verify the page is redirected to SNSW Website
+	 		//assertTrue(updateLicPg.verifyUpdateLicTitle().contains("POSTAL ADDRESS"));
+	 		assertTrue(updateLicPg.verifyUpdateLicTitle());
 	 		
 	 		//click on Residential Address Change Edit Button
 	 		UpdatePostalAddressPage updateResAdd = updateLicPg.clickEditPostalAddressBtn();
 	 		
+	 		//Verify the Address Enter Page
+	 		//assertTrue(updateLicPg.verifyAddressEnterTitle().contains("Australia"));
+	 		assertTrue(updateResAdd.verifyPostalpdateLicTitle());
+	 		
 	 		//Enter The New Res Address
 	 		updateResAdd.enterNewPostalAddress(postal_Address);
 	 		
-	 		Utilities.BackBtn(driver);
+	 		//Utilities.BackBtn(driver);
 	 		
-	 		updateResAdd.pressDoneBtn();
+	 		updateResAdd.pressDoneBtn(); 		
+	 		
+	 		
+	 		//Verify the page is redirected 
+	 		assertTrue(updateLicPg.verifyUpdateLicTitle());
 	 		
 	 		//Click Save Changes Button
 	 		SuccessfulLicDetailsUpdatePage LicUpdateSaveBtn = updateLicPg.clickUpdateLicDetailsSaveBtn();
 	 		
-	 		//Verify Success Message
-	 		//String resAddChngMsg = LicUpdateSaveBtn.verifyUpdateLicSucessPage();
-	 		//System.out.println("The Res Address Changed is "+resAddChngMsg);
-	 		//assertTrue(resAddChngMsg.contains("SUCCESSFUL"));
-	 		
 	 		//Click Back button on the success Page
 	 		mngLic=LicUpdateSaveBtn.clickBackBtnSucessLicDetail();
+	 		
+	 		assertTrue(mngLic.verifyManageLicPage().contains("Manage your licence"));
 	 	
 	 		//Click Back button on the Manage your Licence Page
 	 		detailLicPg = mngLic.clickbackBtn();
 	 		
-	 		//Click Back Button on the Detailed Licence Page'
-	 		//LicPg = detailLicPg.pressBackBtn();
+	 		//Verify Detailed Licence Page is Displayed
+	 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));
 	 		
+	 		//Click Back Button on the Detailed Licence Page'
 	 		Utilities.BackBtn(driver);
+	 		
+	 		//Verify My Licence Page is displayed.
+	 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 	 		
 		   // Click on the Settings and Sign out
 		   LicPg.settings();
+		   
+		 //Verify Add Intro Page is displayed
+		   assertTrue(AddInPg.verifyAddPg().contains("Add"));
 		 		
 		}
 	 	catch(Exception e){

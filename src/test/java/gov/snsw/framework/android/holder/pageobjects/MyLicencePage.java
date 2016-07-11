@@ -119,7 +119,8 @@ public class MyLicencePage extends DriverPage{
 	public String verifyMyLicTitle()
 	{
 		By licTitile = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
-		String licPgTitile = driver.findElement(licTitile).getText();
+		
+        String licPgTitile = driver.findElement(licTitile).getText();
 		return licPgTitile;
 	}
 	

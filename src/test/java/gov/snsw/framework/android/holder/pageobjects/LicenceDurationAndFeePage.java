@@ -36,5 +36,11 @@ public class LicenceDurationAndFeePage extends DriverPage
 		return new ReviewDetailsRenewalLicencePage(driver);
 	}
 	
+	public boolean verifyDurationFeePgExist()
+	{
+		By drurationFeePg = By.xpath("//*[@contentDesc='DURATION & FEES']");
+		fluentWait(drurationFeePg);
+		return driver.findElement(drurationFeePg).isDisplayed();
+	}
 	
 }

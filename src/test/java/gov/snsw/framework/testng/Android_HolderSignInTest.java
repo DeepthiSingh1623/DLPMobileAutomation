@@ -1,6 +1,6 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
@@ -61,15 +61,20 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		//Verifying Show Password Exist
 		 		assertTrue(signIn.verifyShowPwd());
 		 		
-		 				 		
 		 		//Keyboard Remove
 		 		Utilities.BackBtn(driver);
 		 		
 		 		//click Sign In Button
 		 		enterPIN = signIn.clickSignInBtn();
 		 		 		
+		 		//Verify the Enter PIN is displayed
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+		 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
+		 		
+		 		//Verify Confirm PIN is displayed
+		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
 		 		
 		 		//Enter 4 digit PIN confirmation
 		 		enterPIN.enter4DigitPin(pin);
@@ -79,47 +84,44 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		{
 		 			enterPIN = new EnterPINPage(driver);
 		 			
+		 			//Verify Unlock Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+		 			
 		 			//Enter 4 digit PIN
 		 			enterPIN.enter4DigitPin(pin);
-		 		}
-		 		
-		 		
+		 		}	 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
-		 		
+		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+		 				 		
 		 		//Verify My Licences Page is displayed
-		 		LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee");
+		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
 		 		//close app
-		 		//Utilities.closeApp(driver,appName);
 		 		Map<String, Object> params1 = new HashMap<String, Object>();
 		 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 		 		Object result1 = driver.executeScript("mobile:application:close", params1);
 		 		
 		 		//Open App
-		 		//Utilities.openApp(driver,appName);
 		 		Map<String, Object> params2 = new HashMap<String, Object>();
 		 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 		 		Object result2 = driver.executeScript("mobile:application:open", params2);
 		 		
-		 		
-		 		
-		 		//Verify the Re-Enter PIN Page is displayed
-		 		enterPIN.isTextPresentOnScreen("Enter PIN");
-		 		//String pinPg = enterPIN.enterPINPgExist();
-		 		//System.out.println("The re-enter PIN text is "+pinPg);
-		 		//assertTrue(pinPg.contains("Enter PIN"));
-		 		
-		 		//Re-enter 4 digit PIN Number
+		 		//Verify Unlock Enter Pin is displayed
+		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+	 			
+	 			//Re-enter 4 digit PIN Number
 		 		enterPIN.enter4DigitPin(pin);
 		 				 		
-		 		//Verify PinPage is displayed
-		 		LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee");
+		 		//Verify My Licences Page is displayed
+		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
+		 		
+		 		//Verify Add Intro Page is displayed
+		 		assertTrue(AddInPg.verifyAddPg().contains("Add"));
 		 		
 		 		
 		}

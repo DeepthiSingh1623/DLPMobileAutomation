@@ -4,8 +4,8 @@ import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -59,55 +59,68 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+		 			//Click on the Start button on introduction page
+			 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInPage signIn = tcPg.pressAgreeBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.pressSignIn(username,password);
+			 		 		
+			 		//Verify Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enterPin();
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enterPin();
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPinPage(driver);
+			 			
+			 			//Verify Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+				 		
+			 			//Enter 4 digit PIN
+			 			enterPIN.enterPINUnlock();
+			 		}
+			 				 		
+			 		
+			 		MyLicencesPage LicPg = new MyLicencesPage(driver);
+			 		
+			 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+			 		{
+			 			LicPg.selectNo();
+			 		}
+			 		
+			 		
+			 	//Verify My Licence Page is displayed
+			 	assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInPage signIn = tcPg.pressAgreeBtn();
-		 		
-		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.pressSignIn(username,password);
-		 		
-		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enterPin();
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enterPin();
-		 		}
-		 		else
-		 		{
-		 			enterPIN = new EnterPinPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enterPINUnlock();
-		 		}
-		 				 		
-		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
-		 		
-		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
-		 		{
-		 			LicPg.selectNo();
-		 		} 
-		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		//assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		
-		 		//Click Licence Number
+			 	//Click Licence Number
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//verify the Detailed Lic Page 
-		 		//assertTrue(detailLicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		//assertEquals("Recreational Fishing Fee",licence_Name);
-		 		
+		 		assertTrue(detailLicPg.verifyDetailLicTitle().contains(licence_Name));
+
 		 		//Click Manage Button
 		 		ManageLicencePage manageLicPg = detailLicPg.clickManageBtn();
 		 		
+		 		//Verify Manage Page id displayed
+		 		assertTrue(manageLicPg.verifyManagePgTitle().contains("Manage"));
+
 		 		//click Update your details
 		 		RenewLicencePage renewLicPg  = manageLicPg.clickRenewLic();
 		 		
+		 		//Verify the the Page is redirected to Renewal SNSW WebSite
+		 		assertTrue(renewLicPg.verifyRenewalLicTitle().contains("LICENCE NUMBER"));
 		 		
 		 		//verify lic number
 		 		//assertTrue(renewLicPg.isTextPresentOnScreen(licence_Number));
@@ -124,20 +137,32 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 		 	    //Click Next Button on the Licensee Details 
 		 		LicenceDurationAndFeePage durationFeePg = renewLicPg.nextButton();
 		 		
+		 		//Verify Duration and Fee Page is displayed
+		 		assertTrue(renewLicPg.verifyRenewalDurationFeeLicTitle().contentEquals("Total Amount Due"));
+		 		
 		 		//Click 1year or 3years and Next Button
 		 		ReviewDetailsRenewalLicencePage reviewLicPg = durationFeePg.nextButton();
+		 		
+		 		//Verify the Review Details Page is displayed
+		 		assertTrue(renewLicPg.verifyRenewalReviewDetailsTitle().contains("LICENSEE"));
 		 		
 		 		//Click Next Button
 		 		DeclarationRenewalLicencePage declarionPg = reviewLicPg.nextButton();
 		 		
+		 		//Verify the Declaration Page is displayed
+		 		assertTrue(renewLicPg.verifyRenewalDeclartionTitle().contains("I Agree"));
+		 		
 		 		//Click Agree and Next
 		 		LicRenewPaymentPage LicRenewPg = declarionPg.pressNextButton();
+		 		
+		 		//Verify the Payments Page is displayed
+		 		assertTrue(renewLicPg.verifyPaymentTitle().contains("Total Due"));
 		 		
 		 		//Enter Payment Details
 		 		LicRenewPg.enterPaymentDetails(cardNumber, cardCVVNum, cardName, cardExpiryMonth, cardExpiryYear);
 		 		
 		 		//verify Successful message
-		 		//assertTrue(LicRenewPg.isTextPresentOnScreen("SUCCESSFUL"));
+		 		assertTrue(LicRenewPg.isTextPresentOnScreen("SUCCESSFUL"));
 		 		
 		 		LicRenewPg.clickDoneOnSuccessPg();
 		 		

@@ -1,11 +1,10 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -49,78 +48,84 @@ public class IOS_HolderShareLicence extends BasicTest
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+		 			//Click on the Start button on introduction page
+			 		TermsAndCondPage tcPg = AddInPg.pressStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInPage signIn = tcPg.pressAgreeBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		enterPIN = signIn.pressSignIn(username,password);
+			 		 		
+			 		//Verify Enter Pin is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enterPin();
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enterPin();
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPinPage(driver);
+			 			
+			 			//Verify Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+				 		
+			 			//Enter 4 digit PIN
+			 			enterPIN.enterPINUnlock();
+			 		}
+			 				 		
+			 		
+			 		MyLicencesPage LicPg = new MyLicencesPage(driver);
+			 		
+			 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+			 		{
+			 			LicPg.selectNo();
+			 		}
+			 		
+			 		
+			 	//Verify My Licence Page is displayed
+			 	assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInPage signIn = tcPg.pressAgreeBtn();
-		 		
-		 		//Enter the login details in the Sign In Page
-		 		enterPIN = signIn.pressSignIn(username,password);
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enterPin();
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enterPin();
-		 		}
-		 		
-		 		else
-		 		{
-		 			enterPIN = new EnterPinPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enterPINUnlock();
-		 		}
-		 				 		
-		 		MyLicencesPage LicPg = new MyLicencesPage(driver);
-		 		
-		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
-		 		{
-		 			LicPg.selectNo();
-		 		} 
-		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		//assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		
-		 		//Click Licence Number
+			 	//Click Licence Number
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//verify the Detailed Lic Page 
-		 		assertEquals("NSW Recreational Fishing Fee",licence_Name);
+		 		assertTrue(detailLicPg.verifyDetailLicTitle().contains(licence_Name));
 		 		
 		 		//Click Verify Button
 		 		ShareLicencePage shareLicPg = detailLicPg.clickVerifyBtn();
 		 		
 		 		//Verify the Page Load & Verify the Licence Number and Licence Name id displayed
-		 		//assertEquals(lic_OwnerName,shareLicPg.getLicName());
-		 		//assertTrue(shareLicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));
-		 		//assertTrue(shareLicPg.isTextPresentOnScreen(licence_Number));
+		 		assertTrue(shareLicPg.verifyLicName().contains(licence_Name));
+		 		assertTrue(shareLicPg.isTextPresentOnScreen("Licence No. "+licence_Number));
 		 		
+		 		//Click Done Button on the Licence Share Page
 		 		detailLicPg = shareLicPg.clickDoneBtn();
 		 		
 		 		//Click Back Button on the Licence Details Page
 		 		LicPg = detailLicPg.clickBackBtn();	
 		 		
-		 		//Map<String, Object> params10 = new HashMap<String, Object>();
-		 		//params10.put("location", "37,92");
-		 		//Object result10 = driver.executeScript("mobile:touch:tap", params10);	
-		 		
 		 		//Verify My Licence Page is displayed
-		 		assertEquals(licence_Name,LicPg.myLicPgTitle());
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 				 		
 		 		//Click on the Settings and then sign out
-		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
+		 		SettingsPage settingsPage = LicPg.clickSettingsBtn();
 		 		
 		 		//Verify Settings Page is displayed
-		 		settingPg.verifySettingsPageTitile();
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//Click SignOut
-		 		AddInPg = settingPg.pressSigoutButton();
+		 		AddInPg = settingsPage.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
 		 		
 		 	
 		 		

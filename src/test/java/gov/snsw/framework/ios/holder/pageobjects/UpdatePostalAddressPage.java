@@ -12,8 +12,8 @@ public class UpdatePostalAddressPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	
-	By doneBtn = By.xpath("//*[@class='DOMUIAButton']");
-	
+	//By doneBtn = By.xpath("//*[@class='DOMUIAButton']");
+	By doneBtn = By.xpath("//*[text()='International']/../button");
 	//Address 
 	By Address = By.xpath("//*[@class='DOMUIAButton']/../textfield");
 	
@@ -39,7 +39,8 @@ public class UpdatePostalAddressPage extends DriverPage{
 	public String verifyPostalAddressTitle()
 	{
 		//Title
-		By pgTitle = By.xpath("//*[@label='UPDATE CONTACT DETAILS']");
+		By pgTitle = By.xpath("//*[@label='Australia']");
+		fluentWait(pgTitle);
 		String LicPgTitle = driver.findElement(pgTitle).getText();
 		return LicPgTitle;
 	}

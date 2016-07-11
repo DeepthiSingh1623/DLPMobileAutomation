@@ -12,7 +12,7 @@ public class DeclarationRenewalLicencePage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	
-	//*[@contentDesc="DECLARATION"]
+	
 
 	By agreeBtn = By.xpath("//*[@contentDesc='']");
 
@@ -37,5 +37,12 @@ public class DeclarationRenewalLicencePage extends DriverPage{
 		nextBtn();
 		return new PaymentLicenceRenewalPage(driver);
 		
+	}
+	
+	public boolean verifyDeclarationPgExist()
+	{
+		By declarationPg = By.xpath("//*[@contentDesc='DECLARATION']");
+		fluentWait(declarationPg);
+		return driver.findElement(declarationPg).isDisplayed();
 	}
 }

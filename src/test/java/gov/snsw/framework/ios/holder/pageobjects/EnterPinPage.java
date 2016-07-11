@@ -41,6 +41,7 @@ public class EnterPinPage extends DriverPage{
 	public String verifyPinConfirmTitle()
 	{
 		By pinConfirmTitle = By.xpath("//*[@label='Confirm pin']");
+		fluentWait(pinConfirmTitle);
 		String ConfirmpinEnterTitle = driver.findElement(pinConfirmTitle).getText();
 		return ConfirmpinEnterTitle;
 	}
@@ -49,6 +50,7 @@ public class EnterPinPage extends DriverPage{
 	public String verifyUnlockPINTitle()
 	{
 		By unlockTitle = By.xpath("//*[@label='Unlock with pin']");
+		fluentWait(unlockTitle);
 		String unlockPINTitle = driver.findElement(unlockTitle).getText();
 		return unlockPINTitle;
 	}
@@ -103,8 +105,23 @@ public class EnterPinPage extends DriverPage{
 		driver.findElement(unlockPin4).sendKeys("2");
 	}
 	
+	//enter Old Pin Page title
+	public String verifyOldPinTitle()
+	{
+		By enterOldPin= By.xpath("//*[text()='Enter old pin']");
+		fluentWait(enterOldPin);
+		String enterOldPIN = driver.findElement(enterOldPin).getText();
+		return enterOldPIN;
+	}
 	
-	
+	//Enter New Pin Page Title
+	public String verifyNewPinTitle()
+	{
+		By enterNewPin = By.xpath("//*[text()='Enter new pin']");
+		fluentWait(enterNewPin);
+		String enterNewPIN = driver.findElement(enterNewPin).getText();
+		return enterNewPIN;
+	}
 	
 	
 	

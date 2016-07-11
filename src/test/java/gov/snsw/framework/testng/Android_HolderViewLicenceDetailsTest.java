@@ -48,41 +48,56 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
-		 		//Click on the Start button on introduction page
-		 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			//Click on the Start button on introduction page
+			 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+			 		
+			 		//Click Accept Button on the Terms and Condition Page
+			 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		
+			 		//Enter the login details in the Sign In Page
+			 		signIn.signInNswAcct(username,password);
+			 		
+			 		//Verifying Show Password Exist
+			 		assertTrue(signIn.verifyShowPwd());
+			 		
+			 		//Keyboard Remove
+			 		Utilities.BackBtn(driver);
+			 		
+			 		//click Sign In Button
+			 		enterPIN = signIn.clickSignInBtn();
+			 		 		
+			 		//Verify the Enter PIN is displayed
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+			 		
+			 		//Enter 4 digit PIN
+			 		enterPIN.enter4DigitPin(pin);
+			 		
+			 		//Verify Confirm PIN is displayed
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
+			 		
+			 		//Enter 4 digit PIN confirmation
+			 		enterPIN.enter4DigitPin(pin);
+			 		}
+			 		
+			 		else
+			 		{
+			 			enterPIN = new EnterPINPage(driver);
+			 			
+			 			//Verify Unlock Enter Pin is displayed
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
+			 			
+			 			//Enter 4 digit PIN
+			 			enterPIN.enter4DigitPin(pin);
+			 		}	 		
 		 		
-		 		//Click Accept Button on the Terms and Condition Page
-		 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+			 		MyLicencePage LicPg = new MyLicencePage(driver);
+			 		
+			 		//Verify My Licence Page is displayed
+			 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+			 				 		
+			 		//Verify My Licences Page is displayed
+			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
-		 		//Enter the login details in the Sign In Page
-		 		signIn.signInNswAcct(username,password);
-		 		
-		 		//Keyboard Remove
-		 		Utilities.BackBtn(driver);
-		 		
-		 		//click Sign In Button
-		 		enterPIN = signIn.clickSignInBtn();
-		 		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enter4DigitPin(pin);
-		 		
-		 		//Enter 4 digit PIN confirmation
-		 		enterPIN.enter4DigitPin(pin);
-		 		}
-		 		
-		 		else
-		 		{
-		 			enterPIN = new EnterPINPage(driver);
-		 			
-		 			//Enter 4 digit PIN
-		 			enterPIN.enter4DigitPin(pin);
-		 		}
-		 		
-		 		
-		 		MyLicencePage LicPg = new MyLicencePage(driver);
-		 		
-		 		//Verify My Licence Page is displayed
-		 		assertEquals("Licences",LicPg.verifyMyLicTitle());
 		 		
 		 		//Click the Fishing Fee License 
 		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
@@ -109,10 +124,15 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		
 		 		//click Back button to go to my license page
 		 		Utilities.BackBtn(driver);
-		 		//LicPg = detailLicPg.pressBackBtn();
 		 		
+		 		//Verify My Licence Page is displayed
+		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+		 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
+		 		
+		 		//Verify Add Intro Page is displayed
+		 		assertTrue(AddInPg.verifyAddPg().contains("Add"));
 		 		
 		 	
 		 		
@@ -125,10 +145,19 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 	 	}
 	 	finally{
 	 		
-	 		Utilities.cleanApp(driver, appName);
-	 		Utilities.closeApp(driver, appName);
+	 		//Clean App
+	 		//Utilities.cleanApp(driver, appName);
+	 		Map<String, Object> params1 = new HashMap<String, Object>();
+	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
 	 		
-	 		driver.close();
+	 		
+	 		
+	 		//close app
+	 		//Utilities.closeApp(driver, appName);
+	 		Map<String, Object> params2 = new HashMap<String, Object>();
+	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		Object result2 = driver.executeScript("mobile:application:close", params2);
 	 	}
 		
         if(testFail){
