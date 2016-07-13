@@ -33,7 +33,7 @@ public class LicRenewPaymentPage extends DriverPage{
 	By keyboardDoneBtn = By.xpath("//device/view/window[2]/toolbar[1]/image[1]/../button[3]");
 
 	//DoneButton
-		By doneBtn1 = By.xpath("//*[text()='Done']");
+		By doneBtn1 = By.xpath("//*[@label='Done']");
 	
 	//Submit
 	By submitBtn = By.xpath("//*[@label='Submit']");
@@ -123,6 +123,14 @@ public class LicRenewPaymentPage extends DriverPage{
 		fluentWait(doneBtn1);
 		driver.findElement(doneBtn1).click();
 	}
+	
+	public boolean verifySuccessMsg()
+	{
+		By successMsg = By.xpath("//*[@label='SUCCESSFUL']");
+		 return driver.findElement(successMsg).isDisplayed();
+	}
+	
+	
 	
 	
 	

@@ -20,7 +20,7 @@
     
   </test-->
   
-    <test name="IOS Holder App Tests">
+    <!-- test name="IOS Holder App Tests">
     <classes>
       
       <class name="gov.snsw.framework.testng.IOS_HolderSignInTest"/>
@@ -28,21 +28,21 @@
       <class name="gov.snsw.framework.testng.IOS_HolderShareLicence"/>
       <class name="gov.snsw.framework.testng.IOS_HolderChangePinTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderUpdateLicenceTest"/>
-      <!-- class name="gov.snsw.framework.testng.IOS_HolderRenewLicenceTest"/-->
+      <class name="gov.snsw.framework.testng.IOS_HolderRenewLicenceTest"/>
       
      </classes>
-     </test>
+     </test-->
 
-     <!--test name="Android Holder App Tests">
+     <test name="Android Holder App Tests">
      <classes>
       <class name="gov.snsw.framework.testng.Android_HolderSignInTest"/>
       <class name="gov.snsw.framework.testng.Android_HolderViewLicenceDetailsTest"/>
        <class name="gov.snsw.framework.testng.Android_HolderChangePINTest"/>
       <class name="gov.snsw.framework.testng.Android_HolderLicenceShareTest"/>
       <class name="gov.snsw.framework.testng.Android_HolderUpdateLicenceDetailsTest"/>
-      <class name="gov.snsw.framework.testng.Android_HolderRenewLicenceTest"/>    
+      <!-- class name="gov.snsw.framework.testng.Android_HolderRenewLicenceTest"/-->    
      </classes>
-  	 </test--> <!-- Holder App Tests -->
+  	 </test> <!-- Holder App Tests -->
   	 
   	 
 </suite> <!-- Suite -->

@@ -121,7 +121,8 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		assertTrue(shareLicPg.verifyShareLicNum().contains(licence_Number));
 		 		
 		 		//Click Back Button on the QR Scan Page
-		 		shareLicPg.backBtn();
+		 		//shareLicPg.backBtn();
+		 		//Utilities.BackBtn(driver);		 		
 		 		
 		 		//Verify Detailed Licence Page is displayed
 		 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));

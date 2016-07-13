@@ -130,7 +130,7 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		assertTrue(renewLicPg.isContentPresentOnScreen(licence_Number));
 	 		
 	 		//Verify Lic Name
-	 		assertTrue(renewLicPg.isContentPresentOnScreen(lic_OwnerName));
+	 		//assertTrue(renewLicPg.isContentPresentOnScreen(lic_OwnerName));
 	 		
 	 		//verify LicenceType
 	 		assertTrue(renewLicPg.isContentPresentOnScreen("Recreational Fishing Fee"));
@@ -181,30 +181,29 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		params7.put("end", "787,479");
 	 		Object result7 = driver.executeScript("mobile:touch:swipe", params7);
 	 		
-	 		Utilities.BackBtn(driver);	
-	 		//payPg.submitBtn();
-	 		
+	 		//Utilities.BackBtn(driver);	
+	 			 		
 	 		//click back button on the Manage your License page
-	 		 mngLic.clickbackBtn();
+	 		// mngLic.clickbackBtn();
 	 		
 	 		//click the back button on the detailed License screen
-	 		Utilities.BackBtn(driver);	
+	 		//Utilities.BackBtn(driver);	
 	 		
 	 		//Scroll to settings page
-	 		Map<String, Object> params22 = new HashMap<String, Object>();
-	 		params22.put("start", "566,700");
-	 		params22.put("end", "552,1721");
-	 		params22.put("duration", "2");
-	 		Object result22 = driver.executeScript("mobile:touch:swipe", params22); 		
-	 		 		 		
+	 		 		
+	 		payPg.submitBtn();
+	 		
+	 		//verify Success Message
+	 		assertTrue(payPg.verifySuccessMessage());
+	 		
 	 		// Click on the Settings and Sign out
-		    LicPg.settings();
+		   // LicPg.settings();
 		        
 			 //Verify Add Intro Page is displayed
-			   assertTrue(AddInPg.verifyAddPg().contains("Add"));
+			  // assertTrue(AddInPg.verifyAddPg().contains("Add"));
 	 		
-	 	  //reportFail("expected", "actual","params");	
-		 		
+	 		//reportFail("expected", "actual","params");	
+	 		//reportPass("success", "param");	
 		  	 		
 	 	}
 	 	catch(Exception e){

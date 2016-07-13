@@ -81,6 +81,7 @@ public class MyLicencePage extends DriverPage{
 	public DetailLicencePage clickOnLicNumber(String licence_Number)
 	{
 		By licNo = By.xpath("//*[text()='"+licence_Number+"']");
+		fluentWait(licNo);
 		driver.findElement(licNo).click();
 		return new DetailLicencePage(driver);
 	}

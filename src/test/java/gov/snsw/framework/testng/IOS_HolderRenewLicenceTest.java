@@ -123,13 +123,13 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 		 		assertTrue(renewLicPg.verifyRenewalLicTitle().contains("LICENCE NUMBER"));
 		 		
 		 		//verify lic number
-		 		//assertTrue(renewLicPg.isTextPresentOnScreen(licence_Number));
+		 		assertTrue(renewLicPg.isTextPresentOnScreen(licence_Number));
 		 		
 		 		//Verify Lic Name
-		 		//assertTrue(renewLicPg.isTextPresentOnScreen(lic_OwnerName));
+		 		assertTrue(renewLicPg.isTextPresentOnScreen(lic_OwnerName));
 		 		
 		 		//verify LicenceType
-		 		//assertTrue(renewLicPg.isTextPresentOnScreen(licence_Name));
+		 		assertTrue(renewLicPg.isTextPresentOnScreen("Recreational Fishing Fee"));
 		 		
 		 		//Verify Expiry Date	 	 		
 		 		//assertEquals(Utilities.dateFormatChange(licence_ExpireDate),renewLicPg.expiryDate());
@@ -162,33 +162,36 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 		 		LicRenewPg.enterPaymentDetails(cardNumber, cardCVVNum, cardName, cardExpiryMonth, cardExpiryYear);
 		 		
 		 		//verify Successful message
-		 		assertTrue(LicRenewPg.isTextPresentOnScreen("SUCCESSFUL"));
+		 		assertTrue(LicRenewPg.verifySuccessMsg());
 		 		
-		 		LicRenewPg.clickDoneOnSuccessPg();
+		 		//click Done Button on the Success Page		 		
+		 		LicRenewPg.clickDoneOnSuccessPg();		 		
 		 		
 		 		//Click Cancel Button on the Manage Page
 		 		detailLicPg = manageLicPg.clickCancelBtn();
 		 		
+		 		assertTrue(detailLicPg.verifyDetailLicTitle().contains(licence_Name));
+		 		
 		 		//Click Back Button on the Detailed Lic Page
-		 		LicPg = detailLicPg.clickBackBtn();
+		 		LicPg = detailLicPg.clickBackBtn();		
 		 		
 		 		//Verify My Licence Page is displayed
-		 		//assertEquals(licence_Name,LicPg.myLicPgTitle());
-		 		assertTrue(LicPg.isTextPresentOnScreen("NSW Recreational Fishing Fee"));		 		
-		 	
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 		
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
 		 		//Verify Settings Page is displayed
-		 		settingPg.verifySettingsPageTitile();
-		 		
+		 		assertTrue(settingPg.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//Click SignOut
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertEquals("Add",AddInPg.verifyAddPageTitle());
+		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
 		 		
+		 		
+		 			 		
 		 	}
 	 	catch(Exception e){
 	 		

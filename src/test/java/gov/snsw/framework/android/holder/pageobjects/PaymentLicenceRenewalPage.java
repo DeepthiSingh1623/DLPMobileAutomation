@@ -78,6 +78,13 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 		return driver.findElement(paymentPg).isDisplayed();
 	}
 	
+	public boolean verifySuccessMessage()
+	{
+		By successPg = By.xpath("//*[@contentDesc='SUCCESSFUL']");
+		fluentWait(successPg);
+		return driver.findElement(successPg).isDisplayed();
+	}
+	
 	
 	
 }
