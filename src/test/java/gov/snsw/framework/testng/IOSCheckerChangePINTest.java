@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
+import gov.snsw.framework.ios.checker.pageobjects.AppUsageAgreementPage;
 import gov.snsw.framework.ios.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.ios.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.ios.checker.pageobjects.SignInNSWAcctPage;
@@ -42,7 +43,9 @@ public class IOSCheckerChangePINTest extends BasicTest{
 		 		
 		 		if(tcPg.isAgreeBtnExist()){
 		 			
-		 			SignInNSWAcctPage signIn = tcPg.pressAgreeBtn();
+		 			AppUsageAgreementPage appAgree = tcPg.pressAgreeBtn();
+		 			
+		 			SignInNSWAcctPage signIn = appAgree.pressAgreeBtn();
 			 		
 			 		//Enter the login details in the Sign In Page
 		 			enterPIN = signIn.pressSignIn(username,password);

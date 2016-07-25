@@ -17,6 +17,7 @@ import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
+import gov.snsw.framework.android.checker.pageobjects.AppUsageAgreementPage;
 import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
@@ -49,8 +50,9 @@ public class CheckerSignInTest extends BasicTest{
 		 			
 		 			
 		 			//Click Accept Button on the Terms and Condition Page
-		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
-			 		
+		 			AppUsageAgreementPage appAgree = tcPg.termsAndConditionAcceptBtn();
+		 			SignInNSWAcctPage signIn = appAgree.pressAcceptBtn();
+		 			
 			 		//Enter the login details in the Sign In Page
 			 		enterPIN = signIn.signInNswAcct(username,password);
 			 		 
@@ -68,7 +70,7 @@ public class CheckerSignInTest extends BasicTest{
 		 		}
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		
+		 		chkPg.fluentWait(chkPg.manualScan);
 		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
 		 		
 		 		Utilities.closeApp(driver, appName);
@@ -83,7 +85,8 @@ public class CheckerSignInTest extends BasicTest{
 		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());		 		
 		 		chkPg.signOut();
 		 		tcPg = new TermsAndConditionsPage(driver);
-		 		tcPg.fluentWait(By.xpath("//*[contains(text(),'Terms and Conditions')]"));
+		 		//tcPg.fluentWait(By.xpath("//*[contains(text(),'Terms and Conditions')]"));
+		 	
 		 		
 		}
 	 	catch(Exception e){

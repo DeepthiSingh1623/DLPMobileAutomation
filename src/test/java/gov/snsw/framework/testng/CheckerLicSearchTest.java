@@ -20,6 +20,7 @@ import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
+import gov.snsw.framework.android.checker.pageobjects.AppUsageAgreementPage;
 import gov.snsw.framework.android.checker.pageobjects.CheckerLicenceDetails;
 import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.checker.pageobjects.LicenceSearch;
@@ -57,7 +58,8 @@ public class CheckerLicSearchTest extends BasicTest{
 		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 			
 		 			//Click Accept Button on the Terms and Condition Page
-		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 			AppUsageAgreementPage appAgree = tcPg.termsAndConditionAcceptBtn();
+		 			SignInNSWAcctPage signIn = appAgree.pressAcceptBtn();
 			 		
 			 		//Enter the login details in the Sign In Page
 			 		enterPIN = signIn.signInNswAcct(username,password);
@@ -75,7 +77,9 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		}
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
+		 		
+		 		chkPg.fluentWait(chkPg.manualScan);
+		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());
 		 		LicenceSearch licSch= new LicenceSearch(driver);
 		 		//LicenceSearch licSch= chkPg.clickManualSearch();	
 		 		

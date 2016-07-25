@@ -9,7 +9,7 @@ import gov.snsw.framework.utils.DriverPage;
 public class SNSWCheckerPage extends DriverPage{
 	
 	
-	By manualScan = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnManualCheck']");
+	public By manualScan = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnManualCheck']");
 	
 	By scanOption = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnFloatingActionButton']");
 	
