@@ -29,7 +29,7 @@ public class IOSCheckerManualSearchTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin, String licenceNo) throws Exception{
+	public void checkerManualSearchIOS(String username, String password,String pin, String licenceNo) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");

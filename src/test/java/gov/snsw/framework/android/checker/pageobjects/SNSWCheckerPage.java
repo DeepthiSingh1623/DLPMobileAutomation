@@ -26,6 +26,8 @@ public class SNSWCheckerPage extends DriverPage{
 	
 	//Click 3bars Setting	
 	By setting3Bars = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
+	By selectSearchOption = By.xpath("//*[text()='Search']");
+	By checkerLog = By.xpath("//*[text()='Checks']");
 	public SNSWCheckerPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -40,10 +42,11 @@ public class SNSWCheckerPage extends DriverPage{
 	}
 	
 
-	public LicenceSearch clickManualSearch() {
+	public LicenceSearch clickSearch() {
 		// TODO Auto-generated method stub
-		fluentWait(manualScan);
-		driver.findElement(manualScan).click();
+		fluentWait(setting3Bars);
+		driver.findElement(setting3Bars).click();
+		driver.findElement(selectSearchOption).click();
 		return new LicenceSearch(driver);
 	}
 	
@@ -54,6 +57,13 @@ public class SNSWCheckerPage extends DriverPage{
 			driver.findElement(setting3Bars).click();
 			driver.findElement(settingOption).click();
 			return new AppSettingPage(driver);
+		}
+		
+				
+		public CheckerLogs clickCheckerLog(){
+			
+			driver.findElement(checkerLog).click();
+			return new CheckerLogs(driver);
 		}
 
 }

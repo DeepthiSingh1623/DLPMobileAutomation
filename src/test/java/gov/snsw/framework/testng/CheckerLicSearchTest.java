@@ -1,5 +1,6 @@
 package gov.snsw.framework.testng;
 
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
@@ -35,7 +36,7 @@ public class CheckerLicSearchTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void checkerLicenceSearch(String username, String password,String pin, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
+	public void checkerLicenceSearchAndroid(String username, String password,String pin, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -78,15 +79,14 @@ public class CheckerLicSearchTest extends BasicTest{
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		chkPg.fluentWait(chkPg.manualScan);
-		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());
-		 		LicenceSearch licSch= new LicenceSearch(driver);
-		 		//LicenceSearch licSch= chkPg.clickManualSearch();	
+		 		assertTrue(chkPg.isMenuItemPresent());
+		 		LicenceSearch licSch= chkPg.clickSearch();
 		 		
-		 		//Thread.sleep(100000);
-		 		//assertEquals("Enter licence details", licSch.getAndroidCheckerPageTitle());
 		 		
 		 		licSch.enterLicenceNumber(licenceNo);
+		 		Map<String, Object> params = new HashMap();
+		 		params.put("keySequence", "BACK");
+ 			 	Object result1 = driver.executeScript("mobile:presskey", params);
 		 		CheckerLicenceDetails licDtls= licSch.clickCheckBtn();
 		 		
 	 		
@@ -98,11 +98,11 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		assertNotNull(licDtls.isTextPresentOnScreen(holdName));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(status));
 	 		
-		 		Map<String, Object> params = new HashMap();
 		 		
+		 		params.clear();
 		 		params.put("start", "887,2173");
 		 		params.put("end", "894,463");
-		 		Object result1 = driver.executeScript("mobile:touch:swipe", params);
+		 		Object result = driver.executeScript("mobile:touch:swipe", params);
 		 		
 		 		assertNotNull(licDtls.isTextPresentOnScreen(licExpD));
 		 		assertNotNull(licDtls.isTextPresentOnScreen(address));
@@ -110,12 +110,16 @@ public class CheckerLicSearchTest extends BasicTest{
 		 		
 		 		params.clear();
  			 	params.put("keySequence", "BACK");
- 			 	Object result = driver.executeScript("mobile:presskey", params);
+ 			 	Object result2 = driver.executeScript("mobile:presskey", params);
 
-		 		
+ 			 	params.clear();
+ 			 	params.put("keySequence", "BACK");
+ 			 	Object result3 = driver.executeScript("mobile:presskey", params);
+ 			 	
+ 			 	assertTrue(chkPg.isMenuItemPresent());
 		 		chkPg.signOut();
 
-		 		
+		 		assertTrue(tcPg.isAgreeBtnExist());
 		}
 	 	catch(Exception e){
 	 		

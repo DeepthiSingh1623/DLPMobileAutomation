@@ -13,7 +13,7 @@ public class EnterPINPage extends DriverPage{
 	}
 	
 	//Enter PIN	
-		By enterPin = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/pin_entry']");
+		By enterPin = By.xpath("//*[@class='android.widget.EditText']");
 		By enterPinExist = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/pin_title']");
 		
 	public void enterPin(String pin)

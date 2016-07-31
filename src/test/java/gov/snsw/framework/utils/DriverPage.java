@@ -53,7 +53,7 @@ public class DriverPage {
 	
 		public WebElement fluentWait(final By element)
 		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(120, TimeUnit.SECONDS)
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
 																			.pollingEvery(2, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
@@ -122,6 +122,21 @@ public class DriverPage {
 			fluentWait(hamBurgerMenu);
 			driver.findElement(hamBurgerMenu).click();
 			
+		}
+		
+		public boolean isMenuItemPresent(){
+			
+			boolean menu=false;
+			
+			try{
+				fluentWait(hamBurgerMenu);
+				menu = true;
+			}
+			
+			catch(Exception e){
+				
+			}
+				return menu;	
 		}
 		
 		//Notification

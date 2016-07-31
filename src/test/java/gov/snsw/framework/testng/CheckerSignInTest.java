@@ -30,7 +30,7 @@ public class CheckerSignInTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin) throws Exception{
+	public void checkerSignInAndroid(String username, String password,String pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -70,8 +70,8 @@ public class CheckerSignInTest extends BasicTest{
 		 		}
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		chkPg.fluentWait(chkPg.manualScan);
-		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
+		 		//chkPg.fluentWait(chkPg.manualScan);
+		 		assertTrue(chkPg.isMenuItemPresent());
 		 		
 		 		Utilities.closeApp(driver, appName);
 		 		
@@ -82,11 +82,11 @@ public class CheckerSignInTest extends BasicTest{
 		 		
 		 		//Re-enter 4 digit PIN Number
 		 		enterPIN.enterPin(pin);
-		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());		 		
+		 		assertEquals("Scan Licence", chkPg.getAndroidCheckerPageTitle());		 		
 		 		chkPg.signOut();
 		 		tcPg = new TermsAndConditionsPage(driver);
 		 		//tcPg.fluentWait(By.xpath("//*[contains(text(),'Terms and Conditions')]"));
-		 	
+		 		assertTrue(tcPg.isAgreeBtnExist());
 		 		
 		}
 	 	catch(Exception e){

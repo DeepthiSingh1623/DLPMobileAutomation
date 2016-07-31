@@ -26,7 +26,7 @@ public class IOSCheckerSignInTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin) throws Exception{
+	public void checkerSignInIOS(String username, String password,String pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -88,7 +88,7 @@ public class IOSCheckerSignInTest extends BasicTest{
 		 		Utilities.openApp(driver, appName);
 		 		
 		 		//Verify the Re-Enter PIN Page is displayed
-		 		assertTrue(enterPIN.isTextPresentOnScreen("Unlock with pin"));
+		 		assertTrue(enterPIN.isTextPresentOnScreen("Unlock with PIN"));
 		 		
 		 		//Re-enter 4 digit PIN Number
 		 		enterPIN.enterPinUnlock();
