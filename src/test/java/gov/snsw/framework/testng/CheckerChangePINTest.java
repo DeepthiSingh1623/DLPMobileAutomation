@@ -19,6 +19,7 @@ import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
 import gov.snsw.framework.android.checker.pageobjects.AppSettingPage;
+import gov.snsw.framework.android.checker.pageobjects.AppUsageAgreementPage;
 import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
@@ -50,7 +51,8 @@ public class CheckerChangePINTest extends BasicTest{
 		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 			
 		 			//Click Accept Button on the Terms and Condition Page
-		 			SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
+		 			AppUsageAgreementPage appAgree = tcPg.termsAndConditionAcceptBtn();
+		 			SignInNSWAcctPage signIn = appAgree.pressAcceptBtn();
 			 		
 			 		//Enter the login details in the Sign In Page
 			 		enterPIN = signIn.signInNswAcct(username,password);
@@ -68,7 +70,7 @@ public class CheckerChangePINTest extends BasicTest{
 			 		 enterPIN.enterPin(pin);
 		 		}
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		
+		 		chkPg.fluentWait(chkPg.manualScan);
 		 		assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	 		
 		 		
 		 		//Click on the AppSettings

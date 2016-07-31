@@ -21,11 +21,11 @@ public class TermsAndConditionsPage extends DriverPage{
 		driver.findElement(agreeBtn).click();
 	}
 
-	public SignInNSWAcctPage pressAgreeBtn()
+	public AppUsageAgreementPage pressAgreeBtn()
 	{
 		fluentWait(agreeBtn);
 		agreeButton();
-		return new SignInNSWAcctPage(driver);
+		return new AppUsageAgreementPage(driver);
 	}
 	
 

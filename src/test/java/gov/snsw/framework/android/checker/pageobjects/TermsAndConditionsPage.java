@@ -20,17 +20,17 @@ public class TermsAndConditionsPage extends DriverPage
 		By termsAndconditionMsg = By.xpath("//*[text()='Terms & Conditions']");	
 		
 		//Terms and Conditions Page Accept Button
-		By tAndcAcceptBtn = By.xpath("//*[text()='Accept']");
+		By tAndcAcceptBtn = By.xpath("//*[text()='Agree']");
 		
 		//Terms and Conditions Page Decline Button
 		By tAndcDeclineBtn = By.xpath("//*[text()='Decline']");
 		
 	
 		
-		public SignInNSWAcctPage termsAndConditionAcceptBtn()
+		public AppUsageAgreementPage termsAndConditionAcceptBtn()
 		{
 			driver.findElement(agreeBtn).click();
-			return new SignInNSWAcctPage(driver);
+			return new AppUsageAgreementPage(driver);
 		}
 
 		By agreeBtn = By.xpath("//*[text()='Agree']");
