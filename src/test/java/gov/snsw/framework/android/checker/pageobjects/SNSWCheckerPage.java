@@ -14,8 +14,10 @@ public class SNSWCheckerPage extends DriverPage{
 	By scanOption = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnFloatingActionButton']");
 	
 	//Click Settings to ChangePIN
-		By settingOption = By.xpath("//*[text()='Settings']");
+	By settingOption = By.xpath("//*[text()='Settings']");
 	
+	//Scan Licence
+	By scanLicPg = By.xpath("//*[text()='Scan Licence']");
 	
 	//Click on Sign out  
 	By signOut = By.xpath("//*[text()='Sign Out']");
@@ -54,6 +56,14 @@ public class SNSWCheckerPage extends DriverPage{
 			driver.findElement(setting3Bars).click();
 			driver.findElement(settingOption).click();
 			return new AppSettingPage(driver);
+		}
+		
+		public String verifyScanLicenceTitleBar()
+		{
+			
+			fluentWait(scanLicPg);
+			String scanLicTitleBar = driver.findElement(scanLicPg).getText();
+			return scanLicTitleBar;
 		}
 
 }
