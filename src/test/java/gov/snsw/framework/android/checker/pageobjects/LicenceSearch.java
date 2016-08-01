@@ -15,6 +15,7 @@ public class LicenceSearch extends DriverPage{
 	
 	By licNo= By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/etxtLicenceNumber']");
 	By chkBtn= By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnCheck']");
+
 	
 	public void enterLicenceNumber(String licNum){
 		

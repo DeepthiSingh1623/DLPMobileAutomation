@@ -16,8 +16,20 @@ public class SettingsPage extends DriverPage{
 	
 	By signOutOKBtn = By.xpath("//*[@label='Yes']");
 	
+	By autoLock = By.xpath("//*[@label='Auto Lock']");
+	
 	By changePIN = By.xpath("//*[@label='Change PIN']");
+	
 	By settingsPgTitile =By.xpath("//*[@label='Settings']");
+	
+	By settingMainPgTitle = By.xpath("//*[@value='Settings']");
+	
+	By settingTitleAutoLock = By.xpath("//*[@name='OGNAutoLockTableView']//*[@label='Settings']");
+	
+	By immediateAutoLock = By.xpath("//*[@label='Immediately']");
+	
+	By fiveMinutesAutoLock = By.xpath("//*[@name='After 5 minutes' and @class='UIATableCell']//*[@label=' ']");
+	
 	public void signoutBtn()
 	{
 		driver.findElement(signout).click();
@@ -49,4 +61,47 @@ public class SettingsPage extends DriverPage{
 		fluentWait(changePIN);
 		driver.findElement(changePIN).click();
 	}
+	
+	public void clickAutoLockOption()
+	{
+		fluentWait(autoLock);
+		driver.findElement(autoLock).click();
+	}
+	
+	
+	public boolean verifySettingsTitle()
+	{
+		boolean autoLockTitlePg = false;
+		try
+		{
+			
+			fluentWait(settingTitleAutoLock);
+			autoLockTitlePg = driver.findElement(settingTitleAutoLock).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return autoLockTitlePg;
+		
+	}
+	
+	public void clickImmediateAutoLockOption()
+	{
+		fluentWait(immediateAutoLock);
+		driver.findElement(immediateAutoLock).click();
+	}
+	public void clickFiveMinAutoLockOption()
+	{
+		fluentWait(fiveMinutesAutoLock);
+		driver.findElement(fiveMinutesAutoLock).click();
+	}
+	
+	public String verifySettingsMainPageTitle()
+	{
+		fluentWait(settingMainPgTitle);
+		String settingsPageTitle = driver.findElement(settingMainPgTitle).getText();
+		return settingsPageTitle;
+	}
 }
+

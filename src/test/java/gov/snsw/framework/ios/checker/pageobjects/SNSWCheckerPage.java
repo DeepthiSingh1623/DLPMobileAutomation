@@ -14,7 +14,7 @@ public class SNSWCheckerPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	//Settings IconPage
-	By settings = By.xpath("//*[@class='UIATabBar']/button[5]");
+	By settings = By.xpath("//*[@label='Settings']");
 	
 	By activityBtn = By.xpath("//*[@class='UIATabBar']/button[3]");
 	
@@ -25,7 +25,7 @@ public class SNSWCheckerPage extends DriverPage{
 	By noBtn = By.xpath("//*[@label='No']");
 	
 	By okBtn = By.xpath("//*[@label='Ok']");
-	
+
 	By pgTitle = By.xpath ("//*[@label='Licence Scan']");
 	
 	public String getPageTitle()
@@ -33,6 +33,8 @@ public class SNSWCheckerPage extends DriverPage{
 		return driver.findElement(pgTitle).getText();
 		
 	}
+
+	By licScanPg = By.xpath("//*[@label='Licence Scan']");
 	
 	public LicenceSearchPage clickManualSearch()
 	{
@@ -119,6 +121,13 @@ public class SNSWCheckerPage extends DriverPage{
 		}
 		
 		return dialOpn;
+	}
+	
+	public String verifyLicScanTitle()
+	{
+		fluentWait(licScanPg);
+		String licScanPgTitle = driver.findElement(licScanPg).getText();
+		return licScanPgTitle;
 	}
 	
 }

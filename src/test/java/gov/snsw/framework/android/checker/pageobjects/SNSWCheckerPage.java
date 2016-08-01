@@ -15,6 +15,9 @@ public class SNSWCheckerPage extends DriverPage{
 	
 	//Click Settings to ChangePIN
 		By settingOption = By.xpath("//*[text()='Settings']");
+		
+		//Scan Licence
+		By scanLicPg = By.xpath("//*[text()='Scan Licence']");
 	
 	
 	//Click on Sign out  
@@ -65,5 +68,14 @@ public class SNSWCheckerPage extends DriverPage{
 			driver.findElement(checkerLog).click();
 			return new CheckerLogs(driver);
 		}
+		
+		public String verifyScanLicenceTitleBar()
+		{
+			
+			fluentWait(scanLicPg);
+			String scanLicTitleBar = driver.findElement(scanLicPg).getText();
+			return scanLicTitleBar;
+		}
+
 
 }

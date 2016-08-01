@@ -110,7 +110,7 @@ public class DetailLicencePage extends DriverPage{
 	
 	public String verifylicDetailsPageTitle()
 	{
-		By licDetailsTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
+		By licDetailsTitle = By.xpath("//*[text()='Licence Details']");
 		String detailedLicTitleBar = driver.findElement(licDetailsTitle).getText();
 		return detailedLicTitleBar;
 	}

@@ -25,10 +25,10 @@ import gov.snsw.framework.ios.holder.pageobjects.SignInPage;
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
 import gov.snsw.framework.utils.Utilities;
 
-public class IOS_HolderChangePinTest extends BasicTest
+public class IOS_HolderAutoLockTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void changePinIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
+	public void AutoLockHolderAppIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -109,56 +109,103 @@ public class IOS_HolderChangePinTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//select Change PIN Option on settings Page
-		 		settingsPage.clickChangePin();
+		 		settingsPage.autoLockOption();
 		 		
-		 		//verify old pin Page 
-		 		assertTrue(enterPIN.verifyOldPinTitle().contains("Enter old PIN"));
+		 		//verify settings page
+		 		assertTrue(settingsPage.verifySettingsTitle());
 		 		
-		 		//enter Old 4 digit PIN
-		 		enterPIN.enterPin();
-		 		
-		 		//verify New pin Page 
-		 		assertTrue(enterPIN.verifyNewPinTitle().contains("Enter new PIN"));
-		 		
-		 		//enter New PIN
-		 		enterPIN.enterNewPIN();
-		 		
-		 		//Verify Confirm PIN
-		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
-		 		
-		 		//Enter Confirm New PIN
-		 		enterPIN.enterNewPIN();
-		 		
-		 		//close app
-		 		Utilities.closeApp(driver, appName);
-		 		
-		 		//Open App	
-		 		Utilities.openApp(driver, appName);
-		 			 				 		
-		 		//Verify the Re-Enter PIN Page is displayed
-		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
-		 		
-		 		//Re-enter 4 digit PIN Number
-		 		enterPIN.enterPINUnlock(); 		
-		 		
-		 		//assert Error Message
-		 		assertTrue(enterPIN.invalidPINError().contains("Invalid PIN"));
-		 		
-		 		//Enter New PIN
-		 		enterPIN.enterNewPINUnlock();	
-		 				 		
-		 		//Verify My Licence Page is displayed
-		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
-		 				 				 		
-		 		//Click on the Settings and then sign out
-		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
+		 		//click immediately 
+		 		settingsPage.clickImmediately();
 		 		
 		 		//Verify Settings Page is displayed
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
-		 		//Click SignOut
-		 		AddInPg = settingPg.pressSigoutButton();
+		 		//click Home button
+		 		Map<String, Object> params1 = new HashMap<>();
+		 		params1.put("keySequence", "HOME");
+		 		Object result1 = driver.executeScript("mobile:presskey", params1);
+		 		Thread.sleep(2000);
 		 		
+		 		//open app
+ 				Map<String, Object> params32 = new HashMap<>();
+ 				params32.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result32 = driver.executeScript("mobile:application:open", params32);
+ 				Thread.sleep(2000);
+ 				
+ 				//Verify the Re-Enter PIN Page is displayed
+		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
+		 		
+		 		//Re-enter 4 digit PIN Number
+		 		LicPg = enterPIN.enterPINUnlock();		 		
+		 				 		
+		 		//Verify Settings Page is displayed
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
+		 		
+		 		//select Change PIN Option on settings Page
+		 		settingsPage.autoLockOption();
+		 		
+		 		//verify old pin Page 
+		 		assertTrue(settingsPage.verifySettingsTitle());
+		 		
+		 		//click immediately 
+		 		settingsPage.clickfiveMinutes();
+		 		
+		 		//Verify Settings Page is displayed
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
+		 		
+		 		//click Home button
+		 		Map<String, Object> params23 = new HashMap<>();
+		 		params23.put("keySequence", "HOME");
+		 		Object result23 = driver.executeScript("mobile:presskey", params23);
+		 		Thread.sleep(2000);
+		 		
+		 		//open app
+ 				Map<String, Object> params42 = new HashMap<>();
+ 				params42.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result42 = driver.executeScript("mobile:application:open", params42);
+ 				Thread.sleep(2000);
+ 				
+ 				//Verify Settings Page is displayed
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
+		 		
+		 		
+		 		//after 5 minutes
+		 		//select Change PIN Option on settings Page
+		 		settingsPage.autoLockOption();
+		 		
+		 		//verify old pin Page 
+		 		assertTrue(settingsPage.verifySettingsTitle());
+		 		
+		 		//click immediately 
+		 		settingsPage.clickfiveMinutes();
+		 		
+		 		//Verify Settings Page is displayed
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
+		 		
+		 		//click Home button
+		 		Map<String, Object> params33 = new HashMap<>();
+		 		params33.put("keySequence", "HOME");
+		 		Object result33 = driver.executeScript("mobile:presskey", params33);
+		 		Thread.sleep(310000);
+		 		
+		 		//open app
+ 				Map<String, Object> params43 = new HashMap<>();
+ 				params43.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result43 = driver.executeScript("mobile:application:open", params43);
+ 				Thread.sleep(2000);
+ 				
+ 				//Verify the Re-Enter PIN Page is displayed
+		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
+		 		
+		 		//Re-enter 4 digit PIN Number
+		 		LicPg = enterPIN.enterPINUnlock();		 		
+		 				 		
+		 		//Verify Settings Page is displayed
+		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
+		 		
+		 		//Click sign out
+		 		settingsPage.pressSigoutButton();
+		 				 		
 		 		//Verify Add Intro Page is displayed
 		 		assertTrue(AddInPg.verifyAddPageTitle());
 		 		
@@ -212,7 +259,7 @@ public class IOS_HolderChangePinTest extends BasicTest
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public IOS_HolderChangePinTest(DesiredCapabilities caps) {
+	public IOS_HolderAutoLockTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 

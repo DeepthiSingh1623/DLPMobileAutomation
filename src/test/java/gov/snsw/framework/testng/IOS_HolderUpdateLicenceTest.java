@@ -5,7 +5,8 @@ import org.testng.annotations.Test;
 
 
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -34,7 +35,7 @@ import gov.snsw.framework.utils.Utilities;
 public class IOS_HolderUpdateLicenceTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
+	public void updateLicenceIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -71,7 +72,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 			 		enterPIN.enterPin();
 			 		
 			 		//Verify Confirm PIN is displayed
-			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
 			 		
 			 		//Enter 4 digit PIN confirmation
 			 		enterPIN.enterPin();
@@ -82,7 +83,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 			 			enterPIN = new EnterPinPage(driver);
 			 			
 			 			//Verify Enter Pin is displayed
-				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
 				 		
 			 			//Enter 4 digit PIN
 			 			enterPIN.enterPINUnlock();
@@ -169,7 +170,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
+		 		assertTrue(AddInPg.verifyAddPageTitle());
 		 		
 		 	}
 	 	catch(Exception e){
@@ -179,28 +180,28 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 
 	 	}
 	 	
-	 	finally{
+finally{
 	 		
-	 		//clean app
-	 		Utilities.cleanApp(driver, appName);
-	 		
-	 		//Close App
-	 		Utilities.closeApp(driver, appName);
-	 		
- 			try {
-	                
-	                // In case you want to download the report or the report attachments, do it here.
-	                PerfectoUtils.downloadReport(driver, "pdf", "C:\\test\\Report");
-	            } 
- 				catch (Exception e) 
- 				{
-	            e.printStackTrace();
-	            }
-	 		
-	 		//close App
-	 		driver.close();
-	 		
+	//clean app
+		//Utilities.cleanApp(driver, appName);
+		
+		Map<String, Object> params1 = new HashMap<>();
+		params1.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+		Object result1 = driver.executeScript("mobile:application:clean", params1);
+		
+		//close app
+		//Utilities.closeApp(driver, appName);
+
+		Map<String, Object> params2 = new HashMap<>();
+		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+		Object result2 = driver.executeScript("mobile:application:close", params2);	 	
+		
+		driver.close();
 	 	}
+		
+        if(testFail){
+        	Assert.fail();
+        }
 		
         if(testFail){
         	Assert.fail();

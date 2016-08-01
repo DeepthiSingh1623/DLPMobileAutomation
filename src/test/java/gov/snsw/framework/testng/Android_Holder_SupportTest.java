@@ -24,35 +24,35 @@ import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.android.holder.pageobjects.SupportPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 import gov.snsw.framework.utils.Utilities;
 
 
-public class Android_HolderSignInTest extends BasicTest{
+public class Android_Holder_SupportTest extends BasicTest{
 
 	
 	
 	@Test (dataProvider="logInData")
-	public void signInHolderAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void supportAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 			//reportPass("success", "param");
-	 			 
-	 	    	//close App
-				Map<String, Object> params12 = new HashMap<>();
-				params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-				Object result12 = driver.executeScript("mobile:application:close", params12);
- 		
-				//open App
-				Map<String, Object> params11 = new HashMap<>();
+	 				
+	 			//close App
+	 			Map<String, Object> params12 = new HashMap<>();
+	 			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result12 = driver.executeScript("mobile:application:close", params12);
+		
+	 			//open App
+	 			Map<String, Object> params11 = new HashMap<>();
 				params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 				Object result11 = driver.executeScript("mobile:application:open", params11);
-	 			
-				switchToContext(driver, "NATIVE_APP");
+ 			
+	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
@@ -102,40 +102,49 @@ public class Android_HolderSignInTest extends BasicTest{
 		 			
 		 			//Enter 4 digit PIN
 		 			enterPIN.enter4DigitPin(pin);
-		 		}	 		
+		 		}	 	
+		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
 		 		//Verify My Licence Page is displayed
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("myLicences"));
-		 				 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
-		 		
-		 		//close app
-		 		Map<String, Object> params1 = new HashMap<String, Object>();
-		 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-		 		Object result1 = driver.executeScript("mobile:application:close", params1);
-		 		
-		 		//Open App
-		 		Map<String, Object> params2 = new HashMap<String, Object>();
-		 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-		 		Object result2 = driver.executeScript("mobile:application:open", params2);
-		 		
-		 		//Verify Unlock Enter Pin is displayed
-		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
-	 			
-	 			//Re-enter 4 digit PIN Number
-		 		enterPIN.enter4DigitPin(pin);
+		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 		 				 		
 		 		//Verify My Licences Page is displayed
 		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
 		 		//Click on the Settings and then sign out
-		 		LicPg.settings();	
+		 		LicPg.clickSettingHamburger();
 		 		
+		 		SupportPage supportPg = new SupportPage(driver);
+		 		
+		 		//select Support
+		 		supportPg.clickSupportOption();
+		 		
+		 		//Verify Support Page is displayed
+		 		assertTrue(supportPg.verifySupportTitile().contains("Support"));
+		 		
+		 		//Verify the Support Services
+		 		assertTrue(supportPg.verifySupportServices().contains("Customer Service"));
+		 		
+		 		//Verify Assestive Services
+		 		assertTrue(supportPg.verifyAssistedServices().contains("Assisted Service"));
+		 		
+		 		//Verify Feedback
+		 		assertTrue(supportPg.verifyFeedbackServices().contains("info@service.nsw.gov.au"));	 	
+		 		
+		 		//Click Back icon on the Support Screen
+		 		Map<String, Object> params3 = new HashMap<>();
+		 		params3.put("keySequence", "BACK");
+		 		Object result3 = driver.executeScript("mobile:presskey", params3);
+		 		
+		 		
+		 		
+		 		//click Settings 
+		 		LicPg.settings();		 		
+		 				 		
 		 		//Verify Add Intro Page is displayed
 		 		assertTrue(AddInPg.verifyAddPg().contains("Add"));
-		 		
+		 			 		
 		 		
 		}
 	 	catch(Exception e){
@@ -193,7 +202,7 @@ public class Android_HolderSignInTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public Android_HolderSignInTest(DesiredCapabilities caps) {
+	public Android_Holder_SupportTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

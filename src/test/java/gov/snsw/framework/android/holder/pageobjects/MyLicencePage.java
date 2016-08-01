@@ -125,6 +125,12 @@ public class MyLicencePage extends DriverPage{
 		return licPgTitile;
 	}
 	
+	public void clickSettingHamburger()
+	{
+		fluentWait(setting3Bars);
+		driver.findElement(setting3Bars).click();
+	}
+	
 		
 
 }

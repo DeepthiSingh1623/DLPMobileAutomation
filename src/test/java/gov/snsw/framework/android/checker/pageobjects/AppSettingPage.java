@@ -22,6 +22,16 @@ public class AppSettingPage extends DriverPage{
 	//Back Button
 	By appSettingsBackBtn = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
 	
+	//autolock Title 
+	By autoLockTitle = By.xpath("//*[text()='Auto lock']");
+		
+	//autolock Immediately
+	By immediatelyRadio = By.xpath("//*[text()='Immediately']");
+		
+	//autolock 5 Minutes
+	By fiveMinutesRadio = By.xpath("//*[text()='After 5 minutes']");
+	
+	
 	public void changePINBtn()
 	{
 		fluentWait(changePIN);
@@ -48,4 +58,49 @@ public class AppSettingPage extends DriverPage{
 		driver.findElement(changePinOK).click();
 		return new EnterPINPage(driver);
 	}
+	
+	public void clickAutoLock()
+	{
+		fluentWait(autoLock);
+		driver.findElement(autoLock).click();
+	}
+	
+	public boolean alertAutoLock()
+	{
+		boolean autoLockTitlePg = false;
+		try
+		{
+			
+			fluentWait(autoLockTitle);
+			autoLockTitlePg = driver.findElement(autoLockTitle).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return autoLockTitlePg;
+		
+	}
+	
+	public void clickImmediatelyRadioButton()
+	{
+		fluentWait(immediatelyRadio);
+		driver.findElement(immediatelyRadio).click();
+	}
+	
+	public void clickFiveMinutesRadioButton()
+	{
+		fluentWait(fiveMinutesRadio);
+		driver.findElement(fiveMinutesRadio).click();
+	}
+	
+	public String verifyAppSettingTitleBar()
+	{
+		//By appSettingsPg = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
+		By appSettingsPg = By.xpath("//*[text()='App Settings']");
+		fluentWait(appSettingsPg);
+		String appTitleBar = driver.findElement(appSettingsPg).getText();
+		return appTitleBar;
+	}
+	
 }

@@ -19,6 +19,9 @@ public class SharingLicencePage extends DriverPage{
 	
 	By shareBackBtn = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 	
+	By Confirm = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/alertTitle']");
+	
+	By noShare = By.xpath("//*[text()='No']");
 	
 	public String verifySharePageTitle()
 	{
@@ -52,6 +55,19 @@ public class SharingLicencePage extends DriverPage{
 		 driver.findElement(shareBackBtn).click();
 		
 	}
+	
+	public String verifyConfirm()
+	{
+		fluentWait(Confirm);
+		return driver.findElement(Confirm).getText();
+	}
+	
+	public void clickNoShare()
+	{
+		fluentWait(noShare);
+		driver.findElement(noShare).click();
+	}
+	
 
 		
 	

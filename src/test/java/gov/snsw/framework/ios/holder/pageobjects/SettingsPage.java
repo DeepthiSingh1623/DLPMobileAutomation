@@ -13,12 +13,23 @@ public class SettingsPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	
+	By quickViewToggel = By.xpath("//*[@label='Quick View' and @class='UIASwitch']");
 	
 	By signout =By.xpath("//*[@label='Sign Out']");
 	
 	By signOutOKBtn = By.xpath("//*[@label='Yes']");
 	
 	By changePIN = By.xpath("//*[@label='Change PIN']");
+	
+	By supportOption = By.xpath("//*[@label='Support']");
+	
+	By autoLock = By.xpath("//*[@label='Auto Lock']");
+	
+	By settingsTitle = By.xpath("//*[@class='UIANavigationBar']//*[@label='Settings']");
+	
+	By immediately = By.xpath("//*[@name='Immediately' and @value='1']//*[@label=' ']");
+	
+	By fiveMinutes = By.xpath("//*[@name='After 5 minutes' and @class='UIATableCell']//*[@label=' ']");
 
 	public void signoutBtn()
 	{
@@ -51,6 +62,69 @@ public class SettingsPage extends DriverPage{
 		fluentWait(changePIN);
 		driver.findElement(changePIN).click();
 	}
+	
+	public void clickQuickView()
+	{
+		fluentWait(quickViewToggel);
+		driver.findElement(quickViewToggel).click();
+	}
+	
+	public String verifyquickViewEnabled()
+	{
+		fluentWait(quickViewToggel);
+		String quickViewFlag = driver.findElement(quickViewToggel).getText();
+		return quickViewFlag;
+	}
+	public void SupportOption()
+	{
+		
+		driver.findElement(supportOption).click();
+	}
+	
+	public SupportPage clickSupportOption()
+	{
+		fluentWait(supportOption);
+		SupportOption();
+		return new SupportPage(driver);
+	}
+	
+	public void autoLockOption()
+	{
+		fluentWait(autoLock);		
+		driver.findElement(autoLock).click();
+	}
+	
+	
+	
+	public boolean verifySettingsTitle()
+	{
+		boolean autoLockTitlePg = false;
+		try
+		{
+			
+			fluentWait(settingsTitle);
+			autoLockTitlePg = driver.findElement(settingsTitle).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return autoLockTitlePg;
+		
+	}
+	
+	public void clickImmediately()
+	{
+		fluentWait(immediately);		
+		driver.findElement(immediately).click();
+	}
+	
+	public void clickfiveMinutes()
+	{
+		fluentWait(fiveMinutes);		
+		driver.findElement(fiveMinutes).click();
+	}
+	
 	
 	
 	
