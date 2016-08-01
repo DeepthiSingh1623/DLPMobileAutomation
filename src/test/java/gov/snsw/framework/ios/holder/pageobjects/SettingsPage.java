@@ -24,6 +24,12 @@ public class SettingsPage extends DriverPage{
 	By supportOption = By.xpath("//*[@label='Support']");
 	
 	By autoLock = By.xpath("//*[@label='Auto Lock']");
+	
+	By settingsTitle = By.xpath("//*[@class='UIANavigationBar']//*[@label='Settings']");
+	
+	By immediately = By.xpath("//*[@name='Immediately' and @value='1']//*[@label=' ']");
+	
+	By fiveMinutes = By.xpath("//*[@name='After 5 minutes' and @class='UIATableCell']//*[@label=' ']");
 
 	public void signoutBtn()
 	{
@@ -80,6 +86,43 @@ public class SettingsPage extends DriverPage{
 		fluentWait(supportOption);
 		SupportOption();
 		return new SupportPage(driver);
+	}
+	
+	public void autoLockOption()
+	{
+		fluentWait(autoLock);		
+		driver.findElement(autoLock).click();
+	}
+	
+	
+	
+	public boolean verifySettingsTitle()
+	{
+		boolean autoLockTitlePg = false;
+		try
+		{
+			
+			fluentWait(settingsTitle);
+			autoLockTitlePg = driver.findElement(settingsTitle).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return autoLockTitlePg;
+		
+	}
+	
+	public void clickImmediately()
+	{
+		fluentWait(immediately);		
+		driver.findElement(immediately).click();
+	}
+	
+	public void clickfiveMinutes()
+	{
+		fluentWait(fiveMinutes);		
+		driver.findElement(fiveMinutes).click();
 	}
 	
 	
