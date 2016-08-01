@@ -4,8 +4,8 @@ import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
-
-
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -38,7 +38,7 @@ import gov.snsw.framework.utils.Utilities;
 public class IOS_HolderRenewLicenceTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void signIn(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber,String cardExpiryMonth, String cardExpiryYear,String cardCVVNum,String cardName) throws Exception{
+	public void renewalLicenceIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber,String cardExpiryMonth, String cardExpiryYear,String cardCVVNum,String cardName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -48,7 +48,16 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 			
+	 			//close App
+ 				Map<String, Object> params12 = new HashMap<>();
+ 				params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result12 = driver.executeScript("mobile:application:close", params12);
+ 		
+ 				//open app
+ 				Map<String, Object> params22 = new HashMap<>();
+ 				params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result22 = driver.executeScript("mobile:application:open", params22);
+ 				
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -75,7 +84,7 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 			 		enterPIN.enterPin();
 			 		
 			 		//Verify Confirm PIN is displayed
-			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm pin"));
+			 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
 			 		
 			 		//Enter 4 digit PIN confirmation
 			 		enterPIN.enterPin();
@@ -86,7 +95,7 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 			 			enterPIN = new EnterPinPage(driver);
 			 			
 			 			//Verify Enter Pin is displayed
-				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+				 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
 				 		
 			 			//Enter 4 digit PIN
 			 			enterPIN.enterPINUnlock();
@@ -188,7 +197,7 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 		 		AddInPg = settingPg.pressSigoutButton();
 		 		
 		 		//Verify Add Intro Page is displayed
-		 		assertTrue(AddInPg.verifyAddPageTitle().contains("Add"));
+		 		assertTrue(AddInPg.verifyAddPageTitle());
 		 		
 		 		
 		 			 		
@@ -203,20 +212,18 @@ public class IOS_HolderRenewLicenceTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		Utilities.cleanApp(driver, appName);
-	 			 		
- 			//close app
-	 		Utilities.closeApp(driver, appName);
+	 		//Utilities.cleanApp(driver, appName);
 	 		
- 			try {
-	                
-	                // In case you want to download the report or the report attachments, do it here.
-	                PerfectoUtils.downloadReport(driver, "pdf", "C:\\test\\Report");
-	            } 
- 				catch (Exception e) 
- 				{
-	            e.printStackTrace();
-	            }
+	 		Map<String, Object> params1 = new HashMap<>();
+	 		params1.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
+	 		
+	 		//close app
+	 		//Utilities.closeApp(driver, appName);
+
+	 		Map<String, Object> params2 = new HashMap<>();
+	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+	 		Object result2 = driver.executeScript("mobile:application:close", params2);	
 	 		
 	 		//close App
 	 		driver.close();

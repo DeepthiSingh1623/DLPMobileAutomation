@@ -12,15 +12,24 @@ public class EnterPINPage extends DriverPage{
 	}
 	
 	//Enter PIN	
-	By enterPin = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']");
+	//By enterPin = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']");
 	
+	By enterPin = By.xpath("//*[@class='android.widget.EditText']");
+	//By enterPin1 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[1]");
+	//By enterPin2 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[2]");
+	//By enterPin3 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[3]");
+	//By enterPin4 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[4]");
+			
 		
 	public void enter4DigitPin(String pin)
 	{
 		fluentWait(enterPin);
 		driver.findElement(enterPin).sendKeys(pin);
 		
-	}
+	}	
+	
+	
+	
 	//Change PIN 
 	public String enterPINPgExist()
 	{
@@ -96,7 +105,13 @@ public class EnterPINPage extends DriverPage{
 					return unlockPINTitle;
 				}
 		
-		//*[@resourceid="au.gov.nsw.onegov.app.holder.uat:id/pin_error"]
+				public String verifyPinEnterPg()
+				{
+					By pinTitle = By.xpath("//*[text()='Enter PIN']");
+					fluentWait(pinTitle);
+					String pinEnterTitle = driver.findElement(pinTitle).getText();
+					return pinEnterTitle;
+				}
 		
 		
 

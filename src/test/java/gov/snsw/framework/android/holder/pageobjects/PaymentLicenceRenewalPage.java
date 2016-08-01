@@ -15,7 +15,7 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 	
 	
 	//CreditNumber
-	By creditCardNum = By.xpath("//*[@resourceid='payment_CreditCardDetails_CreditCardNumber']");
+	By creditCardNum = By.xpath("//*[@id='payment_CreditCardDetails_CreditCardNumber']");
 	
 	//Credit Card Expiry Month
 	
@@ -24,13 +24,13 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 	
 	//*[@resourceid="payment_CreditCardDetails_CreditCardExpiryYear"]
 	// CVV Number
-	By cvvNumber= By.xpath("//*[@resourceid='payment_CreditCardDetails_CVVNumber']");
+	By cvvNumber= By.xpath("//*[@id='payment_CreditCardDetails_CVVNumber']");
 	
 	// Credit Card Holder Name
-	By cardHolderName = By.xpath("//*[@resourceid='payment_CreditCardDetails_CreditCardHolder']");
+	By cardHolderName = By.xpath("//*[@id='payment_CreditCardDetails_CreditCardHolder']");
 	
 	//Submit Button
-	By submitBtn = By.xpath("//*[@resourceid='SubmitStep']");
+	By submitBtn = By.xpath("//*[@id='SubmitStep']");
 	
 	public void creditCardNum(String cardNum)
 	{
@@ -40,7 +40,7 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 	
 	public void creditCardExpiryMonth(String cardExpiryMonth)
 	{
-		By expiryMonth = By.xpath("//*[@resourceid='payment_CreditCardDetails_CreditCardExpiryMonth']");
+		By expiryMonth = By.xpath("//*[text()='Month']");
 		driver.findElement(expiryMonth).click();
 		By monthDate = By.xpath("//*[text()='"+cardExpiryMonth+"']");
 		driver.findElement(monthDate).click();
@@ -48,7 +48,7 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 	
 	public void creditCardExpiryYear(String cardExpiryYear)
 	{
-		By expiryYear = By.xpath("	//*[@resourceid='payment_CreditCardDetails_CreditCardExpiryYear']");
+		By expiryYear = By.xpath("	//*[text()='Year']");
 		driver.findElement(expiryYear).click();
 		By yearDate = By.xpath("//*[text()='"+cardExpiryYear+"']");
 		driver.findElement(yearDate).click();
@@ -73,14 +73,14 @@ public class PaymentLicenceRenewalPage extends DriverPage{
 	
 	public boolean verifyPaymentPgExist()
 	{
-		By paymentPg = By.xpath("//*[@contentDesc='PAYMENT']");
+		By paymentPg = By.xpath("//*[text()='Payment']");
 		fluentWait(paymentPg);
 		return driver.findElement(paymentPg).isDisplayed();
 	}
 	
 	public boolean verifySuccessMessage()
 	{
-		By successPg = By.xpath("//*[@contentDesc='SUCCESSFUL']");
+		By successPg = By.xpath("//*[text()='Successful']");
 		fluentWait(successPg);
 		return driver.findElement(successPg).isDisplayed();
 	}

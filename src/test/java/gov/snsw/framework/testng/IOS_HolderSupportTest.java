@@ -4,8 +4,8 @@ package gov.snsw.framework.testng;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+ 
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -15,20 +15,24 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
-import com.perfectomobile.utils.PerfectoUtils;
+
 
 import gov.snsw.framework.ios.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.ios.holder.pageobjects.EnterPinPage;
+import java.util.Map;
+import java.util.HashMap;
 import gov.snsw.framework.ios.holder.pageobjects.MyLicencesPage;
+import gov.snsw.framework.ios.holder.pageobjects.QuickViewPage;
 import gov.snsw.framework.ios.holder.pageobjects.SettingsPage;
 import gov.snsw.framework.ios.holder.pageobjects.SignInPage;
+import gov.snsw.framework.ios.holder.pageobjects.SupportPage;
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
 import gov.snsw.framework.utils.Utilities;
 
-public class IOS_HolderSignInTest extends BasicTest
+public class IOS_HolderSupportTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void signInIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void supportIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -38,15 +42,15 @@ public class IOS_HolderSignInTest extends BasicTest
 	 			//reportPass("success", "param");
 	 			 
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-	 		
-	 			//open app
-	 			Map<String, Object> params22 = new HashMap<>();
-	 			params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 			Object result22 = driver.executeScript("mobile:application:open", params22);	 		
-	 			
+ 				Map<String, Object> params12 = new HashMap<>();
+ 				params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result12 = driver.executeScript("mobile:application:close", params12);
+ 		
+ 				//open app
+ 				Map<String, Object> params22 = new HashMap<>();
+ 				params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
+ 				Object result22 = driver.executeScript("mobile:application:open", params22);
+ 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -84,7 +88,7 @@ public class IOS_HolderSignInTest extends BasicTest
 		 			enterPIN = new EnterPinPage(driver);
 		 			
 		 			//Verify Enter Pin is displayed
-			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
 			 		
 		 			//Enter 4 digit PIN
 		 			enterPIN.enterPINUnlock();
@@ -96,29 +100,29 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
 		 		{
 		 			LicPg.selectNo();
-		 		}
-		 		
+		 		}		 		
 		 		
 		 		//Verify My Licence Page is displayed
-		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
-		 				 		
-		 		//Close App
-		 		Utilities.closeApp(driver, appName);
+		 		//assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 		
-		 		//Open App		
-		 		Utilities.openApp(driver, appName);		 			 	
-		 		
-		 		//Verify the Re-Enter PIN Page is displayed
-		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
-		 		
-		 		//Re-enter 4 digit PIN Number
-		 		LicPg = enterPIN.enterPINUnlock();		 		
-		 				 		
-		 		//Verify My License Page is displayed
-		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
-		 				
-		 		//Click on the Settings and then sign out
+		 		//Click on the Settings Button
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
+		 		
+		 		//Verify Settings Page is displayed
+		 		settingPg.verifySettingsPageTitile();
+		 		
+		 		//Click on Support Option
+		 		SupportPage suppPg = settingPg.clickSupportOption();
+		 		
+		 		//Support Page is displayed
+		 		assertTrue(suppPg.verifySupportPgTitle().contains("Support"));
+		 		assertTrue(suppPg.verifyCustomerService().contains("CUSTOMER SERVICE"));
+		 		assertTrue(suppPg.verifyAssistedService().contains("ASSISTED SERVICES"));
+		 		assertTrue(suppPg.verifyFeedBack().contains("info@service.nsw.gov.au"));
+		 		
+		 		
+		 		//Click on Settings
+		 		suppPg.clickSettings();		 		
 		 		
 		 		//Verify Settings Page is displayed
 		 		settingPg.verifySettingsPageTitile();
@@ -151,7 +155,11 @@ public class IOS_HolderSignInTest extends BasicTest
 
 	 		Map<String, Object> params2 = new HashMap<>();
 	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);	 		
+	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		
+	 		driver.close();
+	 		
+	 			
  			
 	 	}
 		
@@ -178,7 +186,7 @@ public class IOS_HolderSignInTest extends BasicTest
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public IOS_HolderSignInTest(DesiredCapabilities caps) {
+	public IOS_HolderSupportTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 

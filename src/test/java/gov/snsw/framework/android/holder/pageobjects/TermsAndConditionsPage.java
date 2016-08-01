@@ -19,7 +19,7 @@ public class TermsAndConditionsPage extends DriverPage
 		
 	}
 		//Terms and Conditions Page
-		By termsAndconditionMsg = By.xpath("//*[text()='Terms & Conditions']");	
+		By termsAndconditionMsg = By.xpath("//*[text()='Mobile App Terms and Conditions']");	
 		
 		//Terms and Conditions Page Accept Button		
 		By tAndcAcceptBtn = By.xpath("//*[@resourceid=\"au.gov.nsw.onegov.app.holder.uat:id/btnAccept\"]");

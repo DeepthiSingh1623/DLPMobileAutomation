@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
+import com.perfectomobile.utils.PerfectoUtils;
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 
@@ -34,7 +35,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	
 
 	@Test (dataProvider="logInData")
-	public void licenceShareAsHolder(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin)  throws Exception{
+	public void licenceShareHolderAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin)  throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -42,7 +43,17 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
-	 			 			
+	 			 
+	 			//close App
+	 			Map<String, Object> params12 = new HashMap<>();
+	 			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result12 = driver.executeScript("mobile:application:close", params12);
+		
+	 			//open App
+	 			Map<String, Object> params11 = new HashMap<>();
+	 			params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+	 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -98,7 +109,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 			 		MyLicencePage LicPg = new MyLicencePage(driver);
 			 		
 			 		//Verify My Licence Page is displayed.
-			 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+			 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 			 				 		
 			 		//Verify My Licences Page is displayed
 			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
@@ -114,7 +125,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		SharingLicencePage shareLicPg = detailLicPg.clickShareLicenceBtn();
 		 		
 		 		//Verify Share Licence Page is displayed
-		 		assertTrue(shareLicPg.verifySharePageTitle().contains("Sharing Licence"));
+		 		//assertTrue(shareLicPg.verifySharePageTitle().contains("Sharing Licence"));
 		 		
 		 		assertTrue(shareLicPg.verifyShareLicName().contains("NSW Recreational Fishing Fee"));
 		 		
@@ -122,7 +133,11 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		
 		 		//Click Back Button on the QR Scan Page
 		 		//shareLicPg.backBtn();
-		 		//Utilities.BackBtn(driver);		 		
+		 		
+		 		//Verify Confirm text and click No
+		 		assertTrue(shareLicPg.verifyConfirm().contains("Confirm"));
+		 		
+		 		shareLicPg.clickNoShare();
 		 		
 		 		//Verify Detailed Licence Page is displayed
 		 		assertTrue(detailLicPg.verifylicDetailsPageTitle().contains("Licence Details"));
@@ -131,7 +146,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		Utilities.BackBtn(driver);
 		 		
 		 		//Verify My Licence Page is displayed.
-		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();
@@ -165,6 +180,8 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 		Map<String, Object> params2 = new HashMap<String, Object>();
 	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		
+	 		//PerfectoUtils.downloadReport(driver, "pdf", "C:\\test\\Share_Licence_Android");
 	 		
 	 		
 	 		

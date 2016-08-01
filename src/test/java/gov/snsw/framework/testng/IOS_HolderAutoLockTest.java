@@ -25,10 +25,10 @@ import gov.snsw.framework.ios.holder.pageobjects.SignInPage;
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
 import gov.snsw.framework.utils.Utilities;
 
-public class IOS_HolderChangePinTest extends BasicTest
+public class IOS_HolderAutoLockTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void changePinIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
+	public void AutoLockHolderAppIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -212,7 +212,7 @@ public class IOS_HolderChangePinTest extends BasicTest
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public IOS_HolderChangePinTest(DesiredCapabilities caps) {
+	public IOS_HolderAutoLockTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 

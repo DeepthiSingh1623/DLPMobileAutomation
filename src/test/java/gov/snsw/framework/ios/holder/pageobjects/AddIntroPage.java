@@ -28,12 +28,11 @@ public class AddIntroPage extends DriverPage{
 		return new TermsAndCondPage(driver);
 	}
 	
-	public String verifyAddPageTitle()
-	{	
+	public Boolean verifyAddPageTitle()
+	{		
 	By AddPage = By.xpath("//*[@label='Add']");
 	fluentWait(AddPage);
-	String AddTitle = driver.findElement(AddPage).getText();
-	return AddTitle;
+	return driver.findElement(AddPage).isDisplayed();
 	}
 	
 	public boolean isStartBtnExist()

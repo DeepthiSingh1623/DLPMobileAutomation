@@ -20,39 +20,40 @@ import com.perfectomobile.test.BasicTest;
 import com.perfectomobile.utils.PerfectoUtils;
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
-
+import gov.snsw.framework.android.holder.pageobjects.AppSettingPage;
 import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
+import gov.snsw.framework.android.holder.pageobjects.QuickViewPage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.android.holder.pageobjects.SupportPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 import gov.snsw.framework.utils.Utilities;
 
 
-public class Android_HolderSignInTest extends BasicTest{
+public class Android_Holder_QuickView_Test extends BasicTest{
 
 	
 	
 	@Test (dataProvider="logInData")
-	public void signInHolderAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void quickViewAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 			//reportPass("success", "param");
-	 			 
-	 	    	//close App
-				Map<String, Object> params12 = new HashMap<>();
-				params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-				Object result12 = driver.executeScript("mobile:application:close", params12);
- 		
-				//open App
-				Map<String, Object> params11 = new HashMap<>();
-				params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-				Object result11 = driver.executeScript("mobile:application:open", params11);
-	 			
-				switchToContext(driver, "NATIVE_APP");
+	 		
+	 			//close App
+	 			Map<String, Object> params12 = new HashMap<>();
+	 			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result12 = driver.executeScript("mobile:application:close", params12);
+		
+	 			//open App
+	 			Map<String, Object> params11 = new HashMap<>();
+	 			params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+	 				 			
+	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
@@ -102,14 +103,21 @@ public class Android_HolderSignInTest extends BasicTest{
 		 			
 		 			//Enter 4 digit PIN
 		 			enterPIN.enter4DigitPin(pin);
-		 		}	 		
-		 		MyLicencePage LicPg = new MyLicencePage(driver);
+		 		}	 	
 		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("myLicences"));
-		 				 		
+		 		MyLicencePage LicPg = new MyLicencePage(driver);		 		
+		 		
 		 		//Verify My Licences Page is displayed
 		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		
+		 		//Click on the AppSettings
+		 		AppSettingPage appSettingPg = LicPg.clickSettings();
+		 		
+		 		//Verify app Settings Page is displayed 
+		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
+		 		
+		 		//Click Quick View 			 		
+		 		appSettingPg.clickQuickView();
 		 		
 		 		//close app
 		 		Map<String, Object> params1 = new HashMap<String, Object>();
@@ -117,25 +125,32 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		Object result1 = driver.executeScript("mobile:application:close", params1);
 		 		
 		 		//Open App
-		 		Map<String, Object> params2 = new HashMap<String, Object>();
-		 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-		 		Object result2 = driver.executeScript("mobile:application:open", params2);
+		 		Map<String, Object> params22 = new HashMap<String, Object>();
+		 		params22.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+		 		Object result22 = driver.executeScript("mobile:application:open", params22);
 		 		
-		 		//Verify Unlock Enter Pin is displayed
-		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
-	 			
-	 			//Re-enter 4 digit PIN Number
+		 		QuickViewPage quickPg = new QuickViewPage(driver);
+		 		//assert Quick view Title
+		 		assertTrue(quickPg.verifyQuickViewTitle());
+		 		
+		 		//assertTrue Licence Type
+		 		assertTrue(quickPg.verifyLicType().contains(licence_Name));
+		 		
+		 		//Click Unlock
+		 		enterPIN = quickPg.clickUnlock();
+		 		
+		 		//Verify the Enter PIN is displayed
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+		 		
+		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
-		 				 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
-		 		//Click on the Settings and then sign out
-		 		LicPg.settings();	
+		 		//click Settings 
+		 		LicPg.settings();
 		 		
 		 		//Verify Add Intro Page is displayed
 		 		assertTrue(AddInPg.verifyAddPg().contains("Add"));
-		 		
+		 			 		
 		 		
 		}
 	 	catch(Exception e){
@@ -193,7 +208,7 @@ public class Android_HolderSignInTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public Android_HolderSignInTest(DesiredCapabilities caps) {
+	public Android_Holder_QuickView_Test(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
+import com.perfectomobile.utils.PerfectoUtils;
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 
@@ -29,7 +30,7 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 
 
 	@Test (dataProvider="logInData")
-	public void viewLicenceDetails(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type,String licence_Name, String LogEvent_Type, String new_Pin) throws Exception{
+	public void viewLicenceDetailsAndroid(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type,String licence_Name, String LogEvent_Type, String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -37,7 +38,17 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
-	 			 			
+	 			
+	 			//close App
+	 			Map<String, Object> params12 = new HashMap<>();
+	 			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result12 = driver.executeScript("mobile:application:close", params12);
+		
+	 			//open App
+	 			Map<String, Object> params11 = new HashMap<>();
+	 			params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+ 				
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -46,8 +57,10 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		EnterPINPage enterPIN = null;
 		 		
 		 		if(AddInPg.isStartBtnExist())
-		 		{		 			
 		 		
+		 		{		 			
+		 			
+		 			
 		 			//Click on the Start button on introduction page
 			 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 			 		
@@ -67,7 +80,7 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 			 		enterPIN = signIn.clickSignInBtn();
 			 		 		
 			 		//Verify the Enter PIN is displayed
-			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
+			 		assertTrue(enterPIN.verifyPinEnterTitle().contains("Licences"));
 			 		
 			 		//Enter 4 digit PIN
 			 		enterPIN.enter4DigitPin(pin);
@@ -93,7 +106,7 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 			 		MyLicencePage LicPg = new MyLicencePage(driver);
 			 		
 			 		//Verify My Licence Page is displayed
-			 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+			 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 			 				 		
 			 		//Verify My Licences Page is displayed
 			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
@@ -126,7 +139,7 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		Utilities.BackBtn(driver);
 		 		
 		 		//Verify My Licence Page is displayed
-		 		assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
+		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
 		 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
@@ -158,6 +171,8 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 	 		Map<String, Object> params2 = new HashMap<String, Object>();
 	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
 	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		
+	 		//PerfectoUtils.downloadReport(driver, "pdf", "C:\\test\\View_Licence_Android");
 	 	}
 		
         if(testFail){

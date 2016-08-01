@@ -14,7 +14,7 @@ public class DeclarationRenewalLicencePage extends DriverPage{
 	
 	
 
-	By agreeBtn = By.xpath("//*[@contentDesc='']");
+	By agreeBtn = By.xpath("(//input[@id='DeclarationAgreeChecked'])[1]");
 
 	By nextBtn = By.xpath("//*[@resourceid='NextStep']");
 
@@ -41,7 +41,7 @@ public class DeclarationRenewalLicencePage extends DriverPage{
 	
 	public boolean verifyDeclarationPgExist()
 	{
-		By declarationPg = By.xpath("//*[@contentDesc='DECLARATION']");
+		By declarationPg = By.xpath("//*[text()='I Agree']");
 		fluentWait(declarationPg);
 		return driver.findElement(declarationPg).isDisplayed();
 	}

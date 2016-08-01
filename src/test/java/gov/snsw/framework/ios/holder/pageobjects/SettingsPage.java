@@ -13,12 +13,17 @@ public class SettingsPage extends DriverPage{
 		// TODO Auto-generated constructor stub
 	}
 	
+	By quickViewToggel = By.xpath("//*[@label='Quick View' and @class='UIASwitch']");
 	
 	By signout =By.xpath("//*[@label='Sign Out']");
 	
 	By signOutOKBtn = By.xpath("//*[@label='Yes']");
 	
 	By changePIN = By.xpath("//*[@label='Change PIN']");
+	
+	By supportOption = By.xpath("//*[@label='Support']");
+	
+	By autoLock = By.xpath("//*[@label='Auto Lock']");
 
 	public void signoutBtn()
 	{
@@ -51,6 +56,32 @@ public class SettingsPage extends DriverPage{
 		fluentWait(changePIN);
 		driver.findElement(changePIN).click();
 	}
+	
+	public void clickQuickView()
+	{
+		fluentWait(quickViewToggel);
+		driver.findElement(quickViewToggel).click();
+	}
+	
+	public String verifyquickViewEnabled()
+	{
+		fluentWait(quickViewToggel);
+		String quickViewFlag = driver.findElement(quickViewToggel).getText();
+		return quickViewFlag;
+	}
+	public void SupportOption()
+	{
+		
+		driver.findElement(supportOption).click();
+	}
+	
+	public SupportPage clickSupportOption()
+	{
+		fluentWait(supportOption);
+		SupportOption();
+		return new SupportPage(driver);
+	}
+	
 	
 	
 	

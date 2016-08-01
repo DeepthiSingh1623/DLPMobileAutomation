@@ -28,7 +28,7 @@ public class ReviewDetailsRenewalLicencePage extends DriverPage{
 	
 	public boolean verifyReviewDetailsPgExist()
 	{
-		By reviewDetailsPg = By.xpath("//*[@contentDesc='REVIEW DETAILS']");
+		By reviewDetailsPg = By.xpath("//*[text()='Please review and update your licence details as required.']");
 		fluentWait(reviewDetailsPg);
 		return driver.findElement(reviewDetailsPg).isDisplayed();
 	}
