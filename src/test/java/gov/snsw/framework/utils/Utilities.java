@@ -65,6 +65,16 @@ public class Utilities {
        return p_date;
 	}
 	
+	public static String getCurrentDate() throws ParseException{
+
+       DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+       Date date = new Date();
+       String p_date = formatter.format(date);
+       System.out.println(p_date);
+    
+       return p_date;
+	}			
+	
 	public static  String[] getXLDataLatestByRow(String location, String sheetname, int rowNo) throws IOException
 	  {
 		File excel = new File (location);

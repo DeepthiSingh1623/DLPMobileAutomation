@@ -25,7 +25,15 @@ public class SNSWCheckerPage extends DriverPage{
 	By noBtn = By.xpath("//*[@label='No']");
 	
 	By okBtn = By.xpath("//*[@label='Ok']");
+
+	By pgTitle = By.xpath ("//*[@label='Licence Scan']");
 	
+	public String getPageTitle()
+	{
+		return driver.findElement(pgTitle).getText();
+		
+	}
+
 	By licScanPg = By.xpath("//*[@label='Licence Scan']");
 	
 	public LicenceSearchPage clickManualSearch()
@@ -46,11 +54,11 @@ public class SNSWCheckerPage extends DriverPage{
 		return new SettingsPage(driver);
 	}
 	
-	public LicenceSearchPage clickActivity()
+	public CheckerActivities clickActivity()
 	{
 		fluentWait(activityBtn);
 		driver.findElement(activityBtn).click();
-		return new LicenceSearchPage(driver);
+		return new CheckerActivities(driver);
 	}
 
 	public boolean isDialogOpen(){
