@@ -105,7 +105,7 @@ public class DriverPage {
 			boolean txtPres= false;
 			
 			try{
-				txtPres = driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")).isDisplayed();
+				txtPres = driver.findElement(By.xpath("//text[contains(text(),'" + text + "')]")).isDisplayed();
 			}
 			
 			catch(Exception e){
