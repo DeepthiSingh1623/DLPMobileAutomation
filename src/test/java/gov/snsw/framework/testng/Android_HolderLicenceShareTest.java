@@ -46,12 +46,12 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 			 
 	 			//close App
 	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			params12.put("identifier",appName);
 	 			Object result12 = driver.executeScript("mobile:application:close", params12);
 		
 	 			//open App
 	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			params11.put("identifier", appName);
 	 			Object result11 = driver.executeScript("mobile:application:open", params11);
 	 			
 		 		switchToContext(driver, "NATIVE_APP");
@@ -170,7 +170,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 		//Clean App
 	 		//Utilities.cleanApp(driver, appName);
 	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		params1.put("identifier", appName);
 	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
 	 		
 	 		
@@ -178,11 +178,10 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 		//close app
 	 		//Utilities.closeApp(driver, appName);
 	 		Map<String, Object> params2 = new HashMap<String, Object>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		params2.put("identifier", appName);
 	 		Object result2 = driver.executeScript("mobile:application:close", params2);
 	 		
-	 		//PerfectoUtils.downloadReport(driver, "pdf", "C:\\test\\Share_Licence_Android");
-	 		
+	 
 	 		
 	 		
 	 		

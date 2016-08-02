@@ -36,8 +36,8 @@ public class DriverPage {
 		}		
 		
 
-		protected String holder_android_resourceid = "au.gov.nsw.onegov.app.holder.uat";
-													  		
+		protected String holder_android_resourceid = "au.gov.nsw.onegov.app.holder.psm";
+															  		
 		protected String checker_android_resourceid = "au.gov.nsw.onegov.app.checker.uat";
 		
 		protected String holder_ios_resourceid = "au.gov.nsw.onegov.MyLicences.uat";

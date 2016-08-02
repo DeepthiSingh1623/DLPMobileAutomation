@@ -30,6 +30,14 @@ public class SettingsPage extends DriverPage{
 	
 	By fiveMinutesAutoLock = By.xpath("//*[@name='After 5 minutes' and @class='UIATableCell']//*[@label=' ']");
 	
+	By aboutOption = By.xpath("//*[@label='About']");
+	
+	By appBulidName = By.xpath("//*[@label='Name']/../text[2]");
+	
+	By appVersion = By.xpath("//*[@label='Version']/../text[2]");
+	
+	By appDetails = By.xpath("//*[@label='APP DETAILS']");
+	
 	public void signoutBtn()
 	{
 		driver.findElement(signout).click();
@@ -86,6 +94,11 @@ public class SettingsPage extends DriverPage{
 		
 	}
 	
+	public void clickSettingBackButton()
+	{
+		driver.findElement(settingTitleAutoLock).click();
+	}
+	
 	public void clickImmediateAutoLockOption()
 	{
 		fluentWait(immediateAutoLock);
@@ -102,6 +115,43 @@ public class SettingsPage extends DriverPage{
 		fluentWait(settingMainPgTitle);
 		String settingsPageTitle = driver.findElement(settingMainPgTitle).getText();
 		return settingsPageTitle;
+	}
+	
+	public void clickAboutOption()
+	{
+		fluentWait(aboutOption);
+		driver.findElement(aboutOption).click();
+	}
+	
+	public String verifyBuildName()
+	{
+		fluentWait(appBulidName);
+		String appBuild = driver.findElement(appBulidName).getText();
+		return appBuild;
+	}
+	
+	public String verifyBuildVersion()
+	{
+		fluentWait(appVersion);
+		String buildVersion = driver.findElement(appVersion).getText();
+		return buildVersion;
+	}
+	
+	public boolean verifyAppDetailsTitle()
+	{
+		boolean appDetailsTitle = false;
+		try
+		{
+			
+			fluentWait(appDetails);
+			appDetailsTitle = driver.findElement(appDetails).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return appDetailsTitle;
+	
 	}
 }
 
