@@ -44,12 +44,12 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 			
 	 		//close App
 			Map<String, Object> params12 = new HashMap<>();
-			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+			params12.put("identifier", appName);
 			Object result12 = driver.executeScript("mobile:application:close", params12);
 		
 			//open App
 			Map<String, Object> params11 = new HashMap<>();
-			params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+			params11.put("identifier", appName);
 			Object result11 = driver.executeScript("mobile:application:open", params11);
  			
 	 		switchToContext(driver, "NATIVE_APP");
@@ -168,9 +168,7 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 		//Click Back Button on the Detailed Licence Page'
 	 		Utilities.BackBtn(driver);
 	 		
-	 		//Verify My Licence Page is displayed.
-	 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-	 		
+	 		 		
 		   // Click on the Settings and Sign out
 		   LicPg.settings();
 		   

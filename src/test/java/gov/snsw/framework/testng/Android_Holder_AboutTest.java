@@ -30,18 +30,18 @@ import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
 import gov.snsw.framework.utils.Utilities;
 
 
-public class Android_Holder_AutoLockTest extends BasicTest{
+public class Android_Holder_AboutTest extends BasicTest{
 
 	
 	
 	@Test (dataProvider="logInData")
-	public void autoLockAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void AboutAppDetailsAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum, String cardName,String appBuildName,String appVersion) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
-	 	try{
+		try{
 	 		
 	 			//close App
 	 			Map<String, Object> params12 = new HashMap<>();
@@ -50,7 +50,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		
 	 			//open App
 	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier",appName);
+	 			params11.put("identifier", appName);
 	 			Object result11 = driver.executeScript("mobile:application:open", params11);
 	 				 			
 	 			switchToContext(driver, "NATIVE_APP");
@@ -110,116 +110,21 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		//Verify My Licences Page is displayed
 		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
-		 		//Click on the AppSettings
-		 		AppSettingPage appSettingPg = LicPg.clickSettings();
+		 		//Click on settings hamburger		 		
+		 		LicPg.clickSettingHamburger();
 		 		
-		 		//Verify app Settings Page is displayed 
-		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
+		 		//click on About Option
+		 		LicPg.clickAbout();
 		 		
-		 		//Click AutoLock		 		
-		 		appSettingPg.clickAutoLock();
+		 		//verify app Details Title
+		 		assertTrue(LicPg.verifyappDetailsTitle());
 		 		
-		 		//assert AutoLock title is displayed
-		 		assertTrue(appSettingPg.alertAutoLock());
-		 		
-		 		//select Immediately Radio button
-		 		appSettingPg.clickImmediatelyRadioButton();
-		 		
-		 		//Verify app Settings Page is displayed 
-		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
-		 		
-		 		//Press Home Key
-		 		Map<String, Object> params2 = new HashMap<>();
-		 		params2.put("keySequence", "HOME");
-		 		Object result2 = driver.executeScript("mobile:presskey", params2);
-		 		
-		 		Thread.sleep(2000);
-		 		
-		 		//Open App
-		 		Map<String, Object> params13 = new HashMap<>();
-		 		params13.put("identifier", appName);
-	 			Object results13 = driver.executeScript("mobile:application:open", params13);			
-	 			
-		 				
-	 			Thread.sleep(4000);
-	 			
-	 			//Verify the Enter PIN is displayed
-		 		assertTrue(enterPIN.verifyPinEnterPg().contains("Enter PIN"));
-		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enter4DigitPin(pin);
-	 			
-	 			//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
-		 		
-		 		//Click on the AppSettings
-		 		appSettingPg = LicPg.clickSettings();
-		 		
-		 		//Verify app Settings Page is displayed 
-		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
-		 		
-		 		//Click AutoLock		 		
-		 		appSettingPg.clickAutoLock();
-		 		
-		 		//assert AutoLock title is displayed
-		 		assertTrue(appSettingPg.alertAutoLock());
-		 		
-		 		//select Immediately Radio button
-		 		appSettingPg.clickFiveMinutesRadioButton();
-		 		
-		 		//Verify app Settings Page is displayed 
-		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
-		 		
-		 		//Press Home Key
-		 		Map<String, Object> params32 = new HashMap<>();
-		 		params32.put("keySequence", "HOME");
-		 		Object result32 = driver.executeScript("mobile:presskey", params32);
-		 		
-		 		Thread.sleep(2000);
-		 		
-		 		//Open App
-		 		Map<String, Object> params33 = new HashMap<>();
-		 		params33.put("identifier",appName);
-	 			Object results33 = driver.executeScript("mobile:application:open", params33);			
-	 					 		
-	 			Thread.sleep(3000);
-	 			
-	 			//Verify app Settings Page is displayed 
-		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
+		 		//verify the appName	 		
+		 		assertTrue(LicPg.verifyAppName().contains("App name: "+appBuildName));
 		 		
 		 		
-		 		//Checking after 5 minutes 
-		 		//Click AutoLock		 		
-		 		appSettingPg.clickAutoLock();
-		 		
-		 		//assert AutoLock title is displayed
-		 		assertTrue(appSettingPg.alertAutoLock());
-		 		
-		 		//select Immediately Radio button
-		 		appSettingPg.clickFiveMinutesRadioButton();
-		 		
-		 		//Verify app Settings Page is displayed 
-		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
-		 		
-		 		//Press Home Key
-		 		Map<String, Object> params52 = new HashMap<>();
-		 		params52.put("keySequence", "HOME");
-		 		Object result52 = driver.executeScript("mobile:presskey", params52);
-		 		
-		 		Thread.sleep(310000);		 		
-		 		
-		 		//Open App
-		 		Map<String, Object> params53 = new HashMap<>();
-		 		params53.put("identifier", appName);
-	 			Object results53 = driver.executeScript("mobile:application:open", params53);			
-		 		
-	 			Thread.sleep(1000);
-	 			
-	 			//Verify the Enter PIN is displayed
-		 		assertTrue(enterPIN.verifyPinEnterPg().contains("Enter PIN"));
-		 		
-		 		//Enter 4 digit PIN
-		 		enterPIN.enter4DigitPin(pin);	 			
+		 		//click Back Button
+		 		LicPg.clickBackBtnAboutOption();
 		 		
 		 		
 		 		//Verify My Licences Page is displayed
@@ -246,14 +151,14 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 	 		//Clean App
 	 		//Utilities.cleanApp(driver,appName);
 	 		Map<String, Object> params3 = new HashMap<String, Object>();
-	 		params3.put("identifier",appName);
+	 		params3.put("identifier", appName);
 	 		Object result3 = driver.executeScript("mobile:application:clean", params3);
 	 				
 	 		
 	 		//close app
 	 		//Utilities.closeApp(driver,appName);
 	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier",appName);
+	 		params1.put("identifier", appName);
 	 		Object result1 = driver.executeScript("mobile:application:close", params1);
 	 		
 	 		
@@ -271,7 +176,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(10);
+		  s = ed.getData(19);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -284,7 +189,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public Android_Holder_AutoLockTest(DesiredCapabilities caps) {
+	public Android_Holder_AboutTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

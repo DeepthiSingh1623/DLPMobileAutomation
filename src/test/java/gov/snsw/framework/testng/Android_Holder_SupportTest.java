@@ -44,12 +44,12 @@ public class Android_Holder_SupportTest extends BasicTest{
 	 				
 	 			//close App
 	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 			params12.put("identifier",appName);
 	 			Object result12 = driver.executeScript("mobile:application:close", params12);
 		
 	 			//open App
 	 			Map<String, Object> params11 = new HashMap<>();
-				params11.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+				params11.put("identifier",appName);
 				Object result11 = driver.executeScript("mobile:application:open", params11);
  			
 	 			switchToContext(driver, "NATIVE_APP");
@@ -160,20 +160,17 @@ public class Android_Holder_SupportTest extends BasicTest{
 	 		//Clean App
 	 		//Utilities.cleanApp(driver,appName);
 	 		Map<String, Object> params3 = new HashMap<String, Object>();
-	 		params3.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		params3.put("identifier", appName);
 	 		Object result3 = driver.executeScript("mobile:application:clean", params3);
 	 				
 	 		
 	 		//close app
 	 		//Utilities.closeApp(driver,appName);
 	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
+	 		params1.put("identifier", appName);
 	 		Object result1 = driver.executeScript("mobile:application:close", params1);
 	 		
-	 		//PerfectoUtils.downloadReport(driver, "pdf", "C:\\test\\Sign_In_Android");
 	 		
-	 		//Map<String, Object> params22 = new HashMap<>();
-	 		//Object result22 = driver.executeScript("mobile:monitor:stop", params22);
 	 		
 	 		
 	 	}

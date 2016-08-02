@@ -14,18 +14,30 @@ public class SNSWCheckerPage extends DriverPage{
 	By scanOption = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/btnFloatingActionButton']");
 	
 	//Click Settings to ChangePIN
-		By settingOption = By.xpath("//*[text()='Settings']");
+	By settingOption = By.xpath("//*[text()='Settings']");
 		
-		//Scan Licence
-		By scanLicPg = By.xpath("//*[text()='Scan Licence']");
+	//Scan Licence
+	By scanLicPg = By.xpath("//*[text()='Scan Licence']");
 	
 	
 	//Click on Sign out  
 	By signOut = By.xpath("//*[text()='Sign Out']");
 	
+	//About Option 
+	By aboutOption = By.xpath("//*[text()='About']");
+	
 	
 	//Click on the Sign out OK Confirm Button  
 	By ok = By.xpath("//*[text()='OK']");
+	
+	//About the App Details Title 
+	By appDetailsTitle = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/toolbarTitle']");
+	
+	//App Name
+	By appName = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/txtAppName']");
+	
+	//BackBtn About Page
+	//By backBtnAbout = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
 	
 	//Click 3bars Setting	
 	By setting3Bars = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
@@ -76,6 +88,48 @@ public class SNSWCheckerPage extends DriverPage{
 			String scanLicTitleBar = driver.findElement(scanLicPg).getText();
 			return scanLicTitleBar;
 		}
+		
+		public void clickSettingsHamburger()
+		{
+			fluentWait(setting3Bars);
+			driver.findElement(setting3Bars).click();
+		}
+		
+		public void clickAboutOption()
+		{
+			fluentWait(aboutOption);
+			driver.findElement(aboutOption).click();
+		}
+		
+		public boolean verifyAppDetailsTitle()
+		{
+			boolean buildDetailsTitle = false;
+			
+				try{
+					fluentWait(appDetailsTitle);
+					buildDetailsTitle = driver.findElement(appDetailsTitle).isDisplayed();
+				}
+				catch(Exception e)
+				{
+							
+				}
+				return buildDetailsTitle;
+		}
+		
+		public String verifyAppName()
+		{
+			
+			fluentWait(appName);
+			String buildName = driver.findElement(appName).getText();
+			return buildName;
+		}
+		
+		public void clickBackBtnAboutOption()
+		{
+			fluentWait(setting3Bars);
+			driver.findElement(setting3Bars).click();
+		}
+		
 
 
 }

@@ -31,6 +31,13 @@ public class SettingsPage extends DriverPage{
 	
 	By fiveMinutes = By.xpath("//*[@name='After 5 minutes' and @class='UIATableCell']//*[@label=' ']");
 
+	By aboutOption = By.xpath("//*[@label='About']");
+	
+	By aboutAppDetails = By.xpath("//*[@label='APP DETAILS']");
+	
+	
+	
+	
 	public void signoutBtn()
 	{
 		driver.findElement(signout).click();
@@ -113,6 +120,29 @@ public class SettingsPage extends DriverPage{
 		
 	}
 	
+	public void clickSettingBackButton()
+	{
+		fluentWait(settingsTitle);
+		driver.findElement(settingsTitle).click();
+	}
+	
+	public boolean verifyAppDetailsTitle()
+	{
+		boolean appDetailsTitle = false;
+		try
+		{
+			
+			fluentWait(aboutAppDetails);
+			appDetailsTitle = driver.findElement(aboutAppDetails).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return appDetailsTitle;
+		
+	}
+	
 	public void clickImmediately()
 	{
 		fluentWait(immediately);		
@@ -125,6 +155,31 @@ public class SettingsPage extends DriverPage{
 		driver.findElement(fiveMinutes).click();
 	}
 	
+	public void clickAboutOption()
+	{
+		fluentWait(aboutOption);		
+		driver.findElement(aboutOption).click();
+	}
+	
+	public String verifyAppName()
+	{
+		//app Name 
+		//By appName = By.xpath("//*[@label='Name']/../text[2]");
+		By appName = By.xpath("//device/view/window[1]/table[1]/cell[1]/text[2]");
+		fluentWait(appName);
+		String appNameTitle = driver.findElement(appName).getText();
+		return appNameTitle;
+	}
+	
+	public String verifyAppVersion()
+	{
+		//appVersion
+		//By appVersion = By.xpath("//*[@label='Version']/../text[2]");
+		By appversion = By.xpath("//device/view/window[1]/table[1]/cell[2]/text[2]");
+		fluentWait(appversion);
+		String appVersionTitle = driver.findElement(appversion).getText();
+		return appVersionTitle;
+	}
 	
 	
 	

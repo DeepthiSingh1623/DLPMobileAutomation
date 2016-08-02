@@ -21,6 +21,10 @@ public class MyLicencePage extends DriverPage{
 	//Fishing fee Current Text
 	By fishingFee =  By.xpath("//*[text()='Current']");	
 	
+	By aboutOption = By.xpath("//*[text()='About']");
+	
+	//Back Button on the About this App Option
+	By backBtnAbout = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/imgLeft']");
 		
 	//Fishing Fee Share
 	public By shareLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/recycler']/group[1]/group[1]/group[1]/text[2]");
@@ -42,6 +46,12 @@ public class MyLicencePage extends DriverPage{
 								
 	//Add License button
 	By addLic = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/btnFloatingActionButton']");
+	
+	//app Details title 
+	By appDetailsTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/toolbarTitle']");
+	
+	//App Name 
+	By appName = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtAppName']");
 	
 	public DetailLicencePage clickLicStatus()
 	{	
@@ -129,6 +139,40 @@ public class MyLicencePage extends DriverPage{
 	{
 		fluentWait(setting3Bars);
 		driver.findElement(setting3Bars).click();
+	}
+	
+	public void clickAbout()
+	{
+		fluentWait(aboutOption);
+		driver.findElement(aboutOption).click();
+		
+	}
+	
+	public String verifyAppName()
+	{
+		fluentWait(appName);
+		String buildName = driver.findElement(appName).getText();
+		return buildName;
+	}
+	
+	public boolean verifyappDetailsTitle()
+	{
+		boolean buildTitle  = false;
+		try
+		{	fluentWait(appDetailsTitle);
+			buildTitle = driver.findElement(appDetailsTitle).isDisplayed();
+		}
+		catch(Exception e)
+		{
+			
+		}
+       	return buildTitle;
+	}
+	
+	public void clickBackBtnAboutOption()
+	{
+		fluentWait(backBtnAbout);
+		driver.findElement(backBtnAbout).click();
 	}
 	
 		
