@@ -45,9 +45,9 @@ public class Utilities {
 	
 	public static void BackBtn(RemoteWebDriver driver)
 	{
-		Map<String, Object> params1 = new HashMap<>();
-		params1.put("keySequence", "BACK");
-		Object result1 = driver.executeScript("mobile:presskey", params1);
+		params.put("keySequence", "BACK");
+		Object result1 = driver.executeScript("mobile:presskey", params);
+		params.clear();
 	}
 	
 	public static String dateFormatChange(String p_date) throws ParseException{

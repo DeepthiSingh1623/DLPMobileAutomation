@@ -74,7 +74,7 @@ public class CheckerAboutTest extends BasicTest{
 		 		//assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
 		 		
 		 		//verify Scan LicencePage is displayed
-		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
 		 		//Click on the AppSettings
 		 		chkPg.clickSettingsHamburger();
@@ -92,7 +92,7 @@ public class CheckerAboutTest extends BasicTest{
 		 		chkPg.clickBackBtnAboutOption();	 		
 		 		
 		 		//verify Scan LicencePage is displayed
-		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));
 		 			 		
 		 		// Click on the Settings and Sign out
 		 		chkPg.signOut();

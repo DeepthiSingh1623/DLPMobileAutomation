@@ -46,7 +46,7 @@ public class CheckerAutoLockTest extends BasicTest{
 		 			 		
 		 		EnterPINPage enterPIN = null;
 		 		
-if(tcPg.isAgreeBtnExist()){
+		 		if(tcPg.isAgreeBtnExist()){
 		 			
 		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 			

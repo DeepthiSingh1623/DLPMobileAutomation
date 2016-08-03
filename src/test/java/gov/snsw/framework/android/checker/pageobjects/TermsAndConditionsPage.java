@@ -25,7 +25,7 @@ public class TermsAndConditionsPage extends DriverPage
 		//Terms and Conditions Page Decline Button
 		By tAndcDeclineBtn = By.xpath("//*[text()='Decline']");
 		
-	
+		By allowBtn = By.xpath("//*[@resourceid='com.android.packageinstaller:id/permission_allow_button']");	
 		
 		public AppUsageAgreementPage termsAndConditionAcceptBtn()
 		{
@@ -41,6 +41,11 @@ public class TermsAndConditionsPage extends DriverPage
 			try{
 				fluentWait(agreeBtn);
 				agreeBtnExist= driver.findElement(agreeBtn).isDisplayed();
+				
+				if(!agreeBtnExist){
+					driver.findElement(allowBtn).click();
+					agreeBtnExist= driver.findElement(agreeBtn).isDisplayed();
+				}
 				
 			}
 			catch(Exception e)

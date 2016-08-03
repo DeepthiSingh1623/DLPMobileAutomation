@@ -37,15 +37,6 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			 
-	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-	 		
-	 			//open app
-	 			Map<String, Object> params22 = new HashMap<>();
-	 			params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 			Object result22 = driver.executeScript("mobile:application:open", params22);	 		
 	 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -84,7 +75,7 @@ public class IOS_HolderSignInTest extends BasicTest
 		 			enterPIN = new EnterPinPage(driver);
 		 			
 		 			//Verify Enter Pin is displayed
-			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
 			 		
 		 			//Enter 4 digit PIN
 		 			enterPIN.enterPINUnlock();
@@ -139,20 +130,10 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	
 	 	finally{
 	 		
-	 		//clean app
-	 		//Utilities.cleanApp(driver, appName);
-	 		
-	 		Map<String, Object> params1 = new HashMap<>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
-	 		
-	 		//close app
-	 		//Utilities.closeApp(driver, appName);
+		 		
+	 		Utilities.closeApp(driver, appName);
 
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);	 		
- 			
+	 		
 	 	}
 		
         if(testFail){

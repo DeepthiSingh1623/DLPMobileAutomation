@@ -113,7 +113,7 @@ public class IOSCheckerSignInTest extends BasicTest{
 		
 	 	finally{
 	 		
-	 		Utilities.cleanApp(driver, appName);
+	 		
 	 		
 	 		Utilities.closeApp(driver, appName);
 	 		

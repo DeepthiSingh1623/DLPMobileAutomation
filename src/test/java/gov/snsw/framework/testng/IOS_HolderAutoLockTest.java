@@ -37,16 +37,7 @@ public class IOS_HolderAutoLockTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 			//close App
- 				Map<String, Object> params12 = new HashMap<>();
- 				params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result12 = driver.executeScript("mobile:application:close", params12);
- 		
- 				//open app
- 				Map<String, Object> params22 = new HashMap<>();
- 				params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result22 = driver.executeScript("mobile:application:open", params22);
- 			
+	 		
 	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -220,12 +211,7 @@ public class IOS_HolderAutoLockTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		//Utilities.cleanApp(driver, appName);
-	 		
-	 		Map<String, Object> params1 = new HashMap<>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
-	 		
+
 	 		//close app
 	 		//Utilities.closeApp(driver, appName);
 
