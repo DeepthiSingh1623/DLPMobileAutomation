@@ -44,14 +44,10 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 			//reportPass("success", "param");
 	 			
 	 		//close App
-			Map<String, Object> params12 = new HashMap<>();
-			params12.put("identifier",appName);
-			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
-			//open App
-			Map<String, Object> params11 = new HashMap<>();
-			params11.put("identifier", appName);
-			Object result11 = driver.executeScript("mobile:application:open", params11);
+ 			Utilities.closeApp(driver, appName);
+ 			
+ 			//open App
+			Utilities.openApp(driver, appName);
  			
 	 		switchToContext(driver, "NATIVE_APP");
 	 		//Driver initialization	 		
@@ -107,9 +103,6 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
-		 		//Verify My Licence Page is displayed.
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-		 				 		
 		 		//Verify My Licences Page is displayed
 		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 	 		

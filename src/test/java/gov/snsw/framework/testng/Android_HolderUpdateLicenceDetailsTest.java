@@ -43,14 +43,10 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 			//reportPass("success", "param");
 	 			
 	 		//close App
-			Map<String, Object> params12 = new HashMap<>();
-			params12.put("identifier", appName);
-			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
-			//open App
-			Map<String, Object> params11 = new HashMap<>();
-			params11.put("identifier", appName);
-			Object result11 = driver.executeScript("mobile:application:open", params11);
+ 			Utilities.closeApp(driver, appName);
+ 			
+ 			//open App
+			Utilities.openApp(driver, appName);
  			
 	 		switchToContext(driver, "NATIVE_APP");
 	 		//Driver initialization	 		
@@ -184,14 +180,11 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 	 	}
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
+	 		//clean App
+	 		Utilities.cleanApp(driver, appName);
 	 		
-	  		params.put("identifier", appName);
-	 		result1 = driver.executeScript("mobile:application:close", params);
-	 		params.clear();
+	 		//Close App
+	 		Utilities.closeApp(driver, appName);
 	 		
 	 		driver.close();
 	 	}

@@ -24,6 +24,7 @@ import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
 
 
@@ -46,7 +47,7 @@ public class CheckerAutoLockTest extends BasicTest{
 		 			 		
 		 		EnterPINPage enterPIN = null;
 		 		
-if(tcPg.isAgreeBtnExist()){
+		 		if(tcPg.isAgreeBtnExist()){
 		 			
 		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 		 			
@@ -94,18 +95,12 @@ if(tcPg.isAgreeBtnExist()){
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 			 		
 		 		//Press Home Key
-		 		Map<String, Object> params2 = new HashMap<>();
-		 		params2.put("keySequence", "HOME");
-		 		Object result2 = driver.executeScript("mobile:presskey", params2);
-		 		
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
 		 		//Open App
-		 		Map<String, Object> params13 = new HashMap<>();
-		 		params13.put("identifier", "au.gov.nsw.onegov.app.checker.uat");
-	 			Object results13 = driver.executeScript("mobile:application:open", params13);			
-	 					 				
-	 			Thread.sleep(4000);
+		 		Utilities.openApp(driver, appName);
+		 		Thread.sleep(4000);
 	 			
 	 			//Verify the Enter PIN is displayed
 		 		assertTrue(enterPIN.getPINPageTitle().contains("Enter PIN"));
@@ -135,17 +130,11 @@ if(tcPg.isAgreeBtnExist()){
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 			 		
 		 		//Press Home Key
-		 		Map<String, Object> params12 = new HashMap<>();
-		 		params12.put("keySequence", "HOME");
-		 		Object result12 = driver.executeScript("mobile:presskey", params12);
-		 		
+		 		Utilities.homeBtn(driver, appName);	 		
 		 		Thread.sleep(2000);
 		 		
 		 		//Open App
-		 		Map<String, Object> params23 = new HashMap<>();
-		 		params23.put("identifier", "au.gov.nsw.onegov.app.checker.uat");
-	 			Object results23 = driver.executeScript("mobile:application:open", params23);			
-	 					 				
+		 		Utilities.openApp(driver, appName);
 	 			Thread.sleep(4000);
 	 			
 	 			//Verify app Settings Page is displayed 
@@ -166,17 +155,11 @@ if(tcPg.isAgreeBtnExist()){
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 			 		
 		 		//Press Home Key
-		 		Map<String, Object> params32 = new HashMap<>();
-		 		params32.put("keySequence", "HOME");
-		 		Object result32 = driver.executeScript("mobile:presskey", params32);
-		 		
+		 		Utilities.homeBtn(driver, appName);	 	 		
 		 		Thread.sleep(310000);
 		 		
 		 		//Open App
-		 		Map<String, Object> params43 = new HashMap<>();
-		 		params43.put("identifier", "au.gov.nsw.onegov.app.checker.uat");
-	 			Object results43 = driver.executeScript("mobile:application:open", params43);			
-	 					 				
+		 		Utilities.openApp(driver, appName); 					 				
 	 			Thread.sleep(4000);
 		 		
 	 			//Verify the Enter PIN is displayed

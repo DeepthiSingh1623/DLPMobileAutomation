@@ -45,14 +45,10 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 			//reportPass("success", "param");
 	 			 
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier",appName);
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
+ 				Utilities.closeApp(driver, appName);
+	 			
 	 			//open App
-	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier", appName);
-	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+				Utilities.openApp(driver, appName);
 	 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -145,9 +141,6 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		//click the back button on the License Detailed Page
 		 		Utilities.BackBtn(driver);
 		 		
-		 		//Verify My Licence Page is displayed.
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();
 		 		
@@ -168,21 +161,12 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 	 		
 
 	 		//Clean App
-	 		//Utilities.cleanApp(driver, appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
-	 		
-	 		
+	 		Utilities.cleanApp(driver, appName);
+	 				
 	 		
 	 		//close app
-	 		//Utilities.closeApp(driver, appName);
-	 		Map<String, Object> params2 = new HashMap<String, Object>();
-	 		params2.put("identifier", appName);
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
-	 		
-	 
-	 		
+	 		Utilities.closeApp(driver, appName);
+	 				
 	 		
 	 		
 	 	}

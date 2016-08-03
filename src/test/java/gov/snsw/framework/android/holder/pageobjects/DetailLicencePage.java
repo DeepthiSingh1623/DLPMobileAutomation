@@ -59,21 +59,25 @@ public class DetailLicencePage extends DriverPage{
 	
 	public String getLicNum()
 	{
+		fluentWait(licNum);
 		return driver.findElement(licNum).getText();
 	}
 	
 	public String getLicStartDate()
 	{
+		fluentWait(licStartDate);
 		return driver.findElement(licStartDate).getText();
 	}
 	
 	public String getLicExpireDate()
 	{
+		fluentWait(licExpiryDate);
 		return driver.findElement(licExpiryDate).getText();	
 	}
 	
 	public String getLicClass()
 	{
+		fluentWait(licClasses);
 		return driver.findElement(licClasses).getText();
 	}
 	

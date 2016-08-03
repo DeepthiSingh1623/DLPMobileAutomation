@@ -1,11 +1,10 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -25,12 +24,12 @@ import gov.snsw.framework.ios.checker.pageobjects.SettingsPage;
 import gov.snsw.framework.utils.Utilities;
 
 
-public class IOSCheckerAutoLockTest extends BasicTest{
+public class IOSCheckerSupportTest extends BasicTest{
 
 	
 	
 	@Test (dataProvider="logInData")
-	public void checkerAutoLockIOS(String username, String password,String pin) throws Exception{
+	public void checkerSupportIOS(String username, String password,String pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -54,7 +53,9 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 		 			enterPIN = signIn.pressSignIn(username,password);
 			 		 
 				 		//Enter 4 digit PIN
+		 				
 				 		 enterPIN.enterPin();
+				 		 
 				 		 enterPIN.enterPin();
 		 			
 		 		}
@@ -88,84 +89,19 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
 		 		
 		 		//click autolock option
-		 		settingPg.clickAutoLockOption();
+		 		settingPg.clickSupportOption();
 		 		
-		 		//verify settings title
-		 		assertTrue(settingPg.verifySettingsTitle());
+		 		//verify Support title
+		 		assertTrue(settingPg.verifySupportTitle());
 		 		
-		 		//click Immediately
-		 		settingPg.clickImmediateAutoLockOption();
+		 		//verify Agency Support Text
+		 		assertTrue(settingPg.verifyAgencySupportTxt().contains("AGENCY SUPPORT"));
 		 		
-		 		//verify settings Page
-		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
+		 		//verify Email address 
+		 		assertTrue(settingPg.verifySupportEmail());
 		 		
-		 		//click Home Button
-		 		Utilities.homeBtn(driver, appName);
-		 		Thread.sleep(2000);
-		 				 		
-		 		//Open App
-		 		Utilities.openApp(driver, appName);
-		 		Thread.sleep(2000);		  		
-		 		
-		 		//Verify the Unlock with  PIN Page is displayed
-		 		assertEquals("Unlock with PIN",enterPIN.verifyUnlockPINTitle());
-		 		
-		 		//Re-enter 4 digit PIN Number
-		 		enterPIN.enterPINUnlock(); 		
-		 		
-		 		//verify settings Page
-		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
-		 		
-		 		//Five Minutes
-		 		//click autolock option
-		 		settingPg.clickAutoLockOption();
-		 		
-		 		//verify settings title
-		 		assertTrue(settingPg.verifySettingsTitle());
-		 		
-		 		//click Immediately
-		 		settingPg.clickFiveMinAutoLockOption();
-		 		
-		 		//verify settings Page
-		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
-		 		
-		 		//click Home Button
-		 		Utilities.homeBtn(driver, appName);
-		 		Thread.sleep(2000);
-		 				 		
-		 		//Open App
-		 		Utilities.openApp(driver, appName);
-		 		Thread.sleep(2000);	
-		 		
-		 		//verify settings Page
-		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
-		 		
-		 		//after 5 minutes
-		 		//click autolock option
-		 		settingPg.clickAutoLockOption();
-		 		
-		 		//verify settings title
-		 		assertTrue(settingPg.verifySettingsTitle());
-		 		
-		 		//click Immediately
-		 		settingPg.clickFiveMinAutoLockOption();
-		 		
-		 		//verify settings Page
-		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
-		 		
-		 		//click Home Button
-		 		Utilities.homeBtn(driver, appName);
-		 		Thread.sleep(310000);
-		 				 		
-		 		//Open App
-		 		Utilities.openApp(driver, appName);
-		 		Thread.sleep(2000);			 		
-		 		
-		 		//Verify the Unlock with  PIN Page is displayed
-		 		assertEquals("Unlock with PIN",enterPIN.verifyUnlockPINTitle());
-		 		
-		 		//Re-enter 4 digit PIN Number
-		 		enterPIN.enterPINUnlock(); 		
+		 		//Click Back Button on Support Page
+		 		settingPg.clickSupportBackBtn();
 		 		
 		 		//verify settings Page
 		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
@@ -215,7 +151,7 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public IOSCheckerAutoLockTest(DesiredCapabilities caps) {
+	public IOSCheckerSupportTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }

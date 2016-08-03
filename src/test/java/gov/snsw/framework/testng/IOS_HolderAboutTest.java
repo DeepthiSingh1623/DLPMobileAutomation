@@ -38,16 +38,13 @@ public class IOS_HolderAboutTest extends BasicTest
 	 			//reportPass("success", "param");
 	 			
 	 			//close App
- 				Map<String, Object> params12 = new HashMap<>();
- 				params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result12 = driver.executeScript("mobile:application:close", params12);
- 		
+	 			Utilities.closeApp(driver, appName);
+ 				 		
  				//open app
- 				Map<String, Object> params22 = new HashMap<>();
- 				params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result22 = driver.executeScript("mobile:application:open", params22);
- 			
-	 			switchToContext(driver, "NATIVE_APP");
+	 			Utilities.openApp(driver, appName);
+	 			
+ 				switchToContext(driver, "NATIVE_APP");
+ 				
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
@@ -118,7 +115,6 @@ public class IOS_HolderAboutTest extends BasicTest
 		 		assertTrue(settingsPage.verifyAppDetailsTitle());
 		 		
 		 		//Verify App Name
-		 		String actualRes = settingsPage.verifyAppName();
 		 		assertTrue(settingsPage.verifyAppName().contains(appBuildName));
 		 		
 		 		//Verify App Version
@@ -147,19 +143,11 @@ public class IOS_HolderAboutTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		//Utilities.cleanApp(driver, appName);
-	 		
-	 		Map<String, Object> params1 = new HashMap<>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
+	 		Utilities.cleanApp(driver, appName);
 	 		
 	 		//close app
-	 		//Utilities.closeApp(driver, appName);
+	 		Utilities.closeApp(driver, appName);
 
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
-	 		
 	 		driver.close();
 	 	}
 		

@@ -44,17 +44,14 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 	 	try{
 	 		
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", appName);
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
+	 			Utilities.closeApp(driver, appName);
+	 			
 	 			//open App
-	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier",appName);
-	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+ 				Utilities.openApp(driver, appName);
 	 				 			
 	 			switchToContext(driver, "NATIVE_APP");
-		 		//Driver initialization	 		
+		 		
+	 			//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
 		 		//Enter PIN
@@ -119,15 +116,11 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		 		//Click Quick View 			 		
 		 		appSettingPg.clickQuickView();
 		 		
-		 		//close app
-		 		Map<String, Object> params1 = new HashMap<String, Object>();
-		 		params1.put("identifier", appName);
-		 		Object result1 = driver.executeScript("mobile:application:close", params1);
-		 		
-		 		//Open App
-		 		Map<String, Object> params22 = new HashMap<String, Object>();
-		 		params22.put("identifier", appName);
-		 		Object result22 = driver.executeScript("mobile:application:open", params22);
+		 		//close App
+	 			Utilities.closeApp(driver, appName);
+	 			
+	 			//open App
+ 				Utilities.openApp(driver, appName);
 		 		
 		 		QuickViewPage quickPg = new QuickViewPage(driver);
 		 		//assert Quick view Title
@@ -164,21 +157,11 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 	 		
 	 		
 	 		//Clean App
-	 		//Utilities.cleanApp(driver,appName);
-	 		Map<String, Object> params3 = new HashMap<String, Object>();
-	 		params3.put("identifier",appName);
-	 		Object result3 = driver.executeScript("mobile:application:clean", params3);
-	 				
-	 		
+	 		Utilities.cleanApp(driver,appName);
+	 		 		
 	 		//close app
-	 		//Utilities.closeApp(driver,appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier",appName);
-	 		Object result1 = driver.executeScript("mobile:application:close", params1);
-	 		
-	 		
-	 		
-	 		
+	 		Utilities.closeApp(driver,appName);
+	 		 		
 	 	}
 		
         if(testFail){

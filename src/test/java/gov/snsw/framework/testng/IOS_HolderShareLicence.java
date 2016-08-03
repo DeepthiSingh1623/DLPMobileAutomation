@@ -38,15 +38,11 @@ public class IOS_HolderShareLicence extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 			//close App
- 				Map<String, Object> params12 = new HashMap<>();
- 				params12.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result12 = driver.executeScript("mobile:application:close", params12);
- 		
- 				//open app
- 				Map<String, Object> params22 = new HashMap<>();
- 				params22.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result22 = driver.executeScript("mobile:application:open", params22);
+	 			//Close App
+	 			Utilities.closeApp(driver, appName);
+					 		
+	 			//Open App
+	 			Utilities.openApp(driver, appName);
  				
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -149,20 +145,12 @@ public class IOS_HolderShareLicence extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-	 		//Utilities.cleanApp(driver, appName);
-	 		
-	 		Map<String, Object> params1 = new HashMap<>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
+	 		Utilities.cleanApp(driver, appName);
 	 		
 	 		//close app
-	 		//Utilities.closeApp(driver, appName);
+	 		Utilities.closeApp(driver, appName);
 
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
- 			
-	 		
+	 				
 	 	}
 		
         if(testFail){
