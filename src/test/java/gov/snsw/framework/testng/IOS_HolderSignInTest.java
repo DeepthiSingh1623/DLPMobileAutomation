@@ -37,6 +37,11 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			 
+	 			//Close App
+ 				Utilities.closeApp(driver, appName);
+				 		
+ 				//Open App
+ 				Utilities.openApp(driver, appName);	 		
 	 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -75,7 +80,7 @@ public class IOS_HolderSignInTest extends BasicTest
 		 			enterPIN = new EnterPinPage(driver);
 		 			
 		 			//Verify Enter Pin is displayed
-			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
 			 		
 		 			//Enter 4 digit PIN
 		 			enterPIN.enterPINUnlock();
@@ -130,11 +135,13 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	
 	 	finally{
 	 		
-		 		
+	 		//clean app
+	 		Utilities.cleanApp(driver, appName);
+	 		
+	 		//close app
 	 		Utilities.closeApp(driver, appName);
 
-	 		
-	 	}
+	  	}
 		
         if(testFail){
         	Assert.fail();

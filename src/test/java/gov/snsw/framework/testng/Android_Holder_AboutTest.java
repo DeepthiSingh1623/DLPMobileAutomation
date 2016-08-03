@@ -44,14 +44,10 @@ public class Android_Holder_AboutTest extends BasicTest{
 		try{
 	 		
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", appName);
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
-	 			//open App
-	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier", appName);
-	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+				Utilities.closeApp(driver, appName);
+	 			
+				//open App
+	 			Utilities.openApp(driver, appName);
 	 				 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -149,20 +145,12 @@ public class Android_Holder_AboutTest extends BasicTest{
 	 		
 	 		
 	 		//Clean App
-	 		//Utilities.cleanApp(driver,appName);
-	 		Map<String, Object> params3 = new HashMap<String, Object>();
-	 		params3.put("identifier", appName);
-	 		Object result3 = driver.executeScript("mobile:application:clean", params3);
-	 				
-	 		
-	 		//close app
-	 		//Utilities.closeApp(driver,appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:close", params1);
-	 		
-	 		
-	 		
+	 		Utilities.cleanApp(driver, appName);
+	 			 		
+	 		//close App
+			Utilities.closeApp(driver, appName);
+ 			
+				 		
 	 	}
 		
         if(testFail){

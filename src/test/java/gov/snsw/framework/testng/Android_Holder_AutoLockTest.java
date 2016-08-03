@@ -44,14 +44,10 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 	 	try{
 	 		
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier", appName);
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
+	 			Utilities.closeApp(driver, appName);
+ 			
 	 			//open App
-	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier",appName);
-	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+	 			Utilities.openApp(driver, appName);
 	 				 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -129,18 +125,11 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Map<String, Object> params2 = new HashMap<>();
-		 		params2.put("keySequence", "HOME");
-		 		Object result2 = driver.executeScript("mobile:presskey", params2);
-		 		
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
-		 		//Open App
-		 		Map<String, Object> params13 = new HashMap<>();
-		 		params13.put("identifier", appName);
-	 			Object results13 = driver.executeScript("mobile:application:open", params13);			
-	 			
-		 				
+		 		//open App
+	 			Utilities.openApp(driver, appName);
 	 			Thread.sleep(4000);
 	 			
 	 			//Verify the Enter PIN is displayed
@@ -171,17 +160,11 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Map<String, Object> params32 = new HashMap<>();
-		 		params32.put("keySequence", "HOME");
-		 		Object result32 = driver.executeScript("mobile:presskey", params32);
-		 		
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
-		 		//Open App
-		 		Map<String, Object> params33 = new HashMap<>();
-		 		params33.put("identifier",appName);
-	 			Object results33 = driver.executeScript("mobile:application:open", params33);			
-	 					 		
+		 		//open App
+	 			Utilities.openApp(driver, appName);		
 	 			Thread.sleep(3000);
 	 			
 	 			//Verify app Settings Page is displayed 
@@ -202,18 +185,12 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Map<String, Object> params52 = new HashMap<>();
-		 		params52.put("keySequence", "HOME");
-		 		Object result52 = driver.executeScript("mobile:presskey", params52);
-		 		
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(310000);		 		
 		 		
-		 		//Open App
-		 		Map<String, Object> params53 = new HashMap<>();
-		 		params53.put("identifier", appName);
-	 			Object results53 = driver.executeScript("mobile:application:open", params53);			
-		 		
-	 			Thread.sleep(1000);
+		 		//open App
+	 			Utilities.openApp(driver, appName);
+		 		Thread.sleep(1000);
 	 			
 	 			//Verify the Enter PIN is displayed
 		 		assertTrue(enterPIN.verifyPinEnterPg().contains("Enter PIN"));
@@ -244,19 +221,12 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 	 		
 	 		
 	 		//Clean App
-	 		//Utilities.cleanApp(driver,appName);
-	 		Map<String, Object> params3 = new HashMap<String, Object>();
-	 		params3.put("identifier",appName);
-	 		Object result3 = driver.executeScript("mobile:application:clean", params3);
-	 				
+	 		Utilities.cleanApp(driver, appName);
+	 			 				
 	 		
 	 		//close app
-	 		//Utilities.closeApp(driver,appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier",appName);
-	 		Object result1 = driver.executeScript("mobile:application:close", params1);
-	 		
-	 		
+	 		Utilities.closeApp(driver, appName);
+	 		 		
 	 		
 	 	}
 		

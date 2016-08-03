@@ -40,14 +40,10 @@ public class Android_HolderChangePINTest extends BasicTest{
 	 			//reportPass("success", "param");
 	 			 	
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier",appName);
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
-	 			//open App
-	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier", appName);
-	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+				Utilities.closeApp(driver, appName);
+			
+				//open App
+				Utilities.openApp(driver, appName);
  			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -142,17 +138,11 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//close app
-		 		//Utilities.closeApp(driver, appName);
-		 		Map<String, Object> params2 = new HashMap<String, Object>();
-		 		params2.put("identifier", appName);
-		 		Object result2 = driver.executeScript("mobile:application:close", params2);
+		 		Utilities.closeApp(driver, appName);
 		 		
 		 		//Open App
-		 		//Utilities.openApp(driver, appName);
-		 		Map<String, Object> params3 = new HashMap<String, Object>();
-		 		params3.put("identifier",appName);
-		 		Object result3 = driver.executeScript("mobile:application:open", params3);
-		 			 		
+		 		Utilities.openApp(driver, appName);
+		 		
 		 		//Verify Unlock Enter Pin is displayed
 		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Enter PIN"));
 		 		
@@ -165,9 +155,6 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		// enter Newly created PIN
 		 		LicPg = enterPIN.enterCurrrentPINOnLogin(new_Pin);		 		 		
 		 	
-		 		//Verify My Licence Page is displayed.
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences")); 	
-		 		
 		 		// Click on the Settings and Sign out
 		 		LicPg.settings();
 		 		
@@ -186,21 +173,11 @@ public class Android_HolderChangePINTest extends BasicTest{
 	 	finally{
 	 		
 	 		//Clean App
-	 		//Utilities.cleanApp(driver, appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
-	 		
-	 		
-	 		
-	 		//close app
-	 		//Utilities.closeApp(driver, appName);
-	 		Map<String, Object> params2 = new HashMap<String, Object>();
-	 		params2.put("identifier", appName);
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
-	 		
+	 		Utilities.cleanApp(driver, appName);
 	 		 		
-	 		
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+	 				
 	 	}
 		
         if(testFail){

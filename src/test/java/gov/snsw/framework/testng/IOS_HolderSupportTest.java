@@ -41,7 +41,11 @@ public class IOS_HolderSupportTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			 
+	 			//Close App
+	 			Utilities.closeApp(driver, appName);
 	 		
+	 			//Open App		
+	 			Utilities.openApp(driver, appName);	
  			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -136,13 +140,11 @@ public class IOS_HolderSupportTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
+	 		Utilities.cleanApp(driver, appName);
 	 		
-	 		//Utilities.closeApp(driver, appName);
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
 
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
-	 		
 	 		driver.close();
 	 		
 	 			

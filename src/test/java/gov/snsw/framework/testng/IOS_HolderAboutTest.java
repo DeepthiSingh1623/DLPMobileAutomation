@@ -36,8 +36,15 @@ public class IOS_HolderAboutTest extends BasicTest
 		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
 	 			//reportPass("success", "param");
-
-	 			switchToContext(driver, "NATIVE_APP");
+	 			
+	 			//close App
+	 			Utilities.closeApp(driver, appName);
+ 				 		
+ 				//open app
+	 			Utilities.openApp(driver, appName);
+	 			
+ 				switchToContext(driver, "NATIVE_APP");
+ 				
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
@@ -108,7 +115,6 @@ public class IOS_HolderAboutTest extends BasicTest
 		 		assertTrue(settingsPage.verifyAppDetailsTitle());
 		 		
 		 		//Verify App Name
-		 		String actualRes = settingsPage.verifyAppName();
 		 		assertTrue(settingsPage.verifyAppName().contains(appBuildName));
 		 		
 		 		//Verify App Version
@@ -121,10 +127,10 @@ public class IOS_HolderAboutTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//Click sign out
-		 		//settingsPage.pressSigoutButton();
+		 		settingsPage.pressSigoutButton();
 		 				 		
 		 		//Verify Add Intro Page is displayed
-		 		//assertTrue(AddInPg.verifyAddPageTitle());
+		 		assertTrue(AddInPg.verifyAddPageTitle());
 		 		
 	 	}
 	 	    catch(Exception e){
@@ -136,14 +142,12 @@ public class IOS_HolderAboutTest extends BasicTest
 	 	
 	 	finally{
 	 		
+	 		//clean app
+	 		Utilities.cleanApp(driver, appName);
 	 		
 	 		//close app
-	 		//Utilities.closeApp(driver, appName);
+	 		Utilities.closeApp(driver, appName);
 
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
-	 		
 	 		driver.close();
 	 	}
 		

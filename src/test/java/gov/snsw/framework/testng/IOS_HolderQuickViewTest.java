@@ -40,7 +40,11 @@ public class IOS_HolderQuickViewTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			 
-	 			
+	 			//Close App
+				Utilities.closeApp(driver, appName);
+						 		
+				//Open App
+				Utilities.openApp(driver, appName);
  				
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -92,9 +96,6 @@ public class IOS_HolderQuickViewTest extends BasicTest
 		 		{
 		 			LicPg.selectNo();
 		 		}		 		
-		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 		
 		 		//Click on the Settings Button
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
@@ -156,11 +157,13 @@ public class IOS_HolderQuickViewTest extends BasicTest
 	 	}
 	 	
 	 	finally{
-
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
 	 		
+	 		//clean app
+	 		Utilities.cleanApp(driver, appName);
+	 		
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+
 	 		driver.close();
 	 			
  			

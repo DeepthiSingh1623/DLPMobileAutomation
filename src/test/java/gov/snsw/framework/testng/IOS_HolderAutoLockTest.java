@@ -37,7 +37,12 @@ public class IOS_HolderAutoLockTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 		
+	 			//Close App
+ 				Utilities.closeApp(driver, appName);
+				 		
+				//Open App
+ 				Utilities.openApp(driver, appName);
+ 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -112,15 +117,11 @@ public class IOS_HolderAutoLockTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//click Home button
-		 		Map<String, Object> params1 = new HashMap<>();
-		 		params1.put("keySequence", "HOME");
-		 		Object result1 = driver.executeScript("mobile:presskey", params1);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
-		 		//open app
- 				Map<String, Object> params32 = new HashMap<>();
- 				params32.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result32 = driver.executeScript("mobile:application:open", params32);
+		 		//Open App
+ 				Utilities.openApp(driver, appName);
  				Thread.sleep(2000);
  				
  				//Verify the Re-Enter PIN Page is displayed
@@ -145,15 +146,11 @@ public class IOS_HolderAutoLockTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//click Home button
-		 		Map<String, Object> params23 = new HashMap<>();
-		 		params23.put("keySequence", "HOME");
-		 		Object result23 = driver.executeScript("mobile:presskey", params23);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
-		 		//open app
- 				Map<String, Object> params42 = new HashMap<>();
- 				params42.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result42 = driver.executeScript("mobile:application:open", params42);
+		 		//Open App
+ 				Utilities.openApp(driver, appName);
  				Thread.sleep(2000);
  				
  				//Verify Settings Page is displayed
@@ -174,15 +171,11 @@ public class IOS_HolderAutoLockTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//click Home button
-		 		Map<String, Object> params33 = new HashMap<>();
-		 		params33.put("keySequence", "HOME");
-		 		Object result33 = driver.executeScript("mobile:presskey", params33);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(310000);
 		 		
-		 		//open app
- 				Map<String, Object> params43 = new HashMap<>();
- 				params43.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
- 				Object result43 = driver.executeScript("mobile:application:open", params43);
+		 		//Open App
+ 				Utilities.openApp(driver, appName);
  				Thread.sleep(2000);
  				
  				//Verify the Re-Enter PIN Page is displayed
@@ -211,14 +204,11 @@ public class IOS_HolderAutoLockTest extends BasicTest
 	 	finally{
 	 		
 	 		//clean app
-
-	 		//close app
-	 		//Utilities.closeApp(driver, appName);
-
-	 		Map<String, Object> params2 = new HashMap<>();
-	 		params2.put("identifier", "au.gov.nsw.onegov.MyLicences.uat");
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		Utilities.cleanApp(driver, appName);
 	 		
+	 		//close app
+	 		Utilities.closeApp(driver, appName);
+
 	 		driver.close();
 	 	}
 		

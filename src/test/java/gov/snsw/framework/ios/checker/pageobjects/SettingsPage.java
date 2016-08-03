@@ -38,6 +38,21 @@ public class SettingsPage extends DriverPage{
 	
 	By appDetails = By.xpath("//*[@label='APP DETAILS']");
 	
+	By supportOption = By.xpath("//*[@label='Support']");
+	
+	//Support Page Title
+	By supportTitle = By.xpath("//*[@label='Support']");
+	
+	//Agency Support Text
+	By supportAgencyTxt = By.xpath("//*[@label='AGENCY SUPPORT']");
+	
+	//support Email
+	By supportEmail = By.xpath("//*[@label='support@licence.nsw.gov.au']");
+	
+	//BackBtn
+	By supportBackBtn = By.xpath("//*[@name='Support' and @class='UIANavigationBar']//*[@label='Settings']");
+	
+		
 	public void signoutBtn()
 	{
 		driver.findElement(signout).click();
@@ -153,5 +168,61 @@ public class SettingsPage extends DriverPage{
 		return appDetailsTitle;
 	
 	}
+	
+	public void clickSupportOption()
+	{
+		fluentWait(supportOption);
+		driver.findElement(supportOption).click();
+	}
+	
+	public boolean verifySupportTitle()
+	{
+		boolean supportPgTitle = false;
+		try
+		{
+			
+			fluentWait(supportTitle);
+			supportPgTitle = driver.findElement(supportTitle).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return supportPgTitle;
+	
+	}
+	
+	public String verifyAgencySupportTxt()
+	{
+		fluentWait(supportAgencyTxt);
+		String agencySupport = driver.findElement(supportAgencyTxt).getText();
+		return agencySupport;
+	}
+	
+	public boolean verifySupportEmail()
+	{
+		boolean supportEmailTxt = false;
+		try
+		{
+			
+			fluentWait(supportEmail);
+			supportEmailTxt = driver.findElement(supportEmail).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			
+		}
+		return supportEmailTxt;
+	
+	}
+	
+	public void clickSupportBackBtn()
+	{
+		driver.findElement(supportBackBtn).click();
+	}
+	
+	
+	
+	
 }
 

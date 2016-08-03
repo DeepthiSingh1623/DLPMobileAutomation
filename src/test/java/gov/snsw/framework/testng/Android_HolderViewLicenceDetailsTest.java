@@ -1,11 +1,10 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -15,7 +14,7 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
-import com.perfectomobile.utils.PerfectoUtils;
+
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 
@@ -40,14 +39,10 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 	 			//reportPass("success", "param");
 	 			
 	 			//close App
-	 			Map<String, Object> params12 = new HashMap<>();
-	 			params12.put("identifier",appName);
-	 			Object result12 = driver.executeScript("mobile:application:close", params12);
-		
-	 			//open App
-	 			Map<String, Object> params11 = new HashMap<>();
-	 			params11.put("identifier", appName);
-	 			Object result11 = driver.executeScript("mobile:application:open", params11);
+ 				Utilities.closeApp(driver, appName);
+ 			
+ 				//open App
+				Utilities.openApp(driver, appName);
  				
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -57,7 +52,6 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		EnterPINPage enterPIN = null;
 		 		
 		 		if(AddInPg.isStartBtnExist())
-		 		
 		 		{		 			
 		 			
 		 			
@@ -105,42 +99,29 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		
 			 		MyLicencePage LicPg = new MyLicencePage(driver);
 			 		
-			 		//Verify My Licence Page is displayed
-			 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-			 				 		
+			 		
 			 		//Verify My Licences Page is displayed
 			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
 		 		
 		 		
 		 		//Click the Fishing Fee License 
-		 		//DetailLicencePage detailLicPg = LicPg.clickLicStatus();		 				
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);
 		 		
 		 		//Capturing the Lic Num
-		 		String licenceNumber = detailLicPg.getLicNum();			 		
-		 		assertTrue(licenceNumber.equalsIgnoreCase(licence_Number));
-		 		
+		 		assertTrue(detailLicPg.getLicNum().equalsIgnoreCase(licence_Number));
+		 				 		
 		 		//Capturing the Lic Start Date		 		
-		 		String licenceStartDate = detailLicPg.getLicStartDate();
-		 		assertTrue(licenceStartDate.equalsIgnoreCase(licence_StartDate));
+		 		assertTrue(detailLicPg.getLicStartDate().equalsIgnoreCase(licence_StartDate));		 		
 		 		
+		 		//Verify licenceExpireDate
+		 		assertTrue(detailLicPg.getLicExpireDate().equalsIgnoreCase(licence_ExpireDate));		 
 		 		
-		 		//capturing the Lic Expire Date
-		 		String licenceExpireDate = detailLicPg.getLicExpireDate();
-		 		//assert licenceExpireDate
-		 		assertTrue(licenceExpireDate.equalsIgnoreCase(licence_ExpireDate));		 
-		 		
-		 		//Capture Class Type
-		 		String classType = detailLicPg.getLicClass();		 		
 		 		//assert Class Type
-		 		assertTrue(classType.equalsIgnoreCase(class_Type));
+		 		assertTrue(detailLicPg.getLicClass().equalsIgnoreCase(class_Type));
 		 		
 		 		//click Back button to go to my license page
 		 		Utilities.BackBtn(driver);
 		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-		 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
 		 		
@@ -159,18 +140,10 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 	 	finally{
 	 		
 	 		//Clean App
-	 		//Utilities.cleanApp(driver, appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
-	 		
-	 		
-	 		
+	 		Utilities.cleanApp(driver, appName);
+	 		 		
 	 		//close app
-	 		//Utilities.closeApp(driver, appName);
-	 		Map<String, Object> params2 = new HashMap<String, Object>();
-	 		params2.put("identifier", appName);
-	 		Object result2 = driver.executeScript("mobile:application:close", params2);
+	 		Utilities.closeApp(driver, appName);
 	 		
 	 		
 	 	}

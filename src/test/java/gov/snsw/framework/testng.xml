@@ -12,6 +12,7 @@
     </classes>
     
   </test -->
+
   
   <test name="Android Checker App Tests">
     <classes>
@@ -20,16 +21,20 @@
       <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
       <class name="gov.snsw.framework.testng.CheckerAutoLockTest"/>
      <class name="gov.snsw.framework.testng.CheckerAboutTest"/>
+
     </classes>
     
   </test>
   
     <!-- test name="IOS Holder App Tests">
-    <classes>
-      
+    <classes>      
       <class name="gov.snsw.framework.testng.IOS_HolderSignInTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderViewLicenceTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderShareLicence"/>
+      <class name="gov.snsw.framework.testng.IOS_HolderAboutTest"/>
+      <class name="gov.snsw.framework.testng.IOS_HolderAutoLockTest"/>
+      <class name="gov.snsw.framework.testng.IOS_HolderQuickViewTest"/>
+      <class name="gov.snsw.framework.testng.IOS_HolderSupportTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderChangePinTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderUpdateLicenceTest"/>
       <class name="gov.snsw.framework.testng.IOS_HolderAboutTest"/>
@@ -51,6 +56,24 @@
 	      <class name="gov.snsw.framework.testng.Android_Holder_QuickView_Test"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_SupportTest"/>
 	       
+
+      <class name="gov.snsw.framework.testng.IOS_HolderRenewLicenceTest"/>
+      </classes>
+     </test>
+
+     <!-- test name="Android Holder App Tests">
+     <classes>
+      <class name="gov.snsw.framework.testng.Android_HolderSignInTest"/>
+      <class name="gov.snsw.framework.testng.Android_HolderViewLicenceDetailsTest"/>
+      <class name="gov.snsw.framework.testng.Android_HolderLicenceShareTest"/>
+      <class name="gov.snsw.framework.testng.Android_Holder_AboutTest"/>
+      <class name="gov.snsw.framework.testng.Android_Holder_AutoLockTest"/>
+      <class name="gov.snsw.framework.testng.Android_Holder_SupportTest"/>
+      <class name="gov.snsw.framework.testng.Android_Holder_QuickView_Test"/>
+      <class name="gov.snsw.framework.testng.Android_HolderChangePINTest"/>
+      <class name="gov.snsw.framework.testng.Android_HolderUpdateLicenceDetailsTest"/>
+      <class name="gov.snsw.framework.testng.Android_HolderRenewLicenceTest"/>    
+
      </classes>
   	 </test--> <!-- Holder App Tests -->
   	 
