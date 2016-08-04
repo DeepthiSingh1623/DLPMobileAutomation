@@ -118,11 +118,9 @@ public class IOSCheckerAboutTest extends BasicTest{
 	 	}
 		
 	 	finally{
-	 		
-	 		 		
+ 		
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 	 	
         if(testFail){

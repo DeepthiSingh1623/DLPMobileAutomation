@@ -116,8 +116,7 @@ public class IOSCheckerActivityTest extends BasicTest{
 	 		
 	 		 		
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 	 	
         if(testFail){

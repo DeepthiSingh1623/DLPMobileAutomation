@@ -41,12 +41,6 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
-	 			
-	 		//close App
- 			Utilities.closeApp(driver, appName);
- 			
- 			//open App
-			Utilities.openApp(driver, appName);
  			
 	 		switchToContext(driver, "NATIVE_APP");
 	 		//Driver initialization	 		
@@ -179,14 +173,9 @@ public class Android_HolderUpdateLicenceDetailsTest extends BasicTest {
 
 	 	}
 	 	finally{
-	 		
-	 		//clean App
-	 		Utilities.cleanApp(driver, appName);
-	 		
 	 		//Close App
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 		
         if(testFail){

@@ -102,16 +102,7 @@ public class CheckerLicActivityTest extends BasicTest{
 		
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		/*params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();*/
-	 		
-	  		params.put("identifier", appName);
-	  		Object result1 = driver.executeScript("mobile:application:close", params);
-	 		params.clear();
-	 		
-	 		driver.close();
+	 		Utilities.closeApp(driver, appName);
 	 	}
 	 	
         if(testFail){

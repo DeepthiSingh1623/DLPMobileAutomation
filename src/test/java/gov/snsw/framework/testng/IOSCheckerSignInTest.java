@@ -112,12 +112,9 @@ public class IOSCheckerSignInTest extends BasicTest{
 	 	}
 		
 	 	finally{
-	 		
-	 		
-	 		
+
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 	 	
         if(testFail){

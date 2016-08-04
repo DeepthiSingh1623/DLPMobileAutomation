@@ -45,7 +45,7 @@ public class DriverPage {
 		protected String checker_ios_resourceid = "au.gov.nsw.onegov.LicenceChecker.uat";
 	
 		public WebElement explicitWait(By element){
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		WebElement element1 = wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
 		return element1;
 	}
@@ -54,7 +54,7 @@ public class DriverPage {
 		public WebElement fluentWait(final By element)
 		{
 		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS)
-																			.pollingEvery(2, TimeUnit.SECONDS)
+																			.pollingEvery(1, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
 				public WebElement  apply(WebDriver driver) {

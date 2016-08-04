@@ -97,12 +97,8 @@ public class CheckerSignInTest extends BasicTest{
 	 	}
 		
 	 	finally{
-	 		
-	 		//Utilities.cleanApp(driver, appName);
-	 		
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+	
 	 	}
 	 	
         if(testFail){

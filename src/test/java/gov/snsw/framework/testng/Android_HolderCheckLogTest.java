@@ -122,11 +122,6 @@ public class Android_HolderCheckLogTest extends BasicTest{
 	 	}
 	 	finally{
 	 		
-
-	 		//Clean App
-	 		Utilities.cleanApp(driver, appName);
-	 		
-	 		
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
 	 		

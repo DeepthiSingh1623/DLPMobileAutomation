@@ -44,12 +44,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
 	 			//reportPass("success", "param");
-	 			
-	 			//Close App
-	 			Utilities.closeApp(driver, appName);
-	 		
-	 			//Open App		
-	 			Utilities.openApp(driver, appName);		
+	 				
 	 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -185,15 +180,11 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 
 	 	}
 	 	
-finally{
-	 		
-		//clean app
-		Utilities.cleanApp(driver, appName);
-		
-		//close app
-		Utilities.closeApp(driver, appName);
+	 	finally{
 
-		driver.close();
+			//close app
+			Utilities.closeApp(driver, appName);
+
 	 	
 		}
 		

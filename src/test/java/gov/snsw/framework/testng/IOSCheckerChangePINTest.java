@@ -133,8 +133,7 @@ public class IOSCheckerChangePINTest extends BasicTest{
 	 	finally{
 	 	
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 	 	
         if(testFail){

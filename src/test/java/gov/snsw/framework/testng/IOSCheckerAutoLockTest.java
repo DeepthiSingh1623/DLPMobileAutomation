@@ -100,7 +100,7 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
 		 		
 		 		//click Home Button
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(2000);
 		 				 		
 		 		//Open App
@@ -130,7 +130,7 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
 		 		
 		 		//click Home Button
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(2000);
 		 				 		
 		 		//Open App
@@ -154,7 +154,7 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 		 		assertTrue(settingPg.verifySettingsMainPageTitle().contains("Settings"));
 		 		
 		 		//click Home Button
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(310000);
 		 				 		
 		 		//Open App
@@ -185,8 +185,7 @@ public class IOSCheckerAutoLockTest extends BasicTest{
 		
 	 	finally{
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 	 	
         if(testFail){
