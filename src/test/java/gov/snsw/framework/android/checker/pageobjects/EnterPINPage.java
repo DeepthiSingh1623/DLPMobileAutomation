@@ -16,6 +16,15 @@ public class EnterPINPage extends DriverPage{
 		By enterPin = By.xpath("//*[@class='android.widget.EditText']");
 		By enterPinExist = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/pin_title']");
 		
+		//Alert
+		By confirmPg = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/alertTitle']");
+		
+		// OK Button
+		By okBtn = By.xpath("//*[@resourceid='android:id/button1']");
+		
+		//Forgot PIN
+		By forgotPIN = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/forgot_pin']");
+	
 	public void enterPin(String pin)
 	{
 		fluentWait(enterPin);
@@ -30,6 +39,25 @@ public class EnterPINPage extends DriverPage{
 		String pinPgExist = driver.findElement(enterPinExist).getText();
 		return pinPgExist;
 		 
+	}
+	
+	public void clickForgotPIN()
+	{
+		fluentWait(forgotPIN);
+		driver.findElement(forgotPIN).click();;
+	}
+	
+	public String verifyConfirmAlert()
+	{
+		fluentWait(confirmPg);
+		String confirmTitle = driver.findElement(confirmPg).getText();
+		return confirmTitle;
+	}
+	
+	public void clickOKBtn()
+	{
+		fluentWait(okBtn);
+		driver.findElement(okBtn);
 	}
 	
 	

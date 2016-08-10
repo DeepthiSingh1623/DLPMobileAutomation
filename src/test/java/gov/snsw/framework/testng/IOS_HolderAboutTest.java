@@ -117,9 +117,7 @@ public class IOS_HolderAboutTest extends BasicTest
 		 		//Verify App Name
 		 		assertTrue(settingsPage.verifyAppName().contains(appBuildName));
 		 		
-		 		//Verify App Version
-		 		assertTrue(settingsPage.verifyAppVersion().contains(appVersion));
-		 		
+		 			 		
 		 		//click settings Back Button
 		 		settingsPage.clickSettingBackButton();
 		 		

@@ -53,6 +53,9 @@ public class MyLicencePage extends DriverPage{
 	//App Name 
 	By appName = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/txtAppName']");
 	
+	//Activity Option
+	By activityOption = By.xpath("//*[text()='Activity']");
+	
 	public DetailLicencePage clickLicStatus()
 	{	
 		fluentWait(fishingFee);
@@ -112,12 +115,7 @@ public class MyLicencePage extends DriverPage{
 		return new AddLicencePage(driver);
 	}
 	
-	//Click My Activity
-	public LogPage clickMyActivity()
-	{
-		MyActivity();
-		return new LogPage(driver);
-	}
+	
 	
 	//Setting Menu to change PIN
 	public AppSettingPage clickSettings()
@@ -173,6 +171,14 @@ public class MyLicencePage extends DriverPage{
 	{
 		fluentWait(backBtnAbout);
 		driver.findElement(backBtnAbout).click();
+	}
+	
+	public ActivityPage clickActivityOption()
+	{
+		fluentWait(activityOption);
+		driver.findElement(activityOption).click();
+		return new ActivityPage(driver); 
+		
 	}
 	
 		

@@ -1,12 +1,11 @@
+
+
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -16,72 +15,80 @@ import org.testng.annotations.Test;
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
-import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
-import gov.snsw.framework.android.checker.pageobjects.AppUsageAgreementPage;
-import gov.snsw.framework.android.checker.pageobjects.CheckerLogs;
-import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
-import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
-import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
-import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.ios.checker.pageobjects.AppUsageAgreementPage;
+import gov.snsw.framework.ios.checker.pageobjects.EnterPINPage;
+import gov.snsw.framework.ios.checker.pageobjects.SNSWCheckerPage;
+import gov.snsw.framework.ios.checker.pageobjects.SignInNSWAcctPage;
+import gov.snsw.framework.ios.checker.pageobjects.TermsAndConditionsPage;
+
 import gov.snsw.framework.utils.Utilities;
 
 
-public class CheckerActivityLog extends BasicTest{
+public class IOSCheckerForgotPINTest extends BasicTest{
 
 	
 	
 	@Test (dataProvider="logInData")
-	public void checkerSignInAndroid(String username, String password,String pin) throws Exception{
+	public void checkerChangePinIOS(String username, String password,String pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
-		String appName = (String) caps.getCapability("appPackage");
+		String appName = (String) caps.getCapability("bundleId");
 	 	try{
 	 			 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 	
-		 		AddIntroPage AddInPg = new AddIntroPage(driver);
+		 		
 		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
-		 		//assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
-		 		EnterPINPage enterPIN = null;
+		 		EnterPINPage enterPIN = new EnterPINPage(driver);
 		 		
 		 		if(tcPg.isAgreeBtnExist()){
 		 			
+		 			AppUsageAgreementPage appAgree = tcPg.pressAgreeBtn();
 		 			
-		 			
-		 			//Click Accept Button on the Terms and Condition Page
-		 			AppUsageAgreementPage appAgree = tcPg.termsAndConditionAcceptBtn();
-		 			SignInNSWAcctPage signIn = appAgree.pressAcceptBtn();
-		 			
+		 			SignInNSWAcctPage signIn = appAgree.pressAgreeBtn();
+			 		
 			 		//Enter the login details in the Sign In Page
-			 		enterPIN = signIn.signInNswAcct(username,password);
+		 			enterPIN = signIn.pressSignIn(username,password);
 			 		 
 				 		//Enter 4 digit PIN
-				 		 enterPIN.enterPin(pin);
-				 		 enterPIN.enterPin(pin);
-
+				 		 enterPIN.enterPin();
+				 		 enterPIN.enterPin();
+		 			
 		 		}
+		 		
 		 		else{
 		 			
-		 			enterPIN = new EnterPINPage(driver);
-		
-		 			//Enter 4 digit PIN confirmation
-			 		 enterPIN.enterPin(pin);
+		 			enterPIN.enterPinUnlock();
 		 		}
+		 	
 		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
-		 		//chkPg.fluentWait(chkPg.manualScan);
-		 		assertTrue(chkPg.isMenuItemPresent());
-		 		chkPg.clickHamburgerMenu();
-		 		CheckerLogs chkLog = chkPg.clickCheckerLog();
+		 		if(chkPg.isPopupOpen()){
+		 			chkPg.clickNo();
+		 		}
 		 		
-		 		assertTrue(chkLog.isTextPresentOnScreen("Recreational Fishing Fee"));
+		 		if(chkPg.isDialogOpen()){
+		 			
+		 			chkPg.clickCancel();
+		 			
+		 		}
+		 		
+		 		if(chkPg.okNotifications()){
+		 			
+		 			chkPg.clickOk();
+		 			
+		 		}
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
+		 		
+		 		Utilities.homeBtn(driver, appName);
+		 		
+		 		Utilities.openApp(driver, appName);
 		 		
 		 		
 		 		
-	
-		}
+	 	}
 	 	catch(Exception e){
 	 		
 	 		e.printStackTrace();
@@ -91,7 +98,7 @@ public class CheckerActivityLog extends BasicTest{
 		
 	 	finally{
 	 		
-	 		//Utilities.cleanApp(driver, appName);
+	 		Utilities.cleanApp(driver, appName);
 	 		
 	 		Utilities.closeApp(driver, appName);
 	 		
@@ -121,10 +128,7 @@ public class CheckerActivityLog extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public CheckerActivityLog(DesiredCapabilities caps) {
+	public IOSCheckerForgotPINTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 }
-	
-
-

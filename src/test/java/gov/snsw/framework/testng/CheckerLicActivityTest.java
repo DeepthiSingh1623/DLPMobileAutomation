@@ -52,9 +52,6 @@ public class CheckerLicActivityTest extends BasicTest{
 		 		
 		 		if(tcPg.isAgreeBtnExist()){
 		 			
-		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
-		 			
-		 			//Click Accept Button on the Terms and Condition Page
 		 			AppUsageAgreementPage appAgree = tcPg.termsAndConditionAcceptBtn();
 		 			SignInNSWAcctPage signIn = appAgree.pressAcceptBtn();
 			 		
@@ -85,7 +82,20 @@ public class CheckerLicActivityTest extends BasicTest{
 		 		assertEquals("Event type does not match ","Check",chkLogs.getEventType());
 		 		assertEquals("Syn status does not match","Sync status: Log Synced",chkLogs.getSyncStatus());
 		 		assertEquals("Notes deos not match","0 Notes",chkLogs.getNotes());
-		 	
+		 		
+		 		chkLogs.clickActivityLog(licenceNo);
+		 		
+		 		assertTrue(chkLogs.isContentPresentOnScreen(licenceNo));
+		 		assertTrue(chkLogs.isContentPresentOnScreen("Check"));
+		 		assertTrue(chkLogs.isContentPresentOnScreen("Recreational Fishing"));
+		 		assertTrue(chkLogs.isContentPresentOnScreen("NSW Department of Primary Industries"));		
+		 		assertTrue(chkLogs.verifyFlagStatus().contains("OFF"));	 		
+		 		
+		 		
+		 		Utilities.BackBtn(driver);
+		 		assertTrue(chkLogs.isTextPresentOnScreen("Checks"));
+		 		
+		 		
 		 		Utilities.BackBtn(driver);
 		 		assertTrue(chkPg.isMenuItemPresent());
  			  			 	

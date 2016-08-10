@@ -36,6 +36,17 @@ public class SNSWCheckerPage extends DriverPage{
 	//App Name
 	By appName = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/txtAppName']");
 	
+	//Support Page
+	By supportOption = By.xpath("//*[text()='Support']");
+	
+	//SupportEmail
+	By supportEmail = By.xpath("//*[@contentDesc='support@licence.nsw.gov.au']");
+	
+	//Support-Agency Support
+	By supportAgencyMsg = By.xpath("//*[text()='Agency Support']");
+	
+	
+	
 	//BackBtn About Page
 	//By backBtnAbout = By.xpath("//*[@resourceid='"+checker_android_resourceid+":id/imgLeft']");
 	
@@ -129,6 +140,60 @@ public class SNSWCheckerPage extends DriverPage{
 			fluentWait(setting3Bars);
 			driver.findElement(setting3Bars).click();
 		}
+		
+		public void clickSupportOption()
+		{
+			fluentWait(supportOption);
+			driver.findElement(supportOption).click();
+		}
+		
+		public boolean verifySupportTitle()
+		{
+			boolean buildDetailsTitle = false;
+			
+				try{
+					fluentWait(appDetailsTitle);
+					buildDetailsTitle = driver.findElement(appDetailsTitle).isDisplayed();
+				}
+				catch(Exception e)
+				{
+							
+				}
+				return buildDetailsTitle;
+		}
+		
+		public boolean verifySupportEmail()
+		{
+			boolean buildDetailsTitle = false;
+			
+				try{
+					fluentWait(supportEmail);
+					buildDetailsTitle = driver.findElement(supportEmail).isDisplayed();
+				}
+				catch(Exception e)
+				{
+							
+				}
+				return buildDetailsTitle;
+		}
+		
+		public boolean verifySupportAgencyMsg()
+		{
+			boolean buildDetailsTitle = false;
+			
+				try{
+					fluentWait(supportAgencyMsg);
+					buildDetailsTitle = driver.findElement(supportAgencyMsg).isDisplayed();
+				}
+				catch(Exception e)
+				{
+							
+				}
+				return buildDetailsTitle;
+		}
+		
+		
+		
 		
 
 

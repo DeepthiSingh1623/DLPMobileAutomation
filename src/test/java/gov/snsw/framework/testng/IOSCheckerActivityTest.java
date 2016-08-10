@@ -57,15 +57,14 @@ public class IOSCheckerActivityTest extends BasicTest{
 				 		//Enter 4 digit PIN
 				 		 enterPIN.enterPin();
 				 		 enterPIN.enterPin();
-		 			
-		 		}
+		  		}
 		 		
-		 		else{
+		 		else
+		 		{
 		 			
 		 			enterPIN.enterPinUnlock();
 		 		}
 		 	
-		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		if(chkPg.isPopupOpen()){
 		 			chkPg.clickNo();
@@ -87,15 +86,30 @@ public class IOSCheckerActivityTest extends BasicTest{
 		 		
 		 		
 		 		CheckerActivities chkAct= chkPg.clickActivity();
-		 		//assertTrue(chkAct.isTextPresentOnScreen(Utilities.getCurrentDate()));
+		 		assertTrue(chkAct.isTextPresentOnScreen(Utilities.getCurrentDate()));
 		 		assertTrue(chkAct.isTextPresentOnScreen("Licence Number:"));
 		 		assertTrue(chkAct.isTextPresentOnScreen(licenceNo));
 		 		assertTrue(chkAct.isTextPresentOnScreen("Check"));
 		 		assertTrue(chkAct.isTextPresentOnScreen("0 Notes"));
 		 		assertTrue(chkAct.isTextPresentOnScreen("Recreational Fishing Fee"));
+		 		
 
 		 		chkAct.clickActivityLog(licenceNo);
 		 		
+		 		assertTrue(chkAct.verifyActivityTitle().contains("Activity Detail"));
+		 		
+		 		assertTrue(chkAct.isTextPresentOnScreen("Licence Number"));
+		 		assertTrue(chkAct.isTextPresentOnScreen(licenceNo));
+		 		assertTrue(chkAct.isTextPresentOnScreen("Check"));
+		 		assertTrue(chkAct.isTextPresentOnScreen("Recreational Fishing"));
+		 		assertTrue(chkAct.isTextPresentOnScreen("NSW Department of Primary Industries"));
+		 		assertTrue(chkAct.isTextPresentOnScreen("0"));
+		 		
+		 		chkAct.clickActivityDetailBackBtn();
+		 		
+		 		assertTrue(chkAct.isTextPresentOnScreen("Activity"));
+		 		
+		 				 		
 		 		SettingsPage settingPg = chkPg.clickSettingsBtn();
 		 		
 		 		//Click SignOut
