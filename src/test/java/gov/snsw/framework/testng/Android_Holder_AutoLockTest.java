@@ -43,12 +43,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 		
-	 			//close App
-	 			Utilities.closeApp(driver, appName);
- 			
-	 			//open App
-	 			Utilities.openApp(driver, appName);
-	 				 			
+ 				 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -125,7 +120,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(2000);
 		 		
 		 		//open App
@@ -160,7 +155,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(2000);
 		 		
 		 		//open App
@@ -185,7 +180,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(310000);		 		
 		 		
 		 		//open App
@@ -218,12 +213,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 	 	}
 	 	
 	 	finally{
-	 		
-	 		
-	 		//Clean App
-	 		Utilities.cleanApp(driver, appName);
-	 			 				
-	 		
+	 		 		
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
 	 		 		

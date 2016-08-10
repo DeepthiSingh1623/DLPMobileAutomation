@@ -42,12 +42,6 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 		
-	 			//close App
-	 			Utilities.closeApp(driver, appName);
-	 			
-	 			//open App
- 				Utilities.openApp(driver, appName);
 	 				 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		
@@ -154,11 +148,7 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 	 	}
 	 	
 	 	finally{
-	 		
-	 		
-	 		//Clean App
-	 		Utilities.cleanApp(driver,appName);
-	 		 		
+
 	 		//close app
 	 		Utilities.closeApp(driver,appName);
 	 		 		

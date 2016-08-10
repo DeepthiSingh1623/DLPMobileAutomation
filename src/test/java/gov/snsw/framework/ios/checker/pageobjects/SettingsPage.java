@@ -103,7 +103,7 @@ public class SettingsPage extends DriverPage{
 		}
 		catch (Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 		return autoLockTitlePg;
 		

@@ -1,6 +1,7 @@
 package gov.snsw.framework.testng;
 
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
@@ -39,12 +40,7 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 			//Close App
-	 			Utilities.closeApp(driver, appName);
 	 		
-	 			//Open App		
-	 			Utilities.openApp(driver, appName);		
-	 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -106,10 +102,10 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		 		assertTrue(detailLicPg.getLicName().contains(lic_OwnerName)); 		
 		 		
 		 		assertTrue(detailLicPg.getLicNum().contains(licence_Number));
-		 		 		
-		 		assertTrue(detailLicPg.getLicStartDate().contains(licence_StartDate));
+		 				 		
+		 		assertEquals("Licence start date doesnt match",Utilities.dateSingleFormat(licence_StartDate), detailLicPg.getLicStartDate());
 		 		
-		 		//assertTrue(detailLicPg.getLicExpireDate().contains(licence_ExpireDate));
+		 		assertEquals("Licence end date doesnt match",Utilities.dateSingleFormat(licence_ExpireDate), detailLicPg.getLicExpireDate());
 		 		
 		 		//Click Back Button on the License Details Page
 		 		LicPg = detailLicPg.clickBackBtn();		 			 		
@@ -140,10 +136,7 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 	 	}
 	 	
 	 	finally{
-	 		
-	 		//clean app
-	 		Utilities.cleanApp(driver, appName);
-	 		
+
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
 

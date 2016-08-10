@@ -41,12 +41,6 @@ public class Android_HolderSignInTest extends BasicTest{
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
-	 			 
-	 			//close App
-	 			Utilities.closeApp(driver, appName);
- 			
-	 			//open App
-				Utilities.openApp(driver, appName);
 	 			
 				switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
@@ -136,10 +130,6 @@ public class Android_HolderSignInTest extends BasicTest{
 	 	
 	 	finally{
 	 		
-	 		
-	 		//Clean App
-	 		Utilities.cleanApp(driver,appName);
-	 			 		
 	 		//close app
 	 		Utilities.closeApp(driver,appName);
 	 				

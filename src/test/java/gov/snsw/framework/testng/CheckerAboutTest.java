@@ -24,6 +24,7 @@ import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
 
 
@@ -74,7 +75,7 @@ public class CheckerAboutTest extends BasicTest{
 		 		//assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
 		 		
 		 		//verify Scan LicencePage is displayed
-		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
 		 		//Click on the AppSettings
 		 		chkPg.clickSettingsHamburger();
@@ -92,7 +93,7 @@ public class CheckerAboutTest extends BasicTest{
 		 		chkPg.clickBackBtnAboutOption();	 		
 		 		
 		 		//verify Scan LicencePage is displayed
-		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));
+		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));
 		 			 		
 		 		// Click on the Settings and Sign out
 		 		chkPg.signOut();
@@ -107,15 +108,8 @@ public class CheckerAboutTest extends BasicTest{
 	 	}
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();
 	 		
-	 		Map<String, Object> params1 = new HashMap();
-	 		params1.put("identifier", appName);
-	  		Object result11 = driver.executeScript("mobile:application:close", params1);
-	  		params1.clear();
+	 		Utilities.closeApp(driver, appName);
 
 	 	}
         if(testFail){

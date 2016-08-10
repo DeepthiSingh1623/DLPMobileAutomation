@@ -35,14 +35,7 @@ public class IOS_HolderSignInTest extends BasicTest
 		}
 		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
-	 			//reportPass("success", "param");
-	 			 
-	 			//Close App
- 				Utilities.closeApp(driver, appName);
-				 		
- 				//Open App
- 				Utilities.openApp(driver, appName);	 		
-	 			
+	 	
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -80,7 +73,7 @@ public class IOS_HolderSignInTest extends BasicTest
 		 			enterPIN = new EnterPinPage(driver);
 		 			
 		 			//Verify Enter Pin is displayed
-			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with pin"));
+			 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
 			 		
 		 			//Enter 4 digit PIN
 		 			enterPIN.enterPINUnlock();
@@ -135,8 +128,6 @@ public class IOS_HolderSignInTest extends BasicTest
 	 	
 	 	finally{
 	 		
-	 		//clean app
-	 		Utilities.cleanApp(driver, appName);
 	 		
 	 		//close app
 	 		Utilities.closeApp(driver, appName);

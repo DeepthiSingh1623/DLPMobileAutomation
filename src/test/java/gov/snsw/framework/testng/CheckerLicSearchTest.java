@@ -28,6 +28,7 @@ import gov.snsw.framework.android.checker.pageobjects.LicenceSearch;
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.Utilities;
 
 
 
@@ -130,16 +131,7 @@ public class CheckerLicSearchTest extends BasicTest{
 		
 	 	finally{
 	 		
-	 		Map<String, Object> params = new HashMap();
-	 		/*params.put("identifier", appName);
-	 		Object result1 = driver.executeScript("mobile:application:clean", params);
-	 		params.clear();*/
-	 		
-	  		params.put("identifier", appName);
-	  		Object result1 = driver.executeScript("mobile:application:close", params);
-	 		params.clear();
-	 		
-	 		driver.close();
+	 			Utilities.closeApp(driver, appName);
 	 	}
 	 	
         if(testFail){

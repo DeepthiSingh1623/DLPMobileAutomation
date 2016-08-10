@@ -173,14 +173,7 @@ public class Android_HolderViewLicenceDetails_EnduranceTest extends BasicTest {
 	 	}
 	 	finally{
 	 		
-	 		//Clean App
-	 		//Utilities.cleanApp(driver, appName);
-	 		Map<String, Object> params1 = new HashMap<String, Object>();
-	 		params1.put("identifier", "au.gov.nsw.onegov.app.holder.uat");
-	 		Object result1 = driver.executeScript("mobile:application:clean", params1);
-	 		
-	 		
-	 		
+	 			 		
 	 		//close app
 	 		//Utilities.closeApp(driver, appName);
 	 		Map<String, Object> params2 = new HashMap<String, Object>();

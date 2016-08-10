@@ -44,7 +44,7 @@ public class Utilities {
  		
  	}
 	
-	public static void homeBtn(RemoteWebDriver driver,String appName){
+	public static void homeBtn(RemoteWebDriver driver){
 		
  		params.put("keySequence", "HOME");
  		Object result1 = driver.executeScript("mobile:presskey", params);
@@ -53,9 +53,9 @@ public class Utilities {
 	
 	public static void BackBtn(RemoteWebDriver driver)
 	{
-		Map<String, Object> params1 = new HashMap<>();
-		params1.put("keySequence", "BACK");
-		Object result1 = driver.executeScript("mobile:presskey", params1);
+		params.put("keySequence", "BACK");
+		Object result1 = driver.executeScript("mobile:presskey", params);
+		params.clear();
 	}
 	
 	public static String dateFormatChange(String p_date) throws ParseException{
@@ -67,6 +67,21 @@ public class Utilities {
        Date date = (Date)formatter.parse(p_date);
        
        formatter = new SimpleDateFormat("dd/MM/yyyy");
+       p_date = formatter.format(date);
+       //System.out.println("Finalend date:"+p_date);
+    
+       return p_date;
+	}
+	
+public static String dateSingleFormat(String p_date) throws ParseException{
+        
+        
+        //System.out.println("Finalend date:"+p_date);
+        
+       DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+       Date date = (Date)formatter.parse(p_date);
+       
+       formatter = new SimpleDateFormat("d MMM yyyy");
        p_date = formatter.format(date);
        //System.out.println("Finalend date:"+p_date);
     

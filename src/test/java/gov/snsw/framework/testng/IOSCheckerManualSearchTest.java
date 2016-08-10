@@ -111,12 +111,9 @@ public class IOSCheckerManualSearchTest extends BasicTest{
 	 	}
 		
 	 	finally{
-	 		
-	 		Utilities.cleanApp(driver, appName);
-	 		
+
 	 		Utilities.closeApp(driver, appName);
-	 		
-	 		driver.close();
+
 	 	}
 	 	
         if(testFail){

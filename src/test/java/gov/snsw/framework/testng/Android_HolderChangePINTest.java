@@ -38,13 +38,7 @@ public class Android_HolderChangePINTest extends BasicTest{
 		
 	 	try{
 	 			//reportPass("success", "param");
-	 			 	
-	 			//close App
-				Utilities.closeApp(driver, appName);
-			
-				//open App
-				Utilities.openApp(driver, appName);
- 			
+	 					
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
@@ -171,10 +165,7 @@ public class Android_HolderChangePINTest extends BasicTest{
 	 	}
 	 	
 	 	finally{
-	 		
-	 		//Clean App
-	 		Utilities.cleanApp(driver, appName);
-	 		 		
+	
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
 	 				
