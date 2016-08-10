@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -39,7 +40,8 @@ public class CheckerChangePINTest extends BasicTest{
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
-	 			 			
+	 		Reporter.log("Test: checkerChangePInSettingsAndroid "+ 
+	 		 		driver.getCapabilities().asMap().get("deviceName"),true);			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);

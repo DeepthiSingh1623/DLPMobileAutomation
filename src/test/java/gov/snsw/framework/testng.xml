@@ -1,6 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
+<!-- Thread Count should be no more than the number of handsets in yuor Excel -->
 <suite name="DLP Holder and Checker Smoke Test Suite" parallel="false">
+<!-- suite name="DLP Holder and Checker Smoke Test Suite" parallel="instances" thread-count="9"-->
   
   <!-- test name="IOS Checker App Tests">
     <classes>
@@ -14,45 +16,35 @@
   </test -->
 
   
-  <!-- test name="Android Checker App Tests">
+  <test name="Android Checker App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.CheckerSignInTest"/>
       <class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
       <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
       <class name="gov.snsw.framework.testng.CheckerAutoLockTest"/>
-     <class name="gov.snsw.framework.testng.CheckerAboutTest"/>
-
+    <class name="gov.snsw.framework.testng.CheckerAboutTest"/>
+	<class name="gov.snsw.framework.testng.CheckerLicActivityTest"/>
     </classes>
     
-  </test-->
+  </test>
   
-    <test name="IOS Holder App Tests">
+    <!-- test name="IOS Holder App Tests">
     <classes>      
 	      <class name="gov.snsw.framework.testng.IOS_HolderSignInTest"/>
 	      <class name="gov.snsw.framework.testng.IOS_HolderViewLicenceTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderShareLicence"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderAboutTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderAutoLockTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderQuickViewTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderSupportTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderChangePinTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderUpdateLicenceTest"/>
+	
  
      </classes>
-     </test>
+     </test-->
 
     <!-- test name="Android Holder App Tests">
      <classes>
 	      <class name="gov.snsw.framework.testng.Android_HolderSignInTest"/>
 	      <class name="gov.snsw.framework.testng.Android_HolderViewLicenceDetailsTest"/>
-	       
-	      
-	      <class name="gov.snsw.framework.testng.Android_HolderUpdateLicenceDetailsTest"/>
-	      <class name="gov.snsw.framework.testng.Android_Holder_AboutTest"/>
-	      <class name="gov.snsw.framework.testng.Android_Holder_AutoLockTest"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_QuickView_Test"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_SupportTest"/>
-   
+	       
+	     
 
      
       </classes>

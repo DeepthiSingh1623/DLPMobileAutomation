@@ -35,7 +35,7 @@ import gov.snsw.framework.utils.Utilities;
 public class IOS_HolderUpdateLicenceTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void updateLicenceIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName) throws Exception{
+	public void updateLicenceIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String Current_Address,String lic_OwnerName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -126,7 +126,7 @@ public class IOS_HolderUpdateLicenceTest extends BasicTest
 		 		assertTrue(updatePostalPg.verifyPostalAddressTitle().contains("Australia"));
 		 				 	
 		 		//Change Address
-		 		updatePostalPg.addressField(postal_Address);
+		 		updatePostalPg.addressField(Current_Address);
 		 		
 		 	 	//click address enter Done button
 		 		//updatePostalPg.addressEnterDoneBtn();

@@ -105,7 +105,8 @@ public class IOS_HolderViewLicenceTest extends BasicTest
 		 				 		
 		 		assertEquals("Licence start date doesnt match",Utilities.dateSingleFormat(licence_StartDate), detailLicPg.getLicStartDate());
 		 		
-		 		assertEquals("Licence end date doesnt match",Utilities.dateSingleFormat(licence_ExpireDate), detailLicPg.getLicExpireDate());
+		 	
+		 		assertTrue("Licence end date doesnt match",detailLicPg.getLicExpireDate(Utilities.dateSingleFormat(licence_ExpireDate)));
 		 		
 		 		//Click Back Button on the License Details Page
 		 		LicPg = detailLicPg.clickBackBtn();		 			 		

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -25,6 +26,7 @@ import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.holder.pageobjects.TermsAndConditionsPage;
+import gov.snsw.framework.utils.PersonaStopwatch;
 import gov.snsw.framework.utils.Utilities;
 
 
@@ -32,7 +34,7 @@ public class Android_HolderSignInTest extends BasicTest{
 
 	
 	
-	@Test (dataProvider="logInData")
+	@Test (dataProvider="logInData", priority=1)
 	public void signInHolderAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
@@ -40,6 +42,9 @@ public class Android_HolderSignInTest extends BasicTest{
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
+	 		Reporter.log("Test: signInHolderAndroid "+ 
+	 		driver.getCapabilities().asMap().get("deviceName"),true);
+
 	 			//reportPass("success", "param");
 	 			
 				switchToContext(driver, "NATIVE_APP");
@@ -71,8 +76,11 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		enterPIN = signIn.clickSignInBtn();
 		 		 		
 		 		//Verify the Enter PIN is displayed
-		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));
-		 		
+		 		enterPIN.verifyPinEnterTitle();		 		
+		 		//Utilities.logUxPersonaTimer(driver,"signIn","Time to sign in after PIN entry", 5000);
+
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("myLicences"));		 		
+		 	 		
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
 		 		

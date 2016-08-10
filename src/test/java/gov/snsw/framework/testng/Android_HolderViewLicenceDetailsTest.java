@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -28,7 +29,7 @@ import gov.snsw.framework.utils.Utilities;
 public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 
 
-	@Test (dataProvider="logInData")
+	@Test (dataProvider="logInData", priority=2)
 	public void viewLicenceDetailsAndroid(String username, String password,String pin,String licence_Number, String licence_StartDate, String licence_ExpireDate, String class_Type,String licence_Name, String LogEvent_Type, String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
@@ -37,7 +38,8 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
 	 			//reportPass("success", "param");
-	  				
+	 		Reporter.log("Test: viewLicenceDetailsAndroid "+  
+	 		 		driver.getCapabilities().asMap().get("deviceName"),true);
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);

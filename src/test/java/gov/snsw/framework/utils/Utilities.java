@@ -19,43 +19,35 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Utilities {
 	
-	
-	static Map<String, Object> params = new HashMap<String, Object>();
-	
 	public static void closeApp(RemoteWebDriver driver,String appName){
-	
+		Map<String, Object> params = new HashMap<String, Object>();
  		params.put("identifier", appName);
  		driver.executeScript("mobile:application:close", params);
- 		params.clear();
 	}
 	
 	public static void openApp(RemoteWebDriver driver,String appName){
-		
+		Map<String, Object> params = new HashMap<String, Object>();
  		params.put("identifier", appName);
  		driver.executeScript("mobile:application:open", params);
- 		params.clear();
 	}
 	
 	public static void cleanApp(RemoteWebDriver driver,String appName){
-		
+		Map<String, Object> params = new HashMap<String, Object>();
  		params.put("identifier", appName);
  		driver.executeScript("mobile:application:clean", params);
- 		params.clear();
- 		
  	}
 	
 	public static void homeBtn(RemoteWebDriver driver){
-		
+		Map<String, Object> params = new HashMap<String, Object>();
  		params.put("keySequence", "HOME");
  		Object result1 = driver.executeScript("mobile:presskey", params);
- 		params.clear();
 	}
 	
 	public static void BackBtn(RemoteWebDriver driver)
 	{
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("keySequence", "BACK");
 		Object result1 = driver.executeScript("mobile:presskey", params);
-		params.clear();
 	}
 	
 	public static String dateFormatChange(String p_date) throws ParseException{
@@ -145,4 +137,26 @@ public static String dateSingleFormat(String p_date) throws ParseException{
 	    	 wb.close();
 	    	return  data;
 	    }
+	
+	public static long timerGet(RemoteWebDriver driver,String timerType) {
+		 String command = "mobile:timer:info";
+		 Map<String,String> params = new HashMap<String,String>();
+		 params.put("type", timerType);
+		 long result = (long)driver.executeScript(command, params);
+		 	return result;
+	}
+
+	public static void logUxPersonaTimer(RemoteWebDriver driver, String name, String description, long threshold ) {
+		logPersonaTimer(driver,name,description,timerGet(driver,"ux"),threshold);
+	}
+	
+	
+	public static void logPersonaTimer(RemoteWebDriver driver, String name, String description, long duration, long threshold ) {
+	    final Map<String, Object> params = new HashMap<>(7);
+	    params.put("result", duration);
+	    params.put("threshold", threshold);
+	    params.put("description", description);
+	    params.put("name", name);
+	    driver.executeScript("mobile:status:timer", params);
+	}
 }

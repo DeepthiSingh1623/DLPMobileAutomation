@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -37,7 +38,8 @@ public class CheckerSignInTest extends BasicTest{
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 			 			
+	 		Reporter.log("Test: checkerSignInAndroid "+ 
+	 		 		driver.getCapabilities().asMap().get("deviceName"),true);			
 		 		switchToContext(driver, "NATIVE_APP");
 		 	
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);

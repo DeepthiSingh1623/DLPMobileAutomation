@@ -12,11 +12,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 
 import com.google.common.base.Function;
 public class DriverPage {
 	
-	protected static WebDriver driver; 
+	protected WebDriver driver; 
 	
 	public DriverPage(WebDriver driver)
 	{
@@ -24,16 +25,9 @@ public class DriverPage {
 		//System.out.println("Driver title from super class:"+driver.getCurrentUrl());
 		this.driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		SwitchtoContext(driver,"NATIVE_APP");
-		
-		
+				
 		}	
 		
-
-		protected void SwitchtoContext(WebDriver driver, String string) {
-			// TODO Auto-generated method stub
-			
-		}		
 		
 
 		protected String holder_android_resourceid = "au.gov.nsw.onegov.app.holder.psm";
@@ -51,20 +45,24 @@ public class DriverPage {
 	}
 	
 	
-		public WebElement fluentWait(final By element)
-		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS)
-																			.pollingEvery(1, TimeUnit.SECONDS)
-																			.ignoring(NoSuchElementException.class);
-			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
-				public WebElement  apply(WebDriver driver) {
-					// TODO Auto-generated method stub
-					return driver.findElement(element);
+	public WebElement fluentWait(final By element) {
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver)
+				.withTimeout(30, TimeUnit.SECONDS)
+				.pollingEvery(50, TimeUnit.MILLISECONDS)
+				.ignoring(NoSuchElementException.class);
+		try {
+			WebElement element1 = pwait.until(new Function<WebDriver, WebElement>() {
+				public WebElement apply(WebDriver driver) {
+					WebElement result = driver.findElement(element);
+					return result;
 				}
 			});
-			
 			return element1;
+		} catch (NoSuchElementException e) {
+			Reporter.log("Unable to find " + element, 1, true);
+			throw(e);
 		}
+	}
 
 		By titlePg = By.xpath("//*[@resourceid='"+checker_ios_resourceid+":id/toolbarTitle']");
 

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -34,7 +35,7 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 
 	
 	
-	@Test (dataProvider="logInData")
+	@Test (dataProvider="logInData", priority=3)
 	public void quickViewAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
@@ -42,7 +43,8 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 				 			
+	 		Reporter.log("Test: supportAndroid "+ 
+	 		 		driver.getCapabilities().asMap().get("deviceName"),true); 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		
 	 			//Driver initialization	 		

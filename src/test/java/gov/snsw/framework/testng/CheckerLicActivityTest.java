@@ -86,6 +86,7 @@ public class CheckerLicActivityTest extends BasicTest{
 		 		assertEquals("Syn status does not match","Sync status: Log Synced",chkLogs.getSyncStatus());
 		 		assertEquals("Notes deos not match","0 Notes",chkLogs.getNotes());
 		 	
+		 		
 		 		Utilities.BackBtn(driver);
 		 		assertTrue(chkPg.isMenuItemPresent());
  			  			 	
