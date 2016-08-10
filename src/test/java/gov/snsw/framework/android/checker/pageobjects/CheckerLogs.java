@@ -22,6 +22,8 @@ public class CheckerLogs extends DriverPage{
 	By notes = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtHasNotes'])[1]");
 	
 	
+	By flagStatus = By.xpath("//*[text()='OFF']");
+	
 	public String getDate(){
 		
 		return driver.findElement(date).getText();
@@ -58,5 +60,19 @@ public class CheckerLogs extends DriverPage{
 		return driver.findElement(notes).getText();
 		
 	}
+	
+	public void clickActivityLog(String licenceNo) {
+		// TODO Auto-generated method stub
+		By log=By.xpath("//*[text()='"+licenceNo+"']");
+		driver.findElement(log).click();
+	}
+	
+		
+	public String verifyFlagStatus()
+	{
+		String flagStat = driver.findElement(flagStatus).getText();
+		return flagStat;
+	}
+	
 
 }

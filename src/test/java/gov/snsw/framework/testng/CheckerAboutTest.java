@@ -31,7 +31,7 @@ import gov.snsw.framework.utils.Utilities;
 public class CheckerAboutTest extends BasicTest{
 
 	@Test (dataProvider="logInData")
-	public void checkerAutoLock(String username, String password,String pin,String licenceNo, String holdName, String status,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String DOB,String Address, String buildName) throws Exception{
+	public void checkerAbout(String username, String password,String pin,String licenceNo, String holdName, String status,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String DOB,String Address, String buildName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");

@@ -28,7 +28,7 @@ import gov.snsw.framework.utils.Utilities;
 public class IOS_HolderAboutTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void aboutPageHolderAppIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum, String cardName,String appBuildName,String appVersion) throws Exception{
+	public void AutoLockHolderAppIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum, String cardName,String appBuildName,String appVersion) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -37,7 +37,12 @@ public class IOS_HolderAboutTest extends BasicTest
 	 	try{
 	 			//reportPass("success", "param");
 	 			
-	 				 			
+	 			//close App
+	 			Utilities.closeApp(driver, appName);
+ 				 		
+ 				//open app
+	 			Utilities.openApp(driver, appName);
+	 			
  				switchToContext(driver, "NATIVE_APP");
  				
 		 		//Driver initialization	 		
@@ -112,9 +117,7 @@ public class IOS_HolderAboutTest extends BasicTest
 		 		//Verify App Name
 		 		assertTrue(settingsPage.verifyAppName().contains(appBuildName));
 		 		
-		 		//Verify App Version
-		 		//assertTrue(settingsPage.verifyAppVersion().contains(appVersion));
-		 		
+		 			 		
 		 		//click settings Back Button
 		 		settingsPage.clickSettingBackButton();
 		 		
@@ -136,9 +139,14 @@ public class IOS_HolderAboutTest extends BasicTest
 	 	}
 	 	
 	 	finally{
+	 		
+	 		//clean app
+	 		Utilities.cleanApp(driver, appName);
+	 		
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
 
+	 		driver.close();
 	 	}
 		
         if(testFail){

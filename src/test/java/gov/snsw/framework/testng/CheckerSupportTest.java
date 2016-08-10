@@ -1,11 +1,12 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -17,41 +18,39 @@ import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
 
 import gov.snsw.framework.android.checker.pageobjects.AddIntroPage;
+import gov.snsw.framework.android.checker.pageobjects.AppSettingPage;
 import gov.snsw.framework.android.checker.pageobjects.AppUsageAgreementPage;
-import gov.snsw.framework.android.checker.pageobjects.CheckerLogs;
 import gov.snsw.framework.android.checker.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.android.checker.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.android.checker.pageobjects.TermsAndConditionsPage;
-import gov.snsw.framework.utils.Utilities;
 
 
 
-public class CheckerLicActivityTest extends BasicTest{
+public class CheckerSupportTest extends BasicTest{
 
-	
-	
 	@Test (dataProvider="logInData")
-	public void checkerActivityAndroidTest(String username, String password,String pin, String licenceNo,String holdName, String status, String licstDate, String licExpD, String clsOrCond, String licName, String dob , String address) throws Exception{
+	public void checkerSupport(String username, String password,String pin,String licenceNo, String holdName, String status,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String DOB,String Address, String buildName) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 			
-			 			
+	 			//reportPass("success", "param");
+	 			 			
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
-		 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
-		 		//Click on the Start button on introduction page
-		 		//assertTrue(tcPg.isTextPresentOnScreen("Terms and Conditions"));
+		 			 		
 		 		EnterPINPage enterPIN = null;
 		 		
 		 		if(tcPg.isAgreeBtnExist()){
 		 			
+		 			//TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 			
+		 			//Click Accept Button on the Terms and Condition Page
 		 			AppUsageAgreementPage appAgree = tcPg.termsAndConditionAcceptBtn();
 		 			SignInNSWAcctPage signIn = appAgree.pressAcceptBtn();
 			 		
@@ -61,47 +60,47 @@ public class CheckerLicActivityTest extends BasicTest{
 				 		//Enter 4 digit PIN
 				 		 enterPIN.enterPin(pin);
 				 		 enterPIN.enterPin(pin);
+
 		 		}
 		 		else{
 		 			
 		 			enterPIN = new EnterPINPage(driver);
-		 			
+		
 		 			//Enter 4 digit PIN confirmation
 			 		 enterPIN.enterPin(pin);
 		 		}
-		 
 		 		SNSWCheckerPage chkPg = new SNSWCheckerPage(driver);
 		 		
-		 		assertTrue(chkPg.isMenuItemPresent());
-		 		chkPg.clickHamburgerMenu();
-		 		CheckerLogs chkLogs = chkPg.clickCheckerLog();
+		 		//assertEquals("Enter licence details", chkPg.getAndroidCheckerPageTitle());	
 		 		
-		 		assertEquals("Date doesnt match",Utilities.getCurrentDate(),chkLogs.getDate());
-		 		assertEquals("Licence type does not match",licName,chkLogs.getLicenceType());
-		 		assertEquals("Licence Number does not match",licenceNo,chkLogs.getLicenceNo());
-		 		assertEquals("Event type does not match ","Check",chkLogs.getEventType());
-		 		assertEquals("Syn status does not match","Sync status: Log Synced",chkLogs.getSyncStatus());
-		 		assertEquals("Notes deos not match","0 Notes",chkLogs.getNotes());
+		 		//verify Scan LicencePage is displayed
+		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));
 		 		
-		 		chkLogs.clickActivityLog(licenceNo);
+		 		//Click on the AppSettings
+		 		chkPg.clickSettingsHamburger();
 		 		
-		 		assertTrue(chkLogs.isContentPresentOnScreen(licenceNo));
-		 		assertTrue(chkLogs.isContentPresentOnScreen("Check"));
-		 		assertTrue(chkLogs.isContentPresentOnScreen("Recreational Fishing"));
-		 		assertTrue(chkLogs.isContentPresentOnScreen("NSW Department of Primary Industries"));		
-		 		assertTrue(chkLogs.verifyFlagStatus().contains("OFF"));	 		
+		 		//click About Option
+		 		chkPg.clickSupportOption();
 		 		
+		 		//verify the Support Details Title is displayed 
+		 		assertTrue(chkPg.verifySupportTitle());
 		 		
-		 		Utilities.BackBtn(driver);
-		 		assertTrue(chkLogs.isTextPresentOnScreen("Checks"));
+		 		//verify the support details
+		 		assertTrue(chkPg.verifySupportAgencyMsg());
 		 		
+		 		//verify the email details
+		 		assertTrue(chkPg.verifySupportEmail());		 		
+		 			 		
+		 		//click Back Button on the about Option page
+		 		chkPg.clickBackBtnAboutOption();	 		
 		 		
-		 		Utilities.BackBtn(driver);
-		 		assertTrue(chkPg.isMenuItemPresent());
- 			  			 	
+		 		//verify Scan LicencePage is displayed
+		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));
+		 			 		
+		 		// Click on the Settings and Sign out
 		 		chkPg.signOut();
 
-		 		assertTrue(tcPg.isAgreeBtnExist());
+		 		
 		}
 	 	catch(Exception e){
 	 		
@@ -109,12 +108,19 @@ public class CheckerLicActivityTest extends BasicTest{
 	 		reportFail("expected", "actual","params");	
 
 	 	}
-		
 	 	finally{
 	 		
-	 		Utilities.closeApp(driver, appName);
+	 		Map<String, Object> params = new HashMap();
+	 		params.put("identifier", appName);
+	 		Object result1 = driver.executeScript("mobile:application:clean", params);
+	 		params.clear();
+	 		
+	 		Map<String, Object> params1 = new HashMap();
+	 		params1.put("identifier", appName);
+	  		Object result11 = driver.executeScript("mobile:application:close", params1);
+	  		params1.clear();
+
 	 	}
-	 	
         if(testFail){
         	Assert.fail();
         }
@@ -126,7 +132,7 @@ public class CheckerLicActivityTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("checkerSingInSheet"), false);
-		  s = ed.getData(12);
+		  s = ed.getData(13);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -138,10 +144,8 @@ public class CheckerLicActivityTest extends BasicTest{
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public CheckerLicActivityTest(DesiredCapabilities caps) {
+	public CheckerSupportTest(DesiredCapabilities caps) {
 		super(caps);
-	}
+	}	
+
 }
-	
-
-

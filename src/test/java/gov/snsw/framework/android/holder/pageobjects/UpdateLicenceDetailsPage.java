@@ -20,14 +20,12 @@ public class UpdateLicenceDetailsPage extends DriverPage{
 	By editResAdd = By.xpath("//*[@resourceid='licenceApplication']/view[6]/view[3]");
 	
 	//Postal Address
-	By editPostalAdd = By.xpath("//*[@contentDesc='POSTAL ADDRESS']/../view[6]");
+	By editPostalAdd = By.xpath("//*[@resourceid='licenceApplication']/view[6]");
 	
 	//Mobile Number
 	By editMobileNum = By.xpath("//*[@resourceid='licenceApplication']view[14]/view[1]");
 	
 	//email Address
-	//*[@contentDesc="Deepthi.Singh@avocadoconsulting.com.au"]
-	//*[@resourceid="licenceApplication"]/view[18]/view[1]
 	By editEmailAdd = By.xpath("//*[@resourceid='licenceApplication']view[18]/view[1]");
 	
 	//save changes button

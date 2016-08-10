@@ -79,6 +79,7 @@ public class CheckerActivityLog extends BasicTest{
 		 		assertTrue(chkLog.isTextPresentOnScreen("Recreational Fishing Fee"));
 		 		
 		 		
+		 		
 	
 		}
 	 	catch(Exception e){
