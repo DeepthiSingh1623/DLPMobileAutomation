@@ -76,7 +76,7 @@ public class CheckerForgotPINTest extends BasicTest
 		 		//verify Scan LicencePage is displayed
 		 		assertTrue(chkPg.verifyScanLicenceTitleBar().contains("Scan Licence"));	
 		 		
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		
 		 		Utilities.openApp(driver, appName);
 		 		

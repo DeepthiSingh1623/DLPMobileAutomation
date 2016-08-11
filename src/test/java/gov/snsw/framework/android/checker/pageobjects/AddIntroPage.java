@@ -54,6 +54,6 @@ public class AddIntroPage extends DriverPage {
 		}
 		
 		
-	
+	By permissionMsg = By.xpath("//*[@resourceid='com.android.packageinstaller:id/permission_message']");
 
 }

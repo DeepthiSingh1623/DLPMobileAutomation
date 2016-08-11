@@ -82,7 +82,7 @@ public class IOSCheckerForgotPINTest extends BasicTest{
 		 		}
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		
 		 		Utilities.openApp(driver, appName);
 		 		
