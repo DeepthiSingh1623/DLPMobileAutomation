@@ -140,9 +140,7 @@ public class IOS_HolderAboutTest extends BasicTest
 	 	
 	 	finally{
 	 		
-	 		//clean app
-	 		Utilities.cleanApp(driver, appName);
-	 		
+ 		
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
 

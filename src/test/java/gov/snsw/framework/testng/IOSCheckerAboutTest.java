@@ -90,7 +90,7 @@ public class IOSCheckerAboutTest extends BasicTest{
 		 		settingPg.clickAboutOption();
 		 		
 		 		//verify settings title
-		 		assertTrue(settingPg.verifySettingsTitle());
+		 		assertTrue(settingPg.verifyAboutTitle());
 		 		
 		 		//verify App Details
 		 		assertTrue(settingPg.verifyAppDetailsTitle());
