@@ -13,13 +13,13 @@ public class CheckerLogs extends DriverPage{
 	}
 	
 		
-	By date = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtEventDt'])[1]");
-	By licType = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtLicType'])[1]");
-	By licNo = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtLicNo'])[1]");
-	By eventType = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtEventType'])[1]");
-	By syncSts = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtSyncStatus'])[1]");
-	By time = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtEventTime'])[1]");
-	By notes = By.xpath("(//*[@resourceid='au.gov.nsw.onegov.app.checker.uat:id/txtHasNotes'])[1]");
+	By date = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtEventDt'])[1]");
+	By licType = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtLicType'])[1]");
+	By licNo = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtLicNo'])[1]");
+	By eventType = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtEventType'])[1]");
+	By syncSts = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtSyncStatus'])[1]");
+	By time = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtEventTime'])[1]");
+	By notes = By.xpath("(//*[@resourceid='"+checker_android_resourceid+":id/txtHasNotes'])[1]");
 	
 	
 	By flagStatus = By.xpath("//*[text()='OFF']");
