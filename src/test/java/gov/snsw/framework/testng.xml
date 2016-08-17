@@ -4,53 +4,20 @@
 <suite name="DLP Holder and Checker Smoke Test Suite" parallel="false">
 <!-- suite name="DLP Holder and Checker Smoke Test Suite" parallel="instances" thread-count="9"-->
   
-  <!-- test name="IOS Checker App Tests">
-    <classes>
-      <class name="gov.snsw.framework.testng.IOSCheckerSignInTest"/>
-      <class name="gov.snsw.framework.testng.IOSCheckerChangePINTest"/>
-      <class name="gov.snsw.framework.testng.IOSCheckerManualSearchTest"/>
-      <class name="gov.snsw.framework.testng.IOSCheckerAutoLockTest"/>
-      <class name="gov.snsw.framework.testng.IOSCheckerAboutTest"/>
-    </classes>
     
-  </test -->
-
-  
   <test name="Android Checker App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.CheckerSignInTest"/>
-      <class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
+      <!-- class name="gov.snsw.framework.testng.CheckerChangePINTest"/>
       <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
+      <class name="gov.snsw.framework.testng.CheckerLicActivityTest"/>
       <class name="gov.snsw.framework.testng.CheckerAutoLockTest"/>
-    <class name="gov.snsw.framework.testng.CheckerAboutTest"/>
-	<class name="gov.snsw.framework.testng.CheckerLicActivityTest"/>
+      <class name="gov.snsw.framework.testng.CheckerAboutTest"/>
+	  <class name="gov.snsw.framework.testng.CheckerSupportTest"/-->
+
     </classes>
     
   </test>
   
-    <!-- test name="IOS Holder App Tests">
-    <classes>      
-	      <class name="gov.snsw.framework.testng.IOS_HolderSignInTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderViewLicenceTest"/>
-	
- 
-     </classes>
-     </test-->
-
-    <!-- test name="Android Holder App Tests">
-     <classes>
-	      <class name="gov.snsw.framework.testng.Android_HolderSignInTest"/>
-	      <class name="gov.snsw.framework.testng.Android_HolderViewLicenceDetailsTest"/>
-	      <class name="gov.snsw.framework.testng.Android_Holder_QuickView_Test"/>
-	      <class name="gov.snsw.framework.testng.Android_Holder_SupportTest"/>
-	       
-	     
-
-     
-      </classes>
-     </test-->
-
-    
-  	 
-  	 
-</suite> <!-- Suite -->
+     	 
+</suite> 
