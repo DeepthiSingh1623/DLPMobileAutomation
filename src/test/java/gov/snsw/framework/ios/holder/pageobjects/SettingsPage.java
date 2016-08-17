@@ -181,6 +181,11 @@ public class SettingsPage extends DriverPage{
 		return appVersionTitle;
 	}
 	
+	public void ClickTermsCondText()
+	{
 	
+		By tcText = By.xpath("//*[@label='Terms And Conditions']");
+		driver.findElement(tcText).click();
+	}
 	
 }
