@@ -52,7 +52,8 @@ public class SettingsPage extends DriverPage{
 	//BackBtn
 	By supportBackBtn = By.xpath("//*[@name='Support' and @class='UIANavigationBar']//*[@label='Settings']");
 	
-		
+	
+	By aboutTitle = By.xpath("//*[@name='OGNAboutView']//*[@label='Settings']");
 	public void signoutBtn()
 	{
 		driver.findElement(signout).click();
@@ -111,7 +112,7 @@ public class SettingsPage extends DriverPage{
 	
 	public void clickSettingBackButton()
 	{
-		driver.findElement(settingTitleAutoLock).click();
+		driver.findElement(aboutTitle).click();
 	}
 	
 	public void clickImmediateAutoLockOption()
@@ -221,7 +222,22 @@ public class SettingsPage extends DriverPage{
 		driver.findElement(supportBackBtn).click();
 	}
 	
-	
+	public boolean verifyAboutTitle()
+	{
+		boolean aboutTitlePg = false;
+		try
+		{
+			
+			fluentWait(aboutTitle);
+			aboutTitlePg = driver.findElement(aboutTitle).isDisplayed();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return aboutTitlePg;
+		
+	}
 	
 	
 }

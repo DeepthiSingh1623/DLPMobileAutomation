@@ -15,7 +15,7 @@
 		<repository>
 			<id>Beton</id>
 			<name>Beton</name>
-			<url>https://gitlab.com/philipps/PerfectoCI_Philipp/tree/debug/mvn-repo/snapshot</url>
+			<url>https://github.com/PerfectoMobileSA/Beton/raw/master/mvn-repo/snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
