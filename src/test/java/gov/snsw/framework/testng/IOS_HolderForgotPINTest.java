@@ -94,7 +94,7 @@ public class IOS_HolderForgotPINTest extends BasicTest
 		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
 		 				 		
 		 		//Close App
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		
 		 		//Open App		
 		 		Utilities.openApp(driver, appName);		 			 	

@@ -78,7 +78,7 @@ public void checkerChangePinIOS(String username, String password,String pin) thr
 		 		}
 		 		assertTrue(chkPg.isTextPresentOnScreen("Licence Scan"));	
 		 		
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		
 		 		Utilities.openApp(driver, appName);
 		 		

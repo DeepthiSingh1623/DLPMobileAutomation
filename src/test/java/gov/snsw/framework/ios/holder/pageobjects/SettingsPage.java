@@ -184,6 +184,7 @@ public class SettingsPage extends DriverPage{
 		return appVersionTitle;
 	}
 	
+
 	public void ActivityOption()
 	{
 		driver.findElement(activityIcon).click();
@@ -195,6 +196,13 @@ public class SettingsPage extends DriverPage{
 		return new ActivityPage(driver);
 	}
 	
+
+	public void ClickTermsCondText()
+	{
+
 	
+		By tcText = By.xpath("//*[@label='Terms And Conditions']");
+		driver.findElement(tcText).click();
+	}
 	
 }

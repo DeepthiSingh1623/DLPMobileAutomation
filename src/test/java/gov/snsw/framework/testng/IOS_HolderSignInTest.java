@@ -30,9 +30,9 @@ public class IOS_HolderSignInTest extends BasicTest
 	@Test (dataProvider="logInData")
 	public void signInIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
-		if(this.driver == null){
-			throw new IllegalMonitorStateException("Device not allocated");
-		}
+		Assert.assertNotNull(this.driver,"driver");
+System.err.println(driver.getCapabilities());
+
 		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
 	 	

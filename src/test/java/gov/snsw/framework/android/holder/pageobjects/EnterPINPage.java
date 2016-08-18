@@ -2,7 +2,11 @@ package gov.snsw.framework.android.holder.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 import gov.snsw.framework.utils.DriverPage;
+import gov.snsw.framework.utils.Utilities;
 
 public class EnterPINPage extends DriverPage{
 
@@ -81,9 +85,10 @@ public class EnterPINPage extends DriverPage{
 	public String verifyPinEnterTitle()
 	{
 		By pinTitle = By.xpath("//*[text()='myLicences']");
-		fluentWait(pinTitle);
-		String pinEnterTitle = driver.findElement(pinTitle).getText();
-		return pinEnterTitle;
+		WebElement element = fluentWait(pinTitle);
+		Utilities.logUxPersonaTimer((RemoteWebDriver)driver,"signIn","Time to sign in after PIN entry", 5000);
+		//String pinEnterTitle = driver.findElement(pinTitle).getText();
+		return element.getText();
 	}
 	
 	//Enter CONFIRM PIN 

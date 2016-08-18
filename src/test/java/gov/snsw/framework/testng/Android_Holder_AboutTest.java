@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -34,7 +35,7 @@ public class Android_Holder_AboutTest extends BasicTest{
 
 	
 	
-	@Test (dataProvider="logInData")
+	@Test (dataProvider="logInData", priority=3)
 	public void AboutAppDetailsAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum, String cardName,String appBuildName,String appVersion) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
@@ -42,7 +43,8 @@ public class Android_Holder_AboutTest extends BasicTest{
 		}
 		String appName = (String) caps.getCapability("appPackage");
 		try{
-	 		
+	 		Reporter.log("Test: AboutAppDetailsAndroid "+  
+			 		driver.getCapabilities().asMap().get("deviceName"),true);
 	 			 				 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		

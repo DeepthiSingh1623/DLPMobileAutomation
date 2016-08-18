@@ -15,7 +15,7 @@ public class UpdatePostalAddressPage extends DriverPage{
 	//By doneBtn = By.xpath("//*[@class='DOMUIAButton']");
 	By doneBtn = By.xpath("//*[text()='International']/../button");
 	//Address 
-	By Address = By.xpath("//*[@class='DOMUIAButton']/../textfield");
+	
 	
 	By addEnterDone = By.xpath("//device/view/window[2]/toolbar[3]/button[3]");
 	
@@ -45,11 +45,30 @@ public class UpdatePostalAddressPage extends DriverPage{
 		return LicPgTitle;
 	}
 	
-	public void addressField(String postal_add)
+	By Address = By.xpath("//*[@class='UIAWebView']/textfield");
+	By deletIcon = By.xpath("//*[@label='Delete']");
+	public void addressField(String current_add)
 	{
+		
 		fluentWait(Address);
+		driver.findElement(Address).click();
 		driver.findElement(Address).clear();
-		driver.findElement(Address).sendKeys(postal_add);
+		driver.findElement(Address).clear();
+		/*while(driver.findElement(Address).getText().length()>0){
+			
+			driver.findElement(Address).click();
+			driver.findElement(deletIcon).click();
+.			driver.findElement(deletIcon).click();
+			driver.findElement(deletIcon).click();
+			driver.findElement(deletIcon).click();
+			driver.findElement(deletIcon).click();
+			
+			if(driver.findElement(Address).getText().equals(null)){
+				break;
+			}
+		}*/
+		
+		driver.findElement(Address).sendKeys("95-103 Victoria Street, EAST GOSFORD NSW 2250");
 	}
 	
 	

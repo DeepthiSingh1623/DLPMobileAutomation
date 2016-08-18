@@ -127,11 +127,11 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(2000);
 		 		
 		 		//open App
-	 			Utilities.openApp(driver, appName);
+	 			Utilities.openApp(driver,appName);
 	 			Thread.sleep(4000);
 	 			
 	 			//Verify the Enter PIN is displayed
@@ -162,7 +162,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(2000);
 		 		
 		 		//open App
@@ -187,7 +187,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver, appName);
+		 		Utilities.homeBtn(driver);
 		 		Thread.sleep(310000);		 		
 		 		
 		 		//open App

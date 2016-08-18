@@ -39,6 +39,7 @@ public class AddIntroPage extends DriverPage{
 	{
 		boolean startBtnExist = false;
 		try{
+			fluentWait(startBtn);
 			startBtnExist= driver.findElement(startBtn).isDisplayed();
 			
 		}

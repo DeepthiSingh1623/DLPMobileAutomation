@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import gov.snsw.framework.utils.DriverPage;
+import gov.snsw.framework.utils.PersonaStopwatch;
 import gov.snsw.framework.utils.Utilities;
 
 public class SignInNSWAcctPage extends DriverPage {
@@ -43,8 +44,8 @@ public class SignInNSWAcctPage extends DriverPage {
 	
 	public EnterPINPage clickSignInBtn()
 	{
-		fluentWait(signInBtn);
-		driver.findElement(signInBtn).click();
+		WebElement element = fluentWait(signInBtn);
+		element.click();
 		return new EnterPINPage(driver);
 	}
 	

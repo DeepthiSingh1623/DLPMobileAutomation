@@ -42,12 +42,19 @@ public class DetailLicencePage extends DriverPage{
 		return LicenceStartDate;
 	}
 	
-	public String getLicExpireDate()
+	public boolean getLicExpireDate(String date)
 	{
-		By licExpireDate = By.xpath("//*[@label='Expiry Date']/../text[2]");
-		fluentWait(licExpireDate);
-		String LicenceExpireDate = driver.findElement(licExpireDate).getText();
-		return LicenceExpireDate;
+		By licExpireDate = By.xpath("//*[@label='Expiry: "+date+"']");
+		boolean expiryDateDisplay = false;
+		try{
+			fluentWait(licExpireDate);
+			expiryDateDisplay = driver.findElement(licExpireDate).isDisplayed();
+		}
+		
+		catch(Exception e){
+			
+		}
+		return expiryDateDisplay;
 	}	
 	
 	public void backBtn()

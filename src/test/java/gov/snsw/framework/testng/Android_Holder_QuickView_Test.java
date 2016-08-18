@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -34,16 +35,18 @@ import gov.snsw.framework.utils.Utilities;
 public class Android_Holder_QuickView_Test extends BasicTest{
 
 	
-	
+
 	@Test (dataProvider="logInData")
 	public void quickViewAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address, String lic_OwnerName, String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum,String cardName, String appBuildName,String appVersion, String quickView_LicNum, String quickView_LicStatus) throws Exception{
+
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
 	 	try{
-	 				 			
+	 		Reporter.log("Test: supportAndroid "+ 
+	 		 		driver.getCapabilities().asMap().get("deviceName"),true); 			
 	 			switchToContext(driver, "NATIVE_APP");
 		 		
 	 			//Driver initialization	 		
