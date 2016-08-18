@@ -18,6 +18,8 @@ public class SignInPage extends DriverPage{
 	
 	By signIn = By.xpath("//*[@label='SIGN IN']");
 	
+	By signInPgTitle = By.xpath("//*[@label='Sign in with your MyService NSW account']");
+	
 	public void enterEmail(String Username)
 	{
 		driver.findElement(userName).click();
@@ -47,6 +49,13 @@ public class SignInPage extends DriverPage{
 		signInBtn();
 		return new EnterPinPage(driver);
 		
+	}
+	
+	public String verifySignInTitle()
+	{
+		fluentWait(signInPgTitle);
+		String signInPg = driver.findElement(signInPgTitle).getText();
+		return signInPg;
 	}
 
 }

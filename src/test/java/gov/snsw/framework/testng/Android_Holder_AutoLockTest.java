@@ -51,6 +51,13 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
 		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
+		 		
+		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
@@ -98,8 +105,8 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);		 		
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licenses Page is displayed with License Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = LicPg.clickSettings();
@@ -120,7 +127,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
 		 		//open App
@@ -133,8 +140,8 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		//Enter 4 digit PIN
 		 		enterPIN.enter4DigitPin(pin);
 	 			
-	 			//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click on the AppSettings
 		 		appSettingPg = LicPg.clickSettings();
@@ -155,7 +162,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
 		 		//open App
@@ -180,7 +187,7 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 		 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(310000);		 		
 		 		
 		 		//open App
@@ -194,8 +201,8 @@ public class Android_Holder_AutoLockTest extends BasicTest{
 		 		enterPIN.enter4DigitPin(pin);	 			
 		 		
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//click Settings 
 		 		LicPg.settings();

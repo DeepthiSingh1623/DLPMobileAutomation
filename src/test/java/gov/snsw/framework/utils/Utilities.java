@@ -36,6 +36,10 @@ public class Utilities {
  		params.clear();
 	}
 	
+	
+	
+	
+	
 	public static void cleanApp(RemoteWebDriver driver,String appName){
 		
  		params.put("identifier", appName);
@@ -44,7 +48,7 @@ public class Utilities {
  		
  	}
 	
-	public static void homeBtn(RemoteWebDriver driver){
+	public static void homeBtn(RemoteWebDriver driver, String appName){
 		
  		params.put("keySequence", "HOME");
  		Object result1 = driver.executeScript("mobile:presskey", params);

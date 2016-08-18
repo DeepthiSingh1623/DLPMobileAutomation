@@ -9,11 +9,9 @@
       <class name="gov.snsw.framework.testng.IOSCheckerManualSearchTest"/>
       <class name="gov.snsw.framework.testng.IOSCheckerAutoLockTest"/>
       <class name="gov.snsw.framework.testng.IOSCheckerAboutTest"/>
-    </classes>
-    
+    </classes>    
   </test -->
 
-  
   <!-- test name="Android Checker App Tests">
     <classes>
       <class name="gov.snsw.framework.testng.CheckerSignInTest"/>
@@ -21,12 +19,10 @@
       <class name="gov.snsw.framework.testng.CheckerLicSearchTest"/>
       <class name="gov.snsw.framework.testng.CheckerAutoLockTest"/>
      <class name="gov.snsw.framework.testng.CheckerAboutTest"/>
-
     </classes>
-    
   </test-->
   
-    <test name="IOS Holder App Tests">
+    <!--test name="IOS Holder App Tests">
     <classes>      
 	      <class name="gov.snsw.framework.testng.IOS_HolderSignInTest"/>
 	      <class name="gov.snsw.framework.testng.IOS_HolderViewLicenceTest"/>
@@ -35,30 +31,25 @@
 	      <class name="gov.snsw.framework.testng.IOS_HolderAutoLockTest"/>
 	      <class name="gov.snsw.framework.testng.IOS_HolderQuickViewTest"/>
 	      <class name="gov.snsw.framework.testng.IOS_HolderSupportTest"/>
-	      <class name="gov.snsw.framework.testng.IOS_HolderChangePinTest"/>
 	      <class name="gov.snsw.framework.testng.IOS_HolderUpdateLicenceTest"/>
- 
+	      <class name="gov.snsw.framework.testng.IOS_HolderForgotPINTest"/>
+	      <class name="gov.snsw.framework.testng.IOS_HolderActivityTest"/>
+	      <class name="gov.snsw.framework.testng.IOS_HolderChangePinTest"/>
      </classes>
-     </test>
+     </test-->
 
-    <!-- test name="Android Holder App Tests">
+    <test name="Android Galaxy S7  Holder App Tests">
      <classes>
 	      <class name="gov.snsw.framework.testng.Android_HolderSignInTest"/>
 	      <class name="gov.snsw.framework.testng.Android_HolderViewLicenceDetailsTest"/>
-	       
-	      
-	      <class name="gov.snsw.framework.testng.Android_HolderUpdateLicenceDetailsTest"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_AboutTest"/>
+	      <class name="gov.snsw.framework.testng.Android_HolderLicenceShareTest"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_AutoLockTest"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_QuickView_Test"/>
 	      <class name="gov.snsw.framework.testng.Android_Holder_SupportTest"/>
-   
-
-     
+	      <class name="gov.snsw.framework.testng.Android_Holder_ActivityTest"/>
+	      <class name="gov.snsw.framework.testng.Android_Holder_ForgotPINTest"/>
+	      <class name="gov.snsw.framework.testng.Android_HolderChangePINTest"/> 
       </classes>
-     </test-->
-
-    
-  	 
-  	 
+     </test>
 </suite> <!-- Suite -->

@@ -1,11 +1,10 @@
 package gov.snsw.framework.testng;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -15,11 +14,11 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
-import com.perfectomobile.utils.PerfectoUtils;
+
 
 import gov.snsw.framework.android.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.android.holder.pageobjects.AppSettingPage;
-import gov.snsw.framework.android.holder.pageobjects.DetailLicencePage;
+
 import gov.snsw.framework.android.holder.pageobjects.EnterPINPage;
 import gov.snsw.framework.android.holder.pageobjects.MyLicencePage;
 import gov.snsw.framework.android.holder.pageobjects.SignInNSWAcctPage;
@@ -45,6 +44,12 @@ public class Android_HolderChangePINTest extends BasicTest{
 		 		
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
+		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
 		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
@@ -91,13 +96,10 @@ public class Android_HolderChangePINTest extends BasicTest{
 			 			enterPIN.enter4DigitPin(pin);
 			 		}	 		
 		 		
-			 		MyLicencePage LicPg = new MyLicencePage(driver);
-			 		
-			 		//Verify My Licence Page is displayed.
-			 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-			 				 		
-			 		//Verify My Licences Page is displayed
-			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+			 		MyLicencePage LicPg = new MyLicencePage(driver);			 		
+			 				 				 		
+			 	//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = LicPg.clickSettings();

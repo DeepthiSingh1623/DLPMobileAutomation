@@ -43,6 +43,12 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		//Enter PIN
 		 		EnterPinPage enterPIN = null;
 		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
+		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
@@ -88,8 +94,8 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		}
 		 		
 		 		
-		 		//Verify My Licence Page is displayed
-		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 		//Verify My Licence Page is displayed with Licence Number
+		 		assertTrue(LicPg.verifyLicName(licence_Number).contains(licence_Name));
 		 				 		
 		 		//Close App
 		 		Utilities.closeApp(driver, appName);
@@ -103,8 +109,8 @@ public class IOS_HolderSignInTest extends BasicTest
 		 		//Re-enter 4 digit PIN Number
 		 		LicPg = enterPIN.enterPINUnlock();		 		
 		 				 		
-		 		//Verify My License Page is displayed
-		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 		//Verify My Licence Page is displayed with Licence Number
+		 		assertTrue(LicPg.verifyLicName(licence_Number).contains(licence_Name));
 		 				
 		 		//Click on the Settings and then sign out
 		 		SettingsPage settingPg = LicPg.clickSettingsBtn();

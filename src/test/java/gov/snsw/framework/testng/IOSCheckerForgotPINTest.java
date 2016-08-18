@@ -4,7 +4,6 @@ package gov.snsw.framework.testng;
 
 
 import static org.testng.AssertJUnit.assertTrue;
-
 import java.io.IOException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -21,40 +20,37 @@ import gov.snsw.framework.ios.checker.pageobjects.SNSWCheckerPage;
 import gov.snsw.framework.ios.checker.pageobjects.SignInNSWAcctPage;
 import gov.snsw.framework.ios.checker.pageobjects.TermsAndConditionsPage;
 
-import gov.snsw.framework.utils.Utilities;
-
+import gov.snsw.framework.utils.Utilities;	
 
 public class IOSCheckerForgotPINTest extends BasicTest{
-
 	
-	
-	@Test (dataProvider="logInData")
-	public void checkerChangePinIOS(String username, String password,String pin) throws Exception{
-		boolean testFail = false;
-		if(this.driver == null){
-			throw new IllegalMonitorStateException("Device not allocated");
-		}
-		String appName = (String) caps.getCapability("bundleId");
-	 	try{
-	 			 			
-		 		switchToContext(driver, "NATIVE_APP");
-		 	
+@Test (dataProvider="logInData")
+public void checkerChangePinIOS(String username, String password,String pin) throws Exception{
+	boolean testFail = false;
+	if(this.driver == null){
+		throw new IllegalMonitorStateException("Device not allocated");
+	}
+	String appName = (String) caps.getCapability("bundleId");
+ 	try{
+ 			 			
+	 		switchToContext(driver, "NATIVE_APP");
+	 	
+	 		
+	 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
+	 		EnterPINPage enterPIN = new EnterPINPage(driver);
+	 		
+	 		if(tcPg.isAgreeBtnExist()){
+	 			
+	 			AppUsageAgreementPage appAgree = tcPg.pressAgreeBtn();
+	 			
+	 			SignInNSWAcctPage signIn = appAgree.pressAgreeBtn();
 		 		
-		 		TermsAndConditionsPage tcPg = new TermsAndConditionsPage(driver);
-		 		EnterPINPage enterPIN = new EnterPINPage(driver);
-		 		
-		 		if(tcPg.isAgreeBtnExist()){
-		 			
-		 			AppUsageAgreementPage appAgree = tcPg.pressAgreeBtn();
-		 			
-		 			SignInNSWAcctPage signIn = appAgree.pressAgreeBtn();
-			 		
-			 		//Enter the login details in the Sign In Page
-		 			enterPIN = signIn.pressSignIn(username,password);
-			 		 
-				 		//Enter 4 digit PIN
-				 		 enterPIN.enterPin();
-				 		 enterPIN.enterPin();
+		 		//Enter the login details in the Sign In Page
+	 			enterPIN = signIn.pressSignIn(username,password);
+		 		 
+			 		//Enter 4 digit PIN
+			 		 enterPIN.enterPin();
+			 		 enterPIN.enterPin();
 		 			
 		 		}
 		 		

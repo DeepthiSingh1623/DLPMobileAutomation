@@ -50,6 +50,12 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		//Enter PIN
 	 		EnterPINPage enterPIN = null;
 	 		
+	 		//Close app
+	 		Utilities.closeApp(driver, appName);
+
+	 		//Open App
+	 		Utilities.openApp(driver, appName);
+	 		
 	 		if(AddInPg.isStartBtnExist())
 	 		{		 			
 	 		
@@ -95,10 +101,10 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 		 			enterPIN.enter4DigitPin(pin);
 		 		}	 		
 	 		
-		 		MyLicencePage LicPg = new MyLicencePage(driver);
+		 	MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 	//Verify My Licenses Page is displayed with License Numbers
+			assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	
 	 		
 	 		
 	 		//Click the Fishing Fee License 
@@ -193,14 +199,7 @@ public class Android_HolderRenewLicenceTest extends BasicTest{
 	 		//verify Success Message
 	 		assertTrue(payPg.verifySuccessMessage());
 	 		
-	 		// Click on the Settings and Sign out
-		   // LicPg.settings();
-		        
-			 //Verify Add Intro Page is displayed
-			  // assertTrue(AddInPg.verifyAddPg().contains("Add"));
 	 		
-	 		//reportFail("expected", "actual","params");	
-	 		//reportPass("success", "param");	
 		  	 		
 	 	}
 	 	catch(Exception e){

@@ -49,6 +49,12 @@ public class Android_Holder_SupportTest extends BasicTest{
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
 		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
+		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
@@ -96,11 +102,8 @@ public class Android_Holder_SupportTest extends BasicTest{
 		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
-		 		//Verify My Licence Page is displayed
-		 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-		 				 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.clickSettingHamburger();
@@ -122,11 +125,7 @@ public class Android_Holder_SupportTest extends BasicTest{
 		 		//Verify Feedback
 		 		assertTrue(supportPg.verifyFeedbackServices().contains("info@service.nsw.gov.au"));	 	
 		 		
-		 		//Click Back icon on the Support Screen
-		 		Map<String, Object> params3 = new HashMap<>();
-		 		params3.put("keySequence", "BACK");
-		 		Object result3 = driver.executeScript("mobile:presskey", params3);
-		 		
+		 		Utilities.BackBtn(driver);
 		 		
 		 		//click Settings 
 		 		LicPg.settings();		 		

@@ -27,6 +27,11 @@ public class AppSettingPage extends DriverPage{
 	//Quick View
 	By quickView = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/switchQuickView']");
 	
+	//Push Notification
+	public By pushNotify = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/switchNotifications']");
+	
+	
+			
 	//autolock Title 
 	By autoLockTitle = By.xpath("//*[text()='Auto lock']");
 	
@@ -123,6 +128,25 @@ public class AppSettingPage extends DriverPage{
 		fluentWait(fiveMinutesRadio);
 		driver.findElement(fiveMinutesRadio).click();
 	}
+	
+	public void clickPushNotification()
+	{
+		fluentWait(pushNotify);
+		driver.findElement(pushNotify).click();
+	}
+	
+	public String pushNotificationCheck(By element,String name)
+	{
+		String el = driver.findElement(element).getAttribute(name);
+		return el;
+	}
+	
+	public boolean pushNotificationStatus(By element, String name)
+	{
+		String status = driver.findElement(pushNotify).getAttribute(name);
+		return false;
+	}
+
 	
 	
 	

@@ -1,6 +1,7 @@
 package gov.snsw.framework.testng;
 
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void quickViewAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void quickViewAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address, String lic_OwnerName, String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum,String cardName, String appBuildName,String appVersion, String quickView_LicNum, String quickView_LicStatus) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -50,6 +51,12 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		 		
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
+		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
 		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
@@ -98,14 +105,32 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);		 		
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click on the AppSettings
 		 		AppSettingPage appSettingPg = LicPg.clickSettings();
 		 		
 		 		//Verify app Settings Page is displayed 
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
+		 		
+		 		//verify the toggle		 
+		 		if(appSettingPg.pushNotificationStatus(appSettingPg.pushNotify,"checked"))
+		 		{
+		 			//Verify user is able to toggle
+			 		appSettingPg.clickPushNotification();
+			 		
+			 		//verify the toggle				 		
+			 		assertEquals("Checked attribute is false:","true",appSettingPg.pushNotificationCheck(appSettingPg.pushNotify, "checked"));
+		 		}
+		 		else
+		 		{
+		 			//Verify Push Notification toggle
+			 		appSettingPg.clickPushNotification();
+			 		
+			 		assertEquals("Checked attribute is true:","false",appSettingPg.pushNotificationCheck(appSettingPg.pushNotify, "checked"));
+			 	} 		
+		 		
 		 		
 		 		//Click Quick View 			 		
 		 		appSettingPg.clickQuickView();
@@ -120,8 +145,20 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		 		//assert Quick view Title
 		 		assertTrue(quickPg.verifyQuickViewTitle());
 		 		
-		 		//assertTrue Licence Type
-		 		assertTrue(quickPg.verifyLicType().contains(licence_Name));
+		 		//assertTrue License Type
+		 		if(quickPg.LicType().equalsIgnoreCase(licence_Name))
+		 		{
+		 			assertTrue("The Expiry date on quick view doies not match", quickPg.getExpiryDate(licence_ExpireDate).equalsIgnoreCase("Expires "+licence_ExpireDate));
+		 			assertTrue("The Licence Number doesnot match",quickPg.getLicNumberIndex1().equalsIgnoreCase(quickView_LicNum));
+		 			assertTrue("The Licence Status doesnot match", quickPg.getLicStatusIndex1().equalsIgnoreCase(quickView_LicStatus));
+		 		}
+		 		else if(quickPg.LicTypeAlt().equalsIgnoreCase(licence_Name))
+		 		{
+		 			assertTrue("The Expiry date on quick view doies not match", quickPg.getExpiryDate(licence_ExpireDate).equalsIgnoreCase("Expires "+licence_ExpireDate));
+		 			assertTrue("The Licence Number doesnot match",quickPg.getLicNumberIndex2().equalsIgnoreCase(quickView_LicNum));
+		 			assertTrue("The Licence Status doesnot match", quickPg.getLicStatusIndex2().equalsIgnoreCase(quickView_LicStatus));
+		 		} 	
+		 		
 		 		
 		 		//Click Unlock
 		 		enterPIN = quickPg.clickUnlock();
@@ -165,7 +202,7 @@ public class Android_Holder_QuickView_Test extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(10);
+		  s = ed.getData(21);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

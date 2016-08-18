@@ -54,6 +54,15 @@ public class MyLicencesPage extends DriverPage{
 		return new SettingsPage(driver);
 	}
 	
+	public String verifyLicName(String licence_Number)
+	{
+		By LicName = By.xpath("//*[text()='Licence No. "+licence_Number+"']/../text[1]");
+		fluentWait(LicName);
+		String LicName1 = driver.findElement(LicName).getText();
+		return LicName1;
+		
+	}
+	
 	
 	
 

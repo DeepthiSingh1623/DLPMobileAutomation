@@ -32,7 +32,7 @@ public class CheckerForgotPINTest extends BasicTest
 {
 
 	@Test (dataProvider="logInData")
-	public void checkerChangePInSettingsAndroid(String username, String password,String pin) throws Exception{
+	public void checkerForgotPIN(String username, String password,String pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");

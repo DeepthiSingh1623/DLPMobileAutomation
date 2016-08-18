@@ -53,7 +53,7 @@ public class DriverPage {
 	
 		public WebElement fluentWait(final By element)
 		{
-		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS)
+		Wait<WebDriver> pwait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
 																			.pollingEvery(1, TimeUnit.SECONDS)
 																			.ignoring(NoSuchElementException.class);
 			WebElement element1 = pwait.until(new Function<WebDriver , WebElement>(){
@@ -145,6 +145,13 @@ public class DriverPage {
 		public void selectNo()
 		{
 			driver.findElement(notificationPop).click();
+		}
+		
+		public String activityHelpLink(By element,String name)
+		{
+			String el = driver.findElement(element).getAttribute(name);
+			return el;
+			
 		}
 		
 }

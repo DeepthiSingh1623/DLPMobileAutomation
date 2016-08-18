@@ -39,6 +39,7 @@ public class Android_HolderSignInTest extends BasicTest{
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("appPackage");
+		
 	 	try{
 	 			//reportPass("success", "param");
 	 			
@@ -48,6 +49,10 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
+		 		
+		 		Utilities.closeApp(driver, appName);
+		 		
+		 		Utilities.openApp(driver, appName);
 		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
@@ -95,8 +100,8 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		}	 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+		 		assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 		
 		 		
 		 		//close App
 	 			Utilities.closeApp(driver, appName);
@@ -111,7 +116,7 @@ public class Android_HolderSignInTest extends BasicTest{
 		 		enterPIN.enter4DigitPin(pin);
 		 				 		
 		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	
 		 		
 		 		//Click on the Settings and then sign out
 		 		LicPg.settings();	
@@ -130,8 +135,13 @@ public class Android_HolderSignInTest extends BasicTest{
 	 	
 	 	finally{
 	 		
+	 			
 	 		//close app
 	 		Utilities.closeApp(driver,appName);
+	 		
+	 		
+	 		
+	 		
 	 				
 	 		
 	 	}

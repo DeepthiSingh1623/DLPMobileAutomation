@@ -18,7 +18,11 @@ public class EnterPinPage extends DriverPage{
 	By pin3 = By.xpath("//device/view/window[1]/secure[3]");
 	By pin4 = By.xpath("//device/view/window[1]/secure[4]");
 	
+	//Forgot Pin
+	By forgotPin = By.xpath("//*[@label='Forgot your PIN']");
 	
+	//click SignIn
+	By reSignIn = By.xpath("//*[@label='Sign In']");
 	
 	public String verifyPinEnterTitle()
 	{
@@ -122,6 +126,27 @@ public class EnterPinPage extends DriverPage{
 		String enterNewPIN = driver.findElement(enterNewPin).getText();
 		return enterNewPIN;
 	}
+	
+	public void clickforgotPinTxt()
+	{
+		fluentWait(forgotPin);
+		driver.findElement(forgotPin).click();	
+	}
+	
+	public String verifyForgotPinAlert()
+	{
+		By forgotPIN = By.xpath("//*[@value='Forgot PIN']");
+		fluentWait(forgotPIN);
+		String forgotPinMsg = driver.findElement(forgotPIN).getText();
+		return forgotPinMsg;
+	}
+	
+	public void clickForgotPinSignIn()
+	{
+		fluentWait(reSignIn);
+		driver.findElement(reSignIn).click();	
+	}
+	
 	
 	
 	

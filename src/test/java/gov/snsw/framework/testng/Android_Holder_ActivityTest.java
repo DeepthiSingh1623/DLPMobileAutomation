@@ -37,7 +37,7 @@ public class Android_Holder_ActivityTest extends BasicTest{
 	
 	
 	@Test (dataProvider="logInData")
-	public void AboutAppDetailsAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address,String lic_OwnerName,String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum, String cardName,String appBuildName,String appVersion) throws Exception{
+	public void HolderActivityAndroid(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin, String postal_Address, String lic_OwnerName, String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cardCVVNum,String cardName, String appBuildName,String appVersion, String quickView_LicNum,String quickView_LicStatus,String activity_LicType,String activity_EventType) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
@@ -105,8 +105,8 @@ public class Android_Holder_ActivityTest extends BasicTest{
 		 		
 		 		MyLicencePage LicPg = new MyLicencePage(driver);		 		
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click on settings hamburger		 		
 		 		LicPg.clickSettingHamburger();
@@ -117,21 +117,38 @@ public class Android_Holder_ActivityTest extends BasicTest{
 		 		//verify Activity Title
 		 		assertTrue(activityPg.isActivityTitlePresent().contains("Activity"));
 		 		
-		 		//verify Activity Details 		
-		 		//assertEquals("Date doesnt match",Utilities.getCurrentDate(),activityPg.getActivityDate());
-		 		assertEquals("Licence type does not match","Recreational Fishing Fee",activityPg.getActivityLicType());
-		 		assertEquals("Licence Number does not match",licence_Number,activityPg.getActivityLicNum());
-		 		assertEquals("Event type does not match ","Add",activityPg.getActivityEventType());
+		 		//verify Activity main page 
+		 		if(activityPg.getLicType().equalsIgnoreCase(activity_LicType))
+		 	    {
+		 			//assertEquals("Date doesnt match",Utilities.getCurrentDate(),activityPg.getActivityDate());
+			 		assertEquals("Licence type does not match",activity_LicType,activityPg.getLicType());
+			 		assertEquals("Licence Number does not match",licence_Number,activityPg.getLicNum());
+			 		assertEquals("Event type does not match ",activity_EventType,activityPg.getLicEventType());
+			 		activityPg.clickLicType();
+		     	}
+		 		else if (activityPg.getAltLicType().equalsIgnoreCase(activity_LicType))
+		 		{
+		 			//assertEquals("Date doesnt match",Utilities.getCurrentDate(),activityPg.getActivityDate());
+			 		assertEquals("Licence type does not match",activity_LicType,activityPg.getAltLicType());
+			 		assertEquals("Licence Number does not match",licence_Number,activityPg.getAltLicNum());
+			 		assertEquals("Event type does not match ",activity_EventType,activityPg.getAltLicEventType());
+			 		activityPg.clickAltLicType();
+		 		}
 		 		
-		 		//Click on the Lic Number
-		 		activityPg.clickLicNumber();
-		 		
+		 		Thread.sleep(1000);
 		 		//Verify Activity Detail Title
 		 		assertTrue(activityPg.isActivityTitlePresent().contains("Activity detail"));
 		 		
 		 		//Verify Licence Number is displayed
 		 		assertEquals("Licence Number does not match",licence_Number,activityPg.getActivityDetailsLicNumber());
+		 		//assertTrue("Licence Type on Activity Detail Page does not match",activityPg.isTextPresentOnScreen(activity_LicType));
+		 		assertTrue("Event Type on activity page does not match",activityPg.isTextPresentOnScreen(activity_EventType));
+		 		
 		 			 		
+		 		
+		 		//Verify the clickable element exist
+		 		assertEquals("Clickable attribute is false:","true",activityPg.activityHelpLink(activityPg.helpActivity,"clickable"));
+
 		 		//click Back Button
 		 		activityPg.clickActivityBackBtn();
 		 		
@@ -141,8 +158,8 @@ public class Android_Holder_ActivityTest extends BasicTest{
 		 		//click Back Button
 		 		activityPg.clickActivityBackBtn();
 		 		
-		 		//Verify My Licences Page is displayed
-		 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+		 		//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//click Settings 
 		 		LicPg.settings();
@@ -182,7 +199,7 @@ public class Android_Holder_ActivityTest extends BasicTest{
 		 Object[][] s = null;
 		try {
 		  ExcelDriver ed = new ExcelDriver(sysProp.get("inputWorkbook"), sysProp.get("signInSheet"), false);
-		  s = ed.getData(19);
+		  s = ed.getData(23);
 		} catch(IOException e) {
 			System.out.println("Not able to search data from excel: " + sysProp.get("inputWorkbook"));
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());

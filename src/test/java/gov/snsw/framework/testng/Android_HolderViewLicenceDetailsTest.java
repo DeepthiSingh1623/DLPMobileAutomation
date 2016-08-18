@@ -45,12 +45,18 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
 		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
+		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 			
 		 			
-		 			//Click on the Start button on introduction page
-			 		TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
+		 		//Click on the Start button on introduction page
+			 	TermsAndConditionsPage tcPg = AddInPg.addStartBtn();
 			 		
 			 		//Click Accept Button on the Terms and Condition Page
 			 		SignInNSWAcctPage signIn = tcPg.termsAndConditionAcceptBtn();
@@ -94,9 +100,8 @@ public class Android_HolderViewLicenceDetailsTest extends BasicTest {
 			 		MyLicencePage LicPg = new MyLicencePage(driver);
 			 		
 			 		
-			 		//Verify My Licences Page is displayed
-			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
-		 		
+			 	//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		//Click the Fishing Fee License 
 		 		DetailLicencePage detailLicPg = LicPg.clickOnLicNumber(licence_Number);

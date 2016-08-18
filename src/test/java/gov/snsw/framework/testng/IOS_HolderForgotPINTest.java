@@ -4,8 +4,8 @@ package gov.snsw.framework.testng;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-
- 
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -15,39 +15,35 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.dataDrivers.excelDriver.ExcelDriver;
 import com.perfectomobile.test.BasicTest;
-
+import com.perfectomobile.utils.PerfectoUtils;
 
 import gov.snsw.framework.ios.holder.pageobjects.AddIntroPage;
 import gov.snsw.framework.ios.holder.pageobjects.EnterPinPage;
-import java.util.Map;
-import java.util.HashMap;
 import gov.snsw.framework.ios.holder.pageobjects.MyLicencesPage;
-import gov.snsw.framework.ios.holder.pageobjects.QuickViewPage;
 import gov.snsw.framework.ios.holder.pageobjects.SettingsPage;
 import gov.snsw.framework.ios.holder.pageobjects.SignInPage;
 import gov.snsw.framework.ios.holder.pageobjects.TermsAndCondPage;
 import gov.snsw.framework.utils.Utilities;
 
-public class IOS_HolderQuickViewTest extends BasicTest
+public class IOS_HolderForgotPINTest extends BasicTest
 {
 	@Test (dataProvider="logInData")
-	public void quickViewIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
+	public void signInIOS(String username, String password,String pin,String licence_Number,String licence_StartDate,String licence_ExpireDate,String class_Type,String licence_Name,String LogEvent_Type,String new_Pin) throws Exception{
 		boolean testFail = false;
 		if(this.driver == null){
 			throw new IllegalMonitorStateException("Device not allocated");
 		}
 		String appName = (String) caps.getCapability("bundleId");	
 	 	try{
-	 			//reportPass("success", "param");
-	 			 
-	 			
- 				
+	 	
 		 		switchToContext(driver, "NATIVE_APP");
 		 		//Driver initialization	 		
 		 		AddIntroPage AddInPg = new AddIntroPage(driver);
 		 		
 		 		//Enter PIN
 		 		EnterPinPage enterPIN = null;
+		 		
+		 
 		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
@@ -91,50 +87,60 @@ public class IOS_HolderQuickViewTest extends BasicTest
 		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
 		 		{
 		 			LicPg.selectNo();
-		 		}		 		
-		 		
-		 		//Click on the Settings Button
-		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
-		 		
-		 		//Verify Settings Page is displayed
-		 		settingPg.verifySettingsPageTitile();		 		
+		 		} 		
 		 		
 		 		
-		 		//Click on Quick View
-		 		settingPg.clickQuickView();
-		 		
-		 		
+		 		//Verify My Licence Page is displayed
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 				 		
 		 		//Close App
-		 		Utilities.closeApp(driver, appName);
+		 		Utilities.homeBtn(driver, appName);
 		 		
 		 		//Open App		
 		 		Utilities.openApp(driver, appName);		 			 	
 		 		
-		 		//Quick View Page
-		 		QuickViewPage QuickViewPage = new QuickViewPage(driver);
-		 		
-		 		//verify Quick View Page is displayed
-		 		assertTrue(QuickViewPage.verifyQuickViewTitle().contains("Quick View"));
-		 		
-		 		//verify Licence Name
-		 		assertTrue(QuickViewPage.verifyLicenceName().contains(licence_Name));
-		 		
-		 		//Click Unlock PIN
-		 		enterPIN = QuickViewPage.clickUnlock();
-		 		
-		 		//Verify Enter Pin is displayed
+		 		//Verify the Re-Enter PIN Page is displayed
 		 		assertTrue(enterPIN.verifyUnlockPINTitle().contains("Unlock with PIN"));
 		 		
-	 			//Enter 4 digit PIN
-	 			enterPIN.enterPINUnlock();
+		 		//Re-enter 4 digit PIN Number
+		 		enterPIN.clickforgotPinTxt();
+		 		
+		 		//verify forgot PIN Alert is displayed
+		 		assertTrue(enterPIN.verifyForgotPinAlert().contains("Forgot PIN"));
+		 		
+		 		//Click SignIn
+		 		enterPIN.clickForgotPinSignIn();
+		 		
+		 		//Verify SignIn Page is displayed
+		 		SignInPage signIn = new SignInPage(driver);
+		 		assertTrue(signIn.verifySignInTitle().contains("Sign in with your MyService NSW account"));
+		 		
+		 		
+		 		//Enter the login details in the Sign In Page
+		 		enterPIN = signIn.pressSignIn(username,password);
+		 		 		
+		 		//Verify Enter Pin is displayed
+		 		assertTrue(enterPIN.verifyPinEnterTitle().contains("You are required to set up a PIN.  You can change this in your App Settings."));
+		 		
+		 		//Enter 4 digit PIN
+		 		enterPIN.enterPin();
+		 		
+		 		//Verify Confirm PIN is displayed
+		 		assertTrue(enterPIN.verifyPinConfirmTitle().contains("Confirm PIN"));
+		 		
+		 		//Enter 4 digit PIN confirmation
+		 		enterPIN.enterPin();		 		
+
+		 		if(LicPg.isTextPresentOnScreen("Notifications have been disabled"))
+		 		{
+		 			LicPg.selectNo();
+		 		} 	
 		 		
 		 		//Verify My License Page is displayed
-		 		//assertTrue(LicPg.myLicPgTitle().contains("NSW Recreational Fishing Fee"));
-		 		
-		 		//assertTrue(LicPg.verifyMyLicPgLicNum(licence_Number).contains(licence_Number));
-		 		
+		 		assertTrue(LicPg.myLicPgTitle().contains(licence_Name));
+		 				
 		 		//Click on the Settings and then sign out
-		 		settingPg = LicPg.clickSettingsBtn();
+		 		SettingsPage settingPg = LicPg.clickSettingsBtn();
 		 		
 		 		//Verify Settings Page is displayed
 		 		settingPg.verifySettingsPageTitile();
@@ -155,12 +161,10 @@ public class IOS_HolderQuickViewTest extends BasicTest
 	 	
 	 	finally{
 	 		
-	 		
 	 		//close app
 	 		Utilities.closeApp(driver, appName);
- 			
- 			
-	 	}
+
+	  	}
 		
         if(testFail){
         	Assert.fail();
@@ -185,7 +189,7 @@ public class IOS_HolderQuickViewTest extends BasicTest
 	}
 	
 	@Factory(dataProvider="factoryData")
-	public IOS_HolderQuickViewTest(DesiredCapabilities caps) {
+	public IOS_HolderForgotPINTest(DesiredCapabilities caps) {
 		super(caps);
 	}
 

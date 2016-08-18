@@ -36,6 +36,9 @@ public class SettingsPage extends DriverPage{
 	By aboutAppDetails = By.xpath("//*[@label='APP DETAILS']");
 	
 	
+	//Activity icon
+	By activityIcon = By.xpath("//*[@label='Activity']");
+	
 	
 	
 	public void signoutBtn()
@@ -179,6 +182,17 @@ public class SettingsPage extends DriverPage{
 		fluentWait(appversion);
 		String appVersionTitle = driver.findElement(appversion).getText();
 		return appVersionTitle;
+	}
+	
+	public void ActivityOption()
+	{
+		driver.findElement(activityIcon).click();
+	}
+	
+	public ActivityPage clickActivityOption()
+	{
+		ActivityOption();		
+		return new ActivityPage(driver);
 	}
 	
 	

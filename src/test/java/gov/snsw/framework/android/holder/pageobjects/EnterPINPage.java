@@ -19,8 +19,16 @@ public class EnterPINPage extends DriverPage{
 	//By enterPin2 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[2]");
 	//By enterPin3 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[3]");
 	//By enterPin4 = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/pin_entry']/text[4]");
-			
 		
+	//forgot PIN
+	By forgotPIN = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/forgot_pin']");
+	
+	//ConfirmText
+	By confirmTxt = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/alertTitle']");
+	
+	//Forgot PIN Ok btn
+	By forgotPinOkBtn = By.xpath("//*[@resourceid='android:id/button1']");
+	
 	public void enter4DigitPin(String pin)
 	{
 		fluentWait(enterPin);
@@ -112,7 +120,31 @@ public class EnterPINPage extends DriverPage{
 					String pinEnterTitle = driver.findElement(pinTitle).getText();
 					return pinEnterTitle;
 				}
-		
-		
-
+				
+				public void clickForgotPIN()
+				{
+					fluentWait(forgotPIN);
+					driver.findElement(forgotPIN).click();
+				}
+				
+				public String verifyConfirmTxt()
+				{
+					fluentWait(confirmTxt);
+					String confirmTxt1 = driver.findElement(confirmTxt).getText();
+					return confirmTxt1;
+				}
+				
+				public void clickOkBtn()
+				{	
+					fluentWait(forgotPinOkBtn);
+					driver.findElement(forgotPinOkBtn).click();
+				}
+				
+				public String verifyForgotPinTitle()
+				{
+					By forgotPinTitle = By.xpath("//*[@resourceid='"+holder_android_resourceid+":id/forgot_pin']");
+					fluentWait(forgotPinTitle);
+					String forgotPinPg = driver.findElement(forgotPinTitle).getText();
+					return forgotPinPg;
+				}
 }

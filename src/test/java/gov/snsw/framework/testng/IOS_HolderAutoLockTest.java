@@ -113,7 +113,7 @@ public class IOS_HolderAutoLockTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//click Home button
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
 		 		//Open App
@@ -142,7 +142,7 @@ public class IOS_HolderAutoLockTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//click Home button
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
 		 		//Open App
@@ -167,7 +167,7 @@ public class IOS_HolderAutoLockTest extends BasicTest
 		 		assertTrue(settingsPage.verifySettingsPageTitile().contains("Settings"));
 		 		
 		 		//click Home button
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(310000);
 		 		
 		 		//Open App

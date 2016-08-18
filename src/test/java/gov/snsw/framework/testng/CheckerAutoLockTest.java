@@ -95,7 +95,7 @@ public class CheckerAutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 			 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver);
+		 		Utilities.homeBtn(driver, appName);
 		 		Thread.sleep(2000);
 		 		
 		 		//Open App
@@ -130,7 +130,7 @@ public class CheckerAutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 			 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver);	 		
+		 		Utilities.homeBtn(driver, appName);	 		
 		 		Thread.sleep(2000);
 		 		
 		 		//Open App
@@ -155,7 +155,7 @@ public class CheckerAutoLockTest extends BasicTest{
 		 		assertTrue(appSettingPg.verifyAppSettingTitleBar().contains("App Settings"));
 			 		
 		 		//Press Home Key
-		 		Utilities.homeBtn(driver);	 	 		
+		 		Utilities.homeBtn(driver, appName);	 	 		
 		 		Thread.sleep(310000);
 		 		
 		 		//Open App

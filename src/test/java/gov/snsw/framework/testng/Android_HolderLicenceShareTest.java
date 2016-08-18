@@ -50,6 +50,13 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		//Enter PIN
 		 		EnterPINPage enterPIN = null;
 		 		
+		 		//Close app
+		 		Utilities.closeApp(driver, appName);
+
+		 		//Open App
+		 		Utilities.openApp(driver, appName);
+		 		
+		 		
 		 		if(AddInPg.isStartBtnExist())
 		 		{		 			
 		 		
@@ -97,11 +104,9 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		
 			 		MyLicencePage LicPg = new MyLicencePage(driver);
 			 		
-			 		//Verify My Licence Page is displayed.
-			 		//assertTrue(LicPg.verifyMyLicTitle().contains("Licences"));
-			 				 		
-			 		//Verify My Licences Page is displayed
-			 		assertTrue(LicPg.viewLicName().contains("NSW Recreational Fishing Fee"));
+			 				 				 		
+			 	//Verify My Licences Page is displayed with Licence Numbers
+			 	assertTrue(LicPg.isContentPresentOnScreen(licence_Number));	 
 		 		
 		 		
 		 		//Click the Fishing Fee License 
@@ -116,7 +121,7 @@ public class Android_HolderLicenceShareTest extends BasicTest{
 		 		//Verify Share Licence Page is displayed
 		 		//assertTrue(shareLicPg.verifySharePageTitle().contains("Sharing Licence"));
 		 		
-		 		assertTrue(shareLicPg.verifyShareLicName().contains("NSW Recreational Fishing Fee"));
+		 		assertTrue(shareLicPg.verifyShareLicName().contains(licence_Name));
 		 		
 		 		assertTrue(shareLicPg.verifyShareLicNum().contains(licence_Number));
 		 		
