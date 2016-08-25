@@ -118,34 +118,49 @@ public class Android_Holder_ActivityTest extends BasicTest{
 		 		assertTrue(activityPg.isActivityTitlePresent().contains("Activity"));
 		 		
 		 		//verify Activity main page 
-		 		if(activityPg.getLicType().equalsIgnoreCase(activity_LicType))
-		 	    {
+		 		if(activityPg.getLicType().contains(activity_LicType))
+		 		 {
 		 			//assertEquals("Date doesnt match",Utilities.getCurrentDate(),activityPg.getActivityDate());
-			 		assertEquals("Licence type does not match",activity_LicType,activityPg.getLicType());
-			 		assertEquals("Licence Number does not match",licence_Number,activityPg.getLicNum());
+		 			System.out.println("The Actual LicType:"+activityPg.getLicType());
+			 		System.out.println("The Expected LicType Num:"+activity_LicType);		 			
+			 		assertTrue("Licence type does not match",activityPg.getLicType().contains(activity_LicType));
+			 		
+			 		System.out.println("The Actual Lic Num:"+activityPg.getLicNum());
+			 		System.out.println("The Expected Lic Num:"+licence_Number);
+			 		
+			 		assertEquals("Licence Number does not match",licence_Number,activityPg.getLicNum());			 		
+			 		
+			 		System.out.println("The Actual Event Type:"+activityPg.getLicEventType());
+			 		System.out.println("The Expected Event Type:"+activity_EventType);
+			 		
 			 		assertEquals("Event type does not match ",activity_EventType,activityPg.getLicEventType());
 			 		activityPg.clickLicType();
 		     	}
-		 		else if (activityPg.getAltLicType().equalsIgnoreCase(activity_LicType))
-		 		{
+		 		else if(activityPg.getAltLicType().contains(activity_LicType))
+		 		{  
 		 			//assertEquals("Date doesnt match",Utilities.getCurrentDate(),activityPg.getActivityDate());
+		 			System.out.println("The Actual LicType2:"+activityPg.getAltLicType());
+			 		System.out.println("The Expected LicType2 Num:"+activity_LicType);
+		 			
 			 		assertEquals("Licence type does not match",activity_LicType,activityPg.getAltLicType());
+			 		
+			 		System.out.println("The Actual Lic Num:"+activityPg.getAltLicNum());
+			 		System.out.println("The Expected Lic Num:"+licence_Number);			 		
 			 		assertEquals("Licence Number does not match",licence_Number,activityPg.getAltLicNum());
+			 		System.out.println("The Actual Event Type:"+activityPg.getAltLicEventType());
+			 		System.out.println("The Expected Event Type:"+activity_EventType);			 		
 			 		assertEquals("Event type does not match ",activity_EventType,activityPg.getAltLicEventType());
 			 		activityPg.clickAltLicType();
 		 		}
 		 		
-		 		Thread.sleep(1000);
+		 	
 		 		//Verify Activity Detail Title
 		 		assertTrue(activityPg.isActivityTitlePresent().contains("Activity detail"));
 		 		
 		 		//Verify Licence Number is displayed
 		 		assertEquals("Licence Number does not match",licence_Number,activityPg.getActivityDetailsLicNumber());
-		 		//assertTrue("Licence Type on Activity Detail Page does not match",activityPg.isTextPresentOnScreen(activity_LicType));
-		 		assertTrue("Event Type on activity page does not match",activityPg.isTextPresentOnScreen(activity_EventType));
-		 		
-		 			 		
-		 		
+		 		assertTrue("Licence Type on Activity Detail Page does not match",activityPg.isTextPresentOnScreen(activity_LicType));
+		 		assertTrue("Event Type on activity page does not match",activityPg.isTextPresentOnScreen(activity_EventType));	 		
 		 		//Verify the clickable element exist
 		 		assertEquals("Clickable attribute is false:","true",activityPg.activityHelpLink(activityPg.helpActivity,"clickable"));
 
@@ -179,9 +194,7 @@ public class Android_Holder_ActivityTest extends BasicTest{
 	 	finally{
 	 		
 	 		
-	 		//Clean App
-	 		Utilities.cleanApp(driver, appName);
-	 			 		
+	 					 		
 	 		//close App
 			Utilities.closeApp(driver, appName);
  			

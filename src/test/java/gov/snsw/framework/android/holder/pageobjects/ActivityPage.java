@@ -133,9 +133,9 @@ public class ActivityPage extends DriverPage{
 	
 	public void clickAltLicType()
 	{
-		By LicType1 = By.xpath("(//*[@resourceid='"+holder_android_resourceid+":id/txtLicType'])[2]");
-		fluentWait(LicType1);
-		driver.findElement(LicType1).click();
+		By LicType2 = By.xpath("(//*[@resourceid='"+holder_android_resourceid+":id/txtLicType'])[2]");
+		fluentWait(LicType2);
+		driver.findElement(LicType2).click();
 	}
 	
 
